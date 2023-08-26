@@ -1,4 +1,6 @@
+import React from "react";
 import type { Preview } from "@storybook/react";
+import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 
 import { withThemeByClassName } from "@storybook/addon-styling";
 
@@ -26,6 +28,11 @@ const preview: Preview = {
       },
       defaultTheme: "light",
     }),
+    (Story) => (
+      <FluentProvider theme={teamsLightTheme}>
+        <Story />
+      </FluentProvider>
+    ),
   ],
 };
 

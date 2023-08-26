@@ -1,7 +1,8 @@
-import { FC } from "react";
-import { SlideProps } from "./slide.types";
-import { SlideType } from "@/src/constants";
 import { CheckmarkCircle32Filled } from "@fluentui/react-icons";
+
+import { FC } from "react";
+import { SlideProps } from "./Slide.types";
+import { SlideType } from "@/src/constants";
 
 export const Slide: FC<SlideProps> = ({
   questionEn,

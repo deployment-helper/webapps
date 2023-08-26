@@ -1,4 +1,3 @@
-import Header from "@/components/header/header";
 import Head from "next/head";
 import Script from "next/script";
 import { useEffect } from "react";

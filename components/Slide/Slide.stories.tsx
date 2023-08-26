@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Slide } from "./Slide";
-import { SlideProps } from "./slide.types";
+import { SlideProps } from "./Slide.types";
 import { SlideType } from "@/src/constants";
 
 const meta: Meta<typeof Slide> = {
-  title: "component/slide",
+  title: "Components/slide",
   component: Slide,
 };
 
