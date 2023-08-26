@@ -1,36 +1,36 @@
 export interface Option {
   en: string;
-  hi: string;
-  isRight: boolean;
-  audioDurEn: number;
-  audioDurHi: number;
+  hi?: string;
+  isRight?: boolean;
+  audioDurEn?: number;
+  audioDurHi?: number;
 }
 
 export interface Slide {
   questionEn: string;
-  questionHi: string;
-  audioDurEn: number;
-  audioDurHi: number;
+  questionHi?: string;
+  audioDurEn?: number;
+  audioDurHi?: number;
   rightAnswer: Option;
   explanationEn: string;
-  explanationHi: string;
-  audioDurExplanationEn: number;
-  audioDurExplanationHi: number;
+  explanationHi?: string;
+  audioDurExplanationEn?: number;
+  audioDurExplanationHi?: number;
   options: Array<Option>;
 }
 
 export interface Presentation {
   titleEn: string;
-  titleHi: string;
+  titleHi?: string;
   slides: Array<Slide>;
   descEn: string;
-  descHi: string;
+  descHi?: string;
   audioDurTitleEn: number;
-  audioDurTitleHi: number;
+  audioDurTitleHi?: number;
   audioDurDescEn: number;
-  audioDurDescHi: number;
-  projectId: string;
-  presentationId: string;
+  audioDurDescHi?: number;
+  projectId?: string;
+  presentationId?: string;
 }
 
 interface exoportDefault {

@@ -6,6 +6,7 @@ export enum Theme {
 export enum SlideType {
   QUESTION = "QUESTION",
   OPTION_LIST = "OPTION_LIST",
+  RIGHT_ANSWER = "RIGHT_ANSWER",
   EXPLANATION = "EXPLANATION",
 }
 

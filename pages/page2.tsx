@@ -3,6 +3,8 @@ import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
+import Slide from "@/components/Slide/Slide";
+import { SlideType } from "@/src/constants";
 
 export default function Page() {
   const [slides, setSlides] = useState<any[]>([]);
@@ -67,7 +69,28 @@ export default function Page() {
               <section>Intial Slide1</section>
               <section>Intial Slide2</section>
               {slides.map((slide) => (
-                <section key={slide}>{slide}</section>
+                <>
+                  <Slide
+                    key={slide.questionEn}
+                    {...slide}
+                    slideType={SlideType.QUESTION}
+                  />
+                  <Slide
+                    key={slide.questionEn}
+                    {...slide}
+                    slideType={SlideType.OPTION_LIST}
+                  />
+                  <Slide
+                    key={slide.questionEn}
+                    {...slide}
+                    slideType={SlideType.RIGHT_ANSWER}
+                  />
+                  <Slide
+                    key={slide.questionEn}
+                    {...slide}
+                    slideType={SlideType.EXPLANATION}
+                  />
+                </>
               ))}
             </div>
           </div>
