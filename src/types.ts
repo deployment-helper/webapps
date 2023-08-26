@@ -33,6 +33,12 @@ export interface Presentation {
   presentationId?: string;
 }
 
+export interface User {
+  name: string;
+  email: string;
+  image: string;
+}
+
 interface exoportDefault {
   Presentation: Presentation;
   Slide: Slide;

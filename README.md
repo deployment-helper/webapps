@@ -8,6 +8,14 @@ User will be able to select the template and each template will heave defined JS
 
 This is Next.js based application and local development can be setup as per the framework documentation.
 
+**CSS and Components**
+
+- Component libray
+
+  https://react.fluentui.dev/?path=/docs/theme-colors--page
+  https://react.fluentui.dev/?path=/docs/concepts-developer-theming--page
+  https://react.fluentui.dev/?path=/docs/theme-typography--page
+
 ## Templates
 
 ### Template1
