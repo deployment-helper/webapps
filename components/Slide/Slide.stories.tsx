@@ -11,7 +11,7 @@ const meta: Meta<typeof Slide> = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Slide>;
 const props: SlideProps = {
   slideType: SlideType.QUESTION,
   questionEn: "THis is a english question",

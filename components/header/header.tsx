@@ -91,7 +91,7 @@ export const Header: FC<HeaderProps> = ({
               </MenuPopover>
             </Menu>
             <Subtitle1 className={mergeClasses(classes.title)}>/</Subtitle1>
-            <Input placeholder="Slide name" size="medium" />
+            <Input placeholder="Provide name" size="medium" />
           </div>
           <div>
             {/* TODO: This could be a separate component */}

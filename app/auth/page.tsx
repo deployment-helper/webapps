@@ -1,5 +1,5 @@
 import { LoginAndSignUp } from "@/components/LoginAndSignup";
-import Header from "@/components/header/Header";
+import Header from "@/components/Header/Header";
 
 export const Auth = () => {
   return (

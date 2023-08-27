@@ -1,4 +1,4 @@
-import Header from "@/components/header/Header";
+import Header from "@/components/Header/Header";
 import { FC } from "react";
 
 export const Slides: FC = () => {
