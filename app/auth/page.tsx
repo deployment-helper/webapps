@@ -2,11 +2,12 @@ import { LoginAndSignUp } from "@/components/LoginAndSignup";
 import Header from "@/components/Header/Header";
 
 export const Auth = () => {
+  const ssoUrl = process.env.LOGIN_SIGNUP_URL;
   return (
     <>
       <Header title="Slides" type="public" />
       <div className="flex h-96 w-full items-center justify-center">
-        <LoginAndSignUp ssoUrl="http://example.com" />
+        <LoginAndSignUp ssoUrl={ssoUrl} />
       </div>
     </>
   );
