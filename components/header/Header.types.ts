@@ -1,9 +1,9 @@
-import { User } from "@/src/types";
+import { User, IProject } from "@/src/types";
 
 export interface HeaderProps {
   title: string;
   user?: User;
-  projectList?: string[];
-  currentProject?: string;
+  projectList?: Array<IProject>;
+  currentProject?: IProject;
   type: "public" | "auth" | "create" | "edit";
 }

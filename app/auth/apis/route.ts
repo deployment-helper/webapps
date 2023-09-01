@@ -4,9 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const { searchParams, host, protocol } = new URL(req.url);
   const code = searchParams.get("code");
-
+  // TODO: We can move this call to server.ts file
   const resp = await fetch(
     `${process.env.API_SERVER}/auth/createToken?code=${code}`,
+    { next: { revalidate: 3600 } },
   );
 
   const data = await resp.json();

@@ -48,13 +48,15 @@ export const Header: FC<HeaderProps> = ({
             {/* TODO: This could be a separate component */}
             <Menu>
               <MenuTrigger>
-                <MenuButton>{currentProject}</MenuButton>
+                <MenuButton>{currentProject?.projectName}</MenuButton>
               </MenuTrigger>
 
               <MenuPopover>
                 <MenuList>
                   {projectList?.map((project) => (
-                    <MenuItem key={project}>{project}</MenuItem>
+                    <MenuItem key={project.projectId}>
+                      {project.projectName}
+                    </MenuItem>
                   ))}
                 </MenuList>
               </MenuPopover>
@@ -79,13 +81,15 @@ export const Header: FC<HeaderProps> = ({
             />
             <Menu>
               <MenuTrigger>
-                <MenuButton>{currentProject}</MenuButton>
+                <MenuButton>{currentProject?.projectName}</MenuButton>
               </MenuTrigger>
 
               <MenuPopover>
                 <MenuList>
                   {projectList?.map((project) => (
-                    <MenuItem key={project}>{project}</MenuItem>
+                    <MenuItem key={project.projectId}>
+                      {project.projectName}
+                    </MenuItem>
                   ))}
                 </MenuList>
               </MenuPopover>

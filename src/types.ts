@@ -39,10 +39,15 @@ export interface User {
   image: string;
 }
 
+export interface IProject {
+  projectId: string;
+  projectName: string;
+}
 interface exoportDefault {
   Presentation: Presentation;
   Slide: Slide;
   Option: Option;
+  IPoject: IProject;
 }
 
 export default exoportDefault;
