@@ -19,6 +19,24 @@ export class Server {
 
     return await resp.json();
   }
+
+  public static async createPresentation(body: any) {
+    const cookieStore = cookies();
+    const token = cookieStore.get("access_token");
+    console.log(body);
+    const url = `${API_SERVER}/slides/createPresentation`;
+
+    const resp = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return resp;
+  }
 }
 
 export default Server;

@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
+import Server from "./server";
 
+// create token from authrization code
 export async function GET(req: NextRequest) {
   const { searchParams, host, protocol } = new URL(req.url);
   const code = searchParams.get("code");
@@ -25,4 +27,12 @@ export async function GET(req: NextRequest) {
     resp.cookies.set("refresh_token", data.refresh_token);
     return resp;
   }
+}
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  console.log(body);
+  const resp = await Server.createPresentation(body);
+
+  return new NextResponse("", { status: resp.status });
 }

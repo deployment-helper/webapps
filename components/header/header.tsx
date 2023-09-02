@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
   Avatar,
   Input,
@@ -20,6 +20,8 @@ import { HeaderProps } from "./Header.types";
 import { useStyles } from "./Header.styles";
 import { ArrowLeft24Filled, Navigation24Filled } from "@fluentui/react-icons";
 import { usePathname } from "next/navigation";
+import useSlidesStore from "@/app/auth/store";
+import { ServerClient } from "@/app/auth/apis/server-client";
 
 export const Header: FC<HeaderProps> = ({
   title,
@@ -31,6 +33,24 @@ export const Header: FC<HeaderProps> = ({
 }) => {
   const classes = useStyles();
   const path = usePathname();
+  const [presentationName, setPresentationName] = useState("UnTitled");
+  const editorFile = useSlidesStore((state) => state.createSlide?.editorFile);
+  const goBack = () => {
+    history.back();
+  };
+
+  const publish = (isDraft?: boolean) => {
+    console.log(presentationName);
+    console.log(editorFile);
+
+    ServerClient.createPresentation(
+      presentationName,
+      currentProject?.projectId || "",
+      editorFile,
+    ).then((res) => {
+      console.log(res);
+    });
+  };
 
   if (checkForCreatePath && path === "/auth/slides/create") {
     type = "create";
@@ -84,6 +104,7 @@ export const Header: FC<HeaderProps> = ({
           <div className="flex items-center gap-4">
             <ArrowLeft24Filled
               className={mergeClasses(classes.title, "cursor-pointer")}
+              onClick={goBack}
             />
             <Menu>
               <MenuTrigger>
@@ -101,20 +122,32 @@ export const Header: FC<HeaderProps> = ({
               </MenuPopover>
             </Menu>
             <Subtitle1 className={mergeClasses(classes.title)}>/</Subtitle1>
-            <Input placeholder="UnTitled" size="medium" />
+            <Input
+              placeholder="UnTitled"
+              size="medium"
+              value={presentationName}
+              onChange={(e) => {
+                setPresentationName(e.target.value);
+              }}
+            />
           </div>
           <div>
             {/* TODO: This could be a separate component */}
             <Menu positioning="below-end">
               <MenuTrigger disableButtonEnhancement>
                 {(triggerProps: MenuButtonProps) => (
-                  <SplitButton menuButton={triggerProps}>Publish</SplitButton>
+                  <SplitButton
+                    onClick={() => publish()}
+                    menuButton={triggerProps}
+                  >
+                    Publish
+                  </SplitButton>
                 )}
               </MenuTrigger>
 
               <MenuPopover>
                 <MenuList>
-                  <MenuItem>Draft</MenuItem>
+                  <MenuItem onClick={() => publish(true)}>Draft</MenuItem>
                 </MenuList>
               </MenuPopover>
             </Menu>

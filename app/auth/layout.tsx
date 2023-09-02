@@ -12,7 +12,9 @@ export const AuthLayout: FC<{
   // intialize local store
   useEffect(() => {
     const user = document.querySelector("[data-store]")?.textContent;
-    addUser(JSON.parse(user as string));
+    if (user && user?.length) {
+      addUser(JSON.parse(user as string));
+    }
   }, []);
 
   return <FluentProvider theme={teamsLightTheme}>{children}</FluentProvider>;

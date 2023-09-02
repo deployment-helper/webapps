@@ -8,18 +8,20 @@ import "ace-builds/src-noconflict/theme-github";
 import { useEffect, useState } from "react";
 import { Slide } from "@/components/Slide";
 import { SlideType } from "@/src/constants";
+import useSlidesStore from "../../store";
 
 export default function Page() {
   const [slides, setSlides] = useState<any[]>([]);
   const [editor, setEditor] = useState<string>("{}");
+  const addEditorFile = useSlidesStore((state) => state.addEditorFile);
+
   const onEditorChange = (jsonstr: any) => {
     try {
       setEditor(jsonstr);
-      console.log(jsonstr);
       const json = JSON.parse(jsonstr);
 
-      console.log({ ...json.slides });
       setSlides([...json.slides]);
+      addEditorFile(json);
     } catch (e) {
       console.log(e);
     }
@@ -29,8 +31,6 @@ export default function Page() {
     console.log("Component mounted/updated");
     let Reveal: any;
     import("reveal.js").then((r) => {
-      console.log("Reveal.js loaded");
-      console.log(r.default);
       Reveal = r.default;
       Reveal.initialize({});
     });

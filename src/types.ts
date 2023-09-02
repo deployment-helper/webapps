@@ -61,6 +61,10 @@ export type IUserWithProjectTypes = {
 
 export interface IStore {
   user?: IUserWithProjectTypes;
+  createSlide?: {
+    editorFile: any;
+  };
+  addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
 }
 

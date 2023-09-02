@@ -7,6 +7,14 @@ export const useSlidesStore = create<IStore>()(
     persist(
       (set) => ({
         addUser: (user) => set((store) => ({ ...store, user })),
+        addEditorFile: (content) =>
+          set((store) => ({
+            ...store,
+            createSlide: {
+              ...store.createSlide,
+              editorFile: content,
+            },
+          })),
       }),
       {
         name: "slide-storage",
