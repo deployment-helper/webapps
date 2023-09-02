@@ -19,6 +19,7 @@ import {
 import { HeaderProps } from "./Header.types";
 import { useStyles } from "./Header.styles";
 import { ArrowLeft24Filled, Navigation24Filled } from "@fluentui/react-icons";
+import { usePathname } from "next/navigation";
 
 export const Header: FC<HeaderProps> = ({
   title,
@@ -26,9 +27,14 @@ export const Header: FC<HeaderProps> = ({
   user,
   projectList,
   currentProject,
+  checkForCreatePath,
 }) => {
   const classes = useStyles();
+  const path = usePathname();
 
+  if (checkForCreatePath && path === "/auth/slides/create") {
+    type = "create";
+  }
   return (
     <header
       className={mergeClasses(
@@ -95,7 +101,7 @@ export const Header: FC<HeaderProps> = ({
               </MenuPopover>
             </Menu>
             <Subtitle1 className={mergeClasses(classes.title)}>/</Subtitle1>
-            <Input placeholder="Provide name" size="medium" />
+            <Input placeholder="UnTitled" size="medium" />
           </div>
           <div>
             {/* TODO: This could be a separate component */}

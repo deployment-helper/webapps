@@ -1,18 +1,13 @@
 import Header from "@/components/Header/Header";
 import { FC } from "react";
 import Server from "../apis/server";
+import Link from "next/link";
 
 export const Slides: FC = async () => {
   const user = await Server.getUserInfo();
-  console.log(user);
   return (
     <>
-      <Header
-        title="Dashbord"
-        type="auth"
-        projectList={user.slideProjects}
-        currentProject={user.slideProjects[0]}
-      />
+      <Link href={"/auth/slides/create"}>Create Slide</Link>
     </>
   );
 };

@@ -14,8 +14,20 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/reveal.js@4.5.0/dist/reveal.css"
+        ></link>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/reveal.js@4.5.0/dist/theme/white.css"
+        ></link>
       </head>
       <body>{children}</body>
+      <script
+        async
+        src="https://unpkg.com/reveal.js@4.5.0/dist/reveal.js"
+      ></script>
     </html>
   );
 }

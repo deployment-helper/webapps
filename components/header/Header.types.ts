@@ -6,4 +6,5 @@ export interface HeaderProps {
   projectList?: Array<IProject>;
   currentProject?: IProject;
   type: "public" | "auth" | "create" | "edit";
+  checkForCreatePath?: boolean;
 }

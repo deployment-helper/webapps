@@ -43,11 +43,33 @@ export interface IProject {
   projectId: string;
   projectName: string;
 }
+
+export enum ProjectTypes {
+  slideProjects = "slideProjects",
+}
+export interface IUser {
+  email: string;
+  updatedAt: Date;
+  userId: string;
+  name?: string;
+  createdAt?: Date;
+}
+
+export type IUserWithProjectTypes = {
+  [key in ProjectTypes]: Array<IProject>;
+} & IUser;
+
+export interface IStore {
+  user?: IUserWithProjectTypes;
+  addUser(user: IUserWithProjectTypes): void;
+}
+
 interface exoportDefault {
   Presentation: Presentation;
   Slide: Slide;
   Option: Option;
   IPoject: IProject;
+  IStore: IStore;
 }
 
 export default exoportDefault;
