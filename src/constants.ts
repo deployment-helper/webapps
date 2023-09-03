@@ -10,4 +10,6 @@ export enum SlideType {
   EXPLANATION = "EXPLANATION",
 }
 
+export const TOASTER_ID = "defaultToaster";
+
 export const DEFAULT_THEME = Theme.BLUE;
