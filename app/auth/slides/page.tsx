@@ -1,7 +1,7 @@
 "use client";
 import { FC, useEffect } from "react";
 import Link from "next/link";
-import useSlidesStore from "../../../src/store";
+import useSlidesStore from "@/src/store";
 import {
   DataGrid,
   DataGridBody,
