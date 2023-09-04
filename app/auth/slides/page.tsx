@@ -10,10 +10,13 @@ import {
   DataGridHeader,
   DataGridHeaderCell,
   DataGridRow,
+  Subtitle2,
   TableColumnDefinition,
+  Title1,
   createTableColumn,
 } from "@fluentui/react-components";
 import { IPresentation } from "@/src/types";
+import { Open24Filled } from "@fluentui/react-icons";
 
 export const Slides: FC = () => {
   const { listPresentations } = useSlidesStore();
@@ -24,7 +27,7 @@ export const Slides: FC = () => {
     createTableColumn<IPresentation>({
       columnId: "project",
       renderHeaderCell: () => {
-        return "Project";
+        return <Subtitle2>Project</Subtitle2>;
       },
       renderCell: (item) => {
         return item.project.projectName;
@@ -33,7 +36,7 @@ export const Slides: FC = () => {
     createTableColumn<IPresentation>({
       columnId: "name",
       renderHeaderCell: () => {
-        return "Name";
+        return <Subtitle2>Name</Subtitle2>;
       },
       renderCell: (item) => {
         return item.name;
@@ -42,34 +45,17 @@ export const Slides: FC = () => {
     createTableColumn<IPresentation>({
       columnId: "User",
       renderHeaderCell: () => {
-        return "user";
+        return <Subtitle2>User</Subtitle2>;
       },
       renderCell: (item) => {
         return item.user.email;
       },
     }),
-    createTableColumn<IPresentation>({
-      columnId: "s3File",
-      renderHeaderCell: () => {
-        return "S3 File";
-      },
-      renderCell: (item) => {
-        return item.s3File;
-      },
-    }),
-    createTableColumn<IPresentation>({
-      columnId: "s3MetaFile",
-      renderHeaderCell: () => {
-        return "S3 Meta File";
-      },
-      renderCell: (item) => {
-        return item.s3MetaFile;
-      },
-    }),
+
     createTableColumn<IPresentation>({
       columnId: "updatedAt",
       renderHeaderCell: () => {
-        return "Updated At";
+        return <Subtitle2>Updated At</Subtitle2>;
       },
       renderCell: (item) => {
         return item.updatedAt;
@@ -78,7 +64,7 @@ export const Slides: FC = () => {
     createTableColumn<IPresentation>({
       columnId: "createdAt",
       renderHeaderCell: () => {
-        return "Created At";
+        return <Subtitle2>Created At</Subtitle2>;
       },
       renderCell: (item) => {
         return item.createdAt;
@@ -87,17 +73,18 @@ export const Slides: FC = () => {
     createTableColumn<IPresentation>({
       columnId: "link",
       renderHeaderCell: () => {
-        return "Link";
+        return <Subtitle2>Link</Subtitle2>;
       },
       renderCell: (item) => {
         return (
-          <Button appearance="primary">
+          <Button className="flex gap-2">
             <Link
               href={`/auth/slides/view/${item.project.projectId}?updatedAt=${item.updatedAt}`}
               target="_blank"
             >
               Link
             </Link>
+            <Open24Filled />
           </Button>
         );
       },
@@ -111,10 +98,19 @@ export const Slides: FC = () => {
 
   return (
     <>
-      <Link href={"/auth/slides/create"}>Create Slide</Link>
-      <div className="w-100 max-w-7xl">
+      <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
+        <div className="flex justify-between pb-6 pt-6">
+          <Title1>Presentation List</Title1>
+          <Button appearance="primary">
+            <Link href={"/auth/slides/create"}>Create</Link>
+          </Button>
+        </div>
         {presentations && presentations.length && (
-          <DataGrid items={presentations} columns={columns}>
+          <DataGrid
+            className="w-100 flex"
+            items={presentations}
+            columns={columns}
+          >
             <DataGridHeader>
               <DataGridRow>
                 {({ renderHeaderCell }) => (
