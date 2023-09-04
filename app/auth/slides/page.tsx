@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import Link from "next/link";
 import useSlidesStore from "@/src/store";
 import {
+  Button,
   DataGrid,
   DataGridBody,
   DataGridCell,
@@ -83,6 +84,24 @@ export const Slides: FC = () => {
         return item.createdAt;
       },
     }),
+    createTableColumn<IPresentation>({
+      columnId: "link",
+      renderHeaderCell: () => {
+        return "Link";
+      },
+      renderCell: (item) => {
+        return (
+          <Button appearance="primary">
+            <Link
+              href={`/auth/slides/view/${item.project.projectId}?updatedAt=${item.updatedAt}`}
+              target="_blank"
+            >
+              Link
+            </Link>
+          </Button>
+        );
+      },
+    }),
   ];
   useEffect(() => {
     if (currentProject && !presentations?.length) {
@@ -97,7 +116,7 @@ export const Slides: FC = () => {
         {presentations && presentations.length && (
           <DataGrid items={presentations} columns={columns}>
             <DataGridHeader>
-              <DataGridRow selectionCell={{ "aria-label": "Select all rows" }}>
+              <DataGridRow>
                 {({ renderHeaderCell }) => (
                   <DataGridHeaderCell>{renderHeaderCell()}</DataGridHeaderCell>
                 )}
@@ -105,10 +124,7 @@ export const Slides: FC = () => {
             </DataGridHeader>
             <DataGridBody<IPresentation>>
               {({ item, rowId }) => (
-                <DataGridRow<IPresentation>
-                  key={rowId}
-                  selectionCell={{ "aria-label": "Select row" }}
-                >
+                <DataGridRow<IPresentation> key={rowId}>
                   {({ renderCell }) => (
                     <DataGridCell>{renderCell(item)}</DataGridCell>
                   )}
