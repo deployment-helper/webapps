@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import Link from "next/link";
 import useSlidesStore from "@/src/store";
 import {
+  Body1Strong,
   Button,
   DataGrid,
   DataGridBody,
@@ -77,14 +78,14 @@ export const Slides: FC = () => {
       },
       renderCell: (item) => {
         return (
-          <Button className="flex gap-2">
+          <Button>
             <Link
               href={`/auth/slides/view/${item.project.projectId}?updatedAt=${item.updatedAt}`}
               target="_blank"
             >
-              Link
+              <Body1Strong>Link</Body1Strong>
+              <Open24Filled className="ml-2" />
             </Link>
-            <Open24Filled />
           </Button>
         );
       },
