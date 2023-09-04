@@ -80,7 +80,7 @@ export const Slides: FC = () => {
         return (
           <Button>
             <Link
-              href={`/auth/slides/view/${item.project.projectId}?updatedAt=${item.updatedAt}`}
+              href={`/auth/slides/${item.project.projectId}?updatedAt=${item.updatedAt}`}
               target="_blank"
             >
               <Body1Strong>Link</Body1Strong>
