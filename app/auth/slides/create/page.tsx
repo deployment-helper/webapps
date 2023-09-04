@@ -8,7 +8,7 @@ import "ace-builds/src-noconflict/theme-github";
 import { useEffect, useState } from "react";
 import { Slide } from "@/components/Slide";
 import { SlideType } from "@/src/constants";
-import useSlidesStore from "../../store";
+import useSlidesStore from "../../../../src/store";
 
 export default function Page() {
   const [slides, setSlides] = useState<any[]>([]);
