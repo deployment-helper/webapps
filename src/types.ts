@@ -59,13 +59,29 @@ export type IUserWithProjectTypes = {
   [key in ProjectTypes]: Array<IProject>;
 } & IUser;
 
+export interface IPresentation {
+  project: IProject;
+  updatedAt: Date;
+  createdAt: Date;
+  id: string;
+  name: string;
+  s3File: string;
+  s3MetaFile: string;
+  user: IUserWithProjectTypes;
+}
+
 export interface IStore {
+  apiServer?: string;
+  currentProject?: IProject;
   user?: IUserWithProjectTypes;
+  presentations?: Array<IPresentation>;
   createSlide?: {
     editorFile: any;
   };
+  addServer(server: string): void;
   addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
+  listPresentations(projectId: string): void;
 }
 
 interface exoportDefault {

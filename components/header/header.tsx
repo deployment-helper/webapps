@@ -24,8 +24,8 @@ import { HeaderProps } from "./Header.types";
 import { useStyles } from "./Header.styles";
 import { ArrowLeft24Filled, Navigation24Filled } from "@fluentui/react-icons";
 import { usePathname } from "next/navigation";
-import useSlidesStore from "@/app/auth/store";
-import { ServerClient } from "@/app/auth/apis/server-client";
+import useSlidesStore from "@/src/store";
+import { ServerClient } from "@/src/server-client";
 import { TOASTER_ID } from "@/src/constants";
 
 export const Header: FC<HeaderProps> = ({
