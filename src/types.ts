@@ -61,8 +61,8 @@ export type IUserWithProjectTypes = {
 
 export interface IPresentation {
   project: IProject;
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
   id: string;
   name: string;
   s3File: string;

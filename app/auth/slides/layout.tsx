@@ -10,10 +10,11 @@ export const SlidesLayout: FC<{ children: ReactNode }> = async ({
   return (
     <>
       <div className="flex flex-col items-center">
-        <div data-store="addUser" style={{ display: "none" }}>
-          {JSON.stringify(user)}
+        <div style={{ display: "none" }}>
+          <div data-store="addUser">{JSON.stringify(user)}</div>
+          <div data-store="apiServer">{process.env.API_SERVER}</div>
         </div>
-        <div data-store="apiServer">{process.env.API_SERVER}</div>
+
         <Header
           title="Dashbord"
           type="auth"

@@ -49,11 +49,11 @@ export const useSlidesStore = create<IStore>()(
               project: user?.slideProjects.find(
                 (sp) => sp.projectId === pitem.projectId,
               ) as IProject,
-              updatedAt: new Date(Number(pitem.updatedAt)),
-              createdAt: new Date(pitem.createdAt),
+              updatedAt: pitem.updatedAt,
+              createdAt: pitem.createdAt,
               name: pitem.name,
               user: user as IUserWithProjectTypes,
-              s3File: pitem.s32File,
+              s3File: pitem.s3File,
               s3MetaFile: pitem.s3MetaFile,
             };
             return presentation;
