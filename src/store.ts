@@ -17,7 +17,9 @@ export const useSlidesStore = create<IStore>()(
         set((store) => ({
           ...store,
           user,
-          currentProject: user.slideProjects[0],
+          currentProject: user.slideProjects
+            ? user.slideProjects[0]
+            : undefined,
         }));
       },
       addEditorFile: (content) =>

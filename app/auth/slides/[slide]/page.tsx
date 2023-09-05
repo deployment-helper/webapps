@@ -3,9 +3,9 @@ export const Page = ({
   searchParams,
 }: {
   params: { slide: string };
-  searchParams: { updatedAt: string };
+  searchParams: { updatedAt: string; apiKey: string };
 }) => {
-  return `PresentationId: ${params.slide}, updatedAt:${searchParams.updatedAt}`;
+  return `PresentationId: ${params.slide}, updatedAt:${searchParams.updatedAt}, apiKey:${searchParams.apiKey}`;
 };
 
 export default Page;
