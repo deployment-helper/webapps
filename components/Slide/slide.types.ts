@@ -3,4 +3,5 @@ import { ISlide } from "@/src/types";
 
 export interface SlideProps extends ISlide {
   slideType: SlideType;
+  slideMeta?: any;
 }
