@@ -40,4 +40,22 @@ export class ServerClient {
 
     return await resp.json();
   }
+
+  public static async getPresentation(
+    apiServer: string,
+    pid: string,
+    updateAt: string,
+  ) {
+    const url = `${apiServer}/slides/${pid}?updatedAt=${updateAt}`;
+    const cookieStore = cookies();
+    const token = cookieStore.get("access_token");
+    const resp = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    return await resp.json();
+  }
 }

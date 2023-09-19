@@ -1,6 +1,6 @@
 import { SlideType } from "@/src/constants";
-import { Slide } from "@/src/types";
+import { ISlide } from "@/src/types";
 
-export interface SlideProps extends Slide {
+export interface SlideProps extends ISlide {
   slideType: SlideType;
 }

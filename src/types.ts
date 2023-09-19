@@ -6,7 +6,7 @@ export interface Option {
   audioDurHi?: number;
 }
 
-export interface Slide {
+export interface ISlide {
   questionEn: string;
   questionHi?: string;
   audioDurEn?: number;
@@ -22,7 +22,7 @@ export interface Slide {
 export interface Presentation {
   titleEn: string;
   titleHi?: string;
-  slides: Array<Slide>;
+  slides: Array<ISlide>;
   descEn: string;
   descHi?: string;
   audioDurTitleEn: number;
@@ -75,6 +75,7 @@ export interface IStore {
   currentProject?: IProject;
   user?: IUserWithProjectTypes;
   presentations?: Array<IPresentation>;
+  fullPresentations?: Map<string, any>;
   createSlide?: {
     editorFile: any;
   };
@@ -82,11 +83,12 @@ export interface IStore {
   addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
   listPresentations(projectId: string): void;
+  getPresentation(pid: string, updateAt: string): void;
 }
 
 interface exoportDefault {
   Presentation: Presentation;
-  Slide: Slide;
+  Slide: ISlide;
   Option: Option;
   IPoject: IProject;
   IStore: IStore;
