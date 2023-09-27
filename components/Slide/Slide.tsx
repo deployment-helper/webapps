@@ -17,10 +17,7 @@ export const Slide: FC<SlideProps> = ({
     if (slideType === SlideType.QUESTION) {
       return (
         <section
-          data-autoslide={
-            Number(slideMeta?.questionEn?.dur) * 1000 +
-            Number(slideMeta?.questionHi?.dur || 0) * 1000
-          }
+          data-autoslide={slideMeta.allQuesDur * 1000}
           data-auto-animate
           data-auto-animate-restart
           data-background-color="rgb(252, 211, 77)"
@@ -37,10 +34,7 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.OPTION_LIST) {
       return (
         <section
-          data-autoslide={
-            Number(slideMeta?.questionEn?.dur) * 1000 +
-            Number(slideMeta?.questionHi?.dur || 0) * 1000
-          }
+          data-autoslide={slideMeta.allOptDur * 1000}
           data-auto-animate
           data-background-color="white"
         >
@@ -55,7 +49,8 @@ export const Slide: FC<SlideProps> = ({
             <div data-id="options" className="w-full">
               {options.map((opt) => (
                 <div
-                  className="mt-4 w-2/3 bg-gray-50 pb-2  pl-4 pr-4 pt-2 text-2xl text-black"
+                  data-autoslide="2000"
+                  className="fragment mt-4 w-2/3 bg-gray-50 pb-2  pl-4 pr-4 pt-2 text-2xl text-black"
                   key={opt.en}
                 >
                   {opt.en}
@@ -68,10 +63,7 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.RIGHT_ANSWER) {
       return (
         <section
-          data-autoslide={
-            Number(slideMeta?.questionEn?.dur) * 1000 +
-            Number(slideMeta?.questionHi?.dur || 0) * 1000
-          }
+          data-autoslide={slideMeta?.rightAnswer?.dur * 1000}
           data-auto-animate
           data-background-color="white"
         >
@@ -86,7 +78,7 @@ export const Slide: FC<SlideProps> = ({
             <div data-id="options" className="w-full">
               {options.map((opt) => (
                 <div
-                  className={` mt-4 flex w-2/3 items-center border border-solid pb-2 pl-4 pr-4 pt-2 text-2xl text-black ${
+                  className={`mt-4 flex w-2/3 items-center border border-solid pb-2 pl-4 pr-4 pt-2 text-2xl text-black ${
                     opt.isRight ? "border-green-600" : "border-red-600"
                   }`}
                   key={opt.en}
@@ -106,10 +98,7 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.EXPLANATION) {
       return (
         <section
-          data-autoslide={
-            Number(slideMeta?.questionEn?.dur) * 1000 +
-            Number(slideMeta?.questionHi?.dur || 0) * 1000
-          }
+          data-autoslide={slideMeta?.explanationDur * 1000}
           data-auto-animate
           data-background-color="white"
         >
