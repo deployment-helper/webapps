@@ -17,14 +17,14 @@ export const Slide: FC<SlideProps> = ({
     if (slideType === SlideType.QUESTION) {
       return (
         <section
-          data-autoslide={slideMeta.allQuesDur * 1000}
+          data-autoslide={slideMeta?.allQuesDur * 1000}
           data-auto-animate
           data-auto-animate-restart
-          data-background-color="rgb(252, 211, 77)"
+          data-background-color="white"
         >
           <div
             data-id="question"
-            className="flex w-full flex-col items-center justify-center border-amber-500  bg-amber-300 text-6xl text-black"
+            className="justify-cente flex w-full flex-col items-center text-6xl text-black"
           >
             <div>{questionEn}</div>
             <div>{questionHi}</div>
@@ -34,7 +34,9 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.OPTION_LIST) {
       return (
         <section
-          data-autoslide={slideMeta.allOptDur * 1000}
+          data-autoslide={
+            slideMeta?.allOptDur < 10 ? 10 * 1000 : slideMeta?.allOptDur * 1000
+          }
           data-auto-animate
           data-background-color="white"
         >
@@ -49,7 +51,7 @@ export const Slide: FC<SlideProps> = ({
             <div data-id="options" className="w-full">
               {options.map((opt) => (
                 <div
-                  data-autoslide="2000"
+                  data-autoslide="1500"
                   className="fragment mt-4 w-2/3 bg-gray-50 pb-2  pl-4 pr-4 pt-2 text-2xl text-black"
                   key={opt.en}
                 >
@@ -63,7 +65,11 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.RIGHT_ANSWER) {
       return (
         <section
-          data-autoslide={slideMeta?.rightAnswer?.dur * 1000}
+          data-autoslide={
+            slideMeta?.rightAnswer?.dur < 5
+              ? 5 * 1000
+              : slideMeta?.rightAnswer?.dur * 1000
+          }
           data-auto-animate
           data-background-color="white"
         >

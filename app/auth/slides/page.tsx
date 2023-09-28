@@ -64,16 +64,6 @@ export const Slides: FC = () => {
         return item.user.email;
       },
     }),
-
-    createTableColumn<IPresentation>({
-      columnId: "updatedAt",
-      renderHeaderCell: () => {
-        return <Subtitle2>Updated At</Subtitle2>;
-      },
-      renderCell: (item) => {
-        return item.updatedAt;
-      },
-    }),
     createTableColumn<IPresentation>({
       columnId: "createdAt",
       renderHeaderCell: () => {
@@ -101,6 +91,15 @@ export const Slides: FC = () => {
             Generate
           </Button>
         );
+      },
+    }),
+    createTableColumn<IPresentation>({
+      columnId: "Duration",
+      renderHeaderCell: () => {
+        return <Subtitle2>Duration</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return "TODO";
       },
     }),
     createTableColumn<IPresentation>({
