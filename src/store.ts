@@ -48,6 +48,7 @@ export const useSlidesStore = create<IStore>()(
         const presentations = items.map((pitem: any): IPresentation => {
           const presentation: IPresentation = {
             id: pitem.id,
+            projectId: pitem.projectId,
             project: user?.slideProjects.find(
               (sp) => sp.projectId === pitem.projectId,
             ) as IProject,
@@ -57,6 +58,7 @@ export const useSlidesStore = create<IStore>()(
             user: user as IUserWithProjectTypes,
             s3File: pitem.s3File,
             s3MetaFile: pitem.s3MetaFile,
+            isAudioGenerated: pitem.isAudioGenerated,
           };
           return presentation;
         });

@@ -61,6 +61,7 @@ export type IUserWithProjectTypes = {
 
 export interface IPresentation {
   project: IProject;
+  projectId?: string;
   updatedAt: string;
   createdAt: string;
   id: string;
@@ -68,6 +69,7 @@ export interface IPresentation {
   s3File: string;
   s3MetaFile: string;
   user: IUserWithProjectTypes;
+  isAudioGenerated?: boolean;
 }
 
 export interface IStore {

@@ -1,6 +1,23 @@
 import cookies from "@/src/cookies";
+import { IPresentation } from "./types";
 
 export class ServerClient {
+  public static send(
+    url: string,
+    body?: any,
+    method: string = "GET",
+  ): Promise<any> {
+    const cookieStore = cookies();
+    const token = cookieStore.get("access_token");
+    return fetch(url, {
+      method,
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+  }
   public static async createPresentation(
     name: string,
     projectId: string,
@@ -57,5 +74,13 @@ export class ServerClient {
     });
 
     return await resp.json();
+  }
+
+  public static async generateAudio(
+    apiServer: string,
+    presentation: IPresentation,
+  ) {
+    const url = `${apiServer}/slides/generateAudios`;
+    ServerClient.send(url, presentation, "POST");
   }
 }

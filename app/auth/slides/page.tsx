@@ -17,12 +17,24 @@ import {
   createTableColumn,
 } from "@fluentui/react-components";
 import { IPresentation } from "@/src/types";
-import { Open24Filled } from "@fluentui/react-icons";
+import { CheckmarkCircle20Filled, Open24Filled } from "@fluentui/react-icons";
+import { ServerClient } from "@/src/server-client";
 
 export const Slides: FC = () => {
   const { listPresentations } = useSlidesStore();
   const currentProject = useSlidesStore((store) => store.currentProject);
   const presentations = useSlidesStore((store) => store.presentations);
+  const apiServer = useSlidesStore((store) => store.apiServer);
+
+  const refreshList = () => {
+    if (currentProject) {
+      listPresentations(currentProject?.projectId);
+    }
+  };
+
+  const generateAudio = (presentation: IPresentation) => {
+    ServerClient.generateAudio(apiServer as string, presentation);
+  };
 
   const columns: TableColumnDefinition<IPresentation>[] = [
     createTableColumn<IPresentation>({
@@ -72,6 +84,26 @@ export const Slides: FC = () => {
       },
     }),
     createTableColumn<IPresentation>({
+      columnId: "Auido",
+      renderHeaderCell: () => {
+        return <Subtitle2>Auido</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return item.isAudioGenerated ? (
+          <CheckmarkCircle20Filled className="text-green-800" />
+        ) : (
+          <Button
+            appearance="outline"
+            onClick={() => {
+              generateAudio(item);
+            }}
+          >
+            Generate
+          </Button>
+        );
+      },
+    }),
+    createTableColumn<IPresentation>({
       columnId: "link",
       renderHeaderCell: () => {
         return <Subtitle2>Link</Subtitle2>;
@@ -91,20 +123,26 @@ export const Slides: FC = () => {
       },
     }),
   ];
+
   useEffect(() => {
     if (currentProject && !presentations?.length) {
       listPresentations(currentProject?.projectId);
     }
-  }, [currentProject]);
+  }, [currentProject, listPresentations, presentations?.length]);
 
   return (
     <>
       <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
         <div className="flex justify-between pb-6 pt-6">
           <Title1>Presentation List</Title1>
-          <Button appearance="primary">
-            <Link href={"/auth/slides/create"}>Create</Link>
-          </Button>
+          <div className="flex gap-2">
+            <Button appearance="outline" onClick={refreshList}>
+              Refresh
+            </Button>
+            <Button appearance="primary">
+              <Link href={"/auth/slides/create"}>Create</Link>
+            </Button>
+          </div>
         </div>
         {presentations && presentations.length && (
           <DataGrid
