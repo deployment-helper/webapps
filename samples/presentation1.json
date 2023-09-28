@@ -1,260 +1,487 @@
 {
-  "name": "Sample1",
-  "desc": "This is sample1 for testing purpose",
+  "name": "Computer History and Generations",
+  "desc": "Computer History and Generations",
   "theme": "default",
-  "audioDur": 1000,
   "slides": [
     {
-      "questionEn": "This is is first question",
-      "questionHi": "This is is first question",
-      "audioDurEn": 2000,
-      "audioDurHi": 2000,
+      "questionEn": "Who is known as the 'Father of the Computer'?",
+      "questionHi": "Computer ke 'Father' kaun mane jaate hain?",
       "options": [
         {
-          "en": "This is option one ",
-          "hi": "This is option one",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Alan Turing"
         },
         {
-          "en": "This is option two",
-          "hi": "This is option two",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option three",
-          "hi": "This is option three",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option four",
-          "hi": "This is option four",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000,
+          "en": "Charles Babbage",
           "isRight": true
+        },
+        {
+          "en": "John von Neumann"
+        },
+        {
+          "en": "Bill Gates"
         }
       ],
       "rightAnswer": {
-        "en": "This is option four",
-        "hi": "This is option four",
-        "audioDurEn?": 2000,
-        "audioDurHi?": 2000,
+        "en": "Charles Babbage",
         "isRight": true
       },
-      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-      "audioDurExp?": 5000
+      "explanationEn": "Charles Babbage is considered the 'Father of the Computer' because of his conceptual design for a general-purpose computing device, known as the Analytical Engine."
     },
     {
-      "questionEn": "This is is first question",
-      "questionHi": "This is is first question",
-      "audioDurEn": 2000,
-      "audioDurHi": 2000,
+      "questionEn": "Which generation of computers used vacuum tubes?",
+      "questionHi": "Vacuum tubes ka use kaunsi generation ke computers ne kiya?",
       "options": [
         {
-          "en": "This is option one ",
-          "hi": "This is option one",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option two",
-          "hi": "This is option two",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option three",
-          "hi": "This is option three",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option four",
-          "hi": "This is option four",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000,
+          "en": "First Generation",
           "isRight": true
+        },
+        {
+          "en": "Second Generation"
+        },
+        {
+          "en": "Third Generation"
+        },
+        {
+          "en": "Fourth Generation"
         }
       ],
       "rightAnswer": {
-        "en": "This is option four",
-        "hi": "This is option four",
-        "audioDurEn?": 2000,
-        "audioDurHi?": 2000,
+        "en": "First Generation",
         "isRight": true
       },
-      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-      "audioDurExp?": 5000
+      "explanationEn": "The first generation of computers used vacuum tubes as the basic components for memory and circuitry for CPU."
     },
     {
-      "questionEn": "This is is first question",
-      "questionHi": "This is is first question",
-      "audioDurEn": 2000,
-      "audioDurHi": 2000,
+      "questionEn": "Which programming language was developed first?",
+      "questionHi": "Sabse pehli programming language kaunsi thi?",
       "options": [
         {
-          "en": "This is option one ",
-          "hi": "This is option one",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "C"
         },
         {
-          "en": "This is option two",
-          "hi": "This is option two",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Java"
         },
         {
-          "en": "This is option three",
-          "hi": "This is option three",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option four",
-          "hi": "This is option four",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000,
+          "en": "Fortran",
           "isRight": true
+        },
+        {
+          "en": "Python"
         }
       ],
       "rightAnswer": {
-        "en": "This is option four",
-        "hi": "This is option four",
-        "audioDurEn?": 2000,
-        "audioDurHi?": 2000,
+        "en": "Fortran",
         "isRight": true
       },
-      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-      "audioDurExp?": 5000
+      "explanationEn": "Fortran (Formula Translation) was the first high-level programming language and was developed in the 1950s by IBM."
     },
     {
-      "questionEn": "This is is first question",
-      "questionHi": "This is is first question",
-      "audioDurEn": 2000,
-      "audioDurHi": 2000,
+      "questionEn": "What was the primary purpose of ENIAC?",
+      "questionHi": "ENIAC ka mukhya uddeshya kya tha?",
       "options": [
         {
-          "en": "This is option one ",
-          "hi": "This is option one",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Text Processing"
         },
         {
-          "en": "This is option two",
-          "hi": "This is option two",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Artificial Intelligence"
         },
         {
-          "en": "This is option three",
-          "hi": "This is option three",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option four",
-          "hi": "This is option four",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000,
+          "en": "Ballistic Calculations",
           "isRight": true
+        },
+        {
+          "en": "Web Browsing"
         }
       ],
       "rightAnswer": {
-        "en": "This is option four",
-        "hi": "This is option four",
-        "audioDurEn?": 2000,
-        "audioDurHi?": 2000,
+        "en": "Ballistic Calculations",
         "isRight": true
       },
-      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-      "audioDurExp?": 5000
+      "explanationEn": "The ENIAC (Electronic Numerical Integrator and Computer) was initially designed for the United States Army during World War II to perform artillery trajectory calculations."
     },
     {
-      "questionEn": "This is is first question",
-      "questionHi": "This is is first question",
-      "audioDurEn": 2000,
-      "audioDurHi": 2000,
+      "questionEn": "Which company introduced the first personal computer?",
+      "questionHi": "Pehla personal computer kaunsi company ne introduce kiya?",
       "options": [
         {
-          "en": "This is option one ",
-          "hi": "This is option one",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option two",
-          "hi": "This is option two",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option three",
-          "hi": "This is option three",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
-        },
-        {
-          "en": "This is option four",
-          "hi": "This is option four",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000,
+          "en": "IBM",
           "isRight": true
+        },
+        {
+          "en": "Apple"
+        },
+        {
+          "en": "Microsoft"
+        },
+        {
+          "en": "Dell"
         }
       ],
       "rightAnswer": {
-        "en": "This is option four",
-        "hi": "This is option four",
-        "audioDurEn?": 2000,
-        "audioDurHi?": 2000,
+        "en": "IBM",
         "isRight": true
       },
-      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-      "audioDurExp?": 5000
+      "explanationEn": "IBM introduced the first personal computer, known as the IBM PC, in 1981."
     },
     {
-      "questionEn": "This is is first question",
-      "questionHi": "This is is first question",
-      "audioDurEn": 2000,
-      "audioDurHi": 2000,
+      "questionEn": "What does the acronym 'CPU' stand for?",
+      "questionHi": "'CPU' ka full form kya hai?",
       "options": [
         {
-          "en": "This is option one ",
-          "hi": "This is option one",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Central Processing Unit",
+          "isRight": true
         },
         {
-          "en": "This is option two",
-          "hi": "This is option two",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Computer Processing Unit"
         },
         {
-          "en": "This is option three",
-          "hi": "This is option three",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000
+          "en": "Centralized Power Unit"
         },
         {
-          "en": "This is option four",
-          "hi": "This is option four",
-          "audioDurEn?": 2000,
-          "audioDurHi?": 2000,
+          "en": "Control Panel Unit"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Central Processing Unit",
+        "isRight": true
+      },
+      "explanationEn": "The acronym 'CPU' stands for Central Processing Unit, which is the primary component of a computer that performs most of the processing inside the computer."
+    },
+    {
+      "questionEn": "Which of the following is not a type of computer memory?",
+      "questionHi": "Nimnlikhit mein se kaunsa computer memory ka prakar nahi hai?",
+      "options": [
+        {
+          "en": "RAM"
+        },
+        {
+          "en": "ROM"
+        },
+        {
+          "en": "HDD"
+        },
+        {
+          "en": "TFT",
           "isRight": true
         }
       ],
       "rightAnswer": {
-        "en": "This is option four",
-        "hi": "This is option four",
-        "audioDurEn?": 2000,
-        "audioDurHi?": 2000,
+        "en": "TFT",
         "isRight": true
       },
-      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-      "audioDurExp?": 5000
+      "explanationEn": "TFT (Thin-Film Transistor) is a type of LCD display technology and not a type of computer memory."
+    },
+    {
+      "questionEn": "What does the acronym 'GUI' stand for?",
+      "questionHi": "'GUI' ka full form kya hai?",
+      "options": [
+        {
+          "en": "Graphical User Interface",
+          "isRight": true
+        },
+        {
+          "en": "General User Interface"
+        },
+        {
+          "en": "Geometric User Input"
+        },
+        {
+          "en": "Generic Utility Interface"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Graphical User Interface",
+        "isRight": true
+      },
+      "explanationEn": "The acronym 'GUI' stands for Graphical User Interface, which allows users to interact with electronic devices through graphical icons and visual indicators."
+    },
+    {
+      "questionEn": "Which technology is used to make computer chips?",
+      "questionHi": "Computer chips banane ke liye kaunsi technology ka use hota hai?",
+      "options": [
+        {
+          "en": "Silicon",
+          "isRight": true
+        },
+        {
+          "en": "Plastic"
+        },
+        {
+          "en": "Aluminum"
+        },
+        {
+          "en": "Copper"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Silicon",
+        "isRight": true
+      },
+      "explanationEn": "Silicon is the primary material used for making integrated circuits, commonly known as computer chips."
+    },
+    {
+      "questionEn": "Who developed the World Wide Web?",
+      "questionHi": "World Wide Web ka development kisne kiya?",
+      "options": [
+        {
+          "en": "Bill Gates"
+        },
+        {
+          "en": "Steve Jobs"
+        },
+        {
+          "en": "Tim Berners-Lee",
+          "isRight": true
+        },
+        {
+          "en": "Mark Zuckerberg"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Tim Berners-Lee",
+        "isRight": true
+      },
+      "explanationEn": "The World Wide Web was developed by Tim Berners-Lee, a British computer scientist, in 1989."
+    },
+    {
+      "questionEn": "Which of the following is a non-volatile memory?",
+      "questionHi": "Nimnlikhit mein se kaunsa non-volatile memory hai?",
+      "options": [
+        {
+          "en": "RAM"
+        },
+        {
+          "en": "ROM",
+          "isRight": true
+        },
+        {
+          "en": "Cache"
+        },
+        {
+          "en": "Register"
+        }
+      ],
+      "rightAnswer": {
+        "en": "ROM",
+        "isRight": true
+      },
+      "explanationEn": "ROM (Read-Only Memory) is a type of non-volatile memory that retains data even when the power is turned off."
+    },
+    {
+      "questionEn": "What is the primary function of an operating system?",
+      "questionHi": "Operating system ka mukhya kaam kya hai?",
+      "options": [
+        {
+          "en": "Word Processing"
+        },
+        {
+          "en": "Managing Hardware and Software Resources",
+          "isRight": true
+        },
+        {
+          "en": "Internet Browsing"
+        },
+        {
+          "en": "Data Analysis"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Managing Hardware and Software Resources",
+        "isRight": true
+      },
+      "explanationEn": "The primary function of an operating system is to manage the computer's hardware and software resources, providing various services for computer programs."
+    },
+    {
+      "questionEn": "Which of the following is an example of a high-level programming language?",
+      "questionHi": "Nimnlikhit mein se kaunsa high-level programming language ka example hai?",
+      "options": [
+        {
+          "en": "Assembly Language"
+        },
+        {
+          "en": "Machine Language"
+        },
+        {
+          "en": "Python",
+          "isRight": true
+        },
+        {
+          "en": "Binary Code"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Python",
+        "isRight": true
+      },
+      "explanationEn": "Python is an example of a high-level programming language, which is designed to be easy to read and write."
+    },
+    {
+      "questionEn": "What does the acronym 'URL' stand for?",
+      "questionHi": "'URL' ka full form kya hai?",
+      "options": [
+        {
+          "en": "Universal Resource Locator",
+          "isRight": true
+        },
+        {
+          "en": "Unified Relay Language"
+        },
+        {
+          "en": "User-Related Link"
+        },
+        {
+          "en": "Universal Relay Language"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Universal Resource Locator",
+        "isRight": true
+      },
+      "explanationEn": "The acronym 'URL' stands for Universal Resource Locator, which is used to specify addresses on the World Wide Web."
+    },
+    {
+      "questionEn": "Which of the following storage devices uses magnetic storage?",
+      "questionHi": "Nimnlikhit mein se kaunsa storage device magnetic storage ka use karta hai?",
+      "options": [
+        {
+          "en": "Flash Drive"
+        },
+        {
+          "en": "Hard Disk Drive",
+          "isRight": true
+        },
+        {
+          "en": "Optical Disk"
+        },
+        {
+          "en": "Solid State Drive"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Hard Disk Drive",
+        "isRight": true
+      },
+      "explanationEn": "Hard Disk Drives (HDD) use magnetic storage to read and write data."
+    },
+    {
+      "questionEn": "What is the binary representation of the decimal number 5?",
+      "questionHi": "Decimal number 5 ka binary representation kya hai?",
+      "options": [
+        {
+          "en": "0101",
+          "isRight": true
+        },
+        {
+          "en": "0010"
+        },
+        {
+          "en": "0110"
+        },
+        {
+          "en": "1001"
+        }
+      ],
+      "rightAnswer": {
+        "en": "0101",
+        "isRight": true
+      },
+      "explanationEn": "The binary representation of the decimal number 5 is 0101."
+    },
+    {
+      "questionEn": "Which of the following is an example of an input device?",
+      "questionHi": "Nimnlikhit mein se kaunsa input device ka example hai?",
+      "options": [
+        {
+          "en": "Monitor"
+        },
+        {
+          "en": "Printer"
+        },
+        {
+          "en": "Keyboard",
+          "isRight": true
+        },
+        {
+          "en": "Speaker"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Keyboard",
+        "isRight": true
+      },
+      "explanationEn": "A keyboard is an example of an input device, used to enter data into a computer."
+    },
+    {
+      "questionEn": "What does the acronym 'HTML' stand for?",
+      "questionHi": "'HTML' ka full form kya hai?",
+      "options": [
+        {
+          "en": "HyperText Markup Language",
+          "isRight": true
+        },
+        {
+          "en": "High-Level Text Markup Language"
+        },
+        {
+          "en": "Hyper Transfer Markup Language"
+        },
+        {
+          "en": "High Transfer Markup Language"
+        }
+      ],
+      "rightAnswer": {
+        "en": "HyperText Markup Language",
+        "isRight": true
+      },
+      "explanationEn": "The acronym 'HTML' stands for HyperText Markup Language, which is the standard markup language for creating web pages."
+    },
+    {
+      "questionEn": "Which of the following is a type of malware?",
+      "questionHi": "Nimnlikhit mein se kaunsa malware ka prakar hai?",
+      "options": [
+        {
+          "en": "Trojan",
+          "isRight": true
+        },
+        {
+          "en": "Linux"
+        },
+        {
+          "en": "Java"
+        },
+        {
+          "en": "HTML"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Trojan",
+        "isRight": true
+      },
+      "explanationEn": "A Trojan is a type of malware that is often disguised as legitimate software."
+    },
+    {
+      "questionEn": "What is the primary function of a firewall?",
+      "questionHi": "Firewall ka mukhya kaam kya hai?",
+      "options": [
+        {
+          "en": "Data Storage"
+        },
+        {
+          "en": "Network Security",
+          "isRight": true
+        },
+        {
+          "en": "Data Analysis"
+        },
+        {
+          "en": "File Compression"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Network Security",
+        "isRight": true
+      },
+      "explanationEn": "The primary function of a firewall is to provide network security by monitoring and controlling incoming and outgoing network traffic."
     }
   ]
 }
