@@ -1,0 +1,271 @@
+{
+  "name": "Top 10 **Must-Know** Operating System Questions for Students | MCQs Explained",
+  "desc": "Unlock the world of **Operating Systems** with this comprehensive MCQ video! Perfect for students who are looking to grasp the basics and history of operating systems. Whether you're preparing for exams or just curious to learn, this video has got you covered.\n\n- 🔹 **What was the first-ever operating system?**\n- 🔹 **Who developed Windows?**\n- 🔹 **What is Linux known for?**\n\nFind the answers to these questions and more! Each question is followed by a *detailed explanation* to help you understand the concept better. Don't forget to **like, share, and subscribe** for more educational content!",
+  "theme": "default",
+  "slides": [
+    {
+      "questionEn": "Which was the **first** operating system?",
+      "questionHi": "Pehla operating system **kaunsa** tha?",
+      "options": [
+        {
+          "en": "**Unix**"
+        },
+        {
+          "en": "**Windows**"
+        },
+        {
+          "en": "**Linux**"
+        },
+        {
+          "en": "**GM-NAA I/O**",
+          "isRight": true
+        }
+      ],
+      "rightAnswer": {
+        "en": "**GM-NAA I/O**",
+        "isRight": true
+      },
+      "explanationEn": "**GM-NAA I/O** was the *first* operating system, developed in the *1950s*."
+    },
+    {
+      "questionEn": "Which operating system was developed by **Microsoft**?",
+      "questionHi": "**Microsoft** ne kaunsa operating system develop kiya?",
+      "options": [
+        {
+          "en": "**Unix**"
+        },
+        {
+          "en": "**Windows**",
+          "isRight": true
+        },
+        {
+          "en": "**Linux**"
+        },
+        {
+          "en": "**Mac OS**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Windows**",
+        "isRight": true
+      },
+      "explanationEn": "**Windows** was developed by *Microsoft*."
+    },
+    {
+      "questionEn": "Which operating system is **open source**?",
+      "questionHi": "Kaunsa operating system **open source** hai?",
+      "options": [
+        {
+          "en": "**Unix**"
+        },
+        {
+          "en": "**Windows**"
+        },
+        {
+          "en": "**Linux**",
+          "isRight": true
+        },
+        {
+          "en": "**Mac OS**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Linux**",
+        "isRight": true
+      },
+      "explanationEn": "**Linux** is an *open-source* operating system."
+    },
+    {
+      "questionEn": "Which operating system was initially developed by **Dennis Ritchie** and **Ken Thompson**?",
+      "questionHi": "**Dennis Ritchie** aur **Ken Thompson** ne shuru me kaunsa operating system develop kiya?",
+      "options": [
+        {
+          "en": "**Unix**",
+          "isRight": true
+        },
+        {
+          "en": "**Windows**"
+        },
+        {
+          "en": "**Linux**"
+        },
+        {
+          "en": "**Mac OS**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Unix**",
+        "isRight": true
+      },
+      "explanationEn": "**Unix** was initially developed by *Dennis Ritchie* and *Ken Thompson*."
+    },
+    {
+      "questionEn": "Which operating system was created by **Steve Jobs** after leaving **Apple**?",
+      "questionHi": "**Apple** chhodne ke baad **Steve Jobs** ne kaunsa operating system banaya?",
+      "options": [
+        {
+          "en": "**Unix**"
+        },
+        {
+          "en": "**Windows**"
+        },
+        {
+          "en": "**NeXTSTEP**",
+          "isRight": true
+        },
+        {
+          "en": "**Linux**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**NeXTSTEP**",
+        "isRight": true
+      },
+      "explanationEn": "**NeXTSTEP** was created by *Steve Jobs* after he left *Apple*."
+    },
+    {
+      "questionEn": "Which **version** of **Windows** was released in the year *1995*?",
+      "questionHi": "*1995* me **Windows** ka kaunsa **version** release hua tha?",
+      "options": [
+        {
+          "en": "**Windows 3.1**"
+        },
+        {
+          "en": "**Windows 95**",
+          "isRight": true
+        },
+        {
+          "en": "**Windows XP**"
+        },
+        {
+          "en": "**Windows 7**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Windows 95**",
+        "isRight": true
+      },
+      "explanationEn": "**Windows 95** was released in the year *1995*."
+    },
+    {
+      "questionEn": "Which **Linux distribution** is known for its *user-friendliness*?",
+      "questionHi": "Kaunsa **Linux distribution** *user-friendly* hone ke liye jaana jaata hai?",
+      "options": [
+        {
+          "en": "**Fedora**"
+        },
+        {
+          "en": "**Ubuntu**",
+          "isRight": true
+        },
+        {
+          "en": "**CentOS**"
+        },
+        {
+          "en": "**Debian**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Ubuntu**",
+        "isRight": true
+      },
+      "explanationEn": "**Ubuntu** is known for its *user-friendliness*."
+    },
+    {
+      "questionEn": "Which **Apple** operating system was released in *2001*?",
+      "questionHi": "*2001* me **Apple** ka kaunsa operating system release hua tha?",
+      "options": [
+        {
+          "en": "**Mac OS 9**"
+        },
+        {
+          "en": "**Mac OS X 10.0 Cheetah**",
+          "isRight": true
+        },
+        {
+          "en": "**iOS**"
+        },
+        {
+          "en": "**watchOS**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Mac OS X 10.0 Cheetah**",
+        "isRight": true
+      },
+      "explanationEn": "**Mac OS X 10.0 Cheetah** was released by *Apple* in the year *2001*."
+    },
+    {
+      "questionEn": "Which operating system is primarily used in **supercomputers**?",
+      "questionHi": "**Supercomputers** me kaunsa operating system sabse zyada use hota hai?",
+      "options": [
+        {
+          "en": "**Windows**"
+        },
+        {
+          "en": "**Mac OS**"
+        },
+        {
+          "en": "**Linux**",
+          "isRight": true
+        },
+        {
+          "en": "**Unix**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Linux**",
+        "isRight": true
+      },
+      "explanationEn": "**Linux** is primarily used in *supercomputers*."
+    },
+    {
+      "questionEn": "Which **version** of **Windows** introduced the *Start menu*?",
+      "questionHi": "*Start menu* ko introduce karne wala **Windows** ka kaunsa **version** tha?",
+      "options": [
+        {
+          "en": "**Windows 3.1**"
+        },
+        {
+          "en": "**Windows 95**",
+          "isRight": true
+        },
+        {
+          "en": "**Windows XP**"
+        },
+        {
+          "en": "**Windows 7**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Windows 95**",
+        "isRight": true
+      },
+      "explanationEn": "The *Start menu* was introduced in **Windows 95**."
+    },
+    {
+      "questionEn": "Which **Unix-based** operating system is developed by **Apple**?",
+      "questionHi": "**Apple** dwara develop kiya gaya kaunsa operating system **Unix-based** hai?",
+      "options": [
+        {
+          "en": "**Windows**"
+        },
+        {
+          "en": "**Linux**"
+        },
+        {
+          "en": "**Mac OS**",
+          "isRight": true
+        },
+        {
+          "en": "**Ubuntu**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Mac OS**",
+        "isRight": true
+      },
+      "explanationEn": "**Mac OS** is a *Unix-based* operating system developed by **Apple**."
+    }
+  ]
+}
