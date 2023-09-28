@@ -50,7 +50,7 @@ export const Slide: FC<SlideProps> = ({
           <div className="flex h-screen w-full flex-col text-left">
             <div
               data-id="question"
-              className="flex h-20 w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
+              className="flex  w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
             >
               <div
                 dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
@@ -90,7 +90,7 @@ export const Slide: FC<SlideProps> = ({
           <div className="flex h-screen w-full flex-col">
             <div
               data-id="question"
-              className="flex h-20 w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
+              className="flex  w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
             >
               <div
                 dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
@@ -136,7 +136,7 @@ export const Slide: FC<SlideProps> = ({
           <div className="flex h-screen w-full flex-col">
             <div
               data-id="question"
-              className="flex h-20 w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
+              className="flex  w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
             >
               <div
                 dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
