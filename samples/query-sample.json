@@ -1,42 +1,37 @@
 {
-    
-    "slides": [
-      {
-        "questionEnglish": "This is is first question",
-        "questionHiinglish": "This is is first question",
-        
-        "memonic cues prompt":"",
-        "options": [
-          {
-            "en": "This is option one ",
-            "hi": "This is option one",
-        
-          },
-          {
-            "en": "This is option two",
-            "hi": "This is option two",
-        
-          },
-          {
-            "en": "This is option three",
-            "hi": "This is option three",
-        
-          },
-          {
-            "en": "This is option four",
-            "hi": "This is option four",
-        
-            "isRight": true
-          }
-        ],
-        "rightAnswer": {
+  "slides": [
+    {
+      "questionEnglish": "This is is first question",
+      "questionHiinglish": "This is is first question",
+
+      "memonic cues prompt": "",
+      "options": [
+        {
+          "en": "This is option one ",
+          "hi": "This is option one"
+        },
+        {
+          "en": "This is option two",
+          "hi": "This is option two"
+        },
+        {
+          "en": "This is option three",
+          "hi": "This is option three"
+        },
+        {
           "en": "This is option four",
           "hi": "This is option four",
-        
+
           "isRight": true
-        },
-        "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users.",
-        
-      }
-  }
-  
+        }
+      ],
+      "rightAnswer": {
+        "en": "This is option four",
+        "hi": "This is option four",
+
+        "isRight": true
+      },
+      "explanationEn": "This is the detailed explantion of the questions. Fourth option is correct becuase this the best suited for this contidion and also provide good cost saving for the end users."
+    }
+  ]
+}
