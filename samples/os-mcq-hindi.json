@@ -1,0 +1,175 @@
+{
+  "name": "Top 10 **Must-Know** Operating System Questions for Students | MCQs Explained",
+  "desc": "Unlock the world of **Operating Systems** with this comprehensive MCQ video! Perfect for students who are looking to grasp the basics and history of operating systems. Whether you're preparing for exams or just curious to learn, this video has got you covered.\n\n- 🔹 **What was the first-ever operating system?**\n- 🔹 **Who developed Windows?**\n- 🔹 **What is Linux known for?**\n\nFind the answers to these questions and more! Each question is followed by a *detailed explanation* to help you understand the concept better. Don't forget to **like, share, and subscribe** for more educational content!",
+  "theme": "default",
+  "slides": [
+    {
+      "questionEn": "Which of the following is an example of a **real-time operating system**?",
+      "questionHi": "निम्नलिखित में से कौनसा **रियल-टाइम ऑपरेटिंग सिस्टम** का उदाहरण है?",
+      "options": [
+        {
+          "en": "Option `1`: **Windows 10**"
+        },
+        {
+          "en": "Option `2`: **Linux**"
+        },
+        {
+          "en": "Option `3`: **RTOS**",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **MacOS**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3`: **RTOS**",
+        "isRight": true
+      },
+      "explanationEn": "A **real-time operating system (RTOS)** is designed to serve real-time applications that process data as it comes in, typically without buffer delays. *RTOS* is an example of this."
+    },
+    {
+      "questionEn": "What is the main function of the **kernel** in an operating system?",
+      "questionHi": "ऑपरेटिंग सिस्टम में **कर्नेल** का मुख्य कार्य क्या है?",
+      "options": [
+        {
+          "en": "Option `1`: **File Management**"
+        },
+        {
+          "en": "Option `2`: **Resource Management**",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **Networking**"
+        },
+        {
+          "en": "Option `4`: **User Interface**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: **Resource Management**",
+        "isRight": true
+      },
+      "explanationEn": "The **kernel** is the core part of the operating system that manages system resources like CPU, memory, and I/O devices. It acts as a bridge between the hardware and the software."
+    },
+    {
+      "questionEn": "Which **file system** is commonly used in Linux?",
+      "questionHi": "लिनक्स में कौनसी **फ़ाइल सिस्टम** आमतौर पर इस्तेमाल होती है?",
+      "options": [
+        {
+          "en": "Option `1`: **NTFS**"
+        },
+        {
+          "en": "Option `2`: **FAT32**"
+        },
+        {
+          "en": "Option `3`: **ext4**",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **HFS+**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3`: **ext4**",
+        "isRight": true
+      },
+      "explanationEn": "The **ext4** (Fourth Extended Filesystem) is commonly used in Linux systems. It is an evolution of the earlier **ext3** file system and provides better performance and reliability."
+    },
+    {
+      "questionEn": "What does **CPU scheduling** aim to achieve?",
+      "questionHi": "**CPU स्केजूलिंग** क्या हासिल करने का प्रयास करता है?",
+      "options": [
+        {
+          "en": "Option `1`: **Maximize User Interface**"
+        },
+        {
+          "en": "Option `2`: **Minimize Resource Usage**"
+        },
+        {
+          "en": "Option `3`: **Maximize CPU Utilization**",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **Minimize Power Consumption**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3`: **Maximize CPU Utilization**",
+        "isRight": true
+      },
+      "explanationEn": "The main aim of **CPU scheduling** is to maximize CPU utilization so that the processor remains as busy as possible, thereby increasing the efficiency of the system."
+    },
+    {
+      "questionEn": "Which of the following is a **non-preemptive scheduling algorithm**?",
+      "questionHi": "निम्नलिखित में से कौनसा **नॉन-प्रीम्प्टिव स्केजूलिंग एल्गोरिथम** है?",
+      "options": [
+        {
+          "en": "Option `1`: **Round Robin**"
+        },
+        {
+          "en": "Option `2`: **First-Come, First-Served (FCFS)**",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **Priority Scheduling**"
+        },
+        {
+          "en": "Option `4`: **Shortest Job Next (SJN)**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: **First-Come, First-Served (FCFS)**",
+        "isRight": true
+      },
+      "explanationEn": "In **First-Come, First-Served (FCFS)** scheduling, processes are executed in the order they arrive. Once a process starts execution, it runs to completion and cannot be preempted."
+    },
+    {
+      "questionEn": "What is the primary purpose of **swap space** in an operating system?",
+      "questionHi": "ऑपरेटिंग सिस्टम में **स्वैप स्पेस** का मुख्य उद्देश्य क्या है?",
+      "options": [
+        {
+          "en": "Option `1`: **Data Backup**"
+        },
+        {
+          "en": "Option `2`: **File Compression**"
+        },
+        {
+          "en": "Option `3`: **Temporary Storage for RAM**",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **Network Buffering**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3`: **Temporary Storage for RAM**",
+        "isRight": true
+      },
+      "explanationEn": "The primary purpose of **swap space** is to act as a temporary storage area when the RAM is full. It helps in extending the virtual memory of a system."
+    },
+    {
+      "questionEn": "Which of the following **commands** is used to list files in Linux?",
+      "questionHi": "लिनक्स में फ़ाइलों को लिस्ट करने के लिए निम्नलिखित में से कौनसा **कमांड** इस्तेमाल होता है?",
+      "options": [
+        {
+          "en": "Option `1`: **mkdir**"
+        },
+        {
+          "en": "Option `2`: **ls**",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **rm**"
+        },
+        {
+          "en": "Option `4`: **cd**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: **ls**",
+        "isRight": true
+      },
+      "explanationEn": "The **ls** command in Linux is used to list files and directories. It is one of the most commonly used commands for file management."
+    }
+  ]
+}

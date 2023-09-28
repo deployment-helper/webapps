@@ -41,9 +41,7 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.OPTION_LIST) {
       return (
         <section
-          data-autoslide={
-            slideMeta?.allOptDur < 10 ? 10 * 1000 : slideMeta?.allOptDur * 1000
-          }
+          data-autoslide="2000"
           data-auto-animate
           data-background-color="white"
         >
