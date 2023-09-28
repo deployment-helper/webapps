@@ -1,12 +1,11 @@
 "use client";
+import { useEffect, useState } from "react";
 
 import { Slide } from "@/components/Slide";
 import { SlideType } from "@/src/constants";
 import useSlidesStore from "@/src/store";
 import { ISlide } from "@/src/types";
-import Script from "next/script";
-import { useEffect, useState } from "react";
-
+import Reveal from "@/reveal.js-4.6.0/dist/reveal.esm";
 export const Page = ({
   params,
   searchParams,
@@ -30,13 +29,9 @@ export const Page = ({
 
   useEffect(() => {
     console.log("Component mounted/updated");
-    let Reveal: any;
-    import("reveal.js").then((r) => {
-      Reveal = r.default;
-      Reveal.initialize({});
-    });
     if (Reveal) {
       console.log("Reveal initialized");
+      //@ts-ignore
       Reveal.initialize({});
     }
   });
@@ -109,7 +104,6 @@ export const Page = ({
           </div>
         </div>
       </div>
-      <Script id="my-script">{`Reveal.initialize({});`}</Script>
     </>
   );
 };

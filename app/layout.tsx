@@ -24,10 +24,6 @@ export default function RootLayout({
         ></link>
       </head>
       <body>{children}</body>
-      <script
-        async
-        src="https://unpkg.com/reveal.js@4.5.0/dist/reveal.js"
-      ></script>
     </html>
   );
 }

@@ -3,6 +3,7 @@ import { CheckmarkCircle32Filled } from "@fluentui/react-icons";
 import { FC } from "react";
 import { SlideProps } from "./Slide.types";
 import { SlideType } from "@/src/constants";
+import { marked } from "marked";
 
 export const Slide: FC<SlideProps> = ({
   questionEn,
@@ -26,8 +27,14 @@ export const Slide: FC<SlideProps> = ({
             data-id="question"
             className="justify-cente flex w-full flex-col items-center text-6xl text-black"
           >
-            <div>{questionEn}</div>
-            <div>{questionHi}</div>
+            <div
+              dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
+            ></div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: marked.parse(questionHi as string),
+              }}
+            />
           </div>
         </section>
       );
@@ -45,8 +52,14 @@ export const Slide: FC<SlideProps> = ({
               data-id="question"
               className="flex h-20 w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
             >
-              <div>{questionEn}</div>
-              <div>{questionHi}</div>
+              <div
+                dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
+              ></div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: marked.parse(questionHi as string),
+                }}
+              />
             </div>
             <div data-id="options" className="w-full">
               {options.map((opt) => (
@@ -54,9 +67,10 @@ export const Slide: FC<SlideProps> = ({
                   data-autoslide="1500"
                   className="fragment mt-4 w-2/3 bg-gray-50 pb-2  pl-4 pr-4 pt-2 text-2xl text-black"
                   key={opt.en}
-                >
-                  {opt.en}
-                </div>
+                  dangerouslySetInnerHTML={{
+                    __html: marked.parse(opt.en),
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -78,8 +92,14 @@ export const Slide: FC<SlideProps> = ({
               data-id="question"
               className="flex h-20 w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
             >
-              <div>{questionEn}</div>
-              <div>{questionHi}</div>
+              <div
+                dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
+              ></div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: marked.parse(questionHi as string),
+                }}
+              />
             </div>
             <div data-id="options" className="w-full">
               {options.map((opt) => (
@@ -94,7 +114,12 @@ export const Slide: FC<SlideProps> = ({
                       opt.isRight ? "text-green-800" : "text-red-800"
                     }`}
                   />{" "}
-                  <span className="pl-2">{opt.en}</span>
+                  <span
+                    className="pl-2"
+                    dangerouslySetInnerHTML={{
+                      __html: marked.parse(opt.en),
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -113,18 +138,33 @@ export const Slide: FC<SlideProps> = ({
               data-id="question"
               className="flex h-20 w-full flex-col bg-amber-300 pb-2 pl-4 pr-4 pt-2 text-left text-2xl text-black"
             >
-              <div>{questionEn}</div>
-              <div>{questionHi}</div>
+              <div
+                dangerouslySetInnerHTML={{ __html: marked.parse(questionEn) }}
+              ></div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: marked.parse(questionHi as string),
+                }}
+              />
             </div>
             <div
               data-id="options"
               className="mb-2 mt-2 flex items-center border border-solid border-green-600 pb-2  pl-2 pt-2 text-2xl text-black"
             >
               <CheckmarkCircle32Filled className="text-green-800" />{" "}
-              <span className="">{rightAnswer.en}</span>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: marked.parse(rightAnswer.en),
+                }}
+              />
             </div>
 
-            <div className="pl-4 pt-4 text-4xl text-black">{explanationEn}</div>
+            <div
+              className="pl-4 pt-4 text-4xl text-black"
+              dangerouslySetInnerHTML={{
+                __html: marked.parse(explanationEn),
+              }}
+            />
           </div>
         </section>
       );
