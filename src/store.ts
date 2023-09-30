@@ -65,7 +65,11 @@ export const useSlidesStore = create<IStore>()(
 
         set({ ...store, presentations: presentations });
       },
-      getPresentation: async (pid: string, updateAt: string) => {
+      getPresentation: async (
+        pid: string,
+        updateAt: string,
+        apiKey?: string,
+      ) => {
         const store = get();
         const user = store.user;
 
@@ -77,6 +81,7 @@ export const useSlidesStore = create<IStore>()(
           store.apiServer,
           pid,
           updateAt,
+          apiKey,
         );
         let fullPresentations = store.fullPresentations
           ? store.fullPresentations

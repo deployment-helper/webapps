@@ -16,10 +16,13 @@ export const Slide: FC<SlideProps> = ({
 }: SlideProps) => {
   const getSlide = () => {
     if (slideType === SlideType.QUESTION) {
+      console.log(slideMeta);
       return (
         <section
-          data-autoslide={slideMeta?.allQuesDur * 1000}
-          data-auto-animate
+          data-autoslide={
+            slideMeta?.questionEn.dur * 1000 + slideMeta?.questionHi.dur * 1000
+          }
+          data-transition="fade-in fade-out"
           data-auto-animate-restart
           data-background-color="white"
         >
@@ -41,8 +44,8 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.OPTION_LIST) {
       return (
         <section
-          data-autoslide="2000"
-          data-auto-animate
+          data-autoslide="500"
+          data-transition="fade-in fade-out"
           data-background-color="white"
         >
           <div className="flex h-screen w-full flex-col text-left">
@@ -60,9 +63,9 @@ export const Slide: FC<SlideProps> = ({
               />
             </div>
             <div data-id="options" className="w-full">
-              {options.map((opt) => (
+              {options.map((opt: any, index) => (
                 <div
-                  data-autoslide="1500"
+                  data-autoslide={slideMeta.options[index].dur * 1000}
                   className="fragment mt-4 w-2/3 bg-gray-50 pb-2  pl-4 pr-4 pt-2 text-2xl text-black"
                   key={opt.en}
                   dangerouslySetInnerHTML={{
@@ -77,12 +80,8 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.RIGHT_ANSWER) {
       return (
         <section
-          data-autoslide={
-            slideMeta?.rightAnswer?.dur < 5
-              ? 5 * 1000
-              : slideMeta?.rightAnswer?.dur * 1000
-          }
-          data-auto-animate
+          data-autoslide={slideMeta?.rightAnswer?.dur * 1000}
+          data-transition="fade-in fade-out"
           data-background-color="white"
         >
           <div className="flex h-screen w-full flex-col">
@@ -128,7 +127,7 @@ export const Slide: FC<SlideProps> = ({
       return (
         <section
           data-autoslide={slideMeta?.explanationDur * 1000}
-          data-auto-animate
+          data-transition="fade-in slide-out"
           data-background-color="white"
         >
           <div className="flex h-screen w-full flex-col">

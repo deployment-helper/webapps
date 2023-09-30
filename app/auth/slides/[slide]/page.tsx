@@ -23,9 +23,19 @@ export const Page = ({
   const [slidesMeta, setslidesMeta] = useState<Array<any>>([]);
   useEffect(() => {
     if (apiServer) {
-      getPresentation(params.slide, searchParams.updatedAt);
+      getPresentation(
+        params.slide,
+        searchParams.updatedAt,
+        searchParams.apiKey,
+      );
     }
-  }, [apiServer, getPresentation, params.slide, searchParams.updatedAt]);
+  }, [
+    apiServer,
+    getPresentation,
+    params.slide,
+    searchParams.updatedAt,
+    searchParams.apiKey,
+  ]);
 
   useEffect(() => {
     console.log("Component mounted/updated");

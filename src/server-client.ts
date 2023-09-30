@@ -62,8 +62,11 @@ export class ServerClient {
     apiServer: string,
     pid: string,
     updateAt: string,
+    apiKey?: string,
   ) {
-    const url = `${apiServer}/slides/${pid}?updatedAt=${updateAt}`;
+    const url = `${apiServer}/slides/${pid}?updatedAt=${updateAt} ${
+      apiKey ? "&key=" + apiKey + "" : ""
+    }`;
     const cookieStore = cookies();
     const token = cookieStore.get("access_token");
     const resp = await fetch(url, {

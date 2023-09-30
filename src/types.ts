@@ -85,7 +85,7 @@ export interface IStore {
   addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
   listPresentations(projectId: string): void;
-  getPresentation(pid: string, updateAt: string): void;
+  getPresentation(pid: string, updateAt: string, apiKey?: string): void;
 }
 
 interface exoportDefault {
