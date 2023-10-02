@@ -1,271 +1,298 @@
 {
-  "name": "Top 10 **Must-Know** Operating System Questions for Students | MCQs Explained",
-  "desc": "Unlock the world of **Operating Systems** with this comprehensive MCQ video! Perfect for students who are looking to grasp the basics and history of operating systems. Whether you're preparing for exams or just curious to learn, this video has got you covered.\n\n- 🔹 **What was the first-ever operating system?**\n- 🔹 **Who developed Windows?**\n- 🔹 **What is Linux known for?**\n\nFind the answers to these questions and more! Each question is followed by a *detailed explanation* to help you understand the concept better. Don't forget to **like, share, and subscribe** for more educational content!",
-  "theme": "default",
+  "name": "Understanding OS Concepts Through Cartoons",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
   "slides": [
     {
-      "questionEn": "Which was the **first** operating system?",
-      "questionHi": "Pehla operating system **kaunsa** tha?",
+      "questionEn": "**What is the main function of an Operating System?**",
+      "questionEnSpeak": "What is the main role or function of an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम का मुख्य कार्य क्या है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम का मुख्य कार्य क्या है?",
       "options": [
         {
-          "en": "**Unix**"
+          "en": "Option 1: **To run apps**"
         },
         {
-          "en": "**Windows**"
-        },
-        {
-          "en": "**Linux**"
-        },
-        {
-          "en": "**GM-NAA I/O**",
+          "en": "Option 2: **To manage hardware**",
           "isRight": true
+        },
+        {
+          "en": "Option 3: **To play games**"
+        },
+        {
+          "en": "Option 4: **To browse the internet**"
         }
       ],
       "rightAnswer": {
-        "en": "**GM-NAA I/O**",
+        "en": "Option 2: To manage hardware",
+        "speaking": "Option 2, jo hai hardware manage karna, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**GM-NAA I/O** was the *first* operating system, developed in the *1950s*."
+      "explanationEn": "The main function of an Operating System is to **manage the computer's hardware** and provide services for computer programs.",
+      "explanationEnSpeak": "Operating System ka primary role hota hai computer ke hardware resources ko manage karna. Jaise ki CPU, memory, aur storage devices ko control karna. Iske alawa, yeh user interaction ke liye interface provide karta hai aur software applications ko run karne me help karta hai."
     },
     {
-      "questionEn": "Which operating system was developed by **Microsoft**?",
-      "questionHi": "**Microsoft** ne kaunsa operating system develop kiya?",
+      "questionEn": "**What does multitasking mean in the context of an Operating System?**",
+      "questionEnSpeak": "What does the term multitasking refer to in the context of an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम के संदर्भ में मल्टीटास्किंग का क्या मतलब है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम के संदर्भ में मल्टीटास्किंग का क्या मतलब है?",
       "options": [
         {
-          "en": "**Unix**"
+          "en": "Option 1: **Running one program at a time**"
         },
         {
-          "en": "**Windows**",
+          "en": "Option 2: **Running multiple programs at the same time**",
           "isRight": true
         },
         {
-          "en": "**Linux**"
+          "en": "Option 3: **Running only system programs**"
         },
         {
-          "en": "**Mac OS**"
+          "en": "Option 4: **Running only user programs**"
         }
       ],
       "rightAnswer": {
-        "en": "**Windows**",
+        "en": "Option 2: Running multiple programs at the same time",
+        "speaking": "Option 2, jo hai ek saath kayi programs chalana, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Windows** was developed by *Microsoft*."
+      "explanationEn": "In the context of an Operating System, multitasking refers to the **ability to run multiple programs concurrently**.",
+      "explanationEnSpeak": "Operating System ke context me, multitasking ka matlab hota hai ek saath kayi programs ko run karne ki ability. Jaise, aap music sun sakte hain aur saath me document bhi edit kar sakte hain."
     },
     {
-      "questionEn": "Which operating system is **open source**?",
-      "questionHi": "Kaunsa operating system **open source** hai?",
+      "questionEn": "**What is the kernel in an Operating System responsible for?**",
+      "questionEnSpeak": "What is the kernel responsible for in an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम में कर्नेल का क्या कार्य है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम में कर्नेल का क्या कार्य है?",
       "options": [
         {
-          "en": "**Unix**"
+          "en": "Option 1: **User Interface**"
         },
         {
-          "en": "**Windows**"
-        },
-        {
-          "en": "**Linux**",
+          "en": "Option 2: **Managing Hardware**",
           "isRight": true
         },
         {
-          "en": "**Mac OS**"
+          "en": "Option 3: **Running Applications**"
+        },
+        {
+          "en": "Option 4: **Internet Browsing**"
         }
       ],
       "rightAnswer": {
-        "en": "**Linux**",
+        "en": "Option 2: Managing Hardware",
+        "speaking": "Option 2, jo hai hardware manage karna, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Linux** is an *open-source* operating system."
+      "explanationEn": "The **kernel** in an Operating System is responsible for **managing hardware and system resources**.",
+      "explanationEnSpeak": "Operating System me kernel ka main role hota hai hardware aur system resources ko manage karna. Yeh CPU, memory jaise hardware components ke saath interact karta hai aur unko efficiently use karta hai."
     },
     {
-      "questionEn": "Which operating system was initially developed by **Dennis Ritchie** and **Ken Thompson**?",
-      "questionHi": "**Dennis Ritchie** aur **Ken Thompson** ne shuru me kaunsa operating system develop kiya?",
+      "questionEn": "**What is the primary purpose of virtual memory in an Operating System?**",
+      "questionEnSpeak": "What is the primary purpose of virtual memory in an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम में वर्चुअल मेमोरी का मुख्य उद्देश्य क्या है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम में वर्चुअल मेमोरी का मुख्य उद्देश्य क्या है?",
       "options": [
         {
-          "en": "**Unix**",
+          "en": "Option 1: **To increase storage capacity**"
+        },
+        {
+          "en": "Option 2: **To extend RAM**",
           "isRight": true
         },
         {
-          "en": "**Windows**"
+          "en": "Option 3: **To speed up the CPU**"
         },
         {
-          "en": "**Linux**"
-        },
-        {
-          "en": "**Mac OS**"
+          "en": "Option 4: **To improve graphics**"
         }
       ],
       "rightAnswer": {
-        "en": "**Unix**",
+        "en": "Option 2: To extend RAM",
+        "speaking": "Option 2, jo hai RAM ko extend karna, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Unix** was initially developed by *Dennis Ritchie* and *Ken Thompson*."
+      "explanationEn": "The primary purpose of **virtual memory** in an Operating System is to **extend the available RAM**.",
+      "explanationEnSpeak": "Operating System me virtual memory ka main purpose hota hai available RAM ko extend karna. Isse aapke system me zyada applications ek saath run kar sakte hain, even agar physical RAM full ho."
     },
     {
-      "questionEn": "Which operating system was created by **Steve Jobs** after leaving **Apple**?",
-      "questionHi": "**Apple** chhodne ke baad **Steve Jobs** ne kaunsa operating system banaya?",
+      "questionEn": "**Which of the following is a process scheduling algorithm used in Operating Systems?**",
+      "questionEnSpeak": "Which of the following is a process scheduling algorithm commonly used in Operating Systems?",
+      "questionHi": "**निम्नलिखित में से कौन सा एक प्रोसेस स्केजूलिंग एल्गोरिथ्म ऑपरेटिंग सिस्टम में उपयोग किया जाता है?**",
+      "questionHiSpeak": "निम्नलिखित में से कौन सा एक प्रोसेस स्केजूलिंग एल्गोरिथ्म ऑपरेटिंग सिस्टम में उपयोग किया जाता है?",
       "options": [
         {
-          "en": "**Unix**"
+          "en": "Option 1: **Bubble Sort**"
         },
         {
-          "en": "**Windows**"
-        },
-        {
-          "en": "**NeXTSTEP**",
+          "en": "Option 2: **First-Come, First-Served (FCFS)**",
           "isRight": true
         },
         {
-          "en": "**Linux**"
+          "en": "Option 3: **Quick Sort**"
+        },
+        {
+          "en": "Option 4: **Binary Search**"
         }
       ],
       "rightAnswer": {
-        "en": "**NeXTSTEP**",
+        "en": "Option 2: First-Come, First-Served (FCFS)",
+        "speaking": "Option 2, jo hai First-Come, First-Served yaani FCFS, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**NeXTSTEP** was created by *Steve Jobs* after he left *Apple*."
+      "explanationEn": "The **First-Come, First-Served (FCFS)** algorithm is commonly used for process scheduling in Operating Systems.",
+      "explanationEnSpeak": "Operating System me commonly used process scheduling algorithm hai First-Come, First-Served, yaani FCFS. Isme jo process pehle aata hai, woh pehle execute hota hai."
     },
     {
-      "questionEn": "Which **version** of **Windows** was released in the year *1995*?",
-      "questionHi": "*1995* me **Windows** ka kaunsa **version** release hua tha?",
+      "questionEn": "**What is a deadlock in an Operating System?**",
+      "questionEnSpeak": "What is a deadlock in the context of an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम में डेडलॉक क्या है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम में डेडलॉक क्या है?",
       "options": [
         {
-          "en": "**Windows 3.1**"
+          "en": "Option 1: **A type of error**"
         },
         {
-          "en": "**Windows 95**",
+          "en": "Option 2: **A type of virus**"
+        },
+        {
+          "en": "Option 3: **A situation where processes cannot proceed**",
           "isRight": true
         },
         {
-          "en": "**Windows XP**"
-        },
-        {
-          "en": "**Windows 7**"
+          "en": "Option 4: **A fast execution of processes**"
         }
       ],
       "rightAnswer": {
-        "en": "**Windows 95**",
+        "en": "Option 3: A situation where processes cannot proceed",
+        "speaking": "Option 3, jo hai ek situation jahaan processes aage nahi badh sakte, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Windows 95** was released in the year *1995*."
+      "explanationEn": "A **deadlock** in an Operating System is a situation where two or more processes are unable to proceed because each is waiting for the other to release a resource.",
+      "explanationEnSpeak": "Operating System me deadlock ek aisi situation hoti hai jahaan do ya do se zyada processes aage nahi badh sakte. Kyunki har ek process dusre process se kuch resource release karne ka wait kar raha hota hai."
     },
     {
-      "questionEn": "Which **Linux distribution** is known for its *user-friendliness*?",
-      "questionHi": "Kaunsa **Linux distribution** *user-friendly* hone ke liye jaana jaata hai?",
+      "questionEn": "**What is the primary function of swapping in an Operating System?**",
+      "questionEnSpeak": "What is the primary function of swapping in an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम में स्वैपिंग का मुख्य कार्य क्या है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम में स्वैपिंग का मुख्य कार्य क्या है?",
       "options": [
         {
-          "en": "**Fedora**"
+          "en": "Option 1: **To delete files**"
         },
         {
-          "en": "**Ubuntu**",
+          "en": "Option 2: **To move processes between RAM and disk**",
           "isRight": true
         },
         {
-          "en": "**CentOS**"
+          "en": "Option 3: **To speed up the CPU**"
         },
         {
-          "en": "**Debian**"
+          "en": "Option 4: **To improve graphics**"
         }
       ],
       "rightAnswer": {
-        "en": "**Ubuntu**",
+        "en": "Option 2: To move processes between RAM and disk",
+        "speaking": "Option 2, jo hai processes ko RAM aur disk ke beech move karna, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Ubuntu** is known for its *user-friendliness*."
+      "explanationEn": "The primary function of **swapping** in an Operating System is {} to move processes between RAM and disk when RAM is full.",
+      "explanationEnSpeak": "Operating System me swapping ka main function hota hai jab RAM full ho, tab processes ko RAM aur disk ke beech me move karna.",
+      "explanationImageGenerationPrompts": [
+        "Image illustrating the concept of swapping in Operating Systems"
+      ]
     },
     {
-      "questionEn": "Which **Apple** operating system was released in *2001*?",
-      "questionHi": "*2001* me **Apple** ka kaunsa operating system release hua tha?",
+      "questionEn": "**Which of the following is a type of file system?**",
+      "questionEnSpeak": "Which of the following is a type of file system used in Operating Systems?",
+      "questionHi": "**निम्नलिखित में से कौन सा एक फाइल सिस्टम का प्रकार है?**",
+      "questionHiSpeak": "निम्नलिखित में से कौन सा एक फाइल सिस्टम का प्रकार है?",
       "options": [
         {
-          "en": "**Mac OS 9**"
+          "en": "Option 1: **HTTP**"
         },
         {
-          "en": "**Mac OS X 10.0 Cheetah**",
+          "en": "Option 2: **NTFS**",
           "isRight": true
         },
         {
-          "en": "**iOS**"
+          "en": "Option 3: **SMTP**"
         },
         {
-          "en": "**watchOS**"
+          "en": "Option 4: **TCP/IP**"
         }
       ],
       "rightAnswer": {
-        "en": "**Mac OS X 10.0 Cheetah**",
+        "en": "Option 2: NTFS",
+        "speaking": "Option 2, jo hai NTFS, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Mac OS X 10.0 Cheetah** was released by *Apple* in the year *2001*."
+      "explanationEn": "NTFS (New Technology File System) is {} a type of file system used in Windows Operating Systems.",
+      "explanationEnSpeak": "NTFS, yaani New Technology File System, Windows Operating Systems me use hone wala ek file system hai.",
+      "explanationImageGenerationPrompts": [
+        "Cartoon of a 'File character' being organized into folders by a 'NTFS character', representing the role of NTFS in file management"
+      ]
     },
     {
-      "questionEn": "Which operating system is primarily used in **supercomputers**?",
-      "questionHi": "**Supercomputers** me kaunsa operating system sabse zyada use hota hai?",
+      "questionEn": "**What is the main advantage of multithreading in an Operating System?**",
+      "questionEnSpeak": "What is the main advantage of multithreading in an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम में मल्टीथ्रेडिंग का मुख्य लाभ क्या है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम में मल्टीथ्रेडिंग का मुख्य लाभ क्या है?",
       "options": [
         {
-          "en": "**Windows**"
+          "en": "Option 1: **Reduced power consumption**"
         },
         {
-          "en": "**Mac OS**"
+          "en": "Option 2: **Increased security**"
         },
         {
-          "en": "**Linux**",
+          "en": "Option 3: **Improved performance**",
           "isRight": true
         },
         {
-          "en": "**Unix**"
+          "en": "Option 4: **Simpler code**"
         }
       ],
       "rightAnswer": {
-        "en": "**Linux**",
+        "en": "Option 3: Improved performance",
+        "speaking": "Option 3, jo hai performance improve karna, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "**Linux** is primarily used in *supercomputers*."
+      "explanationEn": "The main advantage of **multithreading** in an Operating System is {} to improve the performance by allowing multiple threads of a single process to execute concurrently.",
+      "explanationEnSpeak": "Operating System me multithreading ka main advantage hota hai performance improve karna, isse ek single process ke multiple threads ek saath execute ho sakte hain.",
+      "explanationImageGenerationPrompts": [
+        "Cartoon of a 'Process character' splitting into multiple 'Thread characters' that perform tasks simultaneously, showcasing the benefit of multithreading"
+      ]
     },
     {
-      "questionEn": "Which **version** of **Windows** introduced the *Start menu*?",
-      "questionHi": "*Start menu* ko introduce karne wala **Windows** ka kaunsa **version** tha?",
+      "questionEn": "**What is the Kernel in an Operating System responsible for?**",
+      "questionEnSpeak": "What is the Kernel responsible for in an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम में कर्नेल का क्या कार्य है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम में कर्नेल का क्या कार्य है?",
       "options": [
         {
-          "en": "**Windows 3.1**"
-        },
-        {
-          "en": "**Windows 95**",
+          "en": "Option 1: **Managing hardware resources**",
           "isRight": true
         },
         {
-          "en": "**Windows XP**"
+          "en": "Option 2: **Running applications**"
         },
         {
-          "en": "**Windows 7**"
+          "en": "Option 3: **Providing security**"
+        },
+        {
+          "en": "Option 4: **Managing files only**"
         }
       ],
       "rightAnswer": {
-        "en": "**Windows 95**",
+        "en": "Option 1: Managing hardware resources",
+        "speaking": "Option 1, jo hai hardware resources manage karna, woh sahi jawab hai.",
         "isRight": true
       },
-      "explanationEn": "The *Start menu* was introduced in **Windows 95**."
-    },
-    {
-      "questionEn": "Which **Unix-based** operating system is developed by **Apple**?",
-      "questionHi": "**Apple** dwara develop kiya gaya kaunsa operating system **Unix-based** hai?",
-      "options": [
-        {
-          "en": "**Windows**"
-        },
-        {
-          "en": "**Linux**"
-        },
-        {
-          "en": "**Mac OS**",
-          "isRight": true
-        },
-        {
-          "en": "**Ubuntu**"
-        }
-      ],
-      "rightAnswer": {
-        "en": "**Mac OS**",
-        "isRight": true
-      },
-      "explanationEn": "**Mac OS** is a *Unix-based* operating system developed by **Apple**."
+      "explanationEn": "The **Kernel** in an Operating System is {} responsible for managing hardware resources like CPU, memory, and I/O devices.",
+      "explanationEnSpeak": "Operating System me Kernel ka main kaam hota hai hardware resources jaise ki CPU, memory, aur I/O devices ko manage karna.",
+      "explanationImageGenerationPrompts": [
+        "Cartoon of a 'Kernel character' acting like a manager, directing 'Hardware Resource characters' like CPU, Memory, and I/O devices"
+      ]
     }
   ]
 }

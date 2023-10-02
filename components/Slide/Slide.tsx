@@ -65,7 +65,7 @@ export const Slide: FC<SlideProps> = ({
             <div data-id="options" className="w-full">
               {options.map((opt: any, index) => (
                 <div
-                  data-autoslide={slideMeta.options[index].dur * 1000}
+                  data-autoslide={slideMeta?.options[index]?.dur * 1000}
                   className="fragment mt-4 w-2/3 bg-gray-50 pb-2  pl-4 pr-4 pt-2 text-2xl text-black"
                   key={opt.en}
                   dangerouslySetInnerHTML={{

@@ -1,0 +1,646 @@
+{
+  "name": "Understanding K8s Concepts Through Cartoons",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**What is Kubernetes primarily used for?**",
+      "questionEnSpeak": "Kubernetes is mainly used for what purpose?",
+      "questionHi": "**Kubernetes mukhya roop se kis liye upyog hota hai?**",
+      "questionHiSpeak": "Kubernetes mukhya roop se kis liye upyog hota hai?",
+      "options": [
+        {
+          "en": "Web Hosting",
+          "speaking": "Option Web Hosting hai"
+        },
+        {
+          "en": "Container Orchestration",
+          "speaking": "Option Container Orchestration hai",
+          "isRight": true
+        },
+        {
+          "en": "Database Management",
+          "speaking": "Option Database Management hai"
+        },
+        {
+          "en": "Text Editing",
+          "speaking": "Option Text Editing hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Container Orchestration",
+        "speaking": "Sahi jawab Container Orchestration hai",
+        "isRight": true
+      },
+      "explanationEn": "Kubernetes is primarily used for **Container Orchestration**. It helps in managing containerized applications across a cluster of machines.",
+      "explanationEnSpeak": "Kubernetes mukhya roop se Container Orchestration ke liye upyog hota hai. Yeh ek cluster of machines par containerized applications ko manage karne mein madad karta hai."
+    },
+    {
+      "questionEn": "**Which company originally developed Kubernetes?**",
+      "questionEnSpeak": "Kubernetes was originally developed by which company?",
+      "questionHi": "**Kubernetes ko mool roop se kaunsi company ne develop kiya tha?**",
+      "questionHiSpeak": "Kubernetes ko mool roop se kaunsi company ne develop kiya tha?",
+      "options": [
+        {
+          "en": "Microsoft",
+          "speaking": "Option Microsoft hai"
+        },
+        {
+          "en": "Google",
+          "speaking": "Option Google hai",
+          "isRight": true
+        },
+        {
+          "en": "Amazon",
+          "speaking": "Option Amazon hai"
+        },
+        {
+          "en": "IBM",
+          "speaking": "Option IBM hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Google",
+        "speaking": "Sahi jawab Google hai",
+        "isRight": true
+      },
+      "explanationEn": "Kubernetes was originally developed by **Google**. It was later donated to the Cloud Native Computing Foundation.",
+      "explanationEnSpeak": "Kubernetes ko mool roop se Google ne develop kiya tha. Baad mein isse Cloud Native Computing Foundation ko donate kar diya gaya."
+    },
+    {
+      "questionEn": "**Which language is Kubernetes written in?**",
+      "questionEnSpeak": "Kubernetes is written in which programming language?",
+      "questionHi": "**Kubernetes kis programming language mein likhi gayi hai?**",
+      "questionHiSpeak": "Kubernetes kis programming language mein likhi gayi hai?",
+      "options": [
+        {
+          "en": "Python",
+          "speaking": "Option Python hai"
+        },
+        {
+          "en": "Java",
+          "speaking": "Option Java hai"
+        },
+        {
+          "en": "Go",
+          "speaking": "Option Go hai",
+          "isRight": true
+        },
+        {
+          "en": "C++",
+          "speaking": "Option C++ hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Go",
+        "speaking": "Sahi jawab Go hai",
+        "isRight": true
+      },
+      "explanationEn": "Kubernetes is primarily written in the **Go** programming language.",
+      "explanationEnSpeak": "Kubernetes mukhya roop se Go programming language mein likhi gayi hai."
+    },
+    {
+      "questionEn": "**What is the smallest unit of deployment in Kubernetes?**",
+      "questionEnSpeak": "What is the smallest unit for deploying applications in Kubernetes?",
+      "questionHi": "**Kubernetes mein deployment ka sabse chhota unit kya hai?**",
+      "questionHiSpeak": "Kubernetes mein deployment ka sabse chhota unit kya hai?",
+      "options": [
+        {
+          "en": "Pod",
+          "speaking": "Option Pod hai",
+          "isRight": true
+        },
+        {
+          "en": "Node",
+          "speaking": "Option Node hai"
+        },
+        {
+          "en": "Cluster",
+          "speaking": "Option Cluster hai"
+        },
+        {
+          "en": "Service",
+          "speaking": "Option Service hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Pod",
+        "speaking": "Sahi jawab Pod hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, the smallest unit of deployment is a **Pod**. A Pod can contain one or more containers.",
+      "explanationEnSpeak": "Kubernetes mein deployment ka sabse chhota unit Pod hota hai. Ek Pod mein ek ya usse adhik containers ho sakte hain."
+    },
+    {
+      "questionEn": "**What does K8s stand for?**",
+      "questionEnSpeak": "What does the abbreviation K8s represent?",
+      "questionHi": "**K8s ka full form kya hai?**",
+      "questionHiSpeak": "K8s ka full form kya hai?",
+      "options": [
+        {
+          "en": "Kubernetes",
+          "speaking": "Option Kubernetes hai",
+          "isRight": true
+        },
+        {
+          "en": "Kubernetes 8 Services",
+          "speaking": "Option Kubernetes 8 Services hai"
+        },
+        {
+          "en": "Kilo 8 Systems",
+          "speaking": "Option Kilo 8 Systems hai"
+        },
+        {
+          "en": "Kernel 8 Software",
+          "speaking": "Option Kernel 8 Software hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Kubernetes",
+        "speaking": "Sahi jawab Kubernetes hai",
+        "isRight": true
+      },
+      "explanationEn": "K8s is an abbreviation for **Kubernetes**. The number 8 represents the eight letters between the 'K' and 's' in Kubernetes.",
+      "explanationEnSpeak": "K8s ka full form Kubernetes hota hai. Yahan 8 number Kubernetes ke 'K' aur 's' ke beech ke aath letters ko represent karta hai."
+    },
+    {
+      "questionEn": "**Which command is used to get information about all pods?**",
+      "questionEnSpeak": "Which command is used to get details about all the pods in Kubernetes?",
+      "questionHi": "**Sabhi pods ke baare mein jaankari paane ke liye kaunsa command use hota hai?**",
+      "questionHiSpeak": "Sabhi pods ke baare mein jaankari paane ke liye kaunsa command use hota hai?",
+      "options": [
+        {
+          "en": "`kubectl get pods`",
+          "speaking": "Option kubectl get pods hai",
+          "isRight": true
+        },
+        {
+          "en": "`kubectl list pods`",
+          "speaking": "Option kubectl list pods hai"
+        },
+        {
+          "en": "`kubectl show pods`",
+          "speaking": "Option kubectl show pods hai"
+        },
+        {
+          "en": "`kubectl info pods`",
+          "speaking": "Option kubectl info pods hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "`kubectl get pods`",
+        "speaking": "Sahi jawab kubectl get pods hai",
+        "isRight": true
+      },
+      "explanationEn": "The command **`kubectl get pods`** is used to get information about all the pods in a Kubernetes cluster.",
+      "explanationEnSpeak": "Kubernetes cluster mein sabhi pods ke baare mein jaankari paane ke liye `kubectl get pods` command ka use hota hai."
+    },
+    {
+      "questionEn": "**What is the default namespace in Kubernetes?**",
+      "questionEnSpeak": "What is the default namespace used in Kubernetes?",
+      "questionHi": "**Kubernetes mein default namespace kya hota hai?**",
+      "questionHiSpeak": "Kubernetes mein default namespace kya hota hai?",
+      "options": [
+        {
+          "en": "kube-system",
+          "speaking": "Option kube-system hai"
+        },
+        {
+          "en": "default",
+          "speaking": "Option default hai",
+          "isRight": true
+        },
+        {
+          "en": "kube-public",
+          "speaking": "Option kube-public hai"
+        },
+        {
+          "en": "kube-node",
+          "speaking": "Option kube-node hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "default",
+        "speaking": "Sahi jawab default hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, the **default** namespace is used for resources with no other namespace.",
+      "explanationEnSpeak": "Kubernetes mein, kisi bhi aur namespace ke bina resources ke liye **default** namespace ka use hota hai."
+    },
+    {
+      "questionEn": "**Which Kubernetes object is used to expose an application?**",
+      "questionEnSpeak": "Which Kubernetes object is commonly used to expose an application to the outside world?",
+      "questionHi": "**Kubernetes mein application ko bahar expose karne ke liye kaunsa object use hota hai?**",
+      "questionHiSpeak": "Kubernetes mein application ko bahar expose karne ke liye kaunsa object use hota hai?",
+      "options": [
+        {
+          "en": "ConfigMap",
+          "speaking": "Option ConfigMap hai"
+        },
+        {
+          "en": "Service",
+          "speaking": "Option Service hai",
+          "isRight": true
+        },
+        {
+          "en": "Volume",
+          "speaking": "Option Volume hai"
+        },
+        {
+          "en": "Pod",
+          "speaking": "Option Pod hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Service",
+        "speaking": "Sahi jawab Service hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, a **Service** is the object that is used to expose an application to the outside world.",
+      "explanationEnSpeak": "Kubernetes mein, application ko bahar expose karne ke liye **Service** object ka use hota hai."
+    },
+    {
+      "questionEn": "**What is Helm used for in Kubernetes?**",
+      "questionEnSpeak": "What is the purpose of using Helm in Kubernetes?",
+      "questionHi": "**Kubernetes mein Helm ka kya upyog hota hai?**",
+      "questionHiSpeak": "Kubernetes mein Helm ka kya upyog hota hai?",
+      "options": [
+        {
+          "en": "Logging",
+          "speaking": "Option Logging hai"
+        },
+        {
+          "en": "Monitoring",
+          "speaking": "Option Monitoring hai"
+        },
+        {
+          "en": "Package Management",
+          "speaking": "Option Package Management hai",
+          "isRight": true
+        },
+        {
+          "en": "Networking",
+          "speaking": "Option Networking hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Package Management",
+        "speaking": "Sahi jawab Package Management hai",
+        "isRight": true
+      },
+      "explanationEn": "Helm is used for **Package Management** in Kubernetes. It helps in defining, installing, and upgrading even the most complex Kubernetes applications.",
+      "explanationEnSpeak": "Kubernetes mein Helm ka upyog **Package Management** ke liye hota hai. Yeh sabse jatil Kubernetes applications ko define, install, aur upgrade karne mein madad karta hai."
+    },
+    {
+      "questionEn": "**Which command is used to apply a configuration file in Kubernetes?**",
+      "questionEnSpeak": "Which command is used to apply a configuration file in Kubernetes?",
+      "questionHi": "**Kubernetes mein configuration file apply karne ke liye kaunsa command use hota hai?**",
+      "questionHiSpeak": "Kubernetes mein configuration file apply karne ke liye kaunsa command use hota hai?",
+      "options": [
+        {
+          "en": "`kubectl apply -f`",
+          "speaking": "Option kubectl apply -f hai",
+          "isRight": true
+        },
+        {
+          "en": "`kubectl set -f`",
+          "speaking": "Option kubectl set -f hai"
+        },
+        {
+          "en": "`kubectl create -f`",
+          "speaking": "Option kubectl create -f hai"
+        },
+        {
+          "en": "`kubectl config -f`",
+          "speaking": "Option kubectl config -f hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "`kubectl apply -f`",
+        "speaking": "Sahi jawab kubectl apply -f hai",
+        "isRight": true
+      },
+      "explanationEn": "The command **`kubectl apply -f`** is used to apply a configuration file in Kubernetes.",
+      "explanationEnSpeak": "Kubernetes mein configuration file apply karne ke liye `kubectl apply -f` command ka use hota hai."
+    },
+    {
+      "questionEn": "**What is the role of the Kubelet in a Kubernetes cluster?**",
+      "questionEnSpeak": "What is the role of the Kubelet in a Kubernetes cluster?",
+      "questionHi": "**Kubernetes cluster mein Kubelet ka kya role hota hai?**",
+      "questionHiSpeak": "Kubernetes cluster mein Kubelet ka kya role hota hai?",
+      "options": [
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        },
+        {
+          "en": "Node Management",
+          "speaking": "Option Node Management hai",
+          "isRight": true
+        },
+        {
+          "en": "Networking",
+          "speaking": "Option Networking hai"
+        },
+        {
+          "en": "Monitoring",
+          "speaking": "Option Monitoring hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Node Management",
+        "speaking": "Sahi jawab Node Management hai",
+        "isRight": true
+      },
+      "explanationEn": "In a Kubernetes cluster, the **Kubelet** is responsible for Node Management. It ensures that containers are running in a Pod.",
+      "explanationEnSpeak": "Kubernetes cluster mein, Kubelet ka role Node Management hota hai. Yeh dekhta hai ki Pod mein containers sahi se chal rahe hain ya nahi."
+    },
+    {
+      "questionEn": "**Which Kubernetes object defines a desired state for an application?**",
+      "questionEnSpeak": "Which Kubernetes object is used to define the desired state for an application?",
+      "questionHi": "**Kubernetes mein application ke liye desired state define karne wala object kaunsa hota hai?**",
+      "questionHiSpeak": "Kubernetes mein application ke liye desired state define karne wala object kaunsa hota hai?",
+      "options": [
+        {
+          "en": "Service",
+          "speaking": "Option Service hai"
+        },
+        {
+          "en": "Deployment",
+          "speaking": "Option Deployment hai",
+          "isRight": true
+        },
+        {
+          "en": "ConfigMap",
+          "speaking": "Option ConfigMap hai"
+        },
+        {
+          "en": "Volume",
+          "speaking": "Option Volume hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Deployment",
+        "speaking": "Sahi jawab Deployment hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, a **Deployment** object is used to define the desired state for an application.",
+      "explanationEnSpeak": "Kubernetes mein, application ke liye desired state define karne ke liye **Deployment** object ka use hota hai."
+    },
+    {
+      "questionEn": "**What is the main role of a Kubernetes Master node?**",
+      "questionEnSpeak": "What is the primary role of a Master node in a Kubernetes cluster?",
+      "questionHi": "**Kubernetes Master node ka mukhya role kya hota hai?**",
+      "questionHiSpeak": "Kubernetes Master node ka mukhya role kya hota hai?",
+      "options": [
+        {
+          "en": "Running Containers",
+          "speaking": "Option Running Containers hai"
+        },
+        {
+          "en": "Cluster Management",
+          "speaking": "Option Cluster Management hai",
+          "isRight": true
+        },
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        },
+        {
+          "en": "Data Storage",
+          "speaking": "Option Data Storage hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Cluster Management",
+        "speaking": "Sahi jawab Cluster Management hai",
+        "isRight": true
+      },
+      "explanationEn": "The main role of a Kubernetes Master node is **Cluster Management**. It is responsible for the overall control of the cluster.",
+      "explanationEnSpeak": "Kubernetes Master node ka mukhya role **Cluster Management** hota hai. Yeh cluster ke overall control ke liye responsible hota hai."
+    },
+    {
+      "questionEn": "**What is the Kubernetes API server responsible for?**",
+      "questionEnSpeak": "What is the responsibility of the Kubernetes API server?",
+      "questionHi": "**Kubernetes API server ka kya kaam hota hai?**",
+      "questionHiSpeak": "Kubernetes API server ka kya kaam hota hai?",
+      "options": [
+        {
+          "en": "Data Storage",
+          "speaking": "Option Data Storage hai"
+        },
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        },
+        {
+          "en": "Exposing Kubernetes API",
+          "speaking": "Option Exposing Kubernetes API hai",
+          "isRight": true
+        },
+        {
+          "en": "Monitoring",
+          "speaking": "Option Monitoring hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Exposing Kubernetes API",
+        "speaking": "Sahi jawab Exposing Kubernetes API hai",
+        "isRight": true
+      },
+      "explanationEn": "The Kubernetes API server is responsible for **Exposing the Kubernetes API**. It acts as the front-end for the Kubernetes control plane.",
+      "explanationEnSpeak": "Kubernetes API server ka kaam **Kubernetes API ko expose karna** hota hai. Yeh Kubernetes control plane ka front-end ka kaam karta hai."
+    },
+    {
+      "questionEn": "**Which command is used to delete a pod in Kubernetes?**",
+      "questionEnSpeak": "Which command is used to delete a pod in Kubernetes?",
+      "questionHi": "**Kubernetes mein pod delete karne ke liye kaunsa command use hota hai?**",
+      "questionHiSpeak": "Kubernetes mein pod delete karne ke liye kaunsa command use hota hai?",
+      "options": [
+        {
+          "en": "`kubectl delete pod`",
+          "speaking": "Option kubectl delete pod hai",
+          "isRight": true
+        },
+        {
+          "en": "`kubectl remove pod`",
+          "speaking": "Option kubectl remove pod hai"
+        },
+        {
+          "en": "`kubectl destroy pod`",
+          "speaking": "Option kubectl destroy pod hai"
+        },
+        {
+          "en": "`kubectl erase pod`",
+          "speaking": "Option kubectl erase pod hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "`kubectl delete pod`",
+        "speaking": "Sahi jawab kubectl delete pod hai",
+        "isRight": true
+      },
+      "explanationEn": "The command **`kubectl delete pod`** is used to delete a pod in Kubernetes.",
+      "explanationEnSpeak": "Kubernetes mein pod delete karne ke liye `kubectl delete pod` command ka use hota hai."
+    },
+    {
+      "questionEn": "**What is the purpose of a ConfigMap in Kubernetes?**",
+      "questionEnSpeak": "What is the purpose of using a ConfigMap in Kubernetes?",
+      "questionHi": "**Kubernetes mein ConfigMap ka kya upyog hota hai?**",
+      "questionHiSpeak": "Kubernetes mein ConfigMap ka kya upyog hota hai?",
+      "options": [
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        },
+        {
+          "en": "Monitoring",
+          "speaking": "Option Monitoring hai"
+        },
+        {
+          "en": "Configuration Management",
+          "speaking": "Option Configuration Management hai",
+          "isRight": true
+        },
+        {
+          "en": "Data Storage",
+          "speaking": "Option Data Storage hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Configuration Management",
+        "speaking": "Sahi jawab Configuration Management hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, a **ConfigMap** is used for Configuration Management. It allows you to decouple configuration artifacts from image content.",
+      "explanationEnSpeak": "Kubernetes mein, Configuration Management ke liye **ConfigMap** ka upyog hota hai. Yeh aapko image content se configuration artifacts alag karne ki anumati deta hai."
+    },
+    {
+      "questionEn": "**What is the role of etcd in a Kubernetes cluster?**",
+      "questionEnSpeak": "What is the role of etcd in a Kubernetes cluster?",
+      "questionHi": "**Kubernetes cluster mein etcd ka kya role hota hai?**",
+      "questionHiSpeak": "Kubernetes cluster mein etcd ka kya role hota hai?",
+      "options": [
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        },
+        {
+          "en": "Data Store",
+          "speaking": "Option Data Store hai",
+          "isRight": true
+        },
+        {
+          "en": "Monitoring",
+          "speaking": "Option Monitoring hai"
+        },
+        {
+          "en": "Networking",
+          "speaking": "Option Networking hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Data Store",
+        "speaking": "Sahi jawab Data Store hai",
+        "isRight": true
+      },
+      "explanationEn": "In a Kubernetes cluster, **etcd** serves as the Data Store. It stores the configuration data and state of the cluster.",
+      "explanationEnSpeak": "Kubernetes cluster mein, **etcd** Data Store ka kaam karta hai. Yeh cluster ke configuration data aur state ko store karta hai."
+    },
+    {
+      "questionEn": "**Which Kubernetes object is used to manage a group of replica Pods?**",
+      "questionEnSpeak": "Which Kubernetes object is used to manage a group of replica Pods?",
+      "questionHi": "**Kubernetes mein replica Pods ke group ko manage karne ke liye kaunsa object use hota hai?**",
+      "questionHiSpeak": "Kubernetes mein replica Pods ke group ko manage karne ke liye kaunsa object use hota hai?",
+      "options": [
+        {
+          "en": "Service",
+          "speaking": "Option Service hai"
+        },
+        {
+          "en": "Deployment",
+          "speaking": "Option Deployment hai",
+          "isRight": true
+        },
+        {
+          "en": "ConfigMap",
+          "speaking": "Option ConfigMap hai"
+        },
+        {
+          "en": "Volume",
+          "speaking": "Option Volume hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Deployment",
+        "speaking": "Sahi jawab Deployment hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, a **Deployment** is used to manage a group of replica Pods.",
+      "explanationEnSpeak": "Kubernetes mein, replica Pods ke group ko manage karne ke liye **Deployment** ka use hota hai."
+    },
+    {
+      "questionEn": "**What is the purpose of a Kubernetes Ingress?**",
+      "questionEnSpeak": "What is the purpose of using a Kubernetes Ingress?",
+      "questionHi": "**Kubernetes Ingress ka kya upyog hota hai?**",
+      "questionHiSpeak": "Kubernetes Ingress ka kya upyog hota hai?",
+      "options": [
+        {
+          "en": "Data Storage",
+          "speaking": "Option Data Storage hai"
+        },
+        {
+          "en": "HTTP Traffic Management",
+          "speaking": "Option HTTP Traffic Management hai",
+          "isRight": true
+        },
+        {
+          "en": "Monitoring",
+          "speaking": "Option Monitoring hai"
+        },
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "HTTP Traffic Management",
+        "speaking": "Sahi jawab HTTP Traffic Management hai",
+        "isRight": true
+      },
+      "explanationEn": "In Kubernetes, an **Ingress** is used for HTTP Traffic Management. It routes external HTTP/HTTPS traffic to services within the cluster.",
+      "explanationEnSpeak": "Kubernetes mein, **Ingress** ka upyog HTTP Traffic Management ke liye hota hai. Yeh external HTTP/HTTPS traffic ko cluster ke andar ke services tak route karta hai."
+    },
+    {
+      "questionEn": "**What is the role of a Kubernetes Node?**",
+      "questionEnSpeak": "What is the role of a Node in a Kubernetes cluster?",
+      "questionHi": "**Kubernetes Node ka kya role hota hai?**",
+      "questionHiSpeak": "Kubernetes Node ka kya role hota hai?",
+      "options": [
+        {
+          "en": "Cluster Management",
+          "speaking": "Option Cluster Management hai"
+        },
+        {
+          "en": "Running Containers",
+          "speaking": "Option Running Containers hai",
+          "isRight": true
+        },
+        {
+          "en": "Load Balancing",
+          "speaking": "Option Load Balancing hai"
+        },
+        {
+          "en": "Data Storage",
+          "speaking": "Option Data Storage hai"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Running Containers",
+        "speaking": "Sahi jawab Running Containers hai",
+        "isRight": true
+      },
+      "explanationEn": "In a Kubernetes cluster, the role of a Node is to **run containers**. It hosts the Pods that are the components of the application workload.",
+      "explanationEnSpeak": "Kubernetes cluster mein, Node ka role **containers chalana** hota hai. Yeh Pods ko host karta hai jo application workload ke components hote hain."
+    }
+  ]
+}

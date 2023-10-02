@@ -1,0 +1,34 @@
+{
+  "name": "Understanding OS Concepts Through Cartoons",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**What is the main function of an Operating System?**",
+      "questionEnSpeak": "What is the main role or function of an Operating System?",
+      "questionHi": "**ऑपरेटिंग सिस्टम का मुख्य कार्य क्या है?**",
+      "questionHiSpeak": "ऑपरेटिंग सिस्टम का मुख्य कार्य क्या है?",
+      "options": [
+        {
+          "en": "Option 1: **To run apps**"
+        },
+        {
+          "en": "Option 2: **To manage hardware**",
+          "isRight": true
+        },
+        {
+          "en": "Option 3: **To play games**"
+        },
+        {
+          "en": "Option 4: **To browse the internet**"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2: To manage hardware",
+        "speaking": "Option 2, jo hai hardware manage karna, woh sahi jawab hai.",
+        "isRight": true
+      },
+      "explanationEn": "The main function of an Operating System is to **manage the computer's hardware** and provide services for computer programs.",
+      "explanationEnSpeak": "Operating System ka primary role hota hai computer ke hardware resources ko manage karna. Jaise ki CPU, memory, aur storage devices ko control karna. Iske alawa, yeh user interaction ke liye interface provide karta hai aur software applications ko run karne me help karta hai."
+    }
+  ]
+}
