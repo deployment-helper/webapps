@@ -20,7 +20,7 @@ export const AuthLayout: FC<{
     if (apiServer && apiServer) {
       addServer(apiServer);
     }
-  }, []);
+  }, [addServer, addUser]);
 
   return <FluentProvider theme={teamsLightTheme}>{children}</FluentProvider>;
 };

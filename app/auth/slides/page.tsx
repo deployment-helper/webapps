@@ -20,7 +20,7 @@ import { IPresentation } from "@/src/types";
 import { CheckmarkCircle20Filled, Open24Filled } from "@fluentui/react-icons";
 import { ServerClient } from "@/src/server-client";
 
-export const Slides: FC = () => {
+const Slides: FC = () => {
   const { listPresentations } = useSlidesStore();
   const currentProject = useSlidesStore((store) => store.currentProject);
   const presentations = useSlidesStore((store) => store.presentations);

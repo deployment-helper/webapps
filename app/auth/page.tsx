@@ -1,7 +1,7 @@
 import { LoginAndSignUp } from "@/components/LoginAndSignup";
 import Header from "@/components/Header/Header";
 
-export const Auth = () => {
+const Auth = () => {
   const ssoUrl = process.env.LOGIN_SIGNUP_URL;
   return (
     <>

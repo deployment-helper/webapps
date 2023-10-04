@@ -6,7 +6,7 @@ import { SlideType } from "@/src/constants";
 import useSlidesStore from "@/src/store";
 import { ISlide } from "@/src/types";
 import Reveal from "@/reveal.js-4.6.0/dist/reveal.esm";
-export const Page = ({
+const Page = ({
   params,
   searchParams,
 }: {
