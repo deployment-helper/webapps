@@ -23,6 +23,6 @@ jobs:
           node-version: "18"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Install 
-        run: npm run install
+        run: npm  install
       - name: Build with Next.js
         run: npm run build      
