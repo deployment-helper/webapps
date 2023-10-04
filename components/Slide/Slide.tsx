@@ -1,4 +1,7 @@
-import { CheckmarkCircle32Filled } from "@fluentui/react-icons";
+import {
+  CheckmarkCircle32Filled,
+  DismissCircle32Filled,
+} from "@fluentui/react-icons";
 
 import { FC } from "react";
 import { SlideProps } from "./Slide.types";
@@ -106,11 +109,11 @@ export const Slide: FC<SlideProps> = ({
                   }`}
                   key={opt.en}
                 >
-                  <CheckmarkCircle32Filled
-                    className={`${
-                      opt.isRight ? "text-green-800" : "text-red-800"
-                    }`}
-                  />{" "}
+                  {opt.isRight ? (
+                    <CheckmarkCircle32Filled className="text-green-800" />
+                  ) : (
+                    <DismissCircle32Filled className="text-red-800" />
+                  )}{" "}
                   <span
                     className="pl-2"
                     dangerouslySetInnerHTML={{
