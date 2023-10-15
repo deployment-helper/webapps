@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { useEffect, useState } from "react";
 
@@ -6,6 +7,7 @@ import { SlideType } from "@/src/constants";
 import useSlidesStore from "@/src/store";
 import { ISlide } from "@/src/types";
 import Reveal from "@/reveal.js-4.6.0/dist/reveal.esm";
+import { ServerClient } from "@/src/server-client";
 const Page = ({
   params,
   searchParams,
@@ -18,9 +20,10 @@ const Page = ({
   const presentation = useSlidesStore(
     (store) => store.fullPresentations?.get(params.slide),
   );
-
   const [slides, setSlides] = useState<Array<ISlide>>([]);
   const [slidesMeta, setslidesMeta] = useState<Array<any>>([]);
+  const slideTransitionData: Record<string, { dur: number }> = {};
+
   useEffect(() => {
     if (apiServer) {
       getPresentation(
@@ -40,9 +43,55 @@ const Page = ({
   useEffect(() => {
     console.log("Component mounted/updated");
     if (Reveal) {
+      let lastSlideChangedTime = new Date().getTime();
+      let totalTime = 0;
       console.log("Reveal initialized");
-      //@ts-ignore
       Reveal.initialize({});
+      Reveal.on("ready", () => {
+        console.log("Slide ready");
+        lastSlideChangedTime = new Date().getTime();
+      });
+
+      Reveal.on("slidechanged", (event) => {
+        console.log("Slide Changed");
+        console.log(event);
+        const time = new Date().getTime();
+
+        const slideId = event.previousSlide.dataset["slideid"];
+        console.log(
+          ` slide id ${slideId} time  ${time - lastSlideChangedTime} ms, ${
+            (time - lastSlideChangedTime) / 1000
+          } sec`,
+        );
+        slideTransitionData[slideId] = {
+          dur: (time - lastSlideChangedTime) / 1000,
+        };
+        lastSlideChangedTime = time;
+
+        // check for last slide
+        if (event.indexh === Reveal.getTotalSlides() - 1) {
+          console.log("THIS IS A LAST SLIDE");
+          console.log(slideTransitionData);
+          ServerClient.createVideoMetaData(
+            presentation.id,
+            slideTransitionData,
+            apiServer,
+          );
+        }
+      });
+
+      Reveal.on("slidetransitionend", (event) => {
+        console.log("slidetransitionend");
+        console.log(event);
+      });
+      Reveal.on("fragmentshown", (event) => {
+        console.log("fragmentshown");
+        console.log(event);
+      });
+      Reveal.on("fragmenthidden", (event) => {
+        console.log("fragmenthidden");
+        console.log(event);
+      });
     }
   });
 
@@ -81,8 +130,12 @@ const Page = ({
           }}
         >
           <div className="slides">
-            <section data-autoslide="2000">Slide 1</section>
-            <section data-autoslide="2000">Slide 2</section>
+            <section data-autoslide="2000" data-slideid={"start-1"}>
+              START 1
+            </section>
+            <section data-autoslide="2000" n data-slideid={"start-2"}>
+              START 2
+            </section>
             {slides.map((slide, index) => (
               <>
                 <Slide
@@ -111,6 +164,12 @@ const Page = ({
                 />
               </>
             ))}
+            <section data-autoslide="2000" data-slideid={"end-1"}>
+              end 1
+            </section>
+            <section data-autoslide="2000" n data-slideid={"end-2"}>
+              end 2
+            </section>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-I need to prepare an Operating System MCQ  for Indian students. 
+I need to prepare an Adobe Experience manage  MCQ  for Indian students. 
 
 Indian students are not very good with English words so you need to use as simple as possible easy words. 
 
@@ -27,16 +27,20 @@ Provide `explanationEnSpeak` in hinglish
   "questionEnSpeak":"This key we are using to generate mp3 content dynamically, Chatgpt can use this key to fill above question(questionHi) key speaking version for Indian origin audience"
   "options": [
     {
-      "en": "Option `1` in **hinglish** markdown"
+      "en": "Option `1` in **hinglish** markdown",
+      "speaking": "This key will be used for speaking purpose",
     },
     {
-      "en": "Option `2` in **hinglish** *markdown*"
+      "en": "Option `2` in **hinglish** *markdown*",
+      "speaking": "This key will be used for speaking purpose",
     },
     {
       "en": "Option 3 in hinglish markdown"
+      "speaking": "This key will be used for speaking purpose",
     },
     {
       "en": "Option 4 in hinglish markdown",
+      "speaking": "This key will be used for speaking purpose",
       "isRight": true
     }
   ],

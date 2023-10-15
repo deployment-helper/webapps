@@ -13,3 +13,10 @@ export enum SlideType {
 export const TOASTER_ID = "defaultToaster";
 
 export const DEFAULT_THEME = Theme.BLUE;
+
+export enum HttpMethod {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE", // You can add more methods as needed
+}

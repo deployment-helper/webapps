@@ -1,0 +1,208 @@
+{
+  "name": "Understanding AEM Concepts ",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**What is the primary use of Adobe Experience Manager (AEM)?**",
+      "questionEnSpeak": "What is the primary use of Adobe Experience Manager, also known as AEM?",
+      "questionHi": "**Adobe Experience Manager (AEM) ka mukhya upyog kya hai?**",
+      "questionHiSpeak": "Adobe Experience Manager, jo ki AEM ke naam se bhi jaana jaata hai, ka mukhya upyog kya hai?",
+      "options": [
+        {
+          "en": "For **video editing**",
+          "speaking": "For video editing"
+        },
+        {
+          "en": "For **web content management**",
+          "speaking": "For web content management",
+          "isRight": true
+        },
+        {
+          "en": "For **data analysis**",
+          "speaking": "For data analysis"
+        },
+        {
+          "en": "For **network security**",
+          "speaking": "For network security"
+        }
+      ],
+      "rightAnswer": {
+        "en": "For **web content management**",
+        "speaking": "For web content management is the correct option",
+        "isRight": true
+      },
+      "explanationEn": "Adobe Experience Manager (AEM) is primarily used for **web content management**. It allows users to create, manage, and optimize digital experiences across different channels.",
+      "explanationEnSpeak": "Adobe Experience Manager, yaani AEM, ka mukhya upyog web content management ke liye hota hai. Isse users alag-alag channels par digital experiences create, manage, aur optimize kar sakte hain.",
+      "imagePrompts": [
+        "Show a screenshot of Adobe Experience Manager interface"
+      ]
+    },
+    {
+      "questionEn": "**Which programming language is primarily used to develop components in AEM?**",
+      "questionEnSpeak": "Which programming language is primarily used to develop components in Adobe Experience Manager?",
+      "questionHi": "**AEM me components develop karne ke liye kaunsi programming language mukhya roop se istemal hoti hai?**",
+      "questionHiSpeak": "Adobe Experience Manager me components develop karne ke liye kaunsi programming language mukhya roop se istemal hoti hai?",
+      "options": [
+        {
+          "en": "**Java**",
+          "speaking": "Java",
+          "isRight": true
+        },
+        {
+          "en": "**Python**",
+          "speaking": "Python"
+        },
+        {
+          "en": "**JavaScript**",
+          "speaking": "JavaScript"
+        },
+        {
+          "en": "**C++**",
+          "speaking": "C++"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Java**",
+        "speaking": "Java is the correct option",
+        "isRight": true
+      },
+      "explanationEn": "Adobe Experience Manager (AEM) is built on the Java Content Repository (JCR), and **Java** is the primary language used for developing components.",
+      "explanationEnSpeak": "Adobe Experience Manager, yaani AEM, Java Content Repository, yaani JCR, par bana hua hai. Isliye components develop karne ke liye Java hi mukhya roop se istemal hota hai.",
+      "imagePrompts": ["Show a code snippet of a Java component in AEM"]
+    },
+    {
+      "questionEn": "**What is the role of Dispatcher in AEM?**",
+      "questionEnSpeak": "What is the role of Dispatcher in Adobe Experience Manager?",
+      "questionHi": "**AEM me Dispatcher ka kya role hota hai?**",
+      "questionHiSpeak": "Adobe Experience Manager me Dispatcher ka kya role hota hai?",
+      "options": [
+        {
+          "en": "**Load balancing**",
+          "speaking": "Load balancing"
+        },
+        {
+          "en": "**Caching**",
+          "speaking": "Caching",
+          "isRight": true
+        },
+        {
+          "en": "**Data Analysis**",
+          "speaking": "Data Analysis"
+        },
+        {
+          "en": "**User Authentication**",
+          "speaking": "User Authentication"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Caching**",
+        "speaking": "Caching is the correct option",
+        "isRight": true
+      },
+      "explanationEn": "Dispatcher serves as the caching and/or load balancing tool in Adobe Experience Manager (AEM). Its primary role is **caching**, to improve the performance of your AEM instance.",
+      "explanationEnSpeak": "Dispatcher Adobe Experience Manager, yaani AEM, me caching ya load balancing ka kaam karta hai. Iska mukhya role caching hota hai, taki AEM instance ki performance behtar ho.",
+      "imagePrompts": [
+        "Show a diagram illustrating how Dispatcher works in AEM"
+      ]
+    },
+    {
+      "questionEn": "**Which of the following is NOT a part of AEM Sites?**",
+      "questionEnSpeak": "Which of the following is NOT a part of Adobe Experience Manager Sites?",
+      "questionHi": "**Nimnlikhit me se kaunsa AEM Sites ka hissa NAHI hai?**",
+      "questionHiSpeak": "Nimnlikhit me se kaunsa Adobe Experience Manager Sites ka hissa NAHI hai?",
+      "options": [
+        {
+          "en": "**Templates**",
+          "speaking": "Templates"
+        },
+        {
+          "en": "**Components**",
+          "speaking": "Components"
+        },
+        {
+          "en": "**Workflows**",
+          "speaking": "Workflows"
+        },
+        {
+          "en": "**Firewall**",
+          "speaking": "Firewall",
+          "isRight": true
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Firewall**",
+        "speaking": "Firewall is NOT a part of AEM Sites, so it is the correct option",
+        "isRight": true
+      },
+      "explanationEn": "Adobe Experience Manager (AEM) Sites primarily deals with templates, components, and workflows for web content management. **Firewall** is not a part of AEM Sites.",
+      "explanationEnSpeak": "Adobe Experience Manager, yaani AEM, Sites mukhya roop se templates, components, aur workflows ke liye hota hai web content management ke liye. Firewall AEM Sites ka hissa nahi hai.",
+      "imagePrompts": ["Show a list of features that are part of AEM Sites"]
+    },
+    {
+      "questionEn": "**What is the main purpose of AEM Assets?**",
+      "questionEnSpeak": "What is the main purpose of Adobe Experience Manager Assets?",
+      "questionHi": "**AEM Assets ka mukhya uddeshya kya hai?**",
+      "questionHiSpeak": "Adobe Experience Manager Assets ka mukhya uddeshya kya hai?",
+      "options": [
+        {
+          "en": "**Email Marketing**",
+          "speaking": "Email Marketing"
+        },
+        {
+          "en": "**Digital Asset Management**",
+          "speaking": "Digital Asset Management",
+          "isRight": true
+        },
+        {
+          "en": "**Data Analysis**",
+          "speaking": "Data Analysis"
+        },
+        {
+          "en": "**Network Security**",
+          "speaking": "Network Security"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**Digital Asset Management**",
+        "speaking": "Digital Asset Management is the correct option",
+        "isRight": true
+      },
+      "explanationEn": "The main purpose of Adobe Experience Manager (AEM) Assets is **Digital Asset Management**. It helps in the storage, organization, and retrieval of digital assets like images, videos, and documents.",
+      "explanationEnSpeak": "Adobe Experience Manager, yaani AEM, Assets ka mukhya uddeshya Digital Asset Management hai. Isse digital assets jaise ki images, videos, aur documents ko store, organize, aur retrieve kiya ja sakta hai.",
+      "imagePrompts": ["Show a screenshot of AEM Assets interface"]
+    },
+    {
+      "questionEn": "**Which of the following is a cloud service version of AEM?**",
+      "questionEnSpeak": "Which of the following is a cloud service version of Adobe Experience Manager?",
+      "questionHi": "**Nimnlikhit me se kaunsa AEM ka cloud service version hai?**",
+      "questionHiSpeak": "Nimnlikhit me se kaunsa Adobe Experience Manager ka cloud service version hai?",
+      "options": [
+        {
+          "en": "**AEM Sites**",
+          "speaking": "AEM Sites"
+        },
+        {
+          "en": "**AEM Forms**",
+          "speaking": "AEM Forms"
+        },
+        {
+          "en": "**AEM as a Cloud Service**",
+          "speaking": "AEM as a Cloud Service",
+          "isRight": true
+        },
+        {
+          "en": "**AEM Assets**",
+          "speaking": "AEM Assets"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**AEM as a Cloud Service**",
+        "speaking": "AEM as a Cloud Service is the correct option",
+        "isRight": true
+      },
+      "explanationEn": "Adobe Experience Manager as a Cloud Service is the cloud-native way of leveraging AEM. It offers all the capabilities of AEM but is fully managed by Adobe in the cloud.",
+      "explanationEnSpeak": "Adobe Experience Manager as a Cloud Service, cloud-native tareeke se AEM ko use karne ka ek tarika hai. Isme AEM ke saare capabilities hote hain, lekin yeh puri tarah se Adobe ke dwara cloud me manage kiya jata hai.",
+      "imagePrompts": ["Show a logo of AEM as a Cloud Service"]
+    }
+  ]
+}

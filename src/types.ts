@@ -1,3 +1,4 @@
+// TODO: naming of types need to revist
 export interface Option {
   en: string;
   hi?: string;
@@ -7,6 +8,7 @@ export interface Option {
 }
 
 export interface ISlide {
+  id?: string;
   questionEn: string;
   questionHi?: string;
   audioDurEn?: number;
@@ -20,10 +22,10 @@ export interface ISlide {
 }
 
 export interface Presentation {
-  titleEn: string;
-  titleHi?: string;
+  name: string;
+  nameHi?: string;
   slides: Array<ISlide>;
-  descEn: string;
+  desc: string;
   descHi?: string;
   audioDurTitleEn: number;
   audioDurTitleHi?: number;

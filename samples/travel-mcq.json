@@ -1,0 +1,166 @@
+{
+  "name": "Understanding AEM Concepts ",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**What is the first step in starting a travel blog?**",
+      "questionEnSpeak": "What is the first step you should take when you want to start a travel blog?",
+      "questionHi": "**ट्रैवल ब्लॉग शुरू करने में पहला कदम क्या है?**",
+      "questionHiSpeak": "ट्रैवल ब्लॉग शुरू करने में पहला कदम क्या है?",
+      "options": [
+        {
+          "en": "Option `1`: **Buying a camera**",
+          "speaking": "Buying a camera"
+        },
+        {
+          "en": "Option `2`: **Choosing a niche**",
+          "speaking": "Choosing a niche",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **Booking flights**",
+          "speaking": "Booking flights"
+        },
+        {
+          "en": "Option `4`: **Creating social media accounts**",
+          "speaking": "Creating social media accounts"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: **Choosing a niche**",
+        "speaking": "Option 2, Choosing a niche, is the correct option.",
+        "isRight": true
+      },
+      "explanationEn": "Choosing a *niche* is crucial because it helps you target a specific audience and stand out among other bloggers.",
+      "explanationEnSpeak": "Choosing a niche is very important. Isse aap ek specific audience ko target kar sakte hain aur dusre bloggers se alag khade ho sakte hain."
+    },
+    {
+      "questionEn": "**Which platform is commonly used for travel blogging?**",
+      "questionEnSpeak": "Which platform do most people use for travel blogging?",
+      "questionHi": "**ट्रैवल ब्लॉगिंग के लिए आमतौर पर कौनसा प्लेटफॉर्म उपयोग किया जाता है?**",
+      "questionHiSpeak": "ट्रैवल ब्लॉगिंग के लिए ज्यादातर लोग कौनसा प्लेटफॉर्म उपयोग करते हैं?",
+      "options": [
+        {
+          "en": "Option `1`: **Instagram**",
+          "speaking": "Instagram"
+        },
+        {
+          "en": "Option `2`: **WordPress**",
+          "speaking": "WordPress",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **Medium**",
+          "speaking": "Medium"
+        },
+        {
+          "en": "Option `4`: **Tumblr**",
+          "speaking": "Tumblr"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: **WordPress**",
+        "speaking": "Option 2, WordPress, is the correct option.",
+        "isRight": true
+      },
+      "explanationEn": "WordPress is widely used for travel blogging due to its flexibility and extensive customization options.",
+      "explanationEnSpeak": "WordPress ko travel blogging ke liye bahut use kiya jata hai kyunki isme aapko bahut saare customization options milte hain."
+    },
+    {
+      "questionEn": "**What is a common ethical dilemma faced by travel bloggers?**",
+      "questionEnSpeak": "What is a common ethical issue that travel bloggers often face?",
+      "questionHi": "**ट्रैवल ब्लॉगर्स आमतौर पर किस प्रकार की नैतिक समस्या का सामना करते हैं?**",
+      "questionHiSpeak": "ट्रैवल ब्लॉगर्स आमतौर पर किस प्रकार की नैतिक समस्या का सामना करते हैं?",
+      "options": [
+        {
+          "en": "Option `1`: **Accepting free trips for positive reviews**",
+          "speaking": "Accepting free trips for positive reviews",
+          "isRight": true
+        },
+        {
+          "en": "Option `2`: **Choosing a niche**",
+          "speaking": "Choosing a niche"
+        },
+        {
+          "en": "Option `3`: **Using copyrighted music**",
+          "speaking": "Using copyrighted music"
+        },
+        {
+          "en": "Option `4`: **Ignoring negative comments**",
+          "speaking": "Ignoring negative comments"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `1`: **Accepting free trips for positive reviews**",
+        "speaking": "Option 1, Accepting free trips for positive reviews, is the correct option.",
+        "isRight": true
+      },
+      "explanationEn": "Accepting free trips in exchange for positive reviews can compromise the integrity and authenticity of the content.",
+      "explanationEnSpeak": "Free trips accept karke positive reviews likhna content ki authenticity aur integrity ko compromise kar sakta hai."
+    },
+    {
+      "questionEn": "**What is the importance of SEO in travel blogging?**",
+      "questionEnSpeak": "Why is SEO important in travel blogging?",
+      "questionHi": "**ट्रैवल ब्लॉगिंग में SEO का महत्व क्या है?**",
+      "questionHiSpeak": "ट्रैवल ब्लॉगिंग में SEO का महत्व क्या है?",
+      "options": [
+        {
+          "en": "Option `1`: **To increase social media followers**",
+          "speaking": "To increase social media followers"
+        },
+        {
+          "en": "Option `2`: **To improve website ranking on search engines**",
+          "speaking": "To improve website ranking on search engines",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **To enhance video quality**",
+          "speaking": "To enhance video quality"
+        },
+        {
+          "en": "Option `4`: **To get sponsorship deals**",
+          "speaking": "To get sponsorship deals"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: **To improve website ranking on search engines**",
+        "speaking": "Option 2, To improve website ranking on search engines, is the correct option.",
+        "isRight": true
+      },
+      "explanationEn": "SEO (Search Engine Optimization) is essential for improving the visibility of your blog on search engines, thereby attracting more organic traffic.",
+      "explanationEnSpeak": "SEO ka main kaam hota hai aapke blog ko search engines pe upar laane ke liye, jisse aapko organic traffic milta hai."
+    },
+    {
+      "questionEn": "**What is the concept of 'Responsible Tourism' in travel blogging?**",
+      "questionEnSpeak": "What does 'Responsible Tourism' mean in the context of travel blogging?",
+      "questionHi": "**ट्रैवल ब्लॉगिंग में 'रेस्पॉन्सिबल टूरिज़्म' का क्या मतलब है?**",
+      "questionHiSpeak": "ट्रैवल ब्लॉगिंग में 'रेस्पॉन्सिबल टूरिज़्म' का क्या मतलब है?",
+      "options": [
+        {
+          "en": "Option `1`: **Promoting luxury travel**",
+          "speaking": "Promoting luxury travel"
+        },
+        {
+          "en": "Option `2`: **Traveling to less-visited places**",
+          "speaking": "Traveling to less-visited places"
+        },
+        {
+          "en": "Option `3`: **Minimizing negative environmental impact**",
+          "speaking": "Minimizing negative environmental impact",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **Focusing on food blogging**",
+          "speaking": "Focusing on food blogging"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3`: **Minimizing negative environmental impact**",
+        "speaking": "Option 3, Minimizing negative environmental impact, is the correct option.",
+        "isRight": true
+      },
+      "explanationEn": "'Responsible Tourism' involves traveling in a way that minimizes negative impacts on the environment and local communities.",
+      "explanationEnSpeak": "'Responsible Tourism' ka matlab hota hai aise travel karna jisse environment aur local communities pe negative impact kam ho."
+    }
+  ]
+}

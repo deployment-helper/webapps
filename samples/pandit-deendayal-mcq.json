@@ -1,0 +1,198 @@
+{
+  "name": "Understanding AEM Concepts ",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**Who was Pandit Deen Dayal Upadhyay?**",
+      "questionEnSpeak": "Who was Pandit Deen Dayal Upadhyay?",
+      "questionHi": "पंडित दीन दयाल उपाध्याय कौन थे?",
+      "questionHiSpeak": "पंडित दीन दयाल उपाध्याय कौन थे?",
+      "options": [
+        {
+          "en": "एक **गायक**",
+          "speaking": "एक गायक"
+        },
+        {
+          "en": "एक **विज्ञानी**",
+          "speaking": "एक विज्ञानी"
+        },
+        {
+          "en": "एक **राजनेता और समाजसेवी**",
+          "speaking": "एक राजनेता और समाजसेवी",
+          "isRight": true
+        },
+        {
+          "en": "एक **क्रिकेटर**",
+          "speaking": "एक क्रिकेटर"
+        }
+      ],
+      "rightAnswer": {
+        "en": "एक **राजनेता और समाजसेवी**",
+        "speaking": "एक राजनेता और समाजसेवी",
+        "isRight": true
+      },
+      "explanationEn": "पंडित दीन दयाल उपाध्याय एक प्रमुख **भारतीय राजनेता और समाजसेवी** थे।",
+      "explanationEnSpeak": "पंडित दीन दयाल उपाध्याय एक प्रमुख भारतीय राजनेता और समाजसेवी थे।"
+    },
+    {
+      "questionEn": "**What was the main philosophy of Pandit Deen Dayal Upadhyay?**",
+      "questionEnSpeak": "What was the main philosophy of Pandit Deen Dayal Upadhyay?",
+      "questionHi": "पंडित दीन दयाल उपाध्याय की मुख्य दर्शना क्या थी?",
+      "questionHiSpeak": "पंडित दीन दयाल उपाध्याय की मुख्य दर्शना क्या थी?",
+      "options": [
+        {
+          "en": "**समाजवाद**",
+          "speaking": "समाजवाद"
+        },
+        {
+          "en": "**इंटीग्रल ह्यूमनिज़्म**",
+          "speaking": "इंटीग्रल ह्यूमनिज़्म",
+          "isRight": true
+        },
+        {
+          "en": "**कपिटलिज़्म**",
+          "speaking": "कपिटलिज़्म"
+        },
+        {
+          "en": "**धर्मनिरपेक्षता**",
+          "speaking": "धर्मनिरपेक्षता"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**इंटीग्रल ह्यूमनिज़्म**",
+        "speaking": "सही जवाब होगा इंटीग्रल ह्यूमनिज़्म",
+        "isRight": true
+      },
+      "explanationEn": "पंडित दीन दयाल उपाध्याय की मुख्य दर्शना **इंटीग्रल ह्यूमनिज़्म** थी।",
+      "explanationEnSpeak": "पंडित दीन दयाल उपाध्याय की मुख्य दर्शना इंटीग्रल ह्यूमनिज़्म थी।"
+    },
+    {
+      "questionEn": "**Which party did Pandit Deen Dayal Upadhyay belong to?**",
+      "questionEnSpeak": "Which party did Pandit Deen Dayal Upadhyay belong to?",
+      "questionHi": "पंडित दीन दयाल उपाध्याय किस पार्टी से जुड़े थे?",
+      "questionHiSpeak": "पंडित दीन दयाल उपाध्याय किस पार्टी से जुड़े थे?",
+      "options": [
+        {
+          "en": "**कांग्रेस**",
+          "speaking": "कांग्रेस"
+        },
+        {
+          "en": "**भारतीय जन संघ**",
+          "speaking": "भारतीय जन संघ",
+          "isRight": true
+        },
+        {
+          "en": "**समाजवादी पार्टी**",
+          "speaking": "समाजवादी पार्टी"
+        },
+        {
+          "en": "**आम आदमी पार्टी**",
+          "speaking": "आम आदमी पार्टी"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**भारतीय जन संघ**",
+        "speaking": "सही जवाब होगा भारतीय जन संघ",
+        "isRight": true
+      },
+      "explanationEn": "पंडित दीन दयाल उपाध्याय **भारतीय जन संघ** के संस्थापक और प्रमुख नेता थे।",
+      "explanationEnSpeak": "पंडित दीन दयाल उपाध्याय भारतीय जन संघ के संस्थापक और प्रमुख नेता थे।"
+    },
+    {
+      "questionEn": "**When did Pandit Deen Dayal Upadhyay pass away?**",
+      "questionEnSpeak": "When did Pandit Deen Dayal Upadhyay pass away?",
+      "questionHi": "पंडित दीन दयाल उपाध्याय का निधन कब हुआ था?",
+      "questionHiSpeak": "पंडित दीन दयाल उपाध्याय का निधन कब हुआ था?",
+      "options": [
+        {
+          "en": "**1960 में**",
+          "speaking": "१९६० में"
+        },
+        {
+          "en": "**1968 में**",
+          "speaking": "१९६८ में",
+          "isRight": true
+        },
+        {
+          "en": "**1972 में**",
+          "speaking": "१९७२ में"
+        },
+        {
+          "en": "**1980 में**",
+          "speaking": "१९८० में"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**1968 में**",
+        "speaking": "सही जवाब होगा १९६८ में",
+        "isRight": true
+      },
+      "explanationEn": "पंडित दीन दयाल उपाध्याय का निधन **11 फरवरी 1968** को हुआ था।",
+      "explanationEnSpeak": "पंडित दीन दयाल उपाध्याय का निधन ११ फरवरी १९६८ को हुआ था।"
+    },
+    {
+      "questionEn": "**What is the name of the scheme launched by the Indian Government in honor of Pandit Deen Dayal Upadhyay?**",
+      "questionEnSpeak": "What is the name of the scheme launched by the Indian Government in honor of Pandit Deen Dayal Upadhyay?",
+      "questionHi": "पंडित दीन दयाल उपाध्याय की याद में भारत सरकार ने कौन सी योजना शुरू की है?",
+      "questionHiSpeak": "पंडित दीन दयाल उपाध्याय की याद में भारत सरकार ने कौन सी योजना शुरू की है?",
+      "options": [
+        {
+          "en": "**आयुष्मान भारत**",
+          "speaking": "आयुष्मान भारत"
+        },
+        {
+          "en": "**पंडित दीन दयाल उपाध्याय ग्रामीण कौशल्या योजना**",
+          "speaking": "पंडित दीन दयाल उपाध्याय ग्रामीण कौशल्या योजना",
+          "isRight": true
+        },
+        {
+          "en": "**स्वच्छ भारत अभियान**",
+          "speaking": "स्वच्छ भारत अभियान"
+        },
+        {
+          "en": "**जन धन योजना**",
+          "speaking": "जन धन योजना"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**पंडित दीन दयाल उपाध्याय ग्रामीण कौशल्या योजना**",
+        "speaking": "सही जवाब होगा पंडित दीन दयाल उपाध्याय ग्रामीण कौशल्या योजना",
+        "isRight": true
+      },
+      "explanationEn": "भारत सरकार ने पंडित दीन दयाल उपाध्याय की याद में **पंडित दीन दयाल उपाध्याय ग्रामीण कौशल्या योजना** शुरू की है।",
+      "explanationEnSpeak": "भारत सरकार ने पंडित दीन दयाल उपाध्याय की याद में पंडित दीन दयाल उपाध्याय ग्रामीण कौशल्या योजना शुरू की है।"
+    },
+    {
+      "questionEn": "**Where was Pandit Deen Dayal Upadhyay born?**",
+      "questionEnSpeak": "Where was Pandit Deen Dayal Upadhyay born?",
+      "questionHi": "पंडित दीन दयाल उपाध्याय का जन्म कहां हुआ था?",
+      "questionHiSpeak": "पंडित दीन दयाल उपाध्याय का जन्म कहां हुआ था?",
+      "options": [
+        {
+          "en": "**मुम्बई**",
+          "speaking": "मुम्बई"
+        },
+        {
+          "en": "**दिल्ली**",
+          "speaking": "दिल्ली"
+        },
+        {
+          "en": "**मथुरा**",
+          "speaking": "मथुरा",
+          "isRight": true
+        },
+        {
+          "en": "**कोलकाता**",
+          "speaking": "कोलकाता"
+        }
+      ],
+      "rightAnswer": {
+        "en": "**मथुरा**",
+        "speaking": "सही जवाब होगा मथुरा",
+        "isRight": true
+      },
+      "explanationEn": "पंडित दीन दयाल उपाध्याय का जन्म **मथुरा, उत्तर प्रदेश** में हुआ था।",
+      "explanationEnSpeak": "पंडित दीन दयाल उपाध्याय का जन्म मथुरा, उत्तर प्रदेश में हुआ था।"
+    }
+  ]
+}

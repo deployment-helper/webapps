@@ -1,11 +1,13 @@
 import cookies from "@/src/cookies";
-import { IPresentation } from "./types";
+import { IPresentation, Presentation } from "./types";
+import { addSlideIds } from "./helpers";
+import { HttpMethod } from "./constants";
 
 export class ServerClient {
   public static send(
     url: string,
     body?: any,
-    method: string = "GET",
+    method: HttpMethod = HttpMethod.GET,
   ): Promise<any> {
     const cookieStore = cookies();
     const token = cookieStore.get("access_token");
@@ -21,12 +23,12 @@ export class ServerClient {
   public static async createPresentation(
     name: string,
     projectId: string,
-    file: any,
+    presentation: Presentation,
   ) {
     const body: any = {
       name,
       projectId,
-      file,
+      file: addSlideIds(presentation),
     };
 
     const resp = await fetch("/auth/apis", {
@@ -39,6 +41,24 @@ export class ServerClient {
 
     const data = resp.json();
     return data;
+  }
+
+  public static async createVideoMetaData(
+    id: string,
+    projectId: string,
+    updatedAt: string,
+    data: any,
+    apiServer: string,
+  ) {
+    const body = {
+      id,
+      projectId,
+      updatedAt,
+      data,
+    };
+
+    const url = `${apiServer}/slides/createVideoMetaData`;
+    await ServerClient.send(url, body, HttpMethod.POST);
   }
 
   public static async listPresentations(
@@ -84,6 +104,6 @@ export class ServerClient {
     presentation: IPresentation,
   ) {
     const url = `${apiServer}/slides/generateAudios`;
-    ServerClient.send(url, presentation, "POST");
+    ServerClient.send(url, presentation, HttpMethod.POST);
   }
 }
