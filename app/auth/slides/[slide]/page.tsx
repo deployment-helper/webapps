@@ -23,6 +23,19 @@ const Page = ({
   const [slides, setSlides] = useState<Array<ISlide>>([]);
   const [slidesMeta, setslidesMeta] = useState<Array<any>>([]);
   const slideTransitionData: Record<string, { dur: number }> = {};
+  const [time, setTime] = useState("0");
+  const [currentSlideTime, setCurrentSlideTime] = useState(0);
+  let currentSideStartTime = new Date();
+  const updateVideoMetaData = () => {
+    ServerClient.createVideoMetaData(
+      presentation.item.id,
+      presentation.item.projectId,
+      presentation.item.updatedAt,
+      slideTransitionData,
+      apiServer,
+      searchParams.apiKey,
+    );
+  };
 
   useEffect(() => {
     if (apiServer) {
@@ -40,12 +53,24 @@ const Page = ({
     searchParams.apiKey,
   ]);
 
+  const startTimer = () => {
+    const startTime = new Date();
+    setInterval(() => {
+      const currentTime = new Date();
+      setTime((currentTime.getTime() - startTime.getTime()) / 1000);
+      setCurrentSlideTime(
+        (currentTime.getTime() - currentSideStartTime.getTime()) / 1000,
+      );
+    }, 200);
+  };
+
   useEffect(() => {
     console.log("Component mounted/updated");
     if (Reveal) {
       let lastSlideChangedTime = new Date().getTime();
       let totalTime = 0;
       console.log("Reveal initialized");
+      startTimer();
       Reveal.initialize({});
       Reveal.on("ready", () => {
         console.log("Slide ready");
@@ -56,7 +81,7 @@ const Page = ({
         console.log("Slide Changed");
         console.log(event);
         const time = new Date().getTime();
-
+        currentSideStartTime = new Date();
         const slideId = event.previousSlide.dataset["slideid"];
         console.log(
           ` slide id ${slideId} time  ${time - lastSlideChangedTime} ms, ${
@@ -70,30 +95,12 @@ const Page = ({
 
         // check for last slide
         if (event.indexh === Reveal.getTotalSlides() - 1) {
-          console.log("THIS IS A LAST SLIDE");
-          console.log(slideTransitionData);
-          ServerClient.createVideoMetaData(
-            presentation.id,
-            slideTransitionData,
-            apiServer,
-          );
+          console.info("THIS IS A LAST SLIDE");
+          updateVideoMetaData();
         }
       });
-
-      Reveal.on("slidetransitionend", (event) => {
-        console.log("slidetransitionend");
-        console.log(event);
-      });
-      Reveal.on("fragmentshown", (event) => {
-        console.log("fragmentshown");
-        console.log(event);
-      });
-      Reveal.on("fragmenthidden", (event) => {
-        console.log("fragmenthidden");
-        console.log(event);
-      });
     }
-  });
+  }, []);
 
   useEffect(() => {
     console.log(presentation);
@@ -112,6 +119,11 @@ const Page = ({
 
   return (
     <>
+      <div style={{ fontSize: "30px" }}>
+        <h2 style={{ fontSize: "30px", padding: "5px" }} id="timer">
+          {time}, Current Slide time {currentSlideTime}
+        </h2>
+      </div>
       <div
         style={{
           width: "100%",

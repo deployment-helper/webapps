@@ -49,6 +49,7 @@ export class ServerClient {
     updatedAt: string,
     data: any,
     apiServer: string,
+    apiKey: string,
   ) {
     const body = {
       id,
@@ -57,7 +58,7 @@ export class ServerClient {
       data,
     };
 
-    const url = `${apiServer}/slides/createVideoMetaData`;
+    const url = `${apiServer}/slides/createVideoMetaData?key=${apiKey}`;
     await ServerClient.send(url, body, HttpMethod.POST);
   }
 
