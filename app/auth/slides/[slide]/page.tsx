@@ -70,7 +70,7 @@ const Page = ({
       let lastSlideChangedTime = new Date().getTime();
       let totalTime = 0;
       console.log("Reveal initialized");
-      startTimer();
+      // startTimer();
       Reveal.initialize({});
       Reveal.on("ready", () => {
         console.log("Slide ready");
@@ -142,12 +142,8 @@ const Page = ({
           }}
         >
           <div className="slides">
-            <section data-autoslide="2000" data-slideid={"start-1"}>
-              START 1
-            </section>
-            <section data-autoslide="2000" n data-slideid={"start-2"}>
-              START 2
-            </section>
+            <section data-slideid={"start-1"}>START 1</section>
+            <section data-slideid={"start-2"}>START 2</section>
             {slides.map((slide, index) => (
               <>
                 <Slide
@@ -176,12 +172,8 @@ const Page = ({
                 />
               </>
             ))}
-            <section data-autoslide="2000" data-slideid={"end-1"}>
-              end 1
-            </section>
-            <section data-autoslide="2000" n data-slideid={"end-2"}>
-              end 2
-            </section>
+            <section data-slideid={"end-1"}>end 1</section>
+            <section data-slideid={"end-2"}>end 2</section>
           </div>
         </div>
       </div>

@@ -22,13 +22,11 @@ export const Slide: FC<SlideProps> = ({
     if (slideType === SlideType.QUESTION) {
       return (
         <section
-          data-autoslide={
-            slideMeta?.questionEn.dur * 1000 + slideMeta?.questionHi.dur * 1000
-          }
           data-transition="fade-in fade-out"
           data-auto-animate-restart
           data-background-color="white"
           data-slideid={`${id}-question`}
+          data-audioUrl={slideMeta?.questionEn?.file}
         >
           <div
             data-id="question"
@@ -48,10 +46,10 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.OPTION_LIST) {
       return (
         <section
-          data-autoslide={slideMeta?.allOptDur * 1000}
           data-transition="fade-in fade-out"
           data-background-color="white"
           data-slideid={`${id}-option-list`}
+          data-audioUrl={slideMeta?.questionEn?.file}
         >
           <div className="flex h-screen w-full flex-col text-left">
             <div
@@ -84,10 +82,10 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.RIGHT_ANSWER) {
       return (
         <section
-          data-autoslide={slideMeta?.rightAnswer?.dur * 1000}
           data-transition="fade-in fade-out"
           data-background-color="white"
           data-slideid={`${id}-right-answer`}
+          data-audioUrl={slideMeta?.rightAnswer?.file}
         >
           <div className="flex h-screen w-full flex-col">
             <div
@@ -131,10 +129,10 @@ export const Slide: FC<SlideProps> = ({
     } else if (slideType === SlideType.EXPLANATION) {
       return (
         <section
-          data-autoslide={slideMeta?.explanationDur * 1000}
           data-transition="fade-in fade-out"
           data-background-color="white"
           data-slideid={`${id}-explation`}
+          data-audioUrl={slideMeta?.explanationEn?.file}
         >
           <div className="flex h-screen w-full flex-col">
             <div
