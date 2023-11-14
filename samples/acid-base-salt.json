@@ -1,0 +1,326 @@
+{
+  "name": "Understanding AEM Concepts ",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**What is the pH value of pure water?**",
+      "questionEnSpeak": "Pure water ka pH value kya hota hai?",
+      "questionHi": "**शुद्ध पानी का pH मान क्या होता है?**",
+      "questionHiSpeak": "Shuddh paani ka pH maan kya hota hai?",
+      "options": [
+        {
+          "en": "Option `1` Less than `7`",
+          "speaking": "Kam se kam saath"
+        },
+        {
+          "en": "Option `2` More than `7`",
+          "speaking": "Saath se zyaada"
+        },
+        {
+          "en": "Option `3` Exactly `7`",
+          "speaking": "Bilkul saath",
+          "isRight": true
+        },
+        {
+          "en": "Option `4` None of the above",
+          "speaking": "Inme se koi nahi"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3` Exactly `7`",
+        "speaking": "Sahi jawab hai option teen, bilkul saath",
+        "isRight": true
+      },
+      "explanationEn": "*Pure water is neutral and has a pH of `7`, which means it is neither acidic nor basic.*",
+      "explanationEnSpeak": "Shuddh paani neutral hota hai aur iska pH maan hota hai saath, jo isse na acid banaata hai na base."
+    },
+    {
+      "questionEn": "**Which of the following is an example of a base?**",
+      "questionEnSpeak": "Nimnlikhit mein se kaun sa ek base ka udaharan hai?",
+      "questionHi": "**निम्नलिखित में से कौन सा एक बेस का उदाहरण है?**",
+      "questionHiSpeak": "Nimnlikhit mein se kaun sa ek base ka udaharan hai?",
+      "options": [
+        {
+          "en": "Option `1` Vinegar",
+          "speaking": "Sirka"
+        },
+        {
+          "en": "Option `2` Lemon Juice",
+          "speaking": "Nimbu ka ras"
+        },
+        {
+          "en": "Option `3` Baking Soda",
+          "speaking": "Baking soda",
+          "isRight": true
+        },
+        {
+          "en": "Option `4` Yogurt",
+          "speaking": "Dahi"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3` Baking Soda",
+        "speaking": "Sahi jawab hai option teen, baking soda",
+        "isRight": true
+      },
+      "explanationEn": "*Baking soda, known chemically as sodium bicarbonate, is a base. It is commonly used in baking and cooking.*",
+      "explanationEnSpeak": "Baking soda, jo sodium bicarbonate ke roop mein jana jata hai, ek base hai. Yeh baking aur khana pakane mein aam taur par istemal kiya jata hai."
+    },
+    {
+      "questionEn": "**What is the common name for Sodium Chloride?**",
+      "questionEnSpeak": "Sodium Chloride ka common naam kya hai?",
+      "questionHi": "**सोडियम क्लोराइड का सामान्य नाम क्या है?**",
+      "questionHiSpeak": "Sodium Chloride ka saamanya naam kya hai?",
+      "options": [
+        {
+          "en": "Option `1` Baking Soda",
+          "speaking": "Baking soda"
+        },
+        {
+          "en": "Option `2` Table Salt",
+          "speaking": "Table namak",
+          "isRight": true
+        },
+        {
+          "en": "Option `3` Vinegar",
+          "speaking": "Sirka"
+        },
+        {
+          "en": "Option `4` Sugar",
+          "speaking": "Cheeni"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2` Table Salt",
+        "speaking": "Sahi jawab hai option do, table namak",
+        "isRight": true
+      },
+      "explanationEn": "*Sodium Chloride is commonly known as table salt. It is widely used in cooking and food preservation.*",
+      "explanationEnSpeak": "Sodium Chloride ko aam tor par table namak ke roop mein jana jata hai. Yeh khana pakane aur bhojan ke sanrakshan mein vyapak roop se istemal kiya jata hai."
+    },
+    {
+      "questionEn": "**Acids turn blue litmus paper to what color?**",
+      "questionEnSpeak": "Acids blue litmus paper ko kis rang mein badal dete hain?",
+      "questionHi": "**एसिड नीले लिटमस पेपर को किस रंग में बदल देते हैं?**",
+      "questionHiSpeak": "Acid neele litmus kagaz ko kis rang mein badal dete hain?",
+      "options": [
+        {
+          "en": "Option `1` Red",
+          "speaking": "Laal",
+          "isRight": true
+        },
+        {
+          "en": "Option `2` Green",
+          "speaking": "Hara"
+        },
+        {
+          "en": "Option `3` Yellow",
+          "speaking": "Peela"
+        },
+        {
+          "en": "Option `4` No change",
+          "speaking": "Koi badlav nahi"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `1` Red",
+        "speaking": "Sahi jawab hai option ek, laal",
+        "isRight": true
+      },
+      "explanationEn": "*Acids turn blue litmus paper red, indicating their acidic nature. This is a basic test to identify an acidic substance.*",
+      "explanationEnSpeak": "Acid neele litmus kagaz ko laal rang mein badal dete hain, yeh unke acidic swabhav ko darshata hai. Yeh ek basic test hai acidic padarth ko pehchanne ke liye."
+    },
+    {
+      "questionEn": "**What is formed when an acid reacts with a base?**",
+      "questionEnSpeak": "Jab ek acid ek base ke saath react karta hai, toh kya banta hai?",
+      "questionHi": "**जब एक एसिड एक बेस के साथ अभिक्रिया करता है, तो क्या बनता है?**",
+      "questionHiSpeak": "Jab ek acid ek base ke saath abhikriya karta hai, toh kya banta hai?",
+      "options": [
+        {
+          "en": "Option `1` Salt only",
+          "speaking": "Sirf namak"
+        },
+        {
+          "en": "Option `2` Water only",
+          "speaking": "Sirf paani"
+        },
+        {
+          "en": "Option `3` Salt and water",
+          "speaking": "Namak aur paani",
+          "isRight": true
+        },
+        {
+          "en": "Option `4` Gas",
+          "speaking": "Gas"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3` Salt and water",
+        "speaking": "Sahi jawab hai option teen, namak aur paani",
+        "isRight": true
+      },
+      "explanationEn": "*When an acid reacts with a base, the reaction typically produces salt and water. This type of reaction is known as neutralization.*",
+      "explanationEnSpeak": "Jab ek acid ek base ke saath react karta hai, toh pratyikriya aam tor par namak aur paani ka nirmaan karti hai. Is prakar ki pratyikriya ko neutralization kehte hain."
+    },
+    {
+      "questionEn": "**What is the main use of Sodium Bicarbonate?**",
+      "questionEnSpeak": "Sodium Bicarbonate ka mukhya upyog kya hai?",
+      "questionHi": "**सोडियम बाइकार्बोनेट का मुख्य उपयोग क्या है?**",
+      "questionHiSpeak": "Sodium Bicarbonate ka mukhya upyog kya hai?",
+      "options": [
+        {
+          "en": "Option `1` Cleaning Agent",
+          "speaking": "Safai agent"
+        },
+        {
+          "en": "Option `2` Cooking",
+          "speaking": "Khana pakane mein",
+          "isRight": true
+        },
+        {
+          "en": "Option `3` Medication",
+          "speaking": "Dawa ke roop mein"
+        },
+        {
+          "en": "Option `4` Water Purification",
+          "speaking": "Paani shuddhikaran"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2` Cooking",
+        "speaking": "Sahi jawab hai option do, khana pakane mein",
+        "isRight": true
+      },
+      "explanationEn": "*Sodium Bicarbonate, commonly known as baking soda, is primarily used in cooking, especially as a leavening agent in baking.*",
+      "explanationEnSpeak": "Sodium Bicarbonate, jo aam tor par baking soda ke roop mein jana jata hai, mukhya roop se khana pakane mein upyog kiya jata hai, vishesh roop se baking mein ek leavening agent ke roop mein."
+    },
+    {
+      "questionEn": "**What is the taste of acids?**",
+      "questionEnSpeak": "Acids ka swaad kaisa hota hai?",
+      "questionHi": "**एसिड का स्वाद कैसा होता है?**",
+      "questionHiSpeak": "Acid ka swaad kaisa hota hai?",
+      "options": [
+        {
+          "en": "Option `1` Sweet",
+          "speaking": "Meetha"
+        },
+        {
+          "en": "Option `2` Salty",
+          "speaking": "Namkeen"
+        },
+        {
+          "en": "Option `3` Bitter",
+          "speaking": "Kadwa"
+        },
+        {
+          "en": "Option `4` Sour",
+          "speaking": "Khatta",
+          "isRight": true
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `4` Sour",
+        "speaking": "Sahi jawab hai option chaar, khatta",
+        "isRight": true
+      },
+      "explanationEn": "*Acids generally have a sour taste. Examples include vinegar and lemon juice, which are acidic and taste sour.*",
+      "explanationEnSpeak": "Acids ka swaad aam tor par khatta hota hai. Udaaharan ke liye sirka aur nimbu ka ras, jo acidic hote hain aur khatta swaad dete hain."
+    },
+    {
+      "questionEn": "**What is the nature of most salts? Are they acidic, basic, or neutral?**",
+      "questionEnSpeak": "Zyadatar namak ka swabhav kaisa hota hai? Kya ve aml, kshar, ya neutral hote hain?",
+      "questionHi": "**अधिकांश नमकों का स्वभाव कैसा होता है? क्या वे अम्ल, क्षार, या न्यूट्रल होते हैं?**",
+      "questionHiSpeak": "Adhikaansh namakon ka swabhav kaisa hota hai? Kya ve aml, kshaar, ya neutral hote hain?",
+      "options": [
+        {
+          "en": "Option `1` Acidic",
+          "speaking": "Aml"
+        },
+        {
+          "en": "Option `2` Basic",
+          "speaking": "Kshar"
+        },
+        {
+          "en": "Option `3` Neutral",
+          "speaking": "Neutral",
+          "isRight": true
+        },
+        {
+          "en": "Option `4` Both Acidic and Basic",
+          "speaking": "Aml aur kshar dono"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3` Neutral",
+        "speaking": "Sahi jawab hai option teen, neutral",
+        "isRight": true
+      },
+      "explanationEn": "*Most salts are neutral in nature. They are formed by the reaction of an acid and a base, which typically neutralizes each other's properties.*",
+      "explanationEnSpeak": "Zyadatar namak neutral swabhav ke hote hain. Ve ek acid aur ek base ki pratyikriya se bante hain, jo aam tor par ek doosre ke guno ko neutralize kar dete hain."
+    },
+    {
+      "questionEn": "**Which of these is a strong acid?**",
+      "questionEnSpeak": "Inme se kaun sa ek majboot acid hai?",
+      "questionHi": "**इनमें से कौन सा एक मजबूत अम्ल है?**",
+      "questionHiSpeak": "Inmein se kaun sa ek majboot aml hai?",
+      "options": [
+        {
+          "en": "Option `1` Acetic Acid",
+          "speaking": "Acetic acid"
+        },
+        {
+          "en": "Option `2` Hydrochloric Acid",
+          "speaking": "Hydrochloric acid",
+          "isRight": true
+        },
+        {
+          "en": "Option `3` Citric Acid",
+          "speaking": "Citric acid"
+        },
+        {
+          "en": "Option `4` Lactic Acid",
+          "speaking": "Lactic acid"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2` Hydrochloric Acid",
+        "speaking": "Sahi jawab hai option do, hydrochloric acid",
+        "isRight": true
+      },
+      "explanationEn": "*Hydrochloric acid is a strong acid commonly found in the stomach. It dissociates completely in water, a characteristic of strong acids.*",
+      "explanationEnSpeak": "Hydrochloric acid ek majboot acid hai jo aam tor par pet mein paya jata hai. Yeh paani mein poorn roop se vibhajit ho jata hai, jo majboot acids ki ek visheshta hai."
+    },
+    {
+      "questionEn": "**Which of these substances is a base?**",
+      "questionEnSpeak": "Inme se kaun si vastu ek base hai?",
+      "questionHi": "**इनमें से कौन सी वस्तु एक क्षार है?**",
+      "questionHiSpeak": "Inmein se kaun si vastu ek kshaar hai?",
+      "options": [
+        {
+          "en": "Option `1` Vinegar",
+          "speaking": "Sirka"
+        },
+        {
+          "en": "Option `2` Lemon Juice",
+          "speaking": "Nimbu ka ras"
+        },
+        {
+          "en": "Option `3` Milk of Magnesia",
+          "speaking": "Milk of Magnesia",
+          "isRight": true
+        },
+        {
+          "en": "Option `4` Orange Juice",
+          "speaking": "Santre ka ras"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3` Milk of Magnesia",
+        "speaking": "Sahi jawab hai option teen, Milk of Magnesia",
+        "isRight": true
+      },
+      "explanationEn": "*Milk of Magnesia is a base. It is often used as an antacid to neutralize stomach acid and relieve indigestion or heartburn.*",
+      "explanationEnSpeak": "Milk of Magnesia ek kshaar hai. Yeh aksar ek antacid ke roop mein upyog kiya jata hai taki pet ke acid ko neutralize kar ke badhazmi ya seenay ki jalan se rahat mil sake."
+    }
+  ]
+}

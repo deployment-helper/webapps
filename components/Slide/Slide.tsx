@@ -26,7 +26,11 @@ export const Slide: FC<SlideProps> = ({
           data-auto-animate-restart
           data-background-color="white"
           data-slideid={`${id}-question`}
-          data-audioUrl={slideMeta?.questionEn?.file}
+          data-name={slideMeta?.questionEn?.file}
+          data-audioUrl={[
+            slideMeta?.questionEn?.file,
+            slideMeta?.questionHi?.file,
+          ]}
         >
           <div
             data-id="question"
@@ -49,7 +53,8 @@ export const Slide: FC<SlideProps> = ({
           data-transition="fade-in fade-out"
           data-background-color="white"
           data-slideid={`${id}-option-list`}
-          data-audioUrl={slideMeta?.questionEn?.file}
+          data-name={slideMeta?.options?.map((o: any) => o.file)[0]}
+          data-audioUrl={slideMeta?.options?.map((o: any) => o.file)}
         >
           <div className="flex h-screen w-full flex-col text-left">
             <div
@@ -85,6 +90,7 @@ export const Slide: FC<SlideProps> = ({
           data-transition="fade-in fade-out"
           data-background-color="white"
           data-slideid={`${id}-right-answer`}
+          data-name={slideMeta?.rightAnswer?.file}
           data-audioUrl={slideMeta?.rightAnswer?.file}
         >
           <div className="flex h-screen w-full flex-col">
@@ -132,6 +138,7 @@ export const Slide: FC<SlideProps> = ({
           data-transition="fade-in fade-out"
           data-background-color="white"
           data-slideid={`${id}-explation`}
+          data-name={slideMeta?.explanationEn?.file}
           data-audioUrl={slideMeta?.explanationEn?.file}
         >
           <div className="flex h-screen w-full flex-col">

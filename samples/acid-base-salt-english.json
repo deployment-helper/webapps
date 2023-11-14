@@ -1,0 +1,390 @@
+{
+  "name": "Understanding AEM Concepts ",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [
+    {
+      "questionEn": "**What is the common characteristic of all acids?**",
+      "questionEnSpeak": "The common characteristic of all acids is their ability to donate protons.",
+      "questionHi": "**सभी अम्लों की सामान्य विशेषता क्या होती है?**",
+      "questionHiSpeak": "सभी अम्लों की सामान्य विशेषता यह होती है कि वे प्रोटॉन दान कर सकते हैं।",
+      "options": [
+        {
+          "en": "Option `1`: **They are all liquids**",
+          "speaking": "They are all liquids"
+        },
+        {
+          "en": "Option `2`: **They turn blue litmus paper red**",
+          "speaking": "They turn blue litmus paper red"
+        },
+        {
+          "en": "Option `3`: **They all have a sour taste**",
+          "speaking": "They all have a sour taste"
+        },
+        {
+          "en": "Option `4`: **They can donate protons**",
+          "speaking": "They can donate protons",
+          "isRight": true
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 4 in English markdown",
+        "speaking": "The correct answer is Option 4: Acids can donate protons",
+        "isRight": true
+      },
+      "explanationEn": "All acids share the common characteristic of being able to donate protons. This property is fundamental to their behavior in chemical reactions.",
+      "explanationEnSpeak": "All acids have the common ability to donate protons. This is a key feature that defines acids and influences how they react in different chemical scenarios."
+    },
+    {
+      "questionEn": "**What is a common property of all bases?**",
+      "questionEnSpeak": "A common property of all bases is their ability to accept protons.",
+      "questionHi": "**सभी क्षारों की एक सामान्य विशेषता क्या होती है?**",
+      "questionHiSpeak": "सभी क्षारों की एक सामान्य विशेषता यह होती है कि वे प्रोटॉन स्वीकार कर सकते हैं।",
+      "options": [
+        {
+          "en": "Option `1`: **They all have a bitter taste**",
+          "speaking": "They all have a bitter taste"
+        },
+        {
+          "en": "Option `2`: **They turn red litmus paper blue**",
+          "speaking": "They turn red litmus paper blue"
+        },
+        {
+          "en": "Option `3`: **They can accept protons**",
+          "speaking": "They can accept protons",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **They are all solids**",
+          "speaking": "They are all solids"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 3 in English markdown",
+        "speaking": "The correct answer is Option 3: Bases can accept protons",
+        "isRight": true
+      },
+      "explanationEn": "Bases are substances that can accept protons, which is a defining feature of their chemical behavior. This property is key to understanding their reactions and interactions.",
+      "explanationEnSpeak": "Bases are defined by their ability to accept protons. This fundamental characteristic helps to explain how they behave in various chemical reactions and interactions."
+    },
+    {
+      "questionEn": "**What is formed when an acid reacts with a base?**",
+      "questionEnSpeak": "When an acid reacts with a base, a salt is formed.",
+      "questionHi": "**जब कोई अम्ल किसी क्षार के साथ प्रतिक्रिया करता है, तो क्या बनता है?**",
+      "questionHiSpeak": "जब कोई अम्ल किसी क्षार के साथ प्रतिक्रिया करता है, तो एक लवण बनता है।",
+      "options": [
+        {
+          "en": "Option `1`: **Water**",
+          "speaking": "Water"
+        },
+        {
+          "en": "Option `2`: **Salt**",
+          "speaking": "Salt",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **Gas**",
+          "speaking": "Gas"
+        },
+        {
+          "en": "Option `4`: **Acid**",
+          "speaking": "Acid"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: Salt is formed when an acid reacts with a base",
+        "isRight": true
+      },
+      "explanationEn": "When an acid and a base react, they undergo a neutralization reaction, resulting in the formation of a salt and usually water.",
+      "explanationEnSpeak": "In a neutralization reaction, where an acid meets a base, a salt is formed. This reaction typically also results in the creation of water, demonstrating the interaction between acids and bases."
+    },
+    {
+      "questionEn": "**What does the pH scale measure?**",
+      "questionEnSpeak": "The pH scale measures the acidity or alkalinity of a solution.",
+      "questionHi": "**pH पैमाना क्या मापता है?**",
+      "questionHiSpeak": "pH पैमाना किसी घोल की अम्लता या क्षारीयता को मापता है।",
+      "options": [
+        {
+          "en": "Option `1`: **The boiling point of a solution**",
+          "speaking": "The boiling point of a solution"
+        },
+        {
+          "en": "Option `2`: **The acidity or alkalinity of a solution**",
+          "speaking": "The acidity or alkalinity of a solution",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **The concentration of a solution**",
+          "speaking": "The concentration of a solution"
+        },
+        {
+          "en": "Option `4`: **The color of a solution**",
+          "speaking": "The color of a solution"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: The pH scale measures the acidity or alkalinity of a solution",
+        "isRight": true
+      },
+      "explanationEn": "The pH scale is used to determine how acidic or alkaline a substance is. The scale ranges from 0 to 14, with 7 being neutral, below 7 being acidic, and above 7 being alkaline.",
+      "explanationEnSpeak": "The pH scale, ranging from 0 to 14, is a measure of how acidic or alkaline a substance is. A pH of 7 is considered neutral, while values below 7 indicate acidity and values above 7 indicate alkalinity."
+    },
+    {
+      "questionEn": "**Which of these is a property of acids?**",
+      "questionEnSpeak": "One of the listed options is a property of acids.",
+      "questionHi": "**इनमें से कौन सी अम्लों की एक विशेषता है?**",
+      "questionHiSpeak": "सूचीबद्ध विकल्पों में से एक अम्लों की एक विशेषता है।",
+      "options": [
+        {
+          "en": "Option `1`: **They feel slippery**",
+          "speaking": "They feel slippery"
+        },
+        {
+          "en": "Option `2`: **They have a sour taste**",
+          "speaking": "They have a sour taste",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **They change red litmus paper to blue**",
+          "speaking": "They change red litmus paper to blue"
+        },
+        {
+          "en": "Option `4`: **They are typically solid at room temperature**",
+          "speaking": "They are typically solid at room temperature"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: Acids have a sour taste",
+        "isRight": true
+      },
+      "explanationEn": "Acids are known for their sour taste, a common property observed in substances like lemon juice and vinegar, which contain citric and acetic acids, respectively.",
+      "explanationEnSpeak": "A well-known property of acids is their sour taste. This is easily observed in everyday substances like lemon juice, which contains citric acid, and vinegar, containing acetic acid."
+    },
+    {
+      "questionEn": "**What happens when an acid reacts with a metal?**",
+      "questionEnSpeak": "When an acid reacts with a metal, hydrogen gas is produced.",
+      "questionHi": "**जब कोई अम्ल धातु के साथ प्रतिक्रिया करता है, तो क्या होता है?**",
+      "questionHiSpeak": "जब कोई अम्ल धातु के साथ प्रतिक्रिया करता है, तो हाइड्रोजन गैस निकलती है।",
+      "options": [
+        {
+          "en": "Option `1`: **Salt is produced**",
+          "speaking": "Salt is produced"
+        },
+        {
+          "en": "Option `2`: **Water is formed**",
+          "speaking": "Water is formed"
+        },
+        {
+          "en": "Option `3`: **Hydrogen gas is produced**",
+          "speaking": "Hydrogen gas is produced",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **The metal dissolves**",
+          "speaking": "The metal dissolves"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 3 in English markdown",
+        "speaking": "The correct answer is Option 3: Hydrogen gas is produced when an acid reacts with a metal",
+        "isRight": true
+      },
+      "explanationEn": "When acids react with metals, they typically form a salt and release hydrogen gas. This is a basic type of chemical reaction involving acids.",
+      "explanationEnSpeak": "A fundamental chemical reaction occurs when acids meet metals: they produce a salt and release hydrogen gas. This reaction is a basic concept in understanding acid-metal interactions."
+    },
+    {
+      "questionEn": "**What is the use of litmus paper in chemistry?**",
+      "questionEnSpeak": "Litmus paper is used in chemistry to test whether a solution is acidic or basic.",
+      "questionHi": "**रसायन शास्त्र में लिटमस पेपर का उपयोग क्या है?**",
+      "questionHiSpeak": "रसायन शास्त्र में लिटमस पेपर का उपयोग यह जांचने के लिए किया जाता है कि कोई घोल अम्लीय है या क्षारीय।",
+      "options": [
+        {
+          "en": "Option `1`: **To measure the temperature of a solution**",
+          "speaking": "To measure the temperature of a solution"
+        },
+        {
+          "en": "Option `2`: **To test the acidity or basicity of a solution**",
+          "speaking": "To test the acidity or basicity of a solution",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **To determine the concentration of a solution**",
+          "speaking": "To determine the concentration of a solution"
+        },
+        {
+          "en": "Option `4`: **To find the boiling point of a solution**",
+          "speaking": "To find the boiling point of a solution"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: Litmus paper is used to test the acidity or basicity of a solution",
+        "isRight": true
+      },
+      "explanationEn": "Litmus paper is an indicator used in chemistry to determine if a solution is acidic or basic. Blue litmus turns red under acidic conditions, and red litmus turns blue under basic conditions.",
+      "explanationEnSpeak": "In chemistry, litmus paper serves as an indicator. It changes color based on the nature of the solution—turning red in acid and blue in a base, thereby identifying its acidic or basic nature."
+    },
+    {
+      "questionEn": "**Which of these is a common property of salts?**",
+      "questionEnSpeak": "One of the listed options is a common property of salts.",
+      "questionHi": "**इनमें से कौन सा लवणों का एक सामान्य गुण है?**",
+      "questionHiSpeak": "सूचीबद्ध विकल्पों में से एक लवणों का एक सामान्य गुण है।",
+      "options": [
+        {
+          "en": "Option `1`: **They are always liquid at room temperature**",
+          "speaking": "They are always liquid at room temperature"
+        },
+        {
+          "en": "Option `2`: **They conduct electricity when dissolved in water**",
+          "speaking": "They conduct electricity when dissolved in water",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **They change litmus paper to green**",
+          "speaking": "They change litmus paper to green"
+        },
+        {
+          "en": "Option `4`: **They have a sour taste**",
+          "speaking": "They have a sour taste"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: Salts conduct electricity when dissolved in water",
+        "isRight": true
+      },
+      "explanationEn": "A key property of salts is that they conduct electricity when dissolved in water, forming an electrolyte solution. This is due to the ions present in the solution.",
+      "explanationEnSpeak": "One important characteristic of salts is their ability to conduct electricity when dissolved in water. This happens because the solution forms an electrolyte, which contains ions that facilitate electrical conduction."
+    },
+    {
+      "questionEn": "**What does a pH value of 7 indicate about a solution?**",
+      "questionEnSpeak": "A pH value of 7 indicates that the solution is neutral.",
+      "questionHi": "**pH मान 7 होने का किसी घोल के बारे में क्या संकेत होता है?**",
+      "questionHiSpeak": "pH मान 7 होना यह संकेत देता है कि घोल उदासीन है।",
+      "options": [
+        {
+          "en": "Option `1`: **The solution is strongly acidic**",
+          "speaking": "The solution is strongly acidic"
+        },
+        {
+          "en": "Option `2`: **The solution is strongly basic**",
+          "speaking": "The solution is strongly basic"
+        },
+        {
+          "en": "Option `3`: **The solution is neutral**",
+          "speaking": "The solution is neutral",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: **The pH value is undefined**",
+          "speaking": "The pH value is undefined"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 3 in English markdown",
+        "speaking": "The correct answer is Option 3: A pH value of 7 indicates that the solution is neutral",
+        "isRight": true
+      },
+      "explanationEn": "A pH value of 7 is considered neutral, neither acidic nor basic. This is the pH of pure water at 25°C.",
+      "explanationEnSpeak": "A pH of 7, as seen in pure water at 25°C, is neutral. It signifies that the solution is neither acidic nor basic, standing exactly in the middle of the pH scale."
+    },
+    {
+      "questionEn": "**How does a base react with red litmus paper?**",
+      "questionEnSpeak": "A base turns red litmus paper blue.",
+      "questionHi": "**क्षार लाल लिटमस पेपर के साथ कैसी प्रतिक्रिया करता है?**",
+      "questionHiSpeak": "क्षार लाल लिटमस पेपर को नीला कर देता है।",
+      "options": [
+        {
+          "en": "Option `1`: **It remains red**",
+          "speaking": "It remains red"
+        },
+        {
+          "en": "Option `2`: **It turns blue**",
+          "speaking": "It turns blue",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **It turns green**",
+          "speaking": "It turns green"
+        },
+        {
+          "en": "Option `4`: **It fades away**",
+          "speaking": "It fades away"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: A base turns red litmus paper blue",
+        "isRight": true
+      },
+      "explanationEn": "Bases turn red litmus paper blue, indicating their basic or alkaline nature. This is a simple test to identify bases in a solution.",
+      "explanationEnSpeak": "One of the basic tests for identifying a base is using red litmus paper. Bases turn red litmus paper blue, showcasing their alkaline characteristics."
+    },
+    {
+      "questionEn": "**Which of these substances is an acid?**",
+      "questionEnSpeak": "One of the listed options is an acid.",
+      "questionHi": "**इनमें से कौन सा पदार्थ एक अम्ल है?**",
+      "questionHiSpeak": "सूचीबद्ध विकल्पों में से एक अम्ल है।",
+      "options": [
+        {
+          "en": "Option `1`: **Vinegar**",
+          "speaking": "Vinegar",
+          "isRight": true
+        },
+        {
+          "en": "Option `2`: **Soap**",
+          "speaking": "Soap"
+        },
+        {
+          "en": "Option `3`: **Baking soda**",
+          "speaking": "Baking soda"
+        },
+        {
+          "en": "Option `4`: **Ammonia**",
+          "speaking": "Ammonia"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 1 in English markdown",
+        "speaking": "The correct answer is Option 1: Vinegar is an acid",
+        "isRight": true
+      },
+      "explanationEn": "Vinegar is an acid, specifically acetic acid. It is a common household substance and a clear example of an acidic solution.",
+      "explanationEnSpeak": "Vinegar, known as acetic acid, is a well-known example of an acidic substance. It's a common household item, demonstrating the properties of acids."
+    },
+    {
+      "questionEn": "**What happens when a base reacts with a non-metal oxide?**",
+      "questionEnSpeak": "When a base reacts with a non-metal oxide, a salt and water are formed.",
+      "questionHi": "**जब कोई क्षार एक अधातु ऑक्साइड के साथ प्रतिक्रिया करता है, तो क्या होता है?**",
+      "questionHiSpeak": "जब कोई क्षार एक अधातु ऑक्साइड के साथ प्रतिक्रिया करता है, तो एक लवण और पानी बनते हैं।",
+      "options": [
+        {
+          "en": "Option `1`: **A gas is released**",
+          "speaking": "A gas is released"
+        },
+        {
+          "en": "Option `2`: **A salt and water are formed**",
+          "speaking": "A salt and water are formed",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: **The base dissolves**",
+          "speaking": "The base dissolves"
+        },
+        {
+          "en": "Option `4`: **A new base is formed**",
+          "speaking": "A new base is formed"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option 2 in English markdown",
+        "speaking": "The correct answer is Option 2: When a base reacts with a non-metal oxide, a salt and water are formed",
+        "isRight": true
+      },
+      "explanationEn": "The reaction between a base and a non-metal oxide typically results in the formation of a salt and water. This is an example of a neutralization reaction.",
+      "explanationEnSpeak": "When bases encounter non-metal oxides, they undergo a neutralization reaction, producing a salt and water. This type of reaction is a fundamental concept in understanding base chemistry."
+    }
+  ]
+}

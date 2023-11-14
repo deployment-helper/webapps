@@ -119,11 +119,6 @@ const Page = ({
 
   return (
     <>
-      <div style={{ fontSize: "30px" }}>
-        <h2 style={{ fontSize: "30px", padding: "5px" }} id="timer">
-          {time}, Current Slide time {currentSlideTime}
-        </h2>
-      </div>
       <div
         style={{
           width: "100%",
@@ -142,8 +137,12 @@ const Page = ({
           }}
         >
           <div className="slides">
-            <section data-slideid={"start-1"}>START 1</section>
-            <section data-slideid={"start-2"}>START 2</section>
+            <section data-slideid={"start-1"} data-name="start-1">
+              START 1
+            </section>
+            <section data-slideid={"start-2"} data-name="start-2">
+              START 2
+            </section>
             {slides.map((slide, index) => (
               <>
                 <Slide
@@ -172,8 +171,12 @@ const Page = ({
                 />
               </>
             ))}
-            <section data-slideid={"end-1"}>end 1</section>
-            <section data-slideid={"end-2"}>end 2</section>
+            <section data-slideid={"end-1"} data-name="end-1">
+              end 1
+            </section>
+            <section data-slideid={"end-2"} data-name="end-2">
+              end 2
+            </section>
           </div>
         </div>
       </div>
