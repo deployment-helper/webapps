@@ -1,4 +1,4 @@
-I need to prepare a MCQ for Indian Student on topic Acid, Base, salt 
+I need to prepare a MCQ for Indian Student on topic of Noun, Verb and Ad verb
 
 Indian students are not very good with English words so you need to use as simple as possible easy words. 
 
@@ -13,15 +13,15 @@ Please heighlight content in marddown for better visiblity
 Following is the JSON format that I am expecting and every key have explation how to fill it. 
 
 
-
+All `speaking key should be in english expect questionHiSpeak`
 
 
 Provide `explanationEnSpeak` in English 
-```js
+```json
 {
   "questionEn": "Question in english in **markdown**",
   "questionEnSpeak":"This key we are using to generate mp3 content dynamically, Chatgpt can use this key to fill above question(questionEn) key speaking version for Indian origin audience"
-  "questionHi": "Question Should be in hindi language with **markdown**",
+  "questionHi": "प्रश्न को हिंदी में **मार्कडाउन** में होना चाहिए",
   "questionHiSpeak":"This key we are using to generate mp3 content dynamically, Chatgpt can use this key to fill above question(questionHi) key speaking version for Indian origin audience"
   "options": [
     {
@@ -44,8 +44,7 @@ Provide `explanationEnSpeak` in English
   ],
   "rightAnswer": {
     "en": "Option 1 in English markdown",
-    "speaking":"This key will be used to generate mp3 content dynamically, ChatGpt can fill this key in speaking lanage like Option xyz is correct option",
-    "isRight": true
+    "speaking":"This key will be used to generate mp3 content dynamically, ChatGpt can fill this key in speaking lanage like Option xyz is correct option"
   },
   "explanationEn": "A detailed explantion in *English* markdown"
   "explanationEnSpeak": "This key we are using to generate mp3 content dynamically, ChatGPt can use this key fill above explation(explanationEn) in speaking way like elaborating above content for Indian origin audidenc"
@@ -53,14 +52,6 @@ Provide `explanationEnSpeak` in English
 
 ```
 
-
-Explanation of `explanationEnSpeak` can be improved as 
-
-Regular response: 
-Operating System me commonly used process scheduling algorithm hai First-Come, First-Served, yaani FCFS. Isme jo process pehle aata hai, woh pehle execute hota hai.
-
-Improved response: 
-
-Operating System me commonly used process scheduling algorithm hai First-Come, First-Served, yaani FCFS. Isme jo process pehle aata hai, woh pehle execute hota hai, jese koi kaam pahele stat kiya vo pahele chalegea 
+ 
 
 

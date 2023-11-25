@@ -1,0 +1,290 @@
+{
+  "name": "Understanding AEM Concepts ",
+  "desc": "Interactive MCQs with cartoons to simplify complex Operating System topics.",
+  "slides": [ {
+    "questionEn": "**Identify the verb in this sentence:** 'She runs quickly.'",
+    "questionEnSpeak": "In the sentence 'She runs quickly', identify the word that is the verb.",
+    "questionHi": "**इस वाक्य में क्रिया को पहचानें:** 'वह तेजी से दौड़ती है।'",
+    "questionHiSpeak": "वाक्य 'वह तेजी से दौड़ती है' में, क्रिया कौन सा शब्द है?",
+    "options": [
+      {
+        "en": "Option `1`: She",
+        "speaking": "Option number one: She"
+      },
+      {
+        "en": "Option `2`: runs",
+        "speaking": "Option number two: runs",
+        "isRight": true
+      },
+      {
+        "en": "Option `3`: quickly",
+        "speaking": "Option number three: quickly"
+      },
+      {
+        "en": "Option `4`: none",
+        "speaking": "Option number four: none"
+      }
+    ],
+    "rightAnswer": {
+      "en": "Option `2`: runs",
+      "speaking": "The correct option is number two: runs",
+      "isRight": true
+    },
+    "explanationEn": "In this sentence, 'runs' is the verb as it describes the action being performed.",
+    "explanationEnSpeak": "In this sentence, the word 'runs' is the verb because it describes an action."
+  },
+    {
+      "questionEn": "**Find the adverb in the sentence:** 'The cat slept soundly.'",
+      "questionEnSpeak": "In the sentence 'The cat slept soundly', find the word that is the adverb.",
+      "questionHi": "**इस वाक्य में क्रिया-विशेषण को खोजें:** 'बिल्ली ने गहरी नींद ली।'",
+      "questionHiSpeak": "वाक्य 'बिल्ली ने गहरी नींद ली' में, क्रिया-विशेषण कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: The",
+          "speaking": "Option number one: The"
+        },
+        {
+          "en": "Option `2`: cat",
+          "speaking": "Option number two: cat"
+        },
+        {
+          "en": "Option `3`: slept",
+          "speaking": "Option number three: slept"
+        },
+        {
+          "en": "Option `4`: soundly",
+          "speaking": "Option number four: soundly",
+          "isRight": true
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `4`: soundly",
+        "speaking": "The correct option is number four: soundly",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'soundly' is the adverb, as it describes how the cat slept.",
+      "explanationEnSpeak": "In this sentence, the word 'soundly' is the adverb because it describes the manner in which the cat slept."
+    },{
+      "questionEn": "**Which word is a noun in this sentence:** 'The tree is tall.'",
+      "questionEnSpeak": "In the sentence 'The tree is tall', identify the noun.",
+      "questionHi": "**इस वाक्य में संज्ञा कौन सा शब्द है:** 'वृक्ष लंबा है।'",
+      "questionHiSpeak": "वाक्य 'वृक्ष लंबा है' में, संज्ञा कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: The",
+          "speaking": "Option number one: The"
+        },
+        {
+          "en": "Option `2`: tree",
+          "speaking": "Option number two: tree",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: is",
+          "speaking": "Option number three: is"
+        },
+        {
+          "en": "Option `4`: tall",
+          "speaking": "Option number four: tall"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: tree",
+        "speaking": "The correct option is number two: tree",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'tree' is the noun because it is a name of an object.",
+      "explanationEnSpeak": "In this sentence, the word 'tree' is the noun because it is the name of an object."
+    },{
+      "questionEn": "**Identify the verb in the following sentence:** 'They laughed at the joke.'",
+      "questionEnSpeak": "In the sentence 'They laughed at the joke', find the verb.",
+      "questionHi": "**निम्नलिखित वाक्य में क्रिया को पहचानें:** 'उन्होंने मजाक पर हँसा।'",
+      "questionHiSpeak": "वाक्य 'उन्होंने मजाक पर हँसा' में, क्रिया कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: They",
+          "speaking": "Option number one: They"
+        },
+        {
+          "en": "Option `2`: laughed",
+          "speaking": "Option number two: laughed",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: at",
+          "speaking": "Option number three: at"
+        },
+        {
+          "en": "Option `4`: joke",
+          "speaking": "Option number four: joke"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: laughed",
+        "speaking": "The correct option is number two: laughed",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'laughed' is the verb as it represents the action.",
+      "explanationEnSpeak": "In this sentence, the word 'laughed' is the verb because it represents an action."
+    },{
+      "questionEn": "**Choose the adverb in the sentence:** 'He spoke loudly during the meeting.'",
+      "questionEnSpeak": "In the sentence 'He spoke loudly during the meeting', identify the adverb.",
+      "questionHi": "**इस वाक्य में क्रिया-विशेषण को चुनें:** 'उसने मीटिंग के दौरान जोर से बात की।'",
+      "questionHiSpeak": "वाक्य 'उसने मीटिंग के दौरान जोर से बात की' में, क्रिया-विशेषण कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: He",
+          "speaking": "Option number one: He"
+        },
+        {
+          "en": "Option `2`: spoke",
+          "speaking": "Option number two: spoke"
+        },
+        {
+          "en": "Option `3`: loudly",
+          "speaking": "Option number three: loudly",
+          "isRight": true
+        },
+        {
+          "en": "Option `4`: meeting",
+          "speaking": "Option number four: meeting"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `3`: loudly",
+        "speaking": "The correct option is number three: loudly",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'loudly' is the adverb, as it describes how he spoke.",
+      "explanationEnSpeak": "In this sentence, the word 'loudly' is the adverb because it describes the manner in which he spoke."
+    },
+    {
+      "questionEn": "**Find the noun in the sentence:** 'The book on the table is old.'",
+      "questionEnSpeak": "In the sentence 'The book on the table is old', identify the noun.",
+      "questionHi": "**इस वाक्य में संज्ञा को खोजें:** 'मेज पर रखी किताब पुरानी है।'",
+      "questionHiSpeak": "वाक्य 'मेज पर रखी किताब पुरानी है' में, संज्ञा कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: The",
+          "speaking": "Option number one: The"
+        },
+        {
+          "en": "Option `2`: book",
+          "speaking": "Option number two: book",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: table",
+          "speaking": "Option number three: table"
+        },
+        {
+          "en": "Option `4`: old",
+          "speaking": "Option number four: old"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: book",
+        "speaking": "The correct option is number two: book",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'book' is the noun as it refers to an object.",
+      "explanationEnSpeak": "In this sentence, the word 'book' is the noun because it refers to an object."
+    },
+    {
+      "questionEn": "**Identify the verb in this sentence:** 'She writes an email every day.'",
+      "questionEnSpeak": "In the sentence 'She writes an email every day', find the verb.",
+      "questionHi": "**इस वाक्य में क्रिया को पहचानें:** 'वह रोज एक ईमेल लिखती है।'",
+      "questionHiSpeak": "वाक्य 'वह रोज एक ईमेल लिखती है' में, क्रिया कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: She",
+          "speaking": "Option number one: She"
+        },
+        {
+          "en": "Option `2`: writes",
+          "speaking": "Option number two: writes",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: email",
+          "speaking": "Option number three: email"
+        },
+        {
+          "en": "Option `4`: day",
+          "speaking": "Option number four: day"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: writes",
+        "speaking": "The correct option is number two: writes",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'writes' is the verb because it describes the action being performed.",
+      "explanationEnSpeak": "In this sentence, the word 'writes' is the verb because it describes an action."
+    },
+    {
+      "questionEn": "**Choose the adverb in the sentence:** 'The flowers bloom beautifully in spring.'",
+      "questionEnSpeak": "In the sentence 'The flowers bloom beautifully in spring', identify the adverb.",
+      "questionHi": "**इस वाक्य में क्रिया-विशेषण को चुनें:** 'वसंत में फूल खूबसूरती से खिलते हैं।'",
+      "questionHiSpeak": "वाक्य 'वसंत में फूल खूबसूरती से खिलते हैं' में, क्रिया-विशेषण कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: The",
+          "speaking": "Option number one: The"
+        },
+        {
+          "en": "Option `2`: flowers",
+          "speaking": "Option number two: flowers"
+        },
+        {
+          "en": "Option `3`: bloom",
+          "speaking": "Option number three: bloom"
+        },
+        {
+          "en": "Option `4`: beautifully",
+          "speaking": "Option number four: beautifully",
+          "isRight": true
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `4`: beautifully",
+        "speaking": "The correct option is number four: beautifully",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'beautifully' is the adverb, as it describes how the flowers bloom.",
+      "explanationEnSpeak": "In this sentence, the word 'beautifully' is the adverb because it describes the manner in which the flowers bloom."
+    },
+    {
+      "questionEn": "**Find the noun in the sentence:** 'The sun shines brightly.'",
+      "questionEnSpeak": "In the sentence 'The sun shines brightly', identify the noun.",
+      "questionHi": "**इस वाक्य में संज्ञा को खोजें:** 'सूरज तेजी से चमकता है।'",
+      "questionHiSpeak": "वाक्य 'सूरज तेजी से चमकता है' में, संज्ञा कौन सा शब्द है?",
+      "options": [
+        {
+          "en": "Option `1`: The",
+          "speaking": "Option number one: The"
+        },
+        {
+          "en": "Option `2`: sun",
+          "speaking": "Option number two: sun",
+          "isRight": true
+        },
+        {
+          "en": "Option `3`: shines",
+          "speaking": "Option number three: shines"
+        },
+        {
+          "en": "Option `4`: brightly",
+          "speaking": "Option number four: brightly"
+        }
+      ],
+      "rightAnswer": {
+        "en": "Option `2`: sun",
+        "speaking": "The correct option is number two: sun",
+        "isRight": true
+      },
+      "explanationEn": "In this sentence, 'sun' is the noun as it is the name of an object.",
+      "explanationEnSpeak": "In this sentence, the word 'sun' is the noun because it is the name of an object."
+    }
+  ]
+}
