@@ -17,8 +17,10 @@ export const AuthLayout: FC<{
     }
     const apiServer = document.querySelector("[data-store='apiServer']")
       ?.textContent;
-    if (apiServer && apiServer) {
-      addServer(apiServer);
+    const batchApiServer = document.querySelector("[data-store='batchApiServer']")
+      ?.textContent;
+    if (apiServer && batchApiServer) {
+      addServer(apiServer,batchApiServer);
     }
   }, [addServer, addUser]);
 

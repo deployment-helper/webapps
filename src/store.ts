@@ -12,8 +12,8 @@ import { ServerClient } from "./server-client";
 export const useSlidesStore = create<IStore>()(
   devtools(
     (set, get) => ({
-      addServer: (server: string) =>
-        set((state) => ({ ...state, apiServer: server })),
+      addServer: (server: string,batchApiServer:string) =>
+        set((state) => ({ ...state, apiServer: server, batchApiServer:batchApiServer })),
       addUser: (user) => {
         set((store) => ({
           ...store,
@@ -59,6 +59,7 @@ export const useSlidesStore = create<IStore>()(
             s3File: pitem.s3File,
             s3MetaFile: pitem.s3MetaFile,
             isAudioGenerated: pitem.isAudioGenerated,
+            isVideoGenerated:pitem.isVideoGenerated,
           };
           return presentation;
         });

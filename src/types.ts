@@ -72,10 +72,12 @@ export interface IPresentation {
   s3MetaFile: string;
   user: IUserWithProjectTypes;
   isAudioGenerated?: boolean;
+  isVideoGenerated?:boolean;
 }
 
 export interface IStore {
   apiServer?: string;
+  batchApiServer?:string;
   currentProject?: IProject;
   user?: IUserWithProjectTypes;
   presentations?: Array<IPresentation>;
@@ -83,7 +85,7 @@ export interface IStore {
   createSlide?: {
     editorFile: any;
   };
-  addServer(server: string): void;
+  addServer(server: string, batchApiServer:string): void;
   addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
   listPresentations(projectId: string): void;

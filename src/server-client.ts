@@ -107,4 +107,13 @@ export class ServerClient {
     const url = `${apiServer}/slides/generateAudios`;
     ServerClient.send(url, presentation, HttpMethod.POST);
   }
+
+  public static async generateVideo(
+      apiServer: string,
+      presentation: IPresentation,
+      presentationUrl:string,
+  ) {
+    const url = `${apiServer}/video/generate`;
+    ServerClient.send(url, {...presentation,url:presentationUrl, pid:presentation.id}, HttpMethod.POST);
+  }
 }

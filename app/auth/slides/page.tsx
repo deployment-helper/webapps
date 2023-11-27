@@ -25,6 +25,7 @@ const Slides: FC = () => {
   const currentProject = useSlidesStore((store) => store.currentProject);
   const presentations = useSlidesStore((store) => store.presentations);
   const apiServer = useSlidesStore((store) => store.apiServer);
+  const batchApiServer =useSlidesStore((store) => store.batchApiServer);
 
   const refreshList = () => {
     if (currentProject) {
@@ -34,6 +35,9 @@ const Slides: FC = () => {
 
   const generateAudio = (presentation: IPresentation) => {
     ServerClient.generateAudio(apiServer as string, presentation);
+  };
+  const generateVideo = (presentation: IPresentation) => {
+    ServerClient.generateVideo(batchApiServer as string, presentation,`${location.protocol}//${location.host}/auth/slides/${presentation.project.projectId}?updatedAt=${presentation.updatedAt}`);
   };
 
   const columns: TableColumnDefinition<IPresentation>[] = [
@@ -74,9 +78,9 @@ const Slides: FC = () => {
       },
     }),
     createTableColumn<IPresentation>({
-      columnId: "Auido",
+      columnId: "Audio",
       renderHeaderCell: () => {
-        return <Subtitle2>Auido</Subtitle2>;
+        return <Subtitle2>Audio</Subtitle2>;
       },
       renderCell: (item) => {
         return item.isAudioGenerated ? (
@@ -90,6 +94,26 @@ const Slides: FC = () => {
           >
             Generate
           </Button>
+        );
+      },
+    }),
+    createTableColumn<IPresentation>({
+      columnId: "Video",
+      renderHeaderCell: () => {
+        return <Subtitle2>Video</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return item.isVideoGenerated ? (
+            <CheckmarkCircle20Filled className="text-green-800" />
+        ) : (
+            <Button
+                appearance="outline"
+                onClick={() => {
+                  generateVideo(item);
+                }}
+            >
+              Generate
+            </Button>
         );
       },
     }),

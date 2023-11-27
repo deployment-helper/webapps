@@ -13,6 +13,7 @@ export const SlidesLayout: FC<{ children: ReactNode }> = async ({
         <div style={{ display: "none" }}>
           <div data-store="addUser">{JSON.stringify(user)}</div>
           <div data-store="apiServer">{process.env.API_SERVER}</div>
+          <div data-store="batchApiServer">{process.env.BATCH_API_SERVER}</div>
         </div>
 
         <Header
