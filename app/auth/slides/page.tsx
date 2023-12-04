@@ -22,11 +22,12 @@ import { ServerClient } from "@/src/server-client";
 import {formatDateString} from "@/src/helpers";
 
 const Slides: FC = () => {
-  const { listPresentations } = useSlidesStore();
+  const { listPresentations,getS3PublicUrl } = useSlidesStore();
   const currentProject = useSlidesStore((store) => store.currentProject);
   const presentations = useSlidesStore((store) => store.presentations);
   const apiServer = useSlidesStore((store) => store.apiServer);
   const batchApiServer =useSlidesStore((store) => store.batchApiServer);
+  const s3PublicUrls = useSlidesStore((store) => store.s3PublicUrls);
 
   const refreshList = () => {
     if (currentProject) {
@@ -107,8 +108,17 @@ const Slides: FC = () => {
         return <Subtitle2>Video</Subtitle2>;
       },
       renderCell: (item) => {
-        return 'TODO'
-      }
+          const url =item.s3VideoFile && s3PublicUrls?.[item.s3VideoFile];
+          return url ? <Link target="_blank" href={url}>Download file</Link> : <Button
+                disabled={!item.isVideoGenerated}
+              appearance="outline"
+              onClick={() => {
+                getS3PublicUrl(item.s3VideoFile as string)
+              }}
+          >
+            Download
+          </Button>
+        }
     }),
     createTableColumn<IPresentation>({
       columnId: "link",

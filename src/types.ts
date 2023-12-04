@@ -86,11 +86,15 @@ export interface IStore {
   createSlide?: {
     editorFile: any;
   };
+  s3PublicUrls?:Record<string, string>
   addServer(server: string, batchApiServer:string): void;
   addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
   listPresentations(projectId: string): void;
   getPresentation(pid: string, updateAt: string, apiKey?: string): void;
+  getS3PublicUrl(key:string):void;
+  removeS3PublicUrl(key:string):void;
+  removeS3PublicUrl(key:string):void;
 }
 
 interface exoportDefault {

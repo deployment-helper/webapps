@@ -96,6 +96,30 @@ export const useSlidesStore = create<IStore>()(
           fullPresentations: fullPresentations,
         });
       },
+        getS3PublicUrl:async (key: string) =>{
+            const store = get();
+            const resp:{url:string} = await ServerClient.generateS3GetSignedUrl(store.apiServer as string,key);
+
+            let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
+            s3PublicUrls[key] = resp.url;
+            set({
+                ...store,
+                s3PublicUrls: s3PublicUrls,
+            });
+            setTimeout(()=>{
+                store.removeS3PublicUrl(key);
+            },3600 * 1000 )
+        },
+        // remove single S3 public url from store
+        removeS3PublicUrl:async (key: string) =>{
+            const store = get();
+            let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
+            delete s3PublicUrls[key];
+            set({
+                ...store,
+                s3PublicUrls: s3PublicUrls,
+            });
+        },
     }),
     {
       name: "slide-storage",

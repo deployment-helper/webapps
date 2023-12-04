@@ -116,4 +116,14 @@ export class ServerClient {
     const url = `${apiServer}/video/generate`;
     ServerClient.send(url, {...presentation,url:presentationUrl, pid:presentation.id}, HttpMethod.POST);
   }
+
+  // generate S3 get signed url
+    public static async generateS3GetSignedUrl(
+        apiServer: string,
+        key:string,
+    ) {
+        const url = `${apiServer}/auth/downloadS3ObjUrl?key=${key}`;
+        const resp = await ServerClient.send(url, undefined, HttpMethod.GET);
+        return await resp.json();
+    }
 }
