@@ -19,6 +19,7 @@ import {
 import { IPresentation } from "@/src/types";
 import { CheckmarkCircle20Filled, Open24Filled } from "@fluentui/react-icons";
 import { ServerClient } from "@/src/server-client";
+import {formatDateString} from "@/src/helpers";
 
 const Slides: FC = () => {
   const { listPresentations } = useSlidesStore();
@@ -42,30 +43,12 @@ const Slides: FC = () => {
 
   const columns: TableColumnDefinition<IPresentation>[] = [
     createTableColumn<IPresentation>({
-      columnId: "project",
-      renderHeaderCell: () => {
-        return <Subtitle2>Project</Subtitle2>;
-      },
-      renderCell: (item) => {
-        return item.project.projectName;
-      },
-    }),
-    createTableColumn<IPresentation>({
       columnId: "name",
       renderHeaderCell: () => {
         return <Subtitle2>Name</Subtitle2>;
       },
       renderCell: (item) => {
-        return item.name;
-      },
-    }),
-    createTableColumn<IPresentation>({
-      columnId: "User",
-      renderHeaderCell: () => {
-        return <Subtitle2>User</Subtitle2>;
-      },
-      renderCell: (item) => {
-        return item.user.email;
+        return <Body1Strong>{item.name}</Body1Strong>;
       },
     }),
     createTableColumn<IPresentation>({
@@ -74,7 +57,7 @@ const Slides: FC = () => {
         return <Subtitle2>Created At</Subtitle2>;
       },
       renderCell: (item) => {
-        return item.createdAt;
+        return formatDateString(item.createdAt);
       },
     }),
     createTableColumn<IPresentation>({
@@ -107,6 +90,7 @@ const Slides: FC = () => {
             <CheckmarkCircle20Filled className="text-green-800" />
         ) : (
             <Button
+                disabled={!item.isAudioGenerated}
                 appearance="outline"
                 onClick={() => {
                   generateVideo(item);
@@ -118,13 +102,13 @@ const Slides: FC = () => {
       },
     }),
     createTableColumn<IPresentation>({
-      columnId: "Duration",
+      columnId: "Download",
       renderHeaderCell: () => {
-        return <Subtitle2>Duration</Subtitle2>;
+        return <Subtitle2>Video</Subtitle2>;
       },
       renderCell: (item) => {
-        return "TODO";
-      },
+        return 'TODO'
+      }
     }),
     createTableColumn<IPresentation>({
       columnId: "link",
@@ -133,7 +117,7 @@ const Slides: FC = () => {
       },
       renderCell: (item) => {
         return (
-          <Button>
+          <Button disabled={!item.isAudioGenerated}>
             <Link
               href={`/auth/slides/${item.project.projectId}?updatedAt=${item.updatedAt}`}
               target="_blank"
