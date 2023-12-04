@@ -73,6 +73,7 @@ export interface IPresentation {
   user: IUserWithProjectTypes;
   isAudioGenerated?: boolean;
   isVideoGenerated?:boolean;
+  s3VideoFile?:string;
 }
 
 export interface IStore {

@@ -60,6 +60,7 @@ export const useSlidesStore = create<IStore>()(
             s3MetaFile: pitem.s3MetaFile,
             isAudioGenerated: pitem.isAudioGenerated,
             isVideoGenerated:pitem.isVideoGenerated,
+            s3VideoFile:pitem.s3VideoFile
           };
           return presentation;
         });
