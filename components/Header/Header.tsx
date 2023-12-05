@@ -45,7 +45,6 @@ export const Header: FC<HeaderProps> = ({
   const { dispatchToast } = useToastController(TOASTER_ID);
 
   const notify = () => {
-    console.log("Calling");
     dispatchToast(
       <Toast>
         <ToastTitle>{`${presentationName} Presentation created.`}</ToastTitle>

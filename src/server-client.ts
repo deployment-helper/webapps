@@ -39,7 +39,7 @@ export class ServerClient {
       body: JSON.stringify(body),
     });
 
-    const data = resp.json();
+    const data = resp.status !== 201 ?  resp.json() : undefined;
     return data;
   }
 
