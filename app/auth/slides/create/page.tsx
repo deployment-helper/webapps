@@ -88,7 +88,6 @@ export default function Page() {
               ))}
             </div>
           </div>
-          <Script id="my-script">{`Reveal.initialize({});`}</Script>
         </>
         <div>
           <AceEditor
