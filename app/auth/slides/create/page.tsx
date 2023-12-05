@@ -32,16 +32,19 @@ export default function Page() {
     let Reveal: any;
     import("reveal.js").then((r) => {
       Reveal = r.default;
-      Reveal.initialize({});
+      console.log("Reveal.js initialized");
+      Reveal.initialize(document.querySelector('#reveal'),{});
     });
-    if (Reveal) {
-      console.log("Reveal initialized");
-      Reveal.initialize({});
+
+    return () => {
+      console.log("Reveal.js destroyed");
+      Reveal.destroy();
     }
   });
   return (
     <>
       <div
+          id={"reveal"}
         style={{
           width: "100%",
           height: "100%",
