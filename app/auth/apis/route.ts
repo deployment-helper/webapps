@@ -8,9 +8,7 @@ export async function GET(req: NextRequest) {
   const code = searchParams.get("code");
   // TODO: We can move this call to server.ts file
   const resp = await fetch(
-    `${process.env.API_SERVER}/auth/createToken?code=${code} ${
-      process.env.NODE_ENV === "development" ? "&devreq=true" : ""
-    }`,
+    `${process.env.API_SERVER}/auth/createToken?code=${code}`,
     { next: { revalidate: 3600 } },
   );
 
