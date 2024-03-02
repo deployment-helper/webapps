@@ -72,13 +72,13 @@ export interface IPresentation {
   s3MetaFile: string;
   user: IUserWithProjectTypes;
   isAudioGenerated?: boolean;
-  isVideoGenerated?:boolean;
-  s3VideoFile?:string;
+  isVideoGenerated?: boolean;
+  s3VideoFile?: string;
 }
 
 export interface IStore {
   apiServer?: string;
-  batchApiServer?:string;
+  batchApiServer?: string;
   currentProject?: IProject;
   user?: IUserWithProjectTypes;
   presentations?: Array<IPresentation>;
@@ -86,23 +86,35 @@ export interface IStore {
   createSlide?: {
     editorFile: any;
   };
-  s3PublicUrls?:Record<string, string>
-  addServer(server: string, batchApiServer:string): void;
+  s3PublicUrls?: Record<string, string>;
+  addServer(server: string, batchApiServer: string): void;
   addEditorFile(content: any): void;
   addUser(user: IUserWithProjectTypes): void;
   listPresentations(projectId: string): void;
   getPresentation(pid: string, updateAt: string, apiKey?: string): void;
-  getS3PublicUrl(key:string):void;
-  removeS3PublicUrl(key:string):void;
-  removeS3PublicUrl(key:string):void;
+  getS3PublicUrl(key: string): void;
+  removeS3PublicUrl(key: string): void;
+  removeS3PublicUrl(key: string): void;
 }
 
-interface exoportDefault {
+export interface Input {
+  type: "input" | "image";
+  name: string;
+  value?: string;
+  placeholder?: string;
+}
+export interface ILayout {
+  image: string;
+  id: string;
+  content: Record<string, Input>;
+}
+
+interface exportDefault {
   Presentation: Presentation;
   Slide: ISlide;
   Option: Option;
-  IPoject: IProject;
+  IProject: IProject;
   IStore: IStore;
 }
 
-export default exoportDefault;
+export default exportDefault;
