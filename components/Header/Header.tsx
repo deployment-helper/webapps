@@ -18,15 +18,28 @@ import {
   Toaster,
   mergeClasses,
   useToastController,
+  Dialog,
+  DialogTrigger,
+  Button,
+  DialogSurface,
+  DialogBody,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@fluentui/react-components";
 
 import { HeaderProps } from "./Header.types";
 import { useStyles } from "./Header.styles";
-import { ArrowLeft24Filled, Navigation24Filled } from "@fluentui/react-icons";
+import {
+  ArrowLeft24Filled,
+  ImageAdd24Filled,
+  Navigation24Filled,
+} from "@fluentui/react-icons";
 import { usePathname } from "next/navigation";
 import useSlidesStore from "@/src/store";
 import { ServerClient } from "@/src/server-client";
 import { TOASTER_ID } from "@/src/constants";
+import UploadImage from "../UploadImage/UploadImage";
 
 export const Header: FC<HeaderProps> = ({
   title,
@@ -69,7 +82,40 @@ export const Header: FC<HeaderProps> = ({
 
   if (checkForCreatePath && path === "/auth/slides/create") {
     type = "create";
+  } else if (checkForCreatePath && path === "/auth/slides/create-new") {
+    type = "create-new";
   }
+
+  function CreatePresentationHeader() {
+    return (
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center gap-4">
+          <Dialog>
+            <DialogTrigger>
+              <ImageAdd24Filled
+                className={mergeClasses(classes.title, "cursor-pointer")}
+              />
+            </DialogTrigger>
+            <DialogSurface>
+              <DialogBody>
+                <DialogTitle>Upload Image</DialogTitle>
+                <DialogContent>
+                  <UploadImage />
+                </DialogContent>
+                <DialogActions>
+                  <DialogTrigger disableButtonEnhancement>
+                    <Button appearance="secondary">Close</Button>
+                  </DialogTrigger>
+                  <Button appearance="primary">Do Something</Button>
+                </DialogActions>
+              </DialogBody>
+            </DialogSurface>
+          </Dialog>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Toaster toasterId={TOASTER_ID} position="top-end" />
@@ -116,7 +162,7 @@ export const Header: FC<HeaderProps> = ({
             </div>
           </div>
         )}
-        {type === "create" && (
+        {(type === "create" || type === "create-new") && (
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-4">
               <ArrowLeft24Filled
