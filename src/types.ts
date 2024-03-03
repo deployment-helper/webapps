@@ -93,11 +93,12 @@ export interface IStore {
   listPresentations(projectId: string): void;
   getPresentation(pid: string, updateAt: string, apiKey?: string): void;
   getS3PublicUrl(key: string): void;
+  uploadS3Object(file: File, key: string, isPublic: boolean): Promise<any>;
   removeS3PublicUrl(key: string): void;
   removeS3PublicUrl(key: string): void;
 }
 
-export interface Input {
+export interface IInput {
   type: "input" | "image";
   name: string;
   value?: string;
@@ -106,7 +107,7 @@ export interface Input {
 export interface ILayout {
   image: string;
   id: string;
-  content: Record<string, Input>;
+  content: Record<string, IInput>;
 }
 
 interface exportDefault {

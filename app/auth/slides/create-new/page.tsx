@@ -34,7 +34,7 @@ export default function Page() {
           image: {
             type: "image",
             name: "image",
-            value: "Image",
+            value: "https://via.placeholder.com/150",
             placeholder: "Image",
           },
         },

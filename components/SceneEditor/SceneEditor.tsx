@@ -1,12 +1,12 @@
 import {
   SelectTabData,
   SelectTabEvent,
-  SelectTabEventHandler,
   Tab,
   TabList,
 } from "@fluentui/react-tabs";
 import { useState } from "react";
 import { ILayout } from "@/src/types";
+import Image from "@/components/Image/Image";
 
 const SceneEditor = (props: ISceneEditorProps) => {
   const [activeTab, setActiveTab] = useState("1");
@@ -21,6 +21,13 @@ const SceneEditor = (props: ISceneEditorProps) => {
     setContent(
       props.layouts.find((layout) => layout.id === layoutId)?.content || {},
     );
+  };
+
+  const onUploadSuccess = (url: string, name: string) => {
+    setContent((prev) => ({
+      ...prev,
+      [name]: { ...prev[name], value: url },
+    }));
   };
 
   return (
@@ -89,7 +96,12 @@ const SceneEditor = (props: ISceneEditorProps) => {
                     placeholder={value.placeholder}
                   />
                 ) : (
-                  <img src={value.value} alt={value.placeholder} />
+                  <Image
+                    src={value.value}
+                    onUploadSuccess={(url?: string) => {
+                      onUploadSuccess(url || "", value.name);
+                    }}
+                  />
                 )}
               </div>
             ))}

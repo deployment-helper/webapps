@@ -12,8 +12,12 @@ import { ServerClient } from "./server-client";
 export const useSlidesStore = create<IStore>()(
   devtools(
     (set, get) => ({
-      addServer: (server: string,batchApiServer:string) =>
-        set((state) => ({ ...state, apiServer: server, batchApiServer:batchApiServer })),
+      addServer: (server: string, batchApiServer: string) =>
+        set((state) => ({
+          ...state,
+          apiServer: server,
+          batchApiServer: batchApiServer,
+        })),
       addUser: (user) => {
         set((store) => ({
           ...store,
@@ -59,8 +63,8 @@ export const useSlidesStore = create<IStore>()(
             s3File: pitem.s3File,
             s3MetaFile: pitem.s3MetaFile,
             isAudioGenerated: pitem.isAudioGenerated,
-            isVideoGenerated:pitem.isVideoGenerated,
-            s3VideoFile:pitem.s3VideoFile
+            isVideoGenerated: pitem.isVideoGenerated,
+            s3VideoFile: pitem.s3VideoFile,
           };
           return presentation;
         });
@@ -96,30 +100,51 @@ export const useSlidesStore = create<IStore>()(
           fullPresentations: fullPresentations,
         });
       },
-        getS3PublicUrl:async (key: string) =>{
-            const store = get();
-            const resp:{url:string} = await ServerClient.generateS3GetSignedUrl(store.apiServer as string,key);
+      // public URL for existing S3 files to download and view for some time
+      getS3PublicUrl: async (key: string) => {
+        const store = get();
+        const resp: { url: string } = await ServerClient.generateS3GetSignedUrl(
+          store.apiServer as string,
+          key,
+        );
 
-            let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
-            s3PublicUrls[key] = resp.url;
-            set({
-                ...store,
-                s3PublicUrls: s3PublicUrls,
-            });
-            setTimeout(()=>{
-                store.removeS3PublicUrl(key);
-            },3600 * 1000 )
-        },
-        // remove single S3 public url from store
-        removeS3PublicUrl:async (key: string) =>{
-            const store = get();
-            let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
-            delete s3PublicUrls[key];
-            set({
-                ...store,
-                s3PublicUrls: s3PublicUrls,
-            });
-        },
+        let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
+        s3PublicUrls[key] = resp.url;
+        set({
+          ...store,
+          s3PublicUrls: s3PublicUrls,
+        });
+        setTimeout(() => {
+          store.removeS3PublicUrl(key);
+        }, 3600 * 1000);
+      },
+
+      // upload S3 file and get public URL
+      uploadS3Object: async (file: any, key: string, isPublic = false) => {
+        const store = get();
+        const resp = await ServerClient.uploadS3Object(
+          store.apiServer as string,
+          key,
+          file,
+          isPublic,
+        );
+        let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
+        s3PublicUrls[key] = resp.publicUrl;
+        set({
+          ...store,
+          s3PublicUrls: s3PublicUrls,
+        });
+      },
+      // remove single S3 public url from store
+      removeS3PublicUrl: async (key: string) => {
+        const store = get();
+        let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};
+        delete s3PublicUrls[key];
+        set({
+          ...store,
+          s3PublicUrls: s3PublicUrls,
+        });
+      },
     }),
     {
       name: "slide-storage",

@@ -39,7 +39,7 @@ export class ServerClient {
       body: JSON.stringify(body),
     });
 
-    const data = resp.status !== 201 ?  resp.json() : undefined;
+    const data = resp.status !== 201 ? resp.json() : undefined;
     return data;
   }
 
@@ -109,21 +109,63 @@ export class ServerClient {
   }
 
   public static async generateVideo(
-      apiServer: string,
-      presentation: IPresentation,
-      presentationUrl:string,
+    apiServer: string,
+    presentation: IPresentation,
+    presentationUrl: string,
   ) {
     const url = `${apiServer}/video/generate`;
-    ServerClient.send(url, {...presentation,url:presentationUrl, pid:presentation.id}, HttpMethod.POST);
+    ServerClient.send(
+      url,
+      { ...presentation, url: presentationUrl, pid: presentation.id },
+      HttpMethod.POST,
+    );
   }
 
   // generate S3 get signed url
-    public static async generateS3GetSignedUrl(
-        apiServer: string,
-        key:string,
-    ) {
-        const url = `${apiServer}/auth/downloadS3ObjUrl?key=${key}`;
-        const resp = await ServerClient.send(url, undefined, HttpMethod.GET);
-        return await resp.json();
+  public static async generateS3GetSignedUrl(apiServer: string, key: string) {
+    const url = `${apiServer}/auth/downloadS3ObjUrl?key=${key}`;
+    const resp = await ServerClient.send(url, undefined, HttpMethod.GET);
+    return await resp.json();
+  }
+
+  // generate S3 put singed URL and mark object as public
+
+  public static async generateS3PutSignedUrl(
+    apiServer: string,
+    key: string,
+    isPublic: boolean = false,
+  ) {
+    const url = `${apiServer}/auth/uploadS3ObjUrl?key=${key}${
+      isPublic ? "&public=true" : ""
+    }`;
+    const resp = await ServerClient.send(url, undefined, HttpMethod.GET);
+    return await resp.json();
+  }
+
+  public static async uploadS3Object(
+    apiServer: string,
+    key: string,
+    file: File,
+    isPublic: boolean = false,
+  ) {
+    const resp = await ServerClient.generateS3PutSignedUrl(
+      apiServer,
+      key,
+      isPublic,
+    );
+
+    const s3Resp = await fetch(resp.url, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": file.type,
+      },
+    });
+
+    if (s3Resp.status !== 200) {
+      throw new Error("File upload error");
     }
+
+    return resp;
+  }
 }
