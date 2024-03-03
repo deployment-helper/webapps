@@ -37,13 +37,18 @@ const SceneEditor = (props: ISceneEditorProps) => {
   };
 
   const createImage = () => {
-    const ref = document.getElementById(props.currentSceneId);
+    const ref = document.getElementById(props.currentSceneId as string);
     html2canvas(ref as HTMLElement, {
       useCORS: true,
       logging: true,
     }).then((canvas) => {
       const img = document.getElementById("canvas") as HTMLImageElement;
       img.src = canvas.toDataURL("image/png");
+      props.onSceneContentChange &&
+        props.onSceneContentChange(
+          props.currentSceneId as string,
+          canvas.toDataURL("image/png"),
+        );
     });
   };
 
@@ -127,7 +132,7 @@ const SceneEditor = (props: ISceneEditorProps) => {
               <img id={"canvas"} src={""} />
               {LayoutReactComponent && (
                 <LayoutReactComponent
-                  isNone={false}
+                  isNone={true}
                   ref={compRef}
                   sceneId={props.currentSceneId}
                   content={content}
@@ -172,8 +177,9 @@ const SceneEditor = (props: ISceneEditorProps) => {
 
 export interface ISceneEditorProps {
   currentLayoutId: string;
-  currentSceneId: string;
+  currentSceneId?: string;
   layouts: Array<ILayout>;
+  onSceneContentChange?: (sceneId: string, content: any) => void;
 }
 
 export { SceneEditor };

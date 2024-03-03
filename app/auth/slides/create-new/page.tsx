@@ -4,11 +4,13 @@ import SceneEditor, {
   ISceneEditorProps,
 } from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
-import { IScene } from "@/src/types";
+import { IInput, IScene } from "@/src/types";
+import { useState } from "react";
 
 export default function Page() {
-  // Page layout three column horizontal layout
-  const sceneEditorProps: ISceneEditorProps = {
+  const [currentSceneId, setCurrentSceneId] = useState<string>();
+  const [scenes, setScenes] = useState<IScene[]>([]);
+  const [sceneEditorProps, setSceneEditorProps] = useState<ISceneEditorProps>({
     currentLayoutId: "layout1",
     currentSceneId: "scene1",
     layouts: [
@@ -58,24 +60,53 @@ export default function Page() {
         },
       },
     ],
+  });
+
+  const onSceneChange = (sceneId: string) => {
+    setCurrentSceneId(sceneId);
+    setSceneEditorProps((prev) => ({ ...prev, currentSceneId: sceneId }));
   };
 
-  let scenes: IScene[] = [
-    {
-      id: "1",
-      title: "Scene 1",
-      sceneImage: "https://via.placeholder.com/150",
-    },
-  ];
+  const onSceneContentChange = (sceneId: string, image: string) => {
+    const newScenes = scenes.map((scene) => {
+      if (scene.id === sceneId) {
+        return { ...scene, image };
+      }
+      return scene;
+    });
+    setScenes(newScenes);
+  };
+
+  const createScene = () => {
+    const newScene: IScene = {
+      id: `scene${scenes.length + 1}`,
+      name: `Scene ${scenes.length + 1}`,
+      image: "https://via.placeholder.com/150",
+      description: "Add a description here.",
+    };
+    setScenes((prev) => [...prev, newScene]);
+
+    if (!currentSceneId) {
+      setCurrentSceneId(newScene.id);
+    }
+  };
 
   return (
     <div className="flex  h-screen w-full">
       <div className="w-1/12 bg-red-200 text-center">Scene</div>
       <div className="w-1/4 bg-green-200">
-        <SceneEditor {...sceneEditorProps} />
+        <SceneEditor
+          {...sceneEditorProps}
+          onSceneContentChange={onSceneContentChange}
+        />
       </div>
       <div className="w-8/12 bg-blue-200">
-        <SceneList scenes={scenes} currentSceneId={"1"} />
+        <SceneList
+          scenes={scenes}
+          currentSceneId={currentSceneId}
+          onSceneChange={onSceneChange}
+          createScene={createScene}
+        />
       </div>
     </div>
   );

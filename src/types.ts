@@ -112,9 +112,12 @@ export interface ILayout {
 }
 
 export interface IScene {
+  isSelected?: boolean;
   id: string;
-  title: string;
-  sceneImage: string;
+  name: string;
+  image: string;
+  description: string;
+  onClick?: (sceneId: string) => void;
 }
 interface exportDefault {
   Presentation: Presentation;
