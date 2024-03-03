@@ -11,7 +11,7 @@ export function Image(props: IImageProps) {
   return (
     <>
       <div
-        className={`relative h-48 w-48  bg-auto bg-center`}
+        className={`relative h-48 w-48  bg-contain bg-center`}
         style={{ backgroundImage: `url(${props.src})` }}
       >
         {!props.isViewOnly && (

@@ -107,9 +107,15 @@ export interface IInput {
 export interface ILayout {
   image: string;
   id: string;
+  componentName: string;
   content: Record<string, IInput>;
 }
 
+export interface IScene {
+  id: string;
+  title: string;
+  sceneImage: string;
+}
 interface exportDefault {
   Presentation: Presentation;
   Slide: ISlide;
