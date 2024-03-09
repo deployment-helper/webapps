@@ -1,7 +1,7 @@
 import cookies from "@/src/cookies";
-import { IPresentation, Presentation } from "./types";
-import { addSlideIds } from "./helpers";
-import { HttpMethod } from "./constants";
+import { IPresentation, Presentation } from "../types";
+import { addSlideIds } from "../helpers";
+import { HttpMethod } from "../constants";
 
 export class ServerClient {
   public static send(

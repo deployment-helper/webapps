@@ -18,7 +18,7 @@ import {
 } from "@fluentui/react-components";
 import { IPresentation } from "@/src/types";
 import { CheckmarkCircle20Filled, Open24Filled } from "@fluentui/react-icons";
-import { ServerClient } from "@/src/server-client";
+import { ServerClient } from "@/src/apis/server-client";
 import { formatDateString } from "@/src/helpers";
 
 const Slides: FC = () => {
