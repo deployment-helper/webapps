@@ -1,4 +1,4 @@
-import useSlidesStore from "@/src/store";
+import useSlidesStore from "@/src/stores/store";
 import { s3RandomPublicKey } from "@/src/helpers";
 
 export function UploadImage(props: IUploadImageProps) {

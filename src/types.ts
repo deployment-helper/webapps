@@ -117,6 +117,7 @@ export interface IScene {
   name: string;
   image: string;
   description: string;
+  content?: Record<string, IInput>;
   onClick?: (sceneId: string) => void;
 }
 interface exportDefault {

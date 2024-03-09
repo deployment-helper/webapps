@@ -1,7 +1,7 @@
 "use client";
 import { FC, useEffect } from "react";
 import Link from "next/link";
-import useSlidesStore from "@/src/store";
+import useSlidesStore from "@/src/stores/store";
 import {
   Body1Strong,
   Button,
@@ -19,14 +19,14 @@ import {
 import { IPresentation } from "@/src/types";
 import { CheckmarkCircle20Filled, Open24Filled } from "@fluentui/react-icons";
 import { ServerClient } from "@/src/server-client";
-import {formatDateString} from "@/src/helpers";
+import { formatDateString } from "@/src/helpers";
 
 const Slides: FC = () => {
-  const { listPresentations,getS3PublicUrl } = useSlidesStore();
+  const { listPresentations, getS3PublicUrl } = useSlidesStore();
   const currentProject = useSlidesStore((store) => store.currentProject);
   const presentations = useSlidesStore((store) => store.presentations);
   const apiServer = useSlidesStore((store) => store.apiServer);
-  const batchApiServer =useSlidesStore((store) => store.batchApiServer);
+  const batchApiServer = useSlidesStore((store) => store.batchApiServer);
   const s3PublicUrls = useSlidesStore((store) => store.s3PublicUrls);
 
   const refreshList = () => {
@@ -39,7 +39,11 @@ const Slides: FC = () => {
     ServerClient.generateAudio(apiServer as string, presentation);
   };
   const generateVideo = (presentation: IPresentation) => {
-    ServerClient.generateVideo(batchApiServer as string, presentation,`${location.protocol}//${location.host}/auth/slides/${presentation.project.projectId}?updatedAt=${presentation.updatedAt}`);
+    ServerClient.generateVideo(
+      batchApiServer as string,
+      presentation,
+      `${location.protocol}//${location.host}/auth/slides/${presentation.project.projectId}?updatedAt=${presentation.updatedAt}`,
+    );
   };
 
   const columns: TableColumnDefinition<IPresentation>[] = [
@@ -88,17 +92,17 @@ const Slides: FC = () => {
       },
       renderCell: (item) => {
         return item.isVideoGenerated ? (
-            <CheckmarkCircle20Filled className="text-green-800" />
+          <CheckmarkCircle20Filled className="text-green-800" />
         ) : (
-            <Button
-                disabled={!item.isAudioGenerated}
-                appearance="outline"
-                onClick={() => {
-                  generateVideo(item);
-                }}
-            >
-              Generate
-            </Button>
+          <Button
+            disabled={!item.isAudioGenerated}
+            appearance="outline"
+            onClick={() => {
+              generateVideo(item);
+            }}
+          >
+            Generate
+          </Button>
         );
       },
     }),
@@ -108,17 +112,23 @@ const Slides: FC = () => {
         return <Subtitle2>Video</Subtitle2>;
       },
       renderCell: (item) => {
-          const url =item.s3VideoFile && s3PublicUrls?.[item.s3VideoFile];
-          return url ? <Link target="_blank" href={url}>Download file</Link> : <Button
-                disabled={!item.isVideoGenerated}
-              appearance="outline"
-              onClick={() => {
-                getS3PublicUrl(item.s3VideoFile as string)
-              }}
+        const url = item.s3VideoFile && s3PublicUrls?.[item.s3VideoFile];
+        return url ? (
+          <Link target="_blank" href={url}>
+            Download file
+          </Link>
+        ) : (
+          <Button
+            disabled={!item.isVideoGenerated}
+            appearance="outline"
+            onClick={() => {
+              getS3PublicUrl(item.s3VideoFile as string);
+            }}
           >
             Download
           </Button>
-        }
+        );
+      },
     }),
     createTableColumn<IPresentation>({
       columnId: "link",

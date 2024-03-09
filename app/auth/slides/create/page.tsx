@@ -8,7 +8,7 @@ import "ace-builds/src-noconflict/theme-github";
 import { useEffect, useState } from "react";
 import { Slide } from "@/components/Slide";
 import { SlideType } from "@/src/constants";
-import useSlidesStore from "../../../../src/store";
+import useSlidesStore from "../../../../src/stores/store";
 
 export default function Page() {
   const [slides, setSlides] = useState<any[]>([]);
@@ -33,18 +33,18 @@ export default function Page() {
     import("reveal.js").then((r) => {
       Reveal = r.default;
       console.log("Reveal.js initialized");
-      Reveal.initialize(document.querySelector('#reveal'),{});
+      Reveal.initialize(document.querySelector("#reveal"), {});
     });
 
     return () => {
       console.log("Reveal.js destroyed");
       Reveal.destroy();
-    }
+    };
   });
   return (
     <>
       <div
-          id={"reveal"}
+        id={"reveal"}
         style={{
           width: "100%",
           height: "100%",

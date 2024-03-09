@@ -6,7 +6,7 @@ import {
 } from "@/src/types";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { ServerClient } from "./server-client";
+import { ServerClient } from "../server-client";
 
 // TODO: code duplication
 export const useSlidesStore = create<IStore>()(

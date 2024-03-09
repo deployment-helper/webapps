@@ -36,7 +36,7 @@ import {
   Navigation24Filled,
 } from "@fluentui/react-icons";
 import { usePathname } from "next/navigation";
-import useSlidesStore from "@/src/store";
+import useSlidesStore from "@/src/stores/store";
 import { ServerClient } from "@/src/server-client";
 import { TOASTER_ID } from "@/src/constants";
 import UploadImage from "../UploadImage/UploadImage";

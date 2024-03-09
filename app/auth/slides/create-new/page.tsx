@@ -1,11 +1,11 @@
 "use client";
+import { useState } from "react";
 
 import SceneEditor, {
   ISceneEditorProps,
 } from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
-import { IInput, IScene } from "@/src/types";
-import { useState } from "react";
+import { IScene } from "@/src/types";
 
 export default function Page() {
   const [currentSceneId, setCurrentSceneId] = useState<string>();

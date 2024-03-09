@@ -2,14 +2,14 @@
 
 import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 import { FC, useEffect } from "react";
-import useSlidesStore from "../../src/store";
+import useSlidesStore from "../../src/stores/store";
 
 export const AuthLayout: FC<{
   children: React.ReactNode;
 }> = ({ children }: { children: React.ReactNode }) => {
   const { addUser, addServer } = useSlidesStore();
 
-  // intialize local store
+  // initialize local store
   useEffect(() => {
     const user = document.querySelector("[data-store='addUser']")?.textContent;
     if (user && user?.length) {
@@ -17,10 +17,11 @@ export const AuthLayout: FC<{
     }
     const apiServer = document.querySelector("[data-store='apiServer']")
       ?.textContent;
-    const batchApiServer = document.querySelector("[data-store='batchApiServer']")
-      ?.textContent;
+    const batchApiServer = document.querySelector(
+      "[data-store='batchApiServer']",
+    )?.textContent;
     if (apiServer && batchApiServer) {
-      addServer(apiServer,batchApiServer);
+      addServer(apiServer, batchApiServer);
     }
   }, [addServer, addUser]);
 
