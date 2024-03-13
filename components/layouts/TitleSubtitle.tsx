@@ -1,6 +1,6 @@
 import LayoutBody from "@/components/layouts/LayoutBody";
 import { forwardRef, MutableRefObject } from "react";
-import { IInput } from "@/src/types";
+import { IInput } from "@/src/types/types";
 
 export const TitleSubtitle = forwardRef<HTMLDivElement, ITitleSubtitleProps>(
   (props: ITitleSubtitleProps, ref) => {

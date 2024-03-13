@@ -3,10 +3,10 @@ import {
   IProject,
   IStore,
   IUserWithProjectTypes,
-} from "@/src/types";
+} from "@/src/types/types";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { ServerClient } from "../apis/server-client";
+import { ServerClient } from "@/src/apis/server.client";
 
 // TODO: code duplication
 export const useSlidesStore = create<IStore>()(

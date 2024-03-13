@@ -1,4 +1,4 @@
-import { IUserWithProjectTypes } from "@/src/types";
+import { IUserWithProjectTypes } from "@/src/types/types";
 import { cookies } from "next/headers";
 
 const API_SERVER = process.env.API_SERVER;

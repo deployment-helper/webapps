@@ -16,7 +16,7 @@ import {
   Title1,
   createTableColumn,
 } from "@fluentui/react-components";
-import { IPresentation } from "@/src/types";
+import { IPresentation } from "@/src/types/types";
 import { CheckmarkCircle20Filled, Open24Filled } from "@fluentui/react-icons";
 import { ServerClient } from "@/src/apis/server-client";
 import { formatDateString } from "@/src/helpers";

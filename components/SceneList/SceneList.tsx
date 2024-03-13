@@ -1,4 +1,4 @@
-import { IScene } from "@/src/types";
+import { IScene } from "@/src/types/types";
 import Scene from "@/components/Scene/Scene";
 
 export function SceneList(props: ISceneListProps) {

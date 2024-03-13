@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import { Presentation } from "./types";
+import { Presentation } from "./types/types";
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -33,6 +33,17 @@ export function formatDateString(dateString: string) {
 
 export function s3RandomPublicKey() {
   return `public/${uuid()}`;
+}
+
+export function getApiServer() {
+  const apiServer = document.querySelector("[data-store='apiServer']")
+    ?.textContent;
+
+  if (!apiServer) {
+    throw new Error("apiServer not found");
+  }
+
+  return apiServer;
 }
 
 const defaultExport = {

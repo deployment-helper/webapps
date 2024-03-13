@@ -1,6 +1,6 @@
 import cookies from "@/src/cookies";
-import { IPresentation, Presentation } from "../types";
-import { addSlideIds } from "../helpers";
+import { IPresentation, Presentation } from "../types/types";
+import { addSlideIds, getApiServer } from "../helpers";
 import { HttpMethod } from "../constants";
 
 export class ServerClient {
@@ -19,6 +19,16 @@ export class ServerClient {
         "Content-Type": "application/json",
       },
     });
+  }
+
+  public static sendToAPiServer(
+    url: string,
+    body?: any,
+    method: HttpMethod = HttpMethod.GET,
+  ): Promise<any> {
+    const API_SERVER = getApiServer();
+
+    return ServerClient.send(new URL(url, API_SERVER).href, body, method);
   }
   public static async createPresentation(
     name: string,

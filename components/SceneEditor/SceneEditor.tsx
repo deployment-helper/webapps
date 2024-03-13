@@ -5,7 +5,7 @@ import {
   TabList,
 } from "@fluentui/react-tabs";
 import { useEffect, useRef, useState } from "react";
-import { ILayout } from "@/src/types";
+import { ILayout } from "@/src/types/types";
 import Image from "@/components/Image/Image";
 import { TitleSubtitle } from "@/components/layouts";
 import html2canvas from "html2canvas";

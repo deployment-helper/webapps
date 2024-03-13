@@ -3,7 +3,9 @@
 import { FluentProvider, teamsLightTheme } from "@fluentui/react-components";
 import { FC, useEffect } from "react";
 import useSlidesStore from "../../src/stores/store";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+const queryClient = new QueryClient();
 export const AuthLayout: FC<{
   children: React.ReactNode;
 }> = ({ children }: { children: React.ReactNode }) => {
@@ -25,7 +27,14 @@ export const AuthLayout: FC<{
     }
   }, [addServer, addUser]);
 
-  return <FluentProvider theme={teamsLightTheme}>{children}</FluentProvider>;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <FluentProvider theme={teamsLightTheme}>{children}</FluentProvider>;
+      </QueryClientProvider>
+    </>
+  );
 };
 
 export default AuthLayout;

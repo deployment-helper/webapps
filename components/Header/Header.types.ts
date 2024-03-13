@@ -1,4 +1,4 @@
-import { User, IProject } from "@/src/types";
+import { User, IProject } from "@/src/types/types";
 
 export interface HeaderProps {
   title: string;

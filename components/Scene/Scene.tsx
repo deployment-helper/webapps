@@ -1,4 +1,4 @@
-import { IScene } from "@/src/types";
+import { IScene } from "@/src/types/types";
 
 export const Scene = (props: ISceneProps) => {
   return (

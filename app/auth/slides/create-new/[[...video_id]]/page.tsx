@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SceneEditor, {
   ISceneEditorProps,
 } from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
-import { IScene } from "@/src/types";
+import { IScene } from "@/src/types/types";
+import { useQueryGetVideo } from "@/src/query/video.query";
+import { VideoClient } from "@/src/apis/video-client";
+import { useRouter } from "next/navigation";
 
-export default function Page() {
+export default function Page({ params }: { params: { video_id: string } }) {
   const [currentSceneId, setCurrentSceneId] = useState<string>();
   const [scenes, setScenes] = useState<IScene[]>([]);
   const [sceneEditorProps, setSceneEditorProps] = useState<ISceneEditorProps>({
@@ -61,7 +64,8 @@ export default function Page() {
       },
     ],
   });
-
+  const { data: video } = useQueryGetVideo(params.video_id);
+  const router = useRouter();
   const onSceneChange = (sceneId: string) => {
     setCurrentSceneId(sceneId);
     setSceneEditorProps((prev) => ({ ...prev, currentSceneId: sceneId }));
@@ -91,6 +95,16 @@ export default function Page() {
     }
   };
 
+  useEffect(() => {
+    async function fetchVideo() {
+      const video = await VideoClient.create(params.video_id, "", "", {});
+      await router.push(`/auth/slides/create-new/${video.id}`);
+    }
+
+    if (!params.video_id) {
+      fetchVideo();
+    }
+  }, [params.video_id]);
   return (
     <div className="flex  h-screen w-full">
       <div className="w-1/12 bg-red-200 text-center">Scene</div>

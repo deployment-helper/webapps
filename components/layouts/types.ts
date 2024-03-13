@@ -1,4 +1,4 @@
-import { IInput } from "@/src/types";
+import { IInput } from "@/src/types/types";
 
 export interface ILayoutProps {
   sceneId: string;

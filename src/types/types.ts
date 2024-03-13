@@ -98,6 +98,7 @@ export interface IStore {
   removeS3PublicUrl(key: string): void;
 }
 
+// Video types
 export interface IInput {
   type: "input" | "image";
   name: string;
