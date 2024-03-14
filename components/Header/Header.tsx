@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Avatar,
   Input,
@@ -26,6 +26,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Spinner,
 } from "@fluentui/react-components";
 
 import { HeaderProps } from "./Header.types";
@@ -35,11 +36,50 @@ import {
   ImageAdd24Filled,
   Navigation24Filled,
 } from "@fluentui/react-icons";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import useSlidesStore from "@/src/stores/store";
-import { ServerClient } from "@/src/apis/server-client";
+import { ServerClient } from "@/src/apis/server.client";
 import { TOASTER_ID } from "@/src/constants";
 import UploadImage from "../UploadImage/UploadImage";
+import {
+  useMutationUpdateVideo,
+  useQueryGetVideo,
+} from "@/src/query/video.query";
+import { useMutation } from "@tanstack/react-query";
+
+function CreatePresentationHeader() {
+  const classes = useStyles();
+
+  return (
+    <div className="flex w-full items-center justify-between">
+      <div className="flex items-center gap-4">
+        <Dialog>
+          <DialogTrigger>
+            <ImageAdd24Filled
+              className={mergeClasses(classes.title, "cursor-pointer")}
+            />
+          </DialogTrigger>
+          <DialogSurface>
+            <DialogBody>
+              <DialogTitle>Upload Image</DialogTitle>
+              <DialogContent>
+                <UploadImage
+                  onUploadSuccess={() => console.log("uploaded successfully!")}
+                />
+              </DialogContent>
+              <DialogActions>
+                <DialogTrigger disableButtonEnhancement>
+                  <Button appearance="secondary">Close</Button>
+                </DialogTrigger>
+                <Button appearance="primary">Do Something</Button>
+              </DialogActions>
+            </DialogBody>
+          </DialogSurface>
+        </Dialog>
+      </div>
+    </div>
+  );
+}
 
 export const Header: FC<HeaderProps> = ({
   title,
@@ -51,8 +91,11 @@ export const Header: FC<HeaderProps> = ({
 }) => {
   const classes = useStyles();
   const path = usePathname();
-  const [presentationName, setPresentationName] = useState("UnTitled");
+  const params = useParams();
+  const [presentationName, setPresentationName] = useState("");
   const editorFile = useSlidesStore((state) => state.createSlide?.editorFile);
+  const { isLoading, data } = useQueryGetVideo(params.video_id as string);
+  const { mutate } = useMutationUpdateVideo();
 
   // TODO: A new hook for toast creation at application level can be created
   const { dispatchToast } = useToastController(TOASTER_ID);
@@ -80,41 +123,22 @@ export const Header: FC<HeaderProps> = ({
     });
   };
 
-  if (checkForCreatePath && path === "/auth/slides/create") {
+  function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    mutate({ id: params.video_id as string, name: e.target.value });
+    setPresentationName(e.target.value);
+  }
+
+  if (checkForCreatePath && path.includes("/auth/slides/create")) {
     type = "create";
-  } else if (checkForCreatePath && path === "/auth/slides/create-new") {
+  }
+
+  if (checkForCreatePath && path.includes("/auth/slides/create-new")) {
     type = "create-new";
   }
 
-  function CreatePresentationHeader() {
-    return (
-      <div className="flex w-full items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Dialog>
-            <DialogTrigger>
-              <ImageAdd24Filled
-                className={mergeClasses(classes.title, "cursor-pointer")}
-              />
-            </DialogTrigger>
-            <DialogSurface>
-              <DialogBody>
-                <DialogTitle>Upload Image</DialogTitle>
-                <DialogContent>
-                  <UploadImage />
-                </DialogContent>
-                <DialogActions>
-                  <DialogTrigger disableButtonEnhancement>
-                    <Button appearance="secondary">Close</Button>
-                  </DialogTrigger>
-                  <Button appearance="primary">Do Something</Button>
-                </DialogActions>
-              </DialogBody>
-            </DialogSurface>
-          </Dialog>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    setPresentationName(data?.name || "UnTitled");
+  }, [data]);
 
   return (
     <>
@@ -162,6 +186,7 @@ export const Header: FC<HeaderProps> = ({
             </div>
           </div>
         )}
+        {/*Create video header*/}
         {(type === "create" || type === "create-new") && (
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-4">
@@ -186,13 +211,16 @@ export const Header: FC<HeaderProps> = ({
               </Menu>
               <Subtitle1 className={mergeClasses(classes.title)}>/</Subtitle1>
               <Input
-                placeholder="UnTitled"
+                placeholder="Enter name"
                 size="medium"
                 value={presentationName}
-                onChange={(e) => {
-                  setPresentationName(e.target.value);
-                }}
+                onChange={onNameChange}
               />
+              {isLoading && (
+                <div style={{ position: "relative" }}>
+                  <Spinner size={"small"} />
+                </div>
+              )}
             </div>
             <div>
               {/* TODO: This could be a separate component */}

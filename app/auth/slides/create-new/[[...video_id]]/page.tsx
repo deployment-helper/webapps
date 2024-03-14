@@ -7,7 +7,7 @@ import SceneEditor, {
 import SceneList from "@/components/SceneList/SceneList";
 import { IScene } from "@/src/types/types";
 import { useQueryGetVideo } from "@/src/query/video.query";
-import { VideoClient } from "@/src/apis/video-client";
+import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
 
 export default function Page({ params }: { params: { video_id: string } }) {
@@ -97,7 +97,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
 
   useEffect(() => {
     async function fetchVideo() {
-      const video = await VideoClient.create(params.video_id, "", "", {});
+      const video = await VideoClient.create("New Video");
       await router.push(`/auth/slides/create-new/${video.id}`);
     }
 
