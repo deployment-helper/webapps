@@ -46,6 +46,7 @@ import {
   useQueryGetVideo,
 } from "@/src/query/video.query";
 import { useMutation } from "@tanstack/react-query";
+import { debounce } from "lodash";
 
 function CreatePresentationHeader() {
   const classes = useStyles();
@@ -81,6 +82,8 @@ function CreatePresentationHeader() {
   );
 }
 
+let debouncedMutation: any = undefined;
+
 export const Header: FC<HeaderProps> = ({
   title,
   type,
@@ -94,7 +97,9 @@ export const Header: FC<HeaderProps> = ({
   const params = useParams();
   const [presentationName, setPresentationName] = useState("");
   const editorFile = useSlidesStore((state) => state.createSlide?.editorFile);
-  const { isLoading, data } = useQueryGetVideo(params.video_id as string);
+  const { isLoading, isFetching, data } = useQueryGetVideo(
+    params.video_id as string,
+  );
   const { mutate } = useMutationUpdateVideo();
 
   // TODO: A new hook for toast creation at application level can be created
@@ -124,7 +129,13 @@ export const Header: FC<HeaderProps> = ({
   };
 
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
-    mutate({ id: params.video_id as string, name: e.target.value });
+    if (debouncedMutation) {
+      debouncedMutation.cancel();
+    }
+
+    debouncedMutation = debounce(mutate, 1000);
+
+    debouncedMutation({ id: params.video_id, name: e.target.value });
     setPresentationName(e.target.value);
   }
 
@@ -216,7 +227,7 @@ export const Header: FC<HeaderProps> = ({
                 value={presentationName}
                 onChange={onNameChange}
               />
-              {isLoading && (
+              {(isLoading || isFetching) && (
                 <div style={{ position: "relative" }}>
                   <Spinner size={"small"} />
                 </div>
