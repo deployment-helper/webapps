@@ -26,3 +26,23 @@ export const useMutationCreateVideo = () => {
     mutationFn: (name: string) => VideoClient.create(name),
   });
 };
+
+export const useMutationCreateScene = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { id: string; name: string }) =>
+      VideoClient.createScene(data.id, data.name),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["video", variables.id, "scenes"],
+      });
+    },
+  });
+};
+
+export const useQueryGetScenes = (id: string) => {
+  return useQuery({
+    queryKey: ["video", id, "scenes"],
+    queryFn: () => VideoClient.getScenes(id),
+  });
+};

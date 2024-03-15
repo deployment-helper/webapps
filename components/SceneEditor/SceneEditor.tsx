@@ -60,12 +60,6 @@ const SceneEditor = (props: ISceneEditorProps) => {
   };
 
   useEffect(() => {
-    console.log("User Effect");
-    console.log(compRef.current);
-  }, [compRef.current]);
-
-  useEffect(() => {
-    console.log("currentLayoutId", currentLayoutId);
     const layout = props.layouts.find(
       (layout) => layout.id === currentLayoutId,
     );

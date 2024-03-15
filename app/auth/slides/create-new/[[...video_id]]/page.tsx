@@ -6,7 +6,11 @@ import SceneEditor, {
 } from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
 import { IScene } from "@/src/types/types";
-import { useQueryGetVideo } from "@/src/query/video.query";
+import {
+  useMutationCreateScene,
+  useQueryGetScenes,
+  useQueryGetVideo,
+} from "@/src/query/video.query";
 import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
 
@@ -65,6 +69,8 @@ export default function Page({ params }: { params: { video_id: string } }) {
     ],
   });
   const { data: video } = useQueryGetVideo(params.video_id);
+  const { data: scenesData } = useQueryGetScenes(params.video_id);
+  const { mutate: createScene } = useMutationCreateScene();
   const router = useRouter();
   const onSceneChange = (sceneId: string) => {
     setCurrentSceneId(sceneId);
@@ -81,18 +87,8 @@ export default function Page({ params }: { params: { video_id: string } }) {
     setScenes(newScenes);
   };
 
-  const createScene = () => {
-    const newScene: IScene = {
-      id: `scene${scenes.length + 1}`,
-      name: `Scene ${scenes.length + 1}`,
-      image: "https://via.placeholder.com/150",
-      description: "Add a description here.",
-    };
-    setScenes((prev) => [...prev, newScene]);
-
-    if (!currentSceneId) {
-      setCurrentSceneId(newScene.id);
-    }
+  const onCreateScene = () => {
+    createScene({ id: params.video_id, name: "New Scene" });
   };
 
   useEffect(() => {
@@ -116,10 +112,10 @@ export default function Page({ params }: { params: { video_id: string } }) {
       </div>
       <div className="w-8/12 bg-blue-200">
         <SceneList
-          scenes={scenes}
+          scenes={scenesData || []}
           currentSceneId={currentSceneId}
           onSceneChange={onSceneChange}
-          createScene={createScene}
+          createScene={onCreateScene}
         />
       </div>
     </div>
