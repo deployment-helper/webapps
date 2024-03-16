@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 
-import { Presentation } from "./types/types";
+import { IInput, Presentation } from "./types/types";
+import layouts from "@/src/layouts";
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -44,6 +45,12 @@ export function getApiServer() {
   }
 
   return apiServer;
+}
+
+export function getLayoutContent(currentLayoutId: string) {
+  const layout = layouts.find((layout) => layout.id === currentLayoutId);
+
+  return layout?.content;
 }
 
 const defaultExport = {

@@ -1,25 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-
-import SceneEditor, {
-  ISceneEditorProps,
-} from "@/components/SceneEditor/SceneEditor";
+import { useEffect } from "react";
+import SceneEditor from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
 import {
   useMutationCreateScene,
   useQueryGetScenes,
-  useQueryGetVideo,
 } from "@/src/query/video.query";
 import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
-import { IScene } from "@/src/types/video.types";
-import { IInput } from "@/src/types/types";
+import { useVideoStore } from "@/src/stores/video.store";
 
 export default function Page({ params }: { params: { video_id: string } }) {
-  const [currentSceneId, setCurrentSceneId] = useState<string>();
-  const [scenes, setScenes] = useState<IScene[]>([]);
-
-  const { data: video } = useQueryGetVideo(params.video_id);
+  const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const {
     data: scenesData,
     isFetching: isScenesFetching,
@@ -27,16 +19,6 @@ export default function Page({ params }: { params: { video_id: string } }) {
   } = useQueryGetScenes(params.video_id);
   const { mutate: createScene, isPending } = useMutationCreateScene();
   const router = useRouter();
-
-  const onSceneContentChange = (sceneId: string, image: string) => {
-    const newScenes = scenes.map((scene) => {
-      if (scene.id === sceneId) {
-        return { ...scene, image };
-      }
-      return scene;
-    });
-    setScenes(newScenes);
-  };
 
   const onCreateScene = () => {
     createScene({ id: params.video_id, name: "New Scene" });

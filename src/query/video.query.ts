@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { VideoClient } from "@/src/apis/video.client";
+import layouts from "@/src/layouts";
 
 export const useQueryGetVideo = (id: string) => {
   return useQuery({
@@ -30,8 +31,8 @@ export const useMutationCreateVideo = () => {
 export const useMutationCreateScene = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: { id: string; name: string }) =>
-      VideoClient.createScene(data.id, data.name),
+    mutationFn: (data: { id: string; name: string; layoutId: string }) =>
+      VideoClient.createScene(data.id, data.name, data.layoutId),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["video", variables.id, "scenes"],
@@ -53,12 +54,17 @@ export const useMutationUpdateScene = () => {
     mutationFn: (data: {
       id: string;
       sceneId: string;
+      layoutId: string;
       data: Record<string, any>;
-    }) => VideoClient.updateScene(data.id, data.sceneId, data.data),
+      isInvalidate?: boolean;
+    }) =>
+      VideoClient.updateScene(data.id, data.sceneId, data.layoutId, data.data),
     onSuccess: (data, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["video", variables.id, "scenes"],
-      });
+      if (variables.isInvalidate) {
+        queryClient.invalidateQueries({
+          queryKey: ["video", variables.id, "scenes"],
+        });
+      }
     },
   });
 };

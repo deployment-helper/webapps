@@ -33,7 +33,9 @@ export const Scene = (props: ISceneProps) => {
           : "border-2 border-t-transparent"
       }`}
       id={props.id}
-      onClick={() => props.onClick && props.onClick(props.id)}
+      onClick={() =>
+        props.onClick && props.onClick(props.id, props.layoutId, props.content)
+      }
     >
       <div className={"flex"}>
         <img

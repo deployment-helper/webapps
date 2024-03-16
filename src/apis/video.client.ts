@@ -35,9 +35,14 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async createScene(id: string, name: string): Promise<IScene> {
+  public static async createScene(
+    id: string,
+    name: string,
+    layoutId: string,
+  ): Promise<IScene> {
     const body = {
       name,
+      layoutId,
     };
 
     const resp = await VideoClient.sendToAPiServer(
@@ -57,10 +62,12 @@ export class VideoClient extends ServerClient {
   public static async updateScene(
     id: string,
     sceneId: string,
+    layoutId: string,
     data: Record<string, any>,
   ): Promise<IScene> {
     const body = {
       ...data,
+      layoutId,
     };
 
     const resp = await VideoClient.sendToAPiServer(

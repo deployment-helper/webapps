@@ -4,18 +4,30 @@ import { IScene } from "@/src/types/video.types";
 import { useParams } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
 import { useEffect } from "react";
+import { IInput } from "@/src/types/types";
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
   const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
+  const setSelectedLayoutId = useVideoStore(
+    (state) => state.setSelectedLayoutId,
+  );
+  const setSelectedContent = useVideoStore((state) => state.setSceneContent);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
-  const onSceneChange = (sceneId: string) => {
+  const onSceneChange = (
+    sceneId: string,
+    layoutId: string,
+    content?: Record<string, IInput>,
+  ) => {
     setSelectedSceneId(sceneId);
+    setSelectedLayoutId(layoutId);
+    setSelectedContent(content);
   };
 
   useEffect(() => {
     if (props.scenes.length > 0 && !selectedSceneId) {
       setSelectedSceneId(props.scenes[0].id);
+      setSelectedContent(props.scenes[0].content);
     }
   }, [selectedSceneId, props.scenes, setSelectedSceneId]);
   return (
