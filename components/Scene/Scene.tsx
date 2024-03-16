@@ -1,21 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { debounce } from "lodash";
-import { Input, Textarea } from "@fluentui/react-components";
+import { Textarea } from "@fluentui/react-components";
 import { useMutationUpdateScene } from "@/src/query/video.query";
 import { IScene } from "@/src/types/video.types";
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
-  const [isEditable, setIsEditable] = useState(false);
   const { mutate: updateScene } = useMutationUpdateScene();
-
-  const onClick = (e: React.MouseEvent | React.FocusEvent) => {
-    setIsEditable(true);
-  };
-
-  const onBlur = (e: React.FocusEvent) => {
-    setIsEditable(false);
-  };
 
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -44,28 +35,14 @@ export const Scene = (props: ISceneProps) => {
       id={props.id}
       onClick={() => props.onClick && props.onClick(props.id)}
     >
-      <h1 onClick={onClick}>
-        {isEditable ? (
-          <Input
-            defaultValue={props.name}
-            onClick={onClick}
-            onBlur={onBlur}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              onInputChange(e, "name")
-            }
-          />
-        ) : (
-          props.name
-        )}
-      </h1>
       <div className={"flex"}>
         <img
           src={props.image}
           alt={props.name}
-          style={{ width: "300px", height: "170px", border: "1px solid" }}
+          style={{ width: "320px", border: "1px solid" }}
         />
         <Textarea
-          style={{ width: "300px", height: "170px" }}
+          style={{ width: "600px", height: "190px" }}
           defaultValue={props.description}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             onInputChange(e, "description")
