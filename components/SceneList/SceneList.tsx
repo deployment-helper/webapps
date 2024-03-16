@@ -2,10 +2,22 @@ import Scene from "@/components/Scene/Scene";
 import { Spinner } from "@fluentui/react-components";
 import { IScene } from "@/src/types/video.types";
 import { useParams } from "next/navigation";
+import { useVideoStore } from "@/src/stores/video.store";
+import { useEffect } from "react";
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
+  const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
+  const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
+  const onSceneChange = (sceneId: string) => {
+    setSelectedSceneId(sceneId);
+  };
 
+  useEffect(() => {
+    if (props.scenes.length > 0 && !selectedSceneId) {
+      setSelectedSceneId(props.scenes[0].id);
+    }
+  }, [selectedSceneId, props.scenes, setSelectedSceneId]);
   return (
     <div className="flex- flex flex-col items-center">
       <div className="flex">
@@ -18,8 +30,8 @@ export function SceneList(props: ISceneListProps) {
             {...scene}
             videoId={params.video_id as string}
             key={scene.id}
-            onClick={props.onSceneChange}
-            isSelected={scene.id === props.currentSceneId}
+            onClick={onSceneChange}
+            isSelected={scene.id === selectedSceneId}
           />
         ))}
       </div>
@@ -34,11 +46,9 @@ export function SceneList(props: ISceneListProps) {
 }
 
 export interface ISceneListProps {
-  currentSceneId?: string;
   createScene: () => void;
   isCreating?: boolean;
   isLoading?: boolean;
   scenes: IScene[];
-  onSceneChange: (sceneId: string) => void;
 }
 export default SceneList;

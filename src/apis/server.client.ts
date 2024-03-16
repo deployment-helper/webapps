@@ -178,4 +178,36 @@ export class ServerClient {
 
     return resp;
   }
+
+  public static async uploadCanvasImageToS3(
+    apiServer: string,
+    key: string,
+    canvasDataURL: string,
+    publicUrl: boolean = false,
+  ) {
+    const resp = await ServerClient.generateS3PutSignedUrl(
+      apiServer,
+      key,
+      publicUrl,
+    );
+
+    // Extract base64 data from the canvas data URL
+    const base64Data = canvasDataURL.replace(/^data:image\/\w+;base64,/, "");
+    const buffer = Buffer.from(base64Data, "base64");
+
+    const s3Resp = await fetch(resp.url, {
+      method: "PUT",
+      body: buffer,
+      headers: {
+        "Content-Type": "image/png", // Adjust content type based on your image type
+        "Content-Encoding": "base64", // Specify content encoding as base64
+      },
+    });
+
+    if (s3Resp.status !== 200) {
+      throw new Error("File upload error");
+    }
+
+    return resp;
+  }
 }

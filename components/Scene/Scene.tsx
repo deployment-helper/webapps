@@ -37,7 +37,9 @@ export const Scene = (props: ISceneProps) => {
   return (
     <div
       className={`flex cursor-pointer flex-col ${
-        props.isSelected ? "border-2 border-blue-500" : ""
+        props.isSelected
+          ? "border-2 border-blue-500"
+          : "border-2 border-t-transparent"
       }`}
       id={props.id}
       onClick={() => props.onClick && props.onClick(props.id)}
@@ -60,7 +62,7 @@ export const Scene = (props: ISceneProps) => {
         <img
           src={props.image}
           alt={props.name}
-          style={{ minWidth: "300px", minHeight: "170px", border: "1px solid" }}
+          style={{ width: "300px", height: "170px", border: "1px solid" }}
         />
         <Textarea
           style={{ width: "300px", height: "170px" }}

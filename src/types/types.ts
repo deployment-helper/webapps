@@ -109,7 +109,7 @@ export interface ILayout {
   image: string;
   id: string;
   componentName: string;
-  content: Record<string, IInput>;
+  contentTemplate: Record<string, IInput>;
 }
 
 interface exportDefault {

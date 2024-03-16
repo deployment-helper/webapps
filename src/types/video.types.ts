@@ -1,5 +1,12 @@
 import { IInput } from "@/src/types/types";
 
+export interface IVideoStore {
+  selectedLayoutId: string;
+  selectedSceneId: string;
+  setSelectedLayoutId: (layoutId: string) => void;
+  setSelectedSceneId: (sceneId: string) => void;
+}
+
 export interface IVideo {
   id: string;
   name: string;
