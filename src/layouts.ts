@@ -1,4 +1,11 @@
-const layouts = [
+import { IInput } from "@/src/types/types";
+
+const layouts: Array<{
+  id: string;
+  componentName: string;
+  image: string;
+  content: Record<string, IInput>;
+}> = [
   {
     id: "layout1",
     componentName: "TitleSubtitle",
