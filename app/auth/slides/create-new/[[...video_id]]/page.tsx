@@ -5,7 +5,6 @@ import SceneEditor, {
   ISceneEditorProps,
 } from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
-import { IScene } from "@/src/types/types";
 import {
   useMutationCreateScene,
   useQueryGetScenes,
@@ -13,6 +12,7 @@ import {
 } from "@/src/query/video.query";
 import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
+import { IScene } from "@/src/types/video.types";
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const [currentSceneId, setCurrentSceneId] = useState<string>();
@@ -69,8 +69,12 @@ export default function Page({ params }: { params: { video_id: string } }) {
     ],
   });
   const { data: video } = useQueryGetVideo(params.video_id);
-  const { data: scenesData } = useQueryGetScenes(params.video_id);
-  const { mutate: createScene } = useMutationCreateScene();
+  const {
+    data: scenesData,
+    isFetching: isScenesFetching,
+    isLoading: isScenesLoading,
+  } = useQueryGetScenes(params.video_id);
+  const { mutate: createScene, isPending } = useMutationCreateScene();
   const router = useRouter();
   const onSceneChange = (sceneId: string) => {
     setCurrentSceneId(sceneId);
@@ -116,6 +120,8 @@ export default function Page({ params }: { params: { video_id: string } }) {
           currentSceneId={currentSceneId}
           onSceneChange={onSceneChange}
           createScene={onCreateScene}
+          isCreating={isPending}
+          isLoading={isScenesFetching || isScenesLoading}
         />
       </div>
     </div>

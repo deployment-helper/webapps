@@ -46,3 +46,19 @@ export const useQueryGetScenes = (id: string) => {
     queryFn: () => VideoClient.getScenes(id),
   });
 };
+
+export const useMutationUpdateScene = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: {
+      id: string;
+      sceneId: string;
+      data: Record<string, any>;
+    }) => VideoClient.updateScene(data.id, data.sceneId, data.data),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["video", variables.id, "scenes"],
+      });
+    },
+  });
+};

@@ -112,15 +112,6 @@ export interface ILayout {
   content: Record<string, IInput>;
 }
 
-export interface IScene {
-  isSelected?: boolean;
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  content?: Record<string, IInput>;
-  onClick?: (sceneId: string) => void;
-}
 interface exportDefault {
   Presentation: Presentation;
   Slide: ISlide;
