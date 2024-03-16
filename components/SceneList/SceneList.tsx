@@ -19,7 +19,7 @@ export function SceneList(props: ISceneListProps) {
     }
   }, [selectedSceneId, props.scenes, setSelectedSceneId]);
   return (
-    <div className="flex- flex flex-col items-center">
+    <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10">
       <div className="flex">
         <h1 className="text-4xl">Scenes List</h1>{" "}
         {props.isLoading && <Spinner size="large" />}
