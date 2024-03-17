@@ -36,4 +36,6 @@ export interface ILayoutBodyProps {
   sceneId: string;
 }
 
+LayoutBody.displayName = "LayoutBody";
+
 export default LayoutBody;
