@@ -1,6 +1,6 @@
 import { ChangeEvent, useRef, useState } from "react";
 import { debounce } from "lodash";
-import { Textarea } from "@fluentui/react-components";
+import { Spinner, Textarea } from "@fluentui/react-components";
 import {
   useMutationPostTextToSpeech,
   useMutationUpdateScene,
@@ -11,7 +11,7 @@ import { PlayCircleHint24Regular } from "@fluentui/react-icons";
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
   const { mutate: updateScene } = useMutationUpdateScene();
-  const { mutate: postTextToSpeech } = useMutationPostTextToSpeech();
+  const { mutate: postTextToSpeech, isPending } = useMutationPostTextToSpeech();
   const descRef = useRef<HTMLTextAreaElement>(null);
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -52,6 +52,7 @@ export const Scene = (props: ISceneProps) => {
     >
       <div className={"flex"}>
         <img src={props.image} alt={props.name} style={{ width: "320px" }} />
+
         <Textarea
           ref={descRef}
           style={{ width: "600px", height: "190px" }}
@@ -65,10 +66,16 @@ export const Scene = (props: ISceneProps) => {
         </Textarea>
         <div className={"relative flex w-10 items-center"}>
           {props.isSelected ? (
-            <PlayCircleHint24Regular
-              onClick={playDescription}
-              className={"absolute right-0"}
-            />
+            isPending ? (
+              <div className={"absolute right-0"}>
+                <Spinner size={"tiny"} />
+              </div>
+            ) : (
+              <PlayCircleHint24Regular
+                onClick={playDescription}
+                className={"absolute right-0"}
+              />
+            )
           ) : null}
         </div>
       </div>
