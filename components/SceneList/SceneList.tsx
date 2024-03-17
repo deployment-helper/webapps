@@ -8,10 +8,6 @@ import { IInput } from "@/src/types/types";
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
-  const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
-  const setSelectedLayoutId = useVideoStore(
-    (state) => state.setSelectedLayoutId,
-  );
   const setSelectedContent = useVideoStore((state) => state.setSceneContent);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const onSceneChange = (
@@ -19,17 +15,15 @@ export function SceneList(props: ISceneListProps) {
     layoutId: string,
     content?: Record<string, IInput>,
   ) => {
-    setSelectedSceneId(sceneId);
-    setSelectedLayoutId(layoutId);
-    setSelectedContent(content);
+    setSelectedContent(layoutId, sceneId, content);
   };
 
   useEffect(() => {
     if (props.scenes.length > 0 && !selectedSceneId) {
-      setSelectedSceneId(props.scenes[0].id);
-      setSelectedContent(props.scenes[0].content);
+      const scene = props.scenes[0];
+      setSelectedContent(scene.layoutId, scene.id, scene.content);
     }
-  }, [selectedSceneId, props.scenes, setSelectedSceneId]);
+  }, [selectedSceneId, props.scenes, setSelectedContent]);
   return (
     <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10">
       <div className="flex">

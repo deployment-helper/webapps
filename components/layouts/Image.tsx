@@ -3,14 +3,14 @@ import { ILayoutProps } from "@/components/layouts/types";
 import LayoutBody from "@/components/layouts/LayoutBody";
 
 export const Image = forwardRef<HTMLImageElement, ILayoutProps>(
-  (props: ILayoutProps, ref) => {
+  ({ content, sceneId, isNone }: ILayoutProps, ref) => {
     return (
-      <LayoutBody isNone={props.isNone} ref={ref} sceneId={props.sceneId}>
+      <LayoutBody isNone={isNone} ref={ref} sceneId={sceneId}>
         <div className="flex">
           <img
             crossOrigin={"anonymous"}
-            src={props.content.image.value}
-            alt={props.content.image.name}
+            src={content?.image?.value}
+            alt={content?.image?.name}
             className={"max-h-full"}
           />
         </div>
@@ -18,5 +18,7 @@ export const Image = forwardRef<HTMLImageElement, ILayoutProps>(
     );
   },
 );
+
+Image.displayName = "Image";
 
 export default Image;

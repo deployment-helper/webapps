@@ -9,7 +9,6 @@ import Image from "@/components/Image/Image";
 import html2canvas from "html2canvas";
 import layouts from "@/src/layouts";
 import { useVideoStore } from "@/src/stores/video.store";
-import { IInput } from "@/src/types/types";
 import { ServerClient } from "@/src/apis/server.client";
 import {
   getApiServer,
@@ -24,22 +23,16 @@ let debounceContent: any = undefined;
 let debounceImage: any = undefined;
 const SceneEditor = (props: ISceneEditorProps) => {
   const [activeTab, setActiveTab] = useState("1");
-  const currentLayoutId = useVideoStore((state) => state.selectedLayoutId);
-  const setCurrentLayoutId = useVideoStore(
-    (state) => state.setSelectedLayoutId,
-  );
+  const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const sceneContent = useVideoStore((state) => state.sceneContent);
+  const setSceneContent = useVideoStore((state) => state.setSceneContent);
   const params = useParams();
 
   // React component to render the selected layout
   const [LayoutReactComponent, setLayoutReactComponent] = useState<
     React.FunctionComponent<any> | undefined
   >(undefined);
-
-  const [contentTemplate, setContentTemplate] = useState<
-    Record<string, IInput>
-  >({});
 
   const compRef = useRef<HTMLDivElement | null>(null);
 
@@ -50,8 +43,7 @@ const SceneEditor = (props: ISceneEditorProps) => {
     setActiveTab(data.value as string);
   };
 
-  // Update scene content
-
+  // Update scene content on server
   const updateSceneContent = () => {
     if (debounceContent) {
       debounceContent.cancel();
@@ -60,27 +52,26 @@ const SceneEditor = (props: ISceneEditorProps) => {
     debounceContent({
       id: params.video_id as string,
       sceneId: selectedSceneId,
-      data: { content: contentTemplate },
+      data: { content: sceneContent },
       invalidate: false,
     });
   };
 
   // Select layout
-  const onLayoutSelect = (layoutId: string) => {
-    setCurrentLayoutId(layoutId);
-    if (layoutId !== currentLayoutId) {
+  const onLayoutChange = (layoutId: string) => {
+    if (layoutId !== selectedLayoutId) {
       const layout = layouts.find((layout) => layout.id === layoutId);
       const newContentTemplate = JSON.parse(JSON.stringify(layout?.content));
-      setContentTemplate(newContentTemplate);
+      setSceneContent(layoutId, selectedSceneId, newContentTemplate);
     }
   };
 
   // When image is uploaded to S3 update image URL to content template
   const onUploadSuccess = (url: string, name: string) => {
-    setContentTemplate((prev) => ({
-      ...prev,
-      [name]: { ...prev[name], value: url },
-    }));
+    setSceneContent(selectedLayoutId, selectedSceneId, {
+      ...sceneContent,
+      [name]: { ...sceneContent[name], value: url },
+    });
     createImage();
     updateSceneContent();
   };
@@ -109,7 +100,7 @@ const SceneEditor = (props: ISceneEditorProps) => {
             updateScene({
               id: params.video_id as string,
               sceneId: selectedSceneId,
-              layoutId: currentLayoutId,
+              layoutId: selectedLayoutId,
               data: {
                 image: res.publicUrl,
               },
@@ -124,11 +115,12 @@ const SceneEditor = (props: ISceneEditorProps) => {
 
   // Listener for content data change and update the content in state
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContentTemplate((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: { ...prev[e.target.name], value: e.target.value },
-      };
+    setSceneContent(selectedLayoutId, selectedSceneId, {
+      ...sceneContent,
+      [e.target.name]: {
+        ...sceneContent[e.target.name],
+        value: e.target.value,
+      },
     });
     createImage();
     updateSceneContent();
@@ -136,31 +128,12 @@ const SceneEditor = (props: ISceneEditorProps) => {
 
   // Dynamically import layout component for selected layout
   useEffect(() => {
-    const layout = layouts.find((layout) => layout.id === currentLayoutId);
+    const layout = layouts.find((layout) => layout.id === selectedLayoutId);
     if (!layout) return;
     const LayoutReactComponent =
       require(`@/components/layouts/${layout?.componentName}`).default;
     setLayoutReactComponent(LayoutReactComponent);
-  }, [currentLayoutId]);
-
-  // Set local content template
-  useEffect(() => {
-    if (
-      currentLayoutId &&
-      selectedSceneId &&
-      sceneContent &&
-      Object.keys(sceneContent).length > 0
-    ) {
-      setContentTemplate(sceneContent);
-    } else if (currentLayoutId) {
-      const newContentTemplate = getLayoutContent(currentLayoutId);
-      newContentTemplate && setContentTemplate(newContentTemplate);
-    } else {
-      setCurrentLayoutId(layouts[0].id);
-      const newContentTemplate = JSON.parse(JSON.stringify(layouts[0].content));
-      setContentTemplate(newContentTemplate);
-    }
-  }, [currentLayoutId, layouts]);
+  }, [selectedLayoutId]);
 
   return (
     <div className={"p-4"}>
@@ -183,9 +156,10 @@ const SceneEditor = (props: ISceneEditorProps) => {
               <img
                 style={{ width: "200px" }}
                 src={
-                  layouts.find((layout) => layout.id === currentLayoutId)?.image
+                  layouts.find((layout) => layout.id === selectedLayoutId)
+                    ?.image
                 }
-                alt={currentLayoutId}
+                alt={selectedLayoutId}
               />
             </div>
 
@@ -197,13 +171,13 @@ const SceneEditor = (props: ISceneEditorProps) => {
                   <img
                     style={{ width: "200px", cursor: "pointer" }}
                     className={`p-0.5 ${
-                      layout.id === currentLayoutId
+                      layout.id === selectedLayoutId
                         ? "border-2 border-blue-500"
                         : ""
                     }`}
                     src={layout.image}
                     alt={layout.id}
-                    onClick={() => onLayoutSelect(layout.id)}
+                    onClick={() => onLayoutChange(layout.id)}
                   />
                 </div>
               ))}
@@ -216,20 +190,20 @@ const SceneEditor = (props: ISceneEditorProps) => {
           <>
             <div>
               <img id={"canvas"} src={""} />
-              {contentTemplate && LayoutReactComponent && (
+              {sceneContent && LayoutReactComponent && (
                 <LayoutReactComponent
                   isNone={true}
                   ref={compRef}
                   sceneId={selectedSceneId}
-                  content={contentTemplate}
+                  content={sceneContent}
                 />
               )}
             </div>
 
             <hr className={"my-4"} />
             <div className={"flex flex-col"}>
-              {contentTemplate &&
-                Object.entries(contentTemplate).map(([key, value]) => (
+              {sceneContent &&
+                Object.entries(sceneContent).map(([key, value]) => (
                   <div key={key} className={"flex flex-col"}>
                     <label className={"capitalize"} htmlFor={key}>
                       {key}

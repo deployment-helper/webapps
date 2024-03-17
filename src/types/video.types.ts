@@ -5,9 +5,11 @@ export interface IVideoStore {
   selectedLayoutId: string;
   selectedSceneId: string;
   sceneContent: Record<string, IInput>;
-  setSelectedLayoutId: (layoutId: string) => void;
-  setSelectedSceneId: (sceneId: string) => void;
-  setSceneContent: (content?: Record<string, IInput>) => void;
+  setSceneContent: (
+    layoutId: string,
+    sceneId: string,
+    content?: Record<string, IInput>,
+  ) => void;
 }
 
 export interface IVideo {
