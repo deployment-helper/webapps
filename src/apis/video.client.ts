@@ -80,4 +80,20 @@ export class VideoClient extends ServerClient {
 
     return resp.json();
   }
+
+  public static async textToSpeech(
+    text: string,
+  ): Promise<{ type: string; data: string }> {
+    const body = {
+      text,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      `ai/synthesis`,
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
 }

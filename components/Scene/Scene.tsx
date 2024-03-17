@@ -1,13 +1,18 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { debounce } from "lodash";
 import { Textarea } from "@fluentui/react-components";
-import { useMutationUpdateScene } from "@/src/query/video.query";
+import {
+  useMutationPostTextToSpeech,
+  useMutationUpdateScene,
+} from "@/src/query/video.query";
 import { IScene } from "@/src/types/video.types";
+import { PlayCircleHint24Regular } from "@fluentui/react-icons";
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
   const { mutate: updateScene } = useMutationUpdateScene();
-
+  const { mutate: postTextToSpeech } = useMutationPostTextToSpeech();
+  const descRef = useRef<HTMLTextAreaElement>(null);
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     name: string,
@@ -25,9 +30,17 @@ export const Scene = (props: ISceneProps) => {
     });
   };
 
+  const playDescription = () => {
+    const text = descRef.current?.value;
+    postTextToSpeech({
+      sceneId: props.id,
+      text: text || "",
+    });
+  };
+
   return (
     <div
-      className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 ${
+      className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 pr-0 ${
         props.isSelected
           ? "border-2 border-blue-200"
           : "border-2 border-blue-50 hover:border-blue-200"
@@ -40,6 +53,7 @@ export const Scene = (props: ISceneProps) => {
       <div className={"flex"}>
         <img src={props.image} alt={props.name} style={{ width: "320px" }} />
         <Textarea
+          ref={descRef}
           style={{ width: "600px", height: "190px" }}
           className={"border-none"}
           defaultValue={props.description}
@@ -49,6 +63,14 @@ export const Scene = (props: ISceneProps) => {
         >
           {props.description}
         </Textarea>
+        <div className={"relative flex w-10 items-center"}>
+          {props.isSelected ? (
+            <PlayCircleHint24Regular
+              onClick={playDescription}
+              className={"absolute right-0"}
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );
