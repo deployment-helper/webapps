@@ -17,11 +17,18 @@ export default function Page({ params }: { params: { video_id: string } }) {
     isFetching: isScenesFetching,
     isLoading: isScenesLoading,
   } = useQueryGetScenes(params.video_id);
+  // Routes
   const { mutate: createScene, isPending } = useMutationCreateScene();
   const router = useRouter();
 
+  // Store values
+  const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
   const onCreateScene = () => {
-    createScene({ id: params.video_id, name: "New Scene" });
+    createScene({
+      id: params.video_id,
+      name: "New Scene",
+      layoutId: selectedLayout,
+    });
   };
 
   useEffect(() => {
@@ -40,7 +47,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
       <div className="w-1/4 bg-green-200">
         <SceneEditor />
       </div>
-      <div className="w-8/12 bg-blue-200">
+      <div className="w-8/12 bg-white">
         <SceneList
           scenes={scenesData || []}
           createScene={onCreateScene}

@@ -10,11 +10,7 @@ import html2canvas from "html2canvas";
 import layouts from "@/src/layouts";
 import { useVideoStore } from "@/src/stores/video.store";
 import { ServerClient } from "@/src/apis/server.client";
-import {
-  getApiServer,
-  getLayoutContent,
-  s3RandomPublicKey,
-} from "@/src/helpers";
+import { getApiServer, s3RandomPublicKey } from "@/src/helpers";
 import { useMutationUpdateScene } from "@/src/query/video.query";
 import { useParams } from "next/navigation";
 import { debounce } from "lodash";

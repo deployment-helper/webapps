@@ -27,10 +27,10 @@ export const Scene = (props: ISceneProps) => {
 
   return (
     <div
-      className={`flex cursor-pointer flex-col ${
+      className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 ${
         props.isSelected
-          ? "border-2 border-blue-500"
-          : "border-2 border-t-transparent"
+          ? "border-2 border-blue-200"
+          : "border-2 border-blue-50 hover:border-blue-200"
       }`}
       id={props.id}
       onClick={() =>
@@ -38,13 +38,10 @@ export const Scene = (props: ISceneProps) => {
       }
     >
       <div className={"flex"}>
-        <img
-          src={props.image}
-          alt={props.name}
-          style={{ width: "320px", border: "1px solid" }}
-        />
+        <img src={props.image} alt={props.name} style={{ width: "320px" }} />
         <Textarea
           style={{ width: "600px", height: "190px" }}
+          className={"border-none"}
           defaultValue={props.description}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             onInputChange(e, "description")
