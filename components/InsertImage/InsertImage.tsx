@@ -2,12 +2,16 @@ import UploadImage, {
   IUploadImageProps,
 } from "@/components/UploadImage/UploadImage";
 
-export function InsertImage(props: IInsertImageProps) {
-  // TODO: This component should be improved to allow other public image sources
-
+export function InsertImage({
+  onUploadSuccess,
+  onStateChange,
+}: IInsertImageProps) {
   return (
     <div>
-      <UploadImage onUploadSuccess={props.onUploadSuccess} />
+      <UploadImage
+        onUploadSuccess={onUploadSuccess}
+        onStateChange={onStateChange}
+      />
     </div>
   );
 }

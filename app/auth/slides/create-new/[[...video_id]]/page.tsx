@@ -9,6 +9,7 @@ import {
 import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
+import { getLayoutContent } from "@/src/helpers";
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -24,10 +25,14 @@ export default function Page({ params }: { params: { video_id: string } }) {
   // Store values
   const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
   const onCreateScene = () => {
+    const content = getLayoutContent(selectedLayoutId);
     createScene({
       id: params.video_id,
       name: "New Scene",
       layoutId: selectedLayout,
+      data: {
+        content,
+      },
     });
   };
 

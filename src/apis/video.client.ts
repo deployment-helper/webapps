@@ -39,10 +39,12 @@ export class VideoClient extends ServerClient {
     id: string,
     name: string,
     layoutId: string,
+    data: Record<string, any>,
   ): Promise<IScene> {
     const body = {
       name,
       layoutId,
+      ...data,
     };
 
     const resp = await VideoClient.sendToAPiServer(

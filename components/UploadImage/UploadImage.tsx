@@ -1,10 +1,12 @@
 import useSlidesStore from "@/src/stores/store";
-import { s3RandomPublicKey } from "@/src/helpers";
+import { getApiServer, s3RandomPublicKey } from "@/src/helpers";
+import { ServerClient } from "@/src/apis/server.client";
+import { UploadStatus } from "@/src/types/common.types";
 
-export function UploadImage(props: IUploadImageProps) {
-  const { uploadS3Object } = useSlidesStore();
-  const s3PublicUrls = useSlidesStore((store) => store.s3PublicUrls);
-
+export function UploadImage({
+  onUploadSuccess,
+  onStateChange,
+}: IUploadImageProps) {
   let key = "";
   const uploadImage = (e: any) => {
     const file = e.target.files[0];
@@ -12,10 +14,17 @@ export function UploadImage(props: IUploadImageProps) {
     // TODO: Add a loading spinner
     // TODO: Add error handling
     // TODO: Close modal on success
-    key = s3RandomPublicKey();
-    uploadS3Object(file, key, true).then(() => {
-      console.log(s3PublicUrls?.[key]);
-      props.onUploadSuccess(s3PublicUrls?.[key]);
+    onStateChange && onStateChange("uploading");
+    const apiServer = getApiServer();
+    ServerClient.uploadS3Object(
+      apiServer,
+      s3RandomPublicKey(),
+      file,
+      true,
+    ).then((resp) => {
+      console.log(resp);
+      onStateChange && onStateChange("uploaded");
+      onUploadSuccess(resp.publicUrl);
     });
   };
 
@@ -28,5 +37,6 @@ export function UploadImage(props: IUploadImageProps) {
 
 export interface IUploadImageProps {
   onUploadSuccess: (url?: string) => void;
+  onStateChange?: (status: UploadStatus) => void;
 }
 export default UploadImage;

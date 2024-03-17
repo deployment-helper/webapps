@@ -14,6 +14,7 @@ import { getApiServer, s3RandomPublicKey } from "@/src/helpers";
 import { useMutationUpdateScene } from "@/src/query/video.query";
 import { useParams } from "next/navigation";
 import { debounce } from "lodash";
+import { IInput } from "@/src/types/types";
 
 let debounceContent: any = undefined;
 let debounceImage: any = undefined;
@@ -40,15 +41,16 @@ const SceneEditor = (props: ISceneEditorProps) => {
   };
 
   // Update scene content on server
-  const updateSceneContent = () => {
+  const updateSceneContent = (content?: Record<string, IInput>) => {
     if (debounceContent) {
       debounceContent.cancel();
     }
     debounceContent = debounce(updateScene, 1000);
+    console.log("sceneContent", sceneContent);
     debounceContent({
       id: params.video_id as string,
       sceneId: selectedSceneId,
-      data: { content: sceneContent },
+      data: { content: content || sceneContent },
       invalidate: false,
     });
   };
@@ -64,12 +66,23 @@ const SceneEditor = (props: ISceneEditorProps) => {
 
   // When image is uploaded to S3 update image URL to content template
   const onUploadSuccess = (url: string, name: string) => {
+    console.log("url", url);
     setSceneContent(selectedLayoutId, selectedSceneId, {
       ...sceneContent,
-      [name]: { ...sceneContent[name], value: url },
+      [name]: {
+        ...sceneContent[name],
+        value: url,
+      },
     });
+    console.log("sceneContent", sceneContent);
     createImage();
-    updateSceneContent();
+    updateSceneContent({
+      ...sceneContent,
+      [name]: {
+        ...sceneContent[name],
+        value: url,
+      },
+    });
   };
 
   // Create image with selected layout and content template with canvas APIs and upload to S3
