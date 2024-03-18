@@ -9,6 +9,7 @@ import layouts from "@/src/layouts";
 import { IInput } from "@/src/types/types";
 import { int } from "utrie/dist/types/Trie";
 
+const audio = new Audio();
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
   return useQuery({
@@ -95,8 +96,12 @@ export const useMutationPostTextToSpeech = () => {
       return resp;
     },
     onSuccess: (data, variables) => {
+      // stop for or delete previous audio
+      audio.pause();
+      audio.src = "";
+
       // play data.data this is base64 audio
-      const audio = new Audio(`data:audio/mp3;base64,${data.data}`);
+      audio.src = `data:audio/mp3;base64,${data.data}`;
       audio.play();
     },
   });
