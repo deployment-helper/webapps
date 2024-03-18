@@ -8,8 +8,8 @@ import { VideoClient } from "@/src/apis/video.client";
 import layouts from "@/src/layouts";
 import { IInput } from "@/src/types/types";
 import { int } from "utrie/dist/types/Trie";
+import { useCallback, useState } from "react";
 
-const audio = new Audio();
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
   return useQuery({
@@ -31,6 +31,13 @@ export const useMutationUpdateVideo = () => {
   });
 };
 
+// get List of video query
+export const useQueryGetVideos = () => {
+  return useQuery({
+    queryKey: ["videos"],
+    queryFn: () => VideoClient.getVideos(),
+  });
+};
 export const useMutationCreateVideo = () => {
   return useMutation({
     mutationFn: (name: string) => VideoClient.create(name),
@@ -86,6 +93,7 @@ export const useMutationUpdateScene = () => {
 
 // Text to speech queries
 export const useMutationPostTextToSpeech = () => {
+  const [audio] = useState<HTMLAudioElement>(new Audio());
   return useMutation<
     { type: string; data: string },
     DefaultError,

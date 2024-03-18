@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent, useRef, useState } from "react";
 import { debounce } from "lodash";
 import { Spinner, Textarea } from "@fluentui/react-components";

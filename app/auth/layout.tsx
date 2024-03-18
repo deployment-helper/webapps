@@ -31,7 +31,7 @@ export const AuthLayout: FC<{
     <>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <FluentProvider theme={teamsLightTheme}>{children}</FluentProvider>;
+        <FluentProvider theme={teamsLightTheme}>{children}</FluentProvider>
       </QueryClientProvider>
     </>
   );
