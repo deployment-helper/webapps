@@ -13,6 +13,14 @@ export const Scene = (props: ISceneProps) => {
   const { mutate: updateScene } = useMutationUpdateScene();
   const { mutate: postTextToSpeech, isPending } = useMutationPostTextToSpeech();
   const descRef = useRef<HTMLTextAreaElement>(null);
+  const [isHover, setIsHover] = useState(false);
+
+  const onHover = () => {
+    setIsHover(true);
+  };
+  const onLeave = () => {
+    setIsHover(false);
+  };
   const onInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     name: string,
@@ -40,6 +48,8 @@ export const Scene = (props: ISceneProps) => {
 
   return (
     <div
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
       className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 pr-0 ${
         props.isSelected
           ? "border-2 border-blue-200"
@@ -65,7 +75,7 @@ export const Scene = (props: ISceneProps) => {
           {props.description}
         </Textarea>
         <div className={"relative flex w-10 items-center"}>
-          {props.isSelected ? (
+          {props.isSelected || isHover ? (
             isPending ? (
               <div className={"absolute right-0"}>
                 <Spinner size={"tiny"} />
