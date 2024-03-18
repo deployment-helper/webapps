@@ -14,12 +14,16 @@ import {
   TableColumnDefinition,
   Title1,
   createTableColumn,
+  Spinner,
 } from "@fluentui/react-components";
 
 import { useQueryGetVideos } from "@/src/query/video.query";
 import { IVideo } from "@/src/types/video.types";
+import { useQueryClient } from "@tanstack/react-query";
 const Videos: FC = () => {
-  const { data: videos } = useQueryGetVideos();
+  const { data: videos, isFetching, isLoading } = useQueryGetVideos();
+  const client = useQueryClient();
+
   const columns: TableColumnDefinition<IVideo>[] = [
     createTableColumn<IVideo>({
       columnId: "name",
@@ -35,17 +39,31 @@ const Videos: FC = () => {
       },
     }),
   ];
+
   return (
     <>
       <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
         <div className="flex justify-between pb-6 pt-6">
-          <Title1>Videos</Title1>
+          <div className={"flex items-center"}>
+            <Title1>Videos</Title1>{" "}
+            {(isFetching || isLoading) && (
+              <Spinner size={"tiny"} className={"pl-1"} />
+            )}
+          </div>
+
           <div className="flex gap-2">
-            <Button appearance="outline" onClick={() => {}}>
+            <Button
+              appearance="outline"
+              onClick={() => {
+                client.invalidateQueries({
+                  queryKey: ["videos"],
+                });
+              }}
+            >
               Refresh
             </Button>
             <Button appearance="primary">
-              <Link href={"/auth/slides/create"}>Create</Link>
+              <Link href={"/auth/slides/create-new"}>Create</Link>
             </Button>
           </div>
         </div>
