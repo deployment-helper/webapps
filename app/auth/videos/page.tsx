@@ -38,6 +38,19 @@ const Videos: FC = () => {
         );
       },
     }),
+    createTableColumn<IVideo>({
+      columnId: "createdAt",
+      renderHeaderCell: () => {
+        return <Subtitle2>Preview</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return (
+          <Link href={`/auth/videos/${item.id}`}>
+            <Body1Strong>Preview</Body1Strong>
+          </Link>
+        );
+      },
+    }),
   ];
 
   return (

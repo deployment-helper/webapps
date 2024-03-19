@@ -15,6 +15,9 @@ export interface IVideoStore {
 export interface IVideo {
   id: string;
   name: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
 }
 
 export interface IScene {
