@@ -6,6 +6,7 @@ import {
   useMutationCreateScene,
   useMutationPostTextToSpeech,
   useQueryGetScenes,
+  useQueryGetVideo,
 } from "@/src/query/video.query";
 import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,7 @@ import { useVideoStore } from "@/src/stores/video.store";
 import { getLayoutContent } from "@/src/helpers";
 import { Button, Spinner } from "@fluentui/react-components";
 import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
+import { ELanguage } from "@/src/types/video.types";
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -21,13 +23,14 @@ export default function Page({ params }: { params: { video_id: string } }) {
     isFetching: isScenesFetching,
     isLoading: isScenesLoading,
   } = useQueryGetScenes(params.video_id);
-  // Routes
+  const { data: videoData } = useQueryGetVideo(params.video_id);
   const { mutate: createScene, isPending } = useMutationCreateScene();
   const {
     isPending: isAudioPending,
     data: audios,
     mutate,
   } = useMutationPostTextToSpeech();
+  // Routes
   const router = useRouter();
 
   // Store values
@@ -47,7 +50,10 @@ export default function Page({ params }: { params: { video_id: string } }) {
   const playAll = () => {
     if (!scenesData) return;
     const texts = scenesData?.map((scene) => scene.description);
-    mutate({ text: texts });
+    mutate({
+      text: texts,
+      audioLanguage: videoData?.audioLanguage || ELanguage.English,
+    });
   };
   useEffect(() => {
     async function fetchVideo() {
@@ -86,6 +92,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
         </div>
         <SceneList
           scenes={scenesData || []}
+          audioLanguage={videoData?.audioLanguage}
           createScene={onCreateScene}
           isCreating={isPending}
           isLoading={isScenesFetching || isScenesLoading}

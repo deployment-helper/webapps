@@ -12,9 +12,16 @@ export interface IVideoStore {
   ) => void;
 }
 
+export enum ELanguage {
+  Hindi = "hi-IN",
+  English = "en-US",
+}
+
 export interface IVideo {
   id: string;
   name: string;
+  description?: string;
+  audioLanguage?: ELanguage;
   createdAt: string;
   updatedAt: string;
   userId: string;

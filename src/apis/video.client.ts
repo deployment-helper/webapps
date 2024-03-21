@@ -1,6 +1,6 @@
 import { ServerClient } from "@/src/apis/server.client";
 import { HttpMethod } from "@/src/constants";
-import { IScene, IVideo } from "@/src/types/video.types";
+import { ELanguage, IScene, IVideo } from "@/src/types/video.types";
 
 export class VideoClient extends ServerClient {
   public static async create(name: string): Promise<IVideo> {
@@ -21,8 +21,13 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async update(id: string, name: string): Promise<IVideo> {
+  public static async update(
+    id: string,
+    name: string,
+    data?: Partial<IVideo>,
+  ): Promise<IVideo> {
     const body = {
+      ...data,
       name,
     };
 
@@ -87,9 +92,11 @@ export class VideoClient extends ServerClient {
 
   public static async textToSpeech(
     text: string[],
+    audioLanguage?: ELanguage,
   ): Promise<{ type: string; data: string }[]> {
     const body = {
       text,
+      audioLanguage,
     };
 
     const resp = await VideoClient.sendToAPiServer(

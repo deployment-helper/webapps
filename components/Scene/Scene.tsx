@@ -6,7 +6,7 @@ import {
   useMutationPostTextToSpeech,
   useMutationUpdateScene,
 } from "@/src/query/video.query";
-import { IScene } from "@/src/types/video.types";
+import { ELanguage, IScene } from "@/src/types/video.types";
 import { PlayCircleHint24Regular } from "@fluentui/react-icons";
 import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 
@@ -48,6 +48,7 @@ export const Scene = (props: ISceneProps) => {
     const text = descRef.current?.value;
     postTextToSpeech({
       text: [text || ""],
+      audioLanguage: props.audioLanguage || ELanguage.English,
     });
   };
 
@@ -107,5 +108,6 @@ export const Scene = (props: ISceneProps) => {
 
 export interface ISceneProps extends IScene {
   videoId: string;
+  audioLanguage?: ELanguage;
 }
 export default Scene;

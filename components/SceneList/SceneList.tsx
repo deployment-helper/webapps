@@ -1,6 +1,6 @@
 import Scene from "@/components/Scene/Scene";
 import { Spinner } from "@fluentui/react-components";
-import { IScene } from "@/src/types/video.types";
+import { ELanguage, IScene } from "@/src/types/video.types";
 import { useParams } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
 import { useEffect } from "react";
@@ -31,6 +31,7 @@ export function SceneList(props: ISceneListProps) {
           <Scene
             {...scene}
             videoId={params.video_id as string}
+            audioLanguage={props.audioLanguage}
             key={scene.id}
             onClick={onSceneChange}
             isSelected={scene.id === selectedSceneId}
@@ -52,5 +53,6 @@ export interface ISceneListProps {
   isCreating?: boolean;
   isLoading?: boolean;
   scenes: IScene[];
+  audioLanguage?: ELanguage;
 }
 export default SceneList;

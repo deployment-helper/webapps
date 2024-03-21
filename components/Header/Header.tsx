@@ -11,75 +11,30 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger,
-  SplitButton,
   Subtitle1,
   Toast,
   ToastTitle,
   Toaster,
   mergeClasses,
   useToastController,
-  Dialog,
-  DialogTrigger,
-  Button,
-  DialogSurface,
-  DialogBody,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Spinner,
+  SplitButton,
 } from "@fluentui/react-components";
 
 import { HeaderProps } from "./Header.types";
 import { useStyles } from "./Header.styles";
-import {
-  ArrowLeft24Filled,
-  ImageAdd24Filled,
-  Navigation24Filled,
-} from "@fluentui/react-icons";
+import { ArrowLeft24Filled, Navigation24Filled } from "@fluentui/react-icons";
 import { usePathname, useParams } from "next/navigation";
 import useSlidesStore from "@/src/stores/store";
 import { ServerClient } from "@/src/apis/server.client";
 import { TOASTER_ID } from "@/src/constants";
-import UploadImage from "../UploadImage/UploadImage";
 import {
   useMutationUpdateVideo,
   useQueryGetVideo,
 } from "@/src/query/video.query";
 import { debounce } from "lodash";
-
-function CreatePresentationHeader() {
-  const classes = useStyles();
-
-  return (
-    <div className="flex w-full items-center justify-between">
-      <div className="flex items-center gap-4">
-        <Dialog>
-          <DialogTrigger>
-            <ImageAdd24Filled
-              className={mergeClasses(classes.title, "cursor-pointer")}
-            />
-          </DialogTrigger>
-          <DialogSurface>
-            <DialogBody>
-              <DialogTitle>Upload Image</DialogTitle>
-              <DialogContent>
-                <UploadImage
-                  onUploadSuccess={() => console.log("uploaded successfully!")}
-                />
-              </DialogContent>
-              <DialogActions>
-                <DialogTrigger disableButtonEnhancement>
-                  <Button appearance="secondary">Close</Button>
-                </DialogTrigger>
-                <Button appearance="primary">Do Something</Button>
-              </DialogActions>
-            </DialogBody>
-          </DialogSurface>
-        </Dialog>
-      </div>
-    </div>
-  );
-}
+import Language from "@/components/Language/Language";
+import { ELanguage } from "@/src/types/video.types";
 
 let debouncedMutation: any = undefined;
 
@@ -127,6 +82,13 @@ export const Header: FC<HeaderProps> = ({
     });
   };
 
+  function onLanguageChange(language: ELanguage) {
+    mutate({
+      id: params.video_id as string,
+      name: presentationName,
+      data: { audioLanguage: language },
+    });
+  }
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (debouncedMutation) {
       debouncedMutation.cancel();
@@ -225,6 +187,10 @@ export const Header: FC<HeaderProps> = ({
                 size="medium"
                 value={presentationName}
                 onChange={onNameChange}
+              />
+              <Language
+                language={data?.audioLanguage || ""}
+                onSelect={onLanguageChange}
               />
               {(isLoading || isFetching) && (
                 <div style={{ position: "relative" }}>

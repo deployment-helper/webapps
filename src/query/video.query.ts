@@ -5,10 +5,8 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { VideoClient } from "@/src/apis/video.client";
-import layouts from "@/src/layouts";
-import { IInput } from "@/src/types/types";
-import { int } from "utrie/dist/types/Trie";
-import { useCallback, useState } from "react";
+import { useState } from "react";
+import { ELanguage, IVideo } from "@/src/types/video.types";
 
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
@@ -21,8 +19,8 @@ export const useQueryGetVideo = (id: string) => {
 export const useMutationUpdateVideo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: { id: string; name: string }) =>
-      VideoClient.update(data.id, data.name),
+    mutationFn: (data: { id: string; name: string; data?: Partial<IVideo> }) =>
+      VideoClient.update(data.id, data.name, data.data),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["video", variables.id],
@@ -97,10 +95,13 @@ export const useMutationPostTextToSpeech = () => {
   return useMutation<
     Array<{ type: string; data: string }>,
     DefaultError,
-    { text: string[] }
+    { text: string[]; audioLanguage: ELanguage }
   >({
-    mutationFn: async (data: { text: string[] }) => {
-      const resp = await VideoClient.textToSpeech(data.text);
+    mutationFn: async (data: { text: string[]; audioLanguage: ELanguage }) => {
+      const resp = await VideoClient.textToSpeech(
+        data.text,
+        data.audioLanguage,
+      );
       return resp;
     },
   });
