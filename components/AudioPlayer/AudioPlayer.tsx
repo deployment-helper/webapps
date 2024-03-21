@@ -34,8 +34,13 @@ const AudioPlayer = ({ audios, onAudioEnd }: IAudioPlayerProps) => {
   const audioSource = `data:audio/mp3;base64,${audios[currentIndex]}`; // Assuming MP3 format
 
   return (
-    <div className="audio-player">
-      <audio ref={audioRef} src={audioSource} controls={!isPlaying}>
+    <div className="audio-player" style={{ width: "100%" }}>
+      <audio
+        ref={audioRef}
+        src={audioSource}
+        controls={!isPlaying}
+        style={{ width: "100%" }}
+      >
         <source src={audioSource} type="audio/mp3" />
         Your browser does not support the audio tag.
       </audio>

@@ -11,7 +11,7 @@ import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
 import { getLayoutContent } from "@/src/helpers";
-import { Spinner } from "@fluentui/react-components";
+import { Button, Spinner } from "@fluentui/react-components";
 import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 
 export default function Page({ params }: { params: { video_id: string } }) {
@@ -66,21 +66,23 @@ export default function Page({ params }: { params: { video_id: string } }) {
         <SceneEditor />
       </div>
       <div className="w-8/12 bg-white">
-        <div>
-          {isAudioPending && (
-            <div>
-              <Spinner />
-            </div>
-          )}
-          <button className={"bg-blue-500"} onClick={playAll}>
-            Play all
-          </button>
+        <div
+          className={"flex items-end items-center justify-end pl-20 pr-20 pt-3"}
+        >
           {audios && audios.length && (
             <AudioPlayer
               audios={audios.map((a) => a.data)}
               onAudioEnd={() => {}}
             />
           )}
+          <Button appearance={"primary"} shape={"circular"} onClick={playAll}>
+            Play All
+            <div className={"pl-2"}>
+              {isAudioPending && (
+                <Spinner appearance={"inverted"} size={"tiny"} />
+              )}
+            </div>
+          </Button>
         </div>
         <SceneList
           scenes={scenesData || []}
