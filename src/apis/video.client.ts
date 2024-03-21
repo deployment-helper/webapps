@@ -86,8 +86,8 @@ export class VideoClient extends ServerClient {
   }
 
   public static async textToSpeech(
-    text: string,
-  ): Promise<{ type: string; data: string }> {
+    text: string[],
+  ): Promise<{ type: string; data: string }[]> {
     const body = {
       text,
     };

@@ -95,22 +95,13 @@ export const useMutationUpdateScene = () => {
 export const useMutationPostTextToSpeech = () => {
   const [audio] = useState<HTMLAudioElement>(new Audio());
   return useMutation<
-    { type: string; data: string },
+    Array<{ type: string; data: string }>,
     DefaultError,
-    { sceneId: string; text: string }
+    { text: string[] }
   >({
-    mutationFn: async (data: { sceneId: string; text: string }) => {
+    mutationFn: async (data: { text: string[] }) => {
       const resp = await VideoClient.textToSpeech(data.text);
       return resp;
-    },
-    onSuccess: (data, variables) => {
-      // stop for or delete previous audio
-      audio.pause();
-      audio.src = "";
-
-      // play data.data this is base64 audio
-      audio.src = `data:audio/mp3;base64,${data.data}`;
-      audio.play();
     },
   });
 };

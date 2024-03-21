@@ -8,11 +8,16 @@ import {
 } from "@/src/query/video.query";
 import { IScene } from "@/src/types/video.types";
 import { PlayCircleHint24Regular } from "@fluentui/react-icons";
+import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
   const { mutate: updateScene } = useMutationUpdateScene();
-  const { mutate: postTextToSpeech, isPending } = useMutationPostTextToSpeech();
+  const {
+    mutate: postTextToSpeech,
+    data: audios,
+    isPending,
+  } = useMutationPostTextToSpeech();
   const descRef = useRef<HTMLTextAreaElement>(null);
   const [isHover, setIsHover] = useState(false);
 
@@ -42,9 +47,12 @@ export const Scene = (props: ISceneProps) => {
   const playDescription = () => {
     const text = descRef.current?.value;
     postTextToSpeech({
-      sceneId: props.id,
-      text: text || "",
+      text: [text || ""],
     });
+  };
+
+  const onAudioEnd = () => {
+    console.log("Audio ended");
   };
 
   return (
@@ -90,6 +98,9 @@ export const Scene = (props: ISceneProps) => {
           ) : null}
         </div>
       </div>
+      {audios && audios.length && (
+        <AudioPlayer audios={[audios[0].data]} onAudioEnd={onAudioEnd} />
+      )}
     </div>
   );
 };

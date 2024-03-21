@@ -4,12 +4,15 @@ import SceneEditor from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
 import {
   useMutationCreateScene,
+  useMutationPostTextToSpeech,
   useQueryGetScenes,
 } from "@/src/query/video.query";
 import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
 import { getLayoutContent } from "@/src/helpers";
+import { Spinner } from "@fluentui/react-components";
+import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -20,6 +23,11 @@ export default function Page({ params }: { params: { video_id: string } }) {
   } = useQueryGetScenes(params.video_id);
   // Routes
   const { mutate: createScene, isPending } = useMutationCreateScene();
+  const {
+    isPending: isAudioPending,
+    data: audios,
+    mutate,
+  } = useMutationPostTextToSpeech();
   const router = useRouter();
 
   // Store values
@@ -36,6 +44,11 @@ export default function Page({ params }: { params: { video_id: string } }) {
     });
   };
 
+  const playAll = () => {
+    if (!scenesData) return;
+    const texts = scenesData?.map((scene) => scene.description);
+    mutate({ text: texts });
+  };
   useEffect(() => {
     async function fetchVideo() {
       const video = await VideoClient.create("New Video");
@@ -53,6 +66,22 @@ export default function Page({ params }: { params: { video_id: string } }) {
         <SceneEditor />
       </div>
       <div className="w-8/12 bg-white">
+        <div>
+          {isAudioPending && (
+            <div>
+              <Spinner />
+            </div>
+          )}
+          <button className={"bg-blue-500"} onClick={playAll}>
+            Play all
+          </button>
+          {audios && audios.length && (
+            <AudioPlayer
+              audios={audios.map((a) => a.data)}
+              onAudioEnd={() => {}}
+            />
+          )}
+        </div>
         <SceneList
           scenes={scenesData || []}
           createScene={onCreateScene}
