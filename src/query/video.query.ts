@@ -91,7 +91,6 @@ export const useMutationUpdateScene = () => {
 
 // Text to speech queries
 export const useMutationPostTextToSpeech = () => {
-  const [audio] = useState<HTMLAudioElement>(new Audio());
   return useMutation<
     Array<{ type: string; data: string }>,
     DefaultError,
