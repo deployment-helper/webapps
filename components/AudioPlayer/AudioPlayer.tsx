@@ -23,10 +23,11 @@ const AudioPlayer = ({ audios, onAudioEnd }: IAudioPlayerProps) => {
       }
     };
 
-    audioRef.current.addEventListener("ended", handleEnded);
+    audioRef.current && audioRef.current.addEventListener("ended", handleEnded);
 
     return () => {
-      audioRef.current.removeEventListener("ended", handleEnded);
+      audioRef.current &&
+        audioRef.current.removeEventListener("ended", handleEnded);
     };
   }, [currentIndex, isPlaying, audioRef, audios, onAudioEnd]); // Update deps
 
