@@ -53,4 +53,5 @@ const layouts: Array<{
   },
 ];
 
+export const DEFAULT_LAYOUT = layouts[1];
 export default layouts;

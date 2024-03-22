@@ -1,6 +1,11 @@
 import { ServerClient } from "@/src/apis/server.client";
 import { HttpMethod } from "@/src/constants";
-import { ELanguage, IScene, IVideo } from "@/src/types/video.types";
+import {
+  ELanguage,
+  IScene,
+  ISceneResponse,
+  IVideo,
+} from "@/src/types/video.types";
 
 export class VideoClient extends ServerClient {
   public static async create(name: string): Promise<IVideo> {
@@ -65,7 +70,7 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async getScenes(id: string): Promise<IScene[]> {
+  public static async getScenes(id: string): Promise<ISceneResponse[]> {
     const resp = await VideoClient.sendToAPiServer(`videos/${id}/scenes`);
     return resp.json();
   }
@@ -75,14 +80,17 @@ export class VideoClient extends ServerClient {
     sceneId: string,
     layoutId: string,
     data: Record<string, any>,
-  ): Promise<IScene> {
+    sceneArrayIndex?: number,
+  ): Promise<ISceneResponse[]> {
     const body = {
       ...data,
       layoutId,
     };
 
     const resp = await VideoClient.sendToAPiServer(
-      `videos/${id}/scenes/${sceneId}`,
+      `videos/${id}/scenes/${sceneId}/${
+        sceneArrayIndex === undefined ? "" : sceneArrayIndex
+      }`,
       body,
       HttpMethod.PUT,
     );

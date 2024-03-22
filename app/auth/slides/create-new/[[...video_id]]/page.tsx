@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import SceneEditor from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
 import {
-  useMutationCreateScene,
   useMutationPostTextToSpeech,
+  useMutationUpdateScene,
   useQueryGetScenes,
   useQueryGetVideo,
 } from "@/src/query/video.query";
@@ -15,6 +15,7 @@ import { getLayoutContent } from "@/src/helpers";
 import { Button, Spinner } from "@fluentui/react-components";
 import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 import { ELanguage } from "@/src/types/video.types";
+import { v4 as uuid } from "uuid";
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -24,7 +25,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
     isLoading: isScenesLoading,
   } = useQueryGetScenes(params.video_id);
   const { data: videoData } = useQueryGetVideo(params.video_id);
-  const { mutate: createScene, isPending } = useMutationCreateScene();
+  const { mutate: updateScene, isPending } = useMutationUpdateScene();
   const {
     isPending: isAudioPending,
     data: audios,
@@ -35,13 +36,18 @@ export default function Page({ params }: { params: { video_id: string } }) {
 
   // Store values
   const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
+  const scenes = scenesData?.[0]?.scenes || [];
   const onCreateScene = () => {
     const content = getLayoutContent(selectedLayoutId);
-    createScene({
+
+    if (videoData?.scenesId === undefined) return;
+
+    updateScene({
       id: params.video_id,
-      name: "New Scene",
+      sceneId: videoData?.scenesId,
       layoutId: selectedLayout,
       data: {
+        id: uuid(),
         content,
       },
     });
@@ -49,7 +55,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
 
   const playAll = () => {
     if (!scenesData) return;
-    const texts = scenesData?.map((scene) => scene.description);
+    const texts = scenes.map((scene) => scene.description);
     mutate({
       text: texts,
       audioLanguage: videoData?.audioLanguage || ELanguage.English,
@@ -69,7 +75,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
     <div className="flex  h-screen w-full">
       <div className="w-1/12 bg-red-200 text-center">Scene</div>
       <div className="w-1/4 bg-green-200">
-        <SceneEditor />
+        <SceneEditor sceneDocId={videoData?.scenesId || ""} />
       </div>
       <div className="w-8/12 bg-white">
         <div
@@ -91,10 +97,11 @@ export default function Page({ params }: { params: { video_id: string } }) {
           </Button>
         </div>
         <SceneList
-          scenes={scenesData || []}
+          scenes={scenes || []}
           audioLanguage={videoData?.audioLanguage}
           createScene={onCreateScene}
           isCreating={isPending}
+          sceneDocId={videoData?.scenesId || ""}
           isLoading={isScenesFetching || isScenesLoading}
         />
       </div>

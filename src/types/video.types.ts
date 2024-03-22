@@ -5,9 +5,11 @@ export interface IVideoStore {
   selectedLayoutId: string;
   selectedSceneId: string;
   sceneContent: Record<string, IInput>;
+  sceneArrayIndex: number;
   setSceneContent: (
     layoutId: string,
     sceneId: string,
+    sceneArrayIndex: number,
     content?: Record<string, IInput>,
   ) => void;
 }
@@ -25,6 +27,7 @@ export interface IVideo {
   createdAt: string;
   updatedAt: string;
   userId: string;
+  scenesId: string;
 }
 
 export interface IScene {
@@ -38,6 +41,12 @@ export interface IScene {
   onClick?: (
     sceneId: string,
     layoutId: string,
+    sceneArrayIndex: number,
     content?: Record<string, IInput>,
   ) => void;
+}
+
+export interface ISceneResponse {
+  videoId: string;
+  scenes: IScene[];
 }

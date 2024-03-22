@@ -39,7 +39,9 @@ export const Scene = (props: ISceneProps) => {
 
     mutateDebounce({
       id: props.videoId,
-      sceneId: props.id,
+      sceneId: props.sceneDocId,
+      layoutId: props.layoutId,
+      sceneArrayIndex: props.sceneArrayIndex,
       data: { [name]: e.target.value },
     });
   };
@@ -67,7 +69,13 @@ export const Scene = (props: ISceneProps) => {
       }`}
       id={props.id}
       onClick={() =>
-        props.onClick && props.onClick(props.id, props.layoutId, props.content)
+        props.onClick &&
+        props.onClick(
+          props.id,
+          props.layoutId,
+          props.sceneArrayIndex,
+          props.content,
+        )
       }
     >
       <div className={"flex"}>
@@ -108,6 +116,8 @@ export const Scene = (props: ISceneProps) => {
 
 export interface ISceneProps extends IScene {
   videoId: string;
+  sceneArrayIndex: number;
+  sceneDocId: string;
   audioLanguage?: ELanguage;
 }
 export default Scene;

@@ -18,11 +18,12 @@ import { IInput } from "@/src/types/types";
 
 let debounceContent: any = undefined;
 let debounceImage: any = undefined;
-const SceneEditor = (props: ISceneEditorProps) => {
+const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
   const [activeTab, setActiveTab] = useState("1");
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const sceneContent = useVideoStore((state) => state.sceneContent);
+  const sceneArrayIndex = useVideoStore((state) => state.sceneArrayIndex);
   const setSceneContent = useVideoStore((state) => state.setSceneContent);
   const params = useParams();
 
@@ -46,10 +47,10 @@ const SceneEditor = (props: ISceneEditorProps) => {
       debounceContent.cancel();
     }
     debounceContent = debounce(updateScene, 1000);
-    console.log("sceneContent", sceneContent);
     debounceContent({
       id: params.video_id as string,
-      sceneId: selectedSceneId,
+      sceneId: sceneDocId,
+      sceneArrayIndex,
       data: { content: content || sceneContent },
       invalidate: false,
     });
@@ -60,14 +61,19 @@ const SceneEditor = (props: ISceneEditorProps) => {
     if (layoutId !== selectedLayoutId) {
       const layout = layouts.find((layout) => layout.id === layoutId);
       const newContentTemplate = JSON.parse(JSON.stringify(layout?.content));
-      setSceneContent(layoutId, selectedSceneId, newContentTemplate);
+      setSceneContent(
+        layoutId,
+        selectedSceneId,
+        sceneArrayIndex,
+        newContentTemplate,
+      );
     }
   };
 
   // When image is uploaded to S3 update image URL to content template
   const onUploadSuccess = (url: string, name: string) => {
     console.log("url", url);
-    setSceneContent(selectedLayoutId, selectedSceneId, {
+    setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
       ...sceneContent,
       [name]: {
         ...sceneContent[name],
@@ -108,12 +114,12 @@ const SceneEditor = (props: ISceneEditorProps) => {
           if (res.publicUrl) {
             updateScene({
               id: params.video_id as string,
-              sceneId: selectedSceneId,
+              sceneId: sceneDocId,
               layoutId: selectedLayoutId,
+              sceneArrayIndex,
               data: {
                 image: res.publicUrl,
               },
-              isInvalidate: true,
             });
           }
         });
@@ -124,7 +130,7 @@ const SceneEditor = (props: ISceneEditorProps) => {
 
   // Listener for content data change and update the content in state
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSceneContent(selectedLayoutId, selectedSceneId, {
+    setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
       ...sceneContent,
       [e.target.name]: {
         ...sceneContent[e.target.name],
@@ -243,7 +249,9 @@ const SceneEditor = (props: ISceneEditorProps) => {
   );
 };
 
-export interface ISceneEditorProps {}
+export interface ISceneEditorProps {
+  sceneDocId: string;
+}
 
 export { SceneEditor };
 export default SceneEditor;

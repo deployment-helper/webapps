@@ -76,15 +76,19 @@ export const useMutationUpdateScene = () => {
       sceneId: string;
       layoutId: string;
       data: Record<string, any>;
-      isInvalidate?: boolean;
+      sceneArrayIndex?: number;
     }) =>
-      VideoClient.updateScene(data.id, data.sceneId, data.layoutId, data.data),
+      VideoClient.updateScene(
+        data.id,
+        data.sceneId,
+        data.layoutId,
+        data.data,
+        data.sceneArrayIndex,
+      ),
     onSuccess: (data, variables) => {
-      if (variables.isInvalidate) {
-        queryClient.invalidateQueries({
-          queryKey: ["video", variables.id, "scenes"],
-        });
-      }
+      queryClient.invalidateQueries({
+        queryKey: ["video", variables.id, "scenes"],
+      });
     },
   });
 };

@@ -6,12 +6,14 @@ export const useVideoStore = create<IVideoStore>()(
   devtools((set, get) => ({
     selectedLayoutId: "",
     selectedSceneId: "",
+    sceneArrayIndex: -1,
     sceneContent: {},
-    setSceneContent: (layoutId, sceneId, content) => {
+    setSceneContent: (layoutId, sceneId, sceneArrayIndex, content) => {
       set((state) => ({
         ...state,
         selectedLayoutId: layoutId,
         selectedSceneId: sceneId,
+        sceneArrayIndex,
         sceneContent: content,
       }));
     },

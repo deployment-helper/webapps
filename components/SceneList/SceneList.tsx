@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
 import { useEffect } from "react";
 import { IInput } from "@/src/types/types";
+import { DEFAULT_LAYOUT } from "@/src/layouts";
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
@@ -13,27 +14,36 @@ export function SceneList(props: ISceneListProps) {
   const onSceneChange = (
     sceneId: string,
     layoutId: string,
+    sceneArrayIndex: number,
     content?: Record<string, IInput>,
   ) => {
-    setSelectedContent(layoutId, sceneId, content);
+    setSelectedContent(layoutId, sceneId, sceneArrayIndex, content);
   };
 
   useEffect(() => {
     if (props.scenes.length > 0 && !selectedSceneId) {
       const scene = props.scenes[0];
-      setSelectedContent(scene.layoutId, scene.id, scene.content);
+      setSelectedContent(
+        scene.layoutId || DEFAULT_LAYOUT.id,
+        scene.id,
+        0,
+        scene.content || DEFAULT_LAYOUT.content,
+      );
     }
   }, [selectedSceneId, props.scenes, setSelectedContent]);
   return (
     <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10 pt-10">
       <div className="flex flex-col">
-        {props.scenes.map((scene) => (
+        {props.scenes.map((scene, index) => (
           <Scene
             {...scene}
             videoId={params.video_id as string}
             audioLanguage={props.audioLanguage}
             key={scene.id}
             onClick={onSceneChange}
+            sceneArrayIndex={index}
+            sceneDocId={props.sceneDocId}
+            layoutId={scene.layoutId || DEFAULT_LAYOUT.id}
             isSelected={scene.id === selectedSceneId}
           />
         ))}
@@ -53,6 +63,7 @@ export interface ISceneListProps {
   isCreating?: boolean;
   isLoading?: boolean;
   scenes: IScene[];
+  sceneDocId: string;
   audioLanguage?: ELanguage;
 }
 export default SceneList;
