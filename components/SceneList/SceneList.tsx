@@ -12,6 +12,7 @@ export function SceneList(props: ISceneListProps) {
   const setSelectedContent = useVideoStore((state) => state.setSceneContent);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const [markerIndex, setMarkerIndex] = useState<number | undefined>(undefined);
+  const [scenes, setScenes] = useState<IScene[]>(props.scenes);
   const [draggedSceneIndex, setDraggedSceneIndex] = useState<
     number | undefined
   >(undefined);
@@ -45,8 +46,21 @@ export function SceneList(props: ISceneListProps) {
     console.log("Dragged scene index", draggedSceneIndex);
     console.log("Target scene index", targetSceneIndex);
     props.onSceneReorder?.(draggedSceneIndex!, targetSceneIndex);
+    updateScenesOrder(draggedSceneIndex!, targetSceneIndex);
   };
 
+  const updateScenesOrder = (
+    sceneArrayIndex: number,
+    newSceneArrayIndex: number,
+  ) => {
+    const newScenes = [...scenes];
+    const scene = newScenes.splice(sceneArrayIndex, 1)[0];
+    newScenes.splice(newSceneArrayIndex, 0, scene);
+    setScenes(newScenes);
+  };
+  useEffect(() => {
+    setScenes(props.scenes);
+  }, [props.scenes]);
   useEffect(() => {
     if (props.scenes.length > 0 && !selectedSceneId) {
       const scene = props.scenes[0];
@@ -62,7 +76,7 @@ export function SceneList(props: ISceneListProps) {
   return (
     <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10 pt-10">
       <div className="flex flex-col">
-        {props.scenes.map((scene, index) => (
+        {scenes.map((scene, index) => (
           <Scene
             {...scene}
             videoId={params.video_id as string}

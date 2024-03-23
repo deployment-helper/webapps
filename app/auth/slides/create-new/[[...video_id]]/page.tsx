@@ -4,6 +4,7 @@ import SceneEditor from "@/components/SceneEditor/SceneEditor";
 import SceneList from "@/components/SceneList/SceneList";
 import {
   useMutationPostTextToSpeech,
+  useMutationReorderScenes,
   useMutationUpdateScene,
   useQueryGetScenes,
   useQueryGetVideo,
@@ -31,6 +32,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
     data: audios,
     mutate,
   } = useMutationPostTextToSpeech();
+  const { mutate: reorderScene } = useMutationReorderScenes();
   // Routes
   const router = useRouter();
 
@@ -59,6 +61,18 @@ export default function Page({ params }: { params: { video_id: string } }) {
     mutate({
       text: texts,
       audioLanguage: videoData?.audioLanguage || ELanguage.English,
+    });
+  };
+
+  const onSceneReorder = (
+    sceneArrayIndex: number,
+    newSceneArrayIndex: number,
+  ) => {
+    reorderScene({
+      id: params.video_id,
+      sceneId: videoData?.scenesId || "",
+      sceneArrayIndex,
+      newSceneArrayIndex,
     });
   };
   useEffect(() => {
@@ -103,6 +117,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
           isCreating={isPending}
           sceneDocId={videoData?.scenesId || ""}
           isLoading={isScenesFetching || isScenesLoading}
+          onSceneReorder={onSceneReorder}
         />
       </div>
     </div>
