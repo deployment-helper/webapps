@@ -98,6 +98,24 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
+  public static async reorderScene(
+    id: string,
+    sceneId: string,
+    sceneArrayIndex: number,
+    newSceneArrayIndex: number,
+  ): Promise<ISceneResponse[]> {
+    const body = {
+      newPosition: newSceneArrayIndex,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      `videos/${id}/scenes/${sceneId}/${sceneArrayIndex}/reorder`,
+      body,
+      HttpMethod.PUT,
+    );
+
+    return resp.json();
+  }
   public static async textToSpeech(
     text: string[],
     audioLanguage?: ELanguage,

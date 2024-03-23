@@ -3,7 +3,7 @@ import { Spinner } from "@fluentui/react-components";
 import { ELanguage, IScene } from "@/src/types/video.types";
 import { useParams } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IInput } from "@/src/types/types";
 import { DEFAULT_LAYOUT } from "@/src/layouts";
 
@@ -11,6 +11,10 @@ export function SceneList(props: ISceneListProps) {
   const params = useParams();
   const setSelectedContent = useVideoStore((state) => state.setSceneContent);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
+  const [markerIndex, setMarkerIndex] = useState<number | undefined>(undefined);
+  const [draggedSceneIndex, setDraggedSceneIndex] = useState<
+    number | undefined
+  >(undefined);
   const onSceneChange = (
     sceneId: string,
     layoutId: string,
@@ -18,6 +22,29 @@ export function SceneList(props: ISceneListProps) {
     content?: Record<string, IInput>,
   ) => {
     setSelectedContent(layoutId, sceneId, sceneArrayIndex, content);
+  };
+
+  const onDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    e.dataTransfer.setData("text/plain", id);
+    const sceneIndex = e.currentTarget.getAttribute("data-index");
+    setDraggedSceneIndex(Number(sceneIndex));
+  };
+
+  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const markerIndex = e.currentTarget.getAttribute("data-index");
+    setMarkerIndex(Number(markerIndex));
+  };
+
+  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    console.log("Dropped");
+    setMarkerIndex(undefined);
+    const sceneIndex = e.currentTarget.getAttribute("data-index");
+    const targetSceneIndex = Number(sceneIndex);
+    console.log("Dragged scene index", draggedSceneIndex);
+    console.log("Target scene index", targetSceneIndex);
+    props.onSceneReorder?.(draggedSceneIndex!, targetSceneIndex);
   };
 
   useEffect(() => {
@@ -31,6 +58,7 @@ export function SceneList(props: ISceneListProps) {
       );
     }
   }, [selectedSceneId, props.scenes, setSelectedContent]);
+
   return (
     <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10 pt-10">
       <div className="flex flex-col">
@@ -41,7 +69,11 @@ export function SceneList(props: ISceneListProps) {
             audioLanguage={props.audioLanguage}
             key={scene.id}
             onClick={onSceneChange}
+            onDragStart={onDragStart}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
             sceneArrayIndex={index}
+            markerIndex={markerIndex}
             sceneDocId={props.sceneDocId}
             layoutId={scene.layoutId || DEFAULT_LAYOUT.id}
             isSelected={scene.id === selectedSceneId}
@@ -65,5 +97,9 @@ export interface ISceneListProps {
   scenes: IScene[];
   sceneDocId: string;
   audioLanguage?: ELanguage;
+  onSceneReorder?: (
+    sceneArrayIndex: number,
+    newSceneArrayIndex: number,
+  ) => void;
 }
 export default SceneList;

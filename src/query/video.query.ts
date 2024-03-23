@@ -93,6 +93,29 @@ export const useMutationUpdateScene = () => {
   });
 };
 
+export const useMutationReorderScenes = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: {
+      id: string;
+      sceneId: string;
+      sceneArrayIndex: number;
+      newSceneArrayIndex: number;
+    }) =>
+      VideoClient.reorderScene(
+        data.id,
+        data.sceneId,
+        data.sceneArrayIndex,
+        data.newSceneArrayIndex,
+      ),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["video", variables.id, "scenes"],
+      });
+    },
+  });
+};
+
 // Text to speech queries
 export const useMutationPostTextToSpeech = () => {
   return useMutation<
