@@ -5,6 +5,7 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
     // this component should have height and width as per 16:9 aspect ratio
     /**
      * High Definition (HD):
+     * 1024 x 576 (WSVGA)
      * 1280 x 720 (HD/WXGA)
      * 1366 x 768 (WXGA)
      * 1600 x 900 (HD+)

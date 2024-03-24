@@ -121,12 +121,17 @@ export const useMutationPostTextToSpeech = () => {
   return useMutation<
     Array<{ type: string; data: string }>,
     DefaultError,
-    { text: string[]; audioLanguage: ELanguage }
+    { text: string[]; audioLanguage: ELanguage; merge?: boolean }
   >({
-    mutationFn: async (data: { text: string[]; audioLanguage: ELanguage }) => {
+    mutationFn: async (data: {
+      text: string[];
+      audioLanguage: ELanguage;
+      merge?: boolean;
+    }) => {
       const resp = await VideoClient.textToSpeech(
         data.text,
         data.audioLanguage,
+        data.merge,
       );
       return resp;
     },

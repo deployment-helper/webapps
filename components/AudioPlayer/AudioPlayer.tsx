@@ -7,17 +7,26 @@
 
 import React, { useState, useRef, useEffect, ChangeEvent } from "react";
 import classNames from "classnames";
+import { Simulate } from "react-dom/test-utils";
+import play = Simulate.play;
 
-const AudioPlayer = ({ audios, onAudioEnd }: IAudioPlayerProps) => {
+const AudioPlayer = ({
+  audios,
+  onAudioEnd,
+  nextIndex,
+  play,
+  stop,
+  autoPlay = true,
+}: IAudioPlayerProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const handleEnded = () => {
-      if (currentIndex < audios.length - 1) {
+      if (currentIndex < audios.length - 1 && isPlaying && autoPlay) {
         setCurrentIndex(currentIndex + 1);
-      } else {
+      } else if (currentIndex === audios.length - 1 && isPlaying) {
         setIsPlaying(false);
         onAudioEnd(); // Call the parent's callback here
       }
@@ -31,6 +40,31 @@ const AudioPlayer = ({ audios, onAudioEnd }: IAudioPlayerProps) => {
     };
   }, [currentIndex, isPlaying, audioRef, audios, onAudioEnd]); // Update deps
 
+  useEffect(() => {
+    if (
+      nextIndex !== undefined &&
+      nextIndex !== currentIndex &&
+      nextIndex < audios.length &&
+      nextIndex !== null
+    ) {
+      setIsPlaying(false);
+      setCurrentIndex(nextIndex);
+    }
+  }, [nextIndex, currentIndex, audios]);
+
+  useEffect(() => {
+    if (play && !isPlaying) {
+      setIsPlaying(true);
+      audioRef.current?.play();
+    }
+  }, [play, isPlaying]);
+
+  useEffect(() => {
+    if (stop && isPlaying) {
+      setIsPlaying(false);
+      audioRef.current?.pause();
+    }
+  }, [stop, isPlaying]);
   const audioSource = `data:audio/mp3;base64,${audios[currentIndex]}`; // Assuming MP3 format
 
   return (
@@ -51,6 +85,10 @@ const AudioPlayer = ({ audios, onAudioEnd }: IAudioPlayerProps) => {
 export interface IAudioPlayerProps {
   audios: string[];
   onAudioEnd: () => void;
+  nextIndex?: number;
+  play?: boolean;
+  stop?: boolean;
+  autoPlay?: boolean;
 }
 
 export default AudioPlayer;
