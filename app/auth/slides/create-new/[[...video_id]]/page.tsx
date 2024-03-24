@@ -13,10 +13,11 @@ import { VideoClient } from "@/src/apis/video.client";
 import { useRouter } from "next/navigation";
 import { useVideoStore } from "@/src/stores/video.store";
 import { getLayoutContent } from "@/src/helpers";
-import { Button, Spinner } from "@fluentui/react-components";
+import { Body1Strong, Button, Spinner } from "@fluentui/react-components";
 import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 import { ELanguage } from "@/src/types/video.types";
 import { v4 as uuid } from "uuid";
+import Link from "next/link";
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -92,22 +93,25 @@ export default function Page({ params }: { params: { video_id: string } }) {
         <SceneEditor sceneDocId={videoData?.scenesId || ""} />
       </div>
       <div className="w-8/12 bg-white">
-        <div
-          className={"flex items-end items-center justify-end pl-20 pr-20 pt-3"}
-        >
+        <div className={"flex items-end justify-end gap-1 pl-20 pr-20 pt-3"}>
           {audios && audios.length && (
             <AudioPlayer
               audios={audios.map((a) => a.data)}
               onAudioEnd={() => {}}
             />
           )}
-          <Button appearance={"primary"} shape={"circular"} onClick={playAll}>
+          <Button appearance={"primary"} onClick={playAll}>
             Play All
             <div className={"pl-2"}>
               {isAudioPending && (
                 <Spinner appearance={"inverted"} size={"tiny"} />
               )}
             </div>
+          </Button>
+          <Button>
+            <Link target={"_blank"} href={`/auth/videos/${params.video_id}`}>
+              <Body1Strong>Preview</Body1Strong>
+            </Link>
           </Button>
         </div>
         <SceneList

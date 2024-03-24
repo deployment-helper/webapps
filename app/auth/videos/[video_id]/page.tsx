@@ -4,6 +4,7 @@ import { Spinner } from "@fluentui/react-components";
 import { useEffect } from "react";
 import Reveal from "@/reveal.js-4.6.0/dist/reveal.esm";
 import Image from "next/image";
+import RenderLayoutComponent from "@/components/RenderLayoutComponent/RenderLayoutComponent";
 
 export default function VideoPreview({
   params,
@@ -12,12 +13,16 @@ export default function VideoPreview({
     video_id: string;
   };
 }) {
-  const { data: videos, isLoading } = useQueryGetScenes(params.video_id);
+  const { data: scenesResp, isLoading } = useQueryGetScenes(params.video_id);
+  const videos = scenesResp?.[0].scenes;
   useEffect(() => {
     if (Reveal && videos?.length) {
       console.log("Reveal initialized");
       // @ts-ignore
-      Reveal.initialize({});
+      Reveal.initialize({
+        width: "1280",
+        height: "720",
+      });
     }
   }, [videos]);
   if (!params.video_id) return <h1>No video id provided</h1>;
@@ -30,8 +35,8 @@ export default function VideoPreview({
         ) : (
           <div
             style={{
-              width: "900vw",
-              height: "900vh",
+              width: "90vw",
+              height: "90vh",
               minHeight: "600px",
               display: "flex",
               flexDirection: "row",
@@ -41,6 +46,7 @@ export default function VideoPreview({
               className="reveal"
               style={{
                 minWidth: "500px",
+                maxWidth: "100%",
                 width: "100%",
                 height: "90vh",
               }}
@@ -52,14 +58,17 @@ export default function VideoPreview({
                 {videos?.map((scene, index) => (
                   <section
                     key={scene.id}
-                    data-slideid={scene.id}
-                    data-name={scene.name}
+                    data-slideid={`${scene.id}`}
+                    data-name={`${scene.id}`}
                   >
-                    {/*TODO: should use next/image*/}
-                    <img src={scene.image} alt={scene.name} />
+                    <RenderLayoutComponent
+                      layoutId={scene.layoutId}
+                      sceneId={scene.id}
+                      content={scene.content}
+                    />
                   </section>
                 ))}
-                <section data-slideid={"start-1"} data-name="start-1">
+                <section data-slideid={"end-1"} data-name="end-1">
                   End 1
                 </section>
               </div>

@@ -4,7 +4,9 @@ import {
   Tab,
   TabList,
 } from "@fluentui/react-tabs";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { debounce } from "lodash";
+
 import Image from "@/components/Image/Image";
 import html2canvas from "html2canvas";
 import layouts from "@/src/layouts";
@@ -13,8 +15,9 @@ import { ServerClient } from "@/src/apis/server.client";
 import { getApiServer, s3RandomPublicKey } from "@/src/helpers";
 import { useMutationUpdateScene } from "@/src/query/video.query";
 import { useParams } from "next/navigation";
-import { debounce } from "lodash";
+
 import { IInput } from "@/src/types/types";
+import RenderLayoutComponent from "@/components/RenderLayoutComponent/RenderLayoutComponent";
 
 let debounceContent: any = undefined;
 let debounceImage: any = undefined;
@@ -26,13 +29,6 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
   const sceneArrayIndex = useVideoStore((state) => state.sceneArrayIndex);
   const setSceneContent = useVideoStore((state) => state.setSceneContent);
   const params = useParams();
-
-  // React component to render the selected layout
-  const [LayoutReactComponent, setLayoutReactComponent] = useState<
-    React.FunctionComponent<any> | undefined
-  >(undefined);
-
-  const compRef = useRef<HTMLDivElement | null>(null);
 
   const { mutate: updateScene } = useMutationUpdateScene();
 
@@ -97,20 +93,24 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
       debounceImage.cancel();
     }
     debounceImage = debounce(() => {
+      console.log("Canvas image creation started");
       const ref = document.getElementById(selectedSceneId);
       html2canvas(ref as HTMLElement, {
         useCORS: true,
+        allowTaint: true,
         logging: true,
       }).then((canvas) => {
         const img = document.getElementById("canvas") as HTMLImageElement;
         const dataUrl = canvas.toDataURL("image/png");
         img.src = dataUrl;
+        console.log("Uploading to S3");
         ServerClient.uploadCanvasImageToS3(
           getApiServer(),
           s3RandomPublicKey(),
           dataUrl,
           true,
         ).then((res) => {
+          console.log("Updating scene");
           if (res.publicUrl) {
             updateScene({
               id: params.video_id as string,
@@ -140,15 +140,6 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
     createImage();
     updateSceneContent();
   };
-
-  // Dynamically import layout component for selected layout
-  useEffect(() => {
-    const layout = layouts.find((layout) => layout.id === selectedLayoutId);
-    if (!layout) return;
-    const LayoutReactComponent =
-      require(`@/components/layouts/${layout?.componentName}`).default;
-    setLayoutReactComponent(LayoutReactComponent);
-  }, [selectedLayoutId]);
 
   return (
     <div className={"p-4"}>
@@ -205,14 +196,11 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
           <>
             <div>
               <img id={"canvas"} src={""} />
-              {sceneContent && LayoutReactComponent && (
-                <LayoutReactComponent
-                  isNone={true}
-                  ref={compRef}
-                  sceneId={selectedSceneId}
-                  content={sceneContent}
-                />
-              )}
+              <RenderLayoutComponent
+                content={sceneContent}
+                sceneId={selectedSceneId}
+                layoutId={selectedLayoutId}
+              />
             </div>
 
             <hr className={"my-4"} />

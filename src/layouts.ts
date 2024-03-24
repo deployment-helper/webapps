@@ -53,5 +53,6 @@ const layouts: Array<{
   },
 ];
 
+export const ALLOWED_LAYOUTS = ["layout1", "layout2"];
 export const DEFAULT_LAYOUT = layouts[1];
 export default layouts;
