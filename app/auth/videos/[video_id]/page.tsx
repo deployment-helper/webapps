@@ -1,10 +1,15 @@
 "use client";
-import { useQueryGetScenes, useQueryGetVideos } from "@/src/query/video.query";
+import {
+  useMutationPostTextToSpeech,
+  useQueryGetScenes,
+  useQueryGetVideos,
+} from "@/src/query/video.query";
 import { Spinner } from "@fluentui/react-components";
-import { useEffect } from "react";
-import Reveal from "@/reveal.js-4.6.0/dist/reveal.esm";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import Reveal from "reveal.js";
 import RenderLayoutComponent from "@/components/RenderLayoutComponent/RenderLayoutComponent";
+import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
+import { ELanguage } from "@/src/types/video.types";
 
 export default function VideoPreview({
   params,
@@ -15,16 +20,52 @@ export default function VideoPreview({
 }) {
   const { data: scenesResp, isLoading } = useQueryGetScenes(params.video_id);
   const videos = scenesResp?.[0].scenes;
+
+  const [sceneIndex, setSceneIndex] = useState<number | undefined>(undefined);
+  const [play, setPlay] = useState(false);
+  const [isRevealInitialized, setIsRevealInitialized] = useState(false);
+  const {
+    isPending: isAudioPending,
+    data: audios,
+    mutate,
+  } = useMutationPostTextToSpeech();
   useEffect(() => {
     if (Reveal && videos?.length) {
       console.log("Reveal initialized");
       // @ts-ignore
       Reveal.initialize({
-        width: "1280",
-        height: "720",
+        width: 1280,
+        height: 720,
+      }).then(() => {
+        setIsRevealInitialized(true);
+      });
+
+      //Reveal js slide change listener
+      Reveal.addEventListener("slidechanged", function (event: any) {
+        // read data attribute of the slide
+        const slideId = event.currentSlide.getAttribute("data-slideid");
+        const sceneIndex = event.currentSlide.getAttribute("data-sceneindex");
+        console.log("Slide changed to ", slideId);
+        console.log("Slide changed to ", event.indexh);
+        console.log("Scene Index ", sceneIndex);
+        if (sceneIndex !== null && sceneIndex !== undefined) {
+          setSceneIndex(parseInt(sceneIndex));
+          setPlay(true);
+        }
       });
     }
+    return () => {
+      isRevealInitialized && Reveal.destroy();
+    };
   }, [videos]);
+  // Fetch audio for the first time
+  useEffect(() => {
+    if (videos?.length && !audios) {
+      const texts = videos.map((v) => v.description! || "");
+      mutate({ text: texts, audioLanguage: ELanguage.English, merge: false });
+    }
+  }, [params.video_id, videos, audios, mutate]);
+
   if (!params.video_id) return <h1>No video id provided</h1>;
 
   return (
@@ -60,6 +101,7 @@ export default function VideoPreview({
                     key={scene.id}
                     data-slideid={`${scene.id}`}
                     data-name={`${scene.id}`}
+                    data-sceneindex={index}
                   >
                     <RenderLayoutComponent
                       layoutId={scene.layoutId}
@@ -74,6 +116,19 @@ export default function VideoPreview({
               </div>
             </div>
           </div>
+        )}
+        {isAudioPending ? (
+          <Spinner appearance={"inverted"} size={"tiny"} />
+        ) : (
+          <AudioPlayer
+            audios={audios ? audios.map((a) => a.data) : []}
+            onAudioEnd={() => {
+              console.log("Audio Ended");
+            }}
+            nextIndex={sceneIndex}
+            play={play}
+            autoPlay={false}
+          />
         )}
       </div>
     </>

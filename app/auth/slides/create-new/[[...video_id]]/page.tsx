@@ -58,7 +58,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
 
   const playAll = () => {
     if (!scenesData) return;
-    const texts = scenes.map((scene) => scene.description);
+    const texts = scenes.map((scene) => scene.description! || "");
     mutate({
       text: texts,
       audioLanguage: videoData?.audioLanguage || ELanguage.English,
