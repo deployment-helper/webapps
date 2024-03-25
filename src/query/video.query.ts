@@ -137,3 +137,13 @@ export const useMutationPostTextToSpeech = () => {
     },
   });
 };
+
+// Project queries
+
+// get List of video query
+export const useQueryGetProjects = () => {
+  return useQuery({
+    queryKey: ["projects"],
+    queryFn: () => VideoClient.getProjects(),
+  });
+};

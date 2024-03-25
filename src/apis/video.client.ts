@@ -49,6 +49,12 @@ export class VideoClient extends ServerClient {
     const resp = await VideoClient.sendToAPiServer("videos");
     return resp.json();
   }
+
+  public static async getProjects(): Promise<IVideo[]> {
+    const resp = await VideoClient.sendToAPiServer("projects");
+    return resp.json();
+  }
+
   public static async createScene(
     id: string,
     name: string,
