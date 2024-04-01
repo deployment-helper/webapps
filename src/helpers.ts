@@ -47,10 +47,49 @@ export function getApiServer() {
   return apiServer;
 }
 
+export function getBatchServer() {
+  const batchServer = document.querySelector("[data-store='batchApiServer']")
+    ?.textContent;
+
+  if (!batchServer) {
+    throw new Error("batchServer not found");
+  }
+
+  return batchServer;
+}
+
+// Generate current web app frontend server URL with scheme and port
+export function getFrontendServerUrl() {
+  return `${window.location.protocol}//${window.location.host}`;
+}
+
 export function getLayoutContent(currentLayoutId: string) {
   const layout = layouts.find((layout) => layout.id === currentLayoutId);
 
   return layout?.content;
+}
+
+/**
+ * Read apiKey params from query string and add to the provided URL
+ */
+export function checkAndSetApiKey(url: string) {
+  const pageUrl = document.location.href;
+  const urlObj = new URL(pageUrl);
+  const apiKey = urlObj.searchParams.get("apiKey");
+
+  if (apiKey) {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set("key", apiKey);
+    return urlObj.toString();
+  }
+
+  return url;
+}
+
+export function generatePreviewUrl(videoId: string) {
+  //http://localhost:3000/auth/videos/ZbUNPeasPcPtOIG7o64z
+  const server = getFrontendServerUrl();
+  return `${server}/auth/videos/${videoId}`;
 }
 
 const defaultExport = {

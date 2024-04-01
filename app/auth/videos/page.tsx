@@ -17,12 +17,24 @@ import {
   Spinner,
 } from "@fluentui/react-components";
 
-import { useQueryGetVideos } from "@/src/query/video.query";
+import {
+  useMutationDownloadVideo,
+  useQueryGetVideos,
+} from "@/src/query/video.query";
 import { IVideo } from "@/src/types/video.types";
 import { useQueryClient } from "@tanstack/react-query";
+import { useMyToastController } from "@/components/MyToast/MyToast.hook";
 const Videos: FC = () => {
   const { data: videos, isFetching, isLoading } = useQueryGetVideos();
   const client = useQueryClient();
+  const { mutate: downloadVideo } = useMutationDownloadVideo();
+  const { dispatchToast } = useMyToastController();
+  const dispatchVideoDownloadToast = () => {
+    dispatchToast({
+      title: "Download Video",
+      body: "Preparing video for download. You will be notified once it is ready.",
+    });
+  };
 
   const columns: TableColumnDefinition<IVideo>[] = [
     createTableColumn<IVideo>({
@@ -39,7 +51,30 @@ const Videos: FC = () => {
       },
     }),
     createTableColumn<IVideo>({
-      columnId: "createdAt",
+      columnId: "download",
+      renderHeaderCell: () => {
+        return <Subtitle2>Download</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return item.generatedVideoInfo && item.generatedVideoInfo.length ? (
+          item.generatedVideoInfo.map((videoInfo) => (
+            <Button
+              key={videoInfo.cloudFile}
+              onClick={() => {
+                dispatchVideoDownloadToast();
+                downloadVideo(videoInfo.cloudFile);
+              }}
+            >
+              Download
+            </Button>
+          ))
+        ) : (
+          <Body1Strong>Not Available</Body1Strong>
+        );
+      },
+    }),
+    createTableColumn<IVideo>({
+      columnId: "Preview",
       renderHeaderCell: () => {
         return <Subtitle2>Preview</Subtitle2>;
       },

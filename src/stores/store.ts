@@ -104,8 +104,8 @@ export const useSlidesStore = create<IStore>()(
       getS3PublicUrl: async (key: string) => {
         const store = get();
         const resp: { url: string } = await ServerClient.generateS3GetSignedUrl(
-          store.apiServer as string,
           key,
+          store.apiServer as string,
         );
 
         let s3PublicUrls = store.s3PublicUrls ? store.s3PublicUrls : {};

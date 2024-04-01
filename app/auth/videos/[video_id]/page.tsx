@@ -101,6 +101,7 @@ export default function VideoPreview({
                     key={scene.id}
                     data-slideid={`${scene.id}`}
                     data-name={`${scene.id}`}
+                    data-description={scene.description}
                     data-sceneindex={index}
                   >
                     <RenderLayoutComponent

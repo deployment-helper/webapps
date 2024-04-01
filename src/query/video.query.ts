@@ -5,14 +5,34 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { VideoClient } from "@/src/apis/video.client";
-import { useState } from "react";
 import { ELanguage, IVideo } from "@/src/types/video.types";
+import { useVideoStore } from "@/src/stores/video.store";
+import { v4 } from "uuid";
 
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
   return useQuery({
     queryKey: ["video", id],
     queryFn: () => VideoClient.get(id),
+  });
+};
+
+export const useMutationDownloadVideo = () => {
+  const setMessage = useVideoStore((state) => state.setMessage);
+  return useMutation({
+    mutationFn: (key: string) => VideoClient.generateS3GetSignedUrl(key),
+    onSuccess: (data) => {
+      setMessage({
+        id: v4(),
+        title: "Download Video",
+        body: "Video is ready for download. Click the link below to download.",
+        intent: "success",
+        link: {
+          url: data.url,
+          text: "Download",
+        },
+      });
+    },
   });
 };
 

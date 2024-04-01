@@ -36,21 +36,8 @@ const Projects: FC = () => {
       },
       renderCell: (item) => {
         return (
-          <Link href={`/auth/slides/create-new/${item.id}`}>
+          <Link href={`/auth/videos`}>
             <Body1Strong>{item.projectName}</Body1Strong>
-          </Link>
-        );
-      },
-    }),
-    createTableColumn<IProject>({
-      columnId: "createdAt",
-      renderHeaderCell: () => {
-        return <Subtitle2>Videos</Subtitle2>;
-      },
-      renderCell: (item) => {
-        return (
-          <Link href={`/auth/videos/${item.id}`}>
-            <Body1Strong>Preview</Body1Strong>
           </Link>
         );
       },
@@ -78,9 +65,6 @@ const Projects: FC = () => {
               }}
             >
               Refresh
-            </Button>
-            <Button appearance="primary">
-              <Link href={"/auth/slides/create-new"}>Create</Link>
             </Button>
           </div>
         </div>

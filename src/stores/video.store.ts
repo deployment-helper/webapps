@@ -8,6 +8,19 @@ export const useVideoStore = create<IVideoStore>()(
     selectedSceneId: "",
     sceneArrayIndex: -1,
     sceneContent: {},
+    messageBar: [],
+    setMessage: (message) => {
+      set((state) => ({
+        ...state,
+        messageBar: [...state.messageBar, message],
+      }));
+    },
+    removeMessage: (id) => {
+      set((state) => ({
+        ...state,
+        messageBar: state.messageBar.filter((message) => message.id !== id),
+      }));
+    },
     setSceneContent: (layoutId, sceneId, sceneArrayIndex, content) => {
       set((state) => ({
         ...state,

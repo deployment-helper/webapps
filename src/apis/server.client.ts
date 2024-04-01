@@ -1,6 +1,11 @@
 import cookies from "@/src/cookies";
 import { IPresentation, Presentation } from "../types/types";
-import { addSlideIds, getApiServer } from "../helpers";
+import {
+  addSlideIds,
+  checkAndSetApiKey,
+  getApiServer,
+  getBatchServer,
+} from "../helpers";
 import { HttpMethod } from "../constants";
 
 export class ServerClient {
@@ -11,7 +16,7 @@ export class ServerClient {
   ): Promise<any> {
     const cookieStore = cookies();
     const token = cookieStore.get("access_token");
-    return fetch(url, {
+    return fetch(checkAndSetApiKey(url), {
       method,
       body: JSON.stringify(body),
       headers: {
@@ -29,6 +34,15 @@ export class ServerClient {
     const API_SERVER = getApiServer();
 
     return ServerClient.send(new URL(url, API_SERVER).href, body, method);
+  }
+
+  public static sendToBatchServer(
+    url: string,
+    body?: any,
+    method: HttpMethod = HttpMethod.GET,
+  ): Promise<any> {
+    const BATCH_SERVER = getBatchServer();
+    return ServerClient.send(new URL(url, BATCH_SERVER).href, body, method);
   }
   public static async createPresentation(
     name: string,
@@ -118,6 +132,12 @@ export class ServerClient {
     ServerClient.send(url, presentation, HttpMethod.POST);
   }
 
+  /**
+   * @Depricated no longer in use
+   * @param apiServer
+   * @param presentation
+   * @param presentationUrl
+   */
   public static async generateVideo(
     apiServer: string,
     presentation: IPresentation,
@@ -131,10 +151,18 @@ export class ServerClient {
     );
   }
 
-  // generate S3 get signed url
-  public static async generateS3GetSignedUrl(apiServer: string, key: string) {
+  /**
+   * Generate S3 get signed url
+   * @param key key should be the s3 object key ex: 'folder/file.png'
+   * @param apiServer
+   */
+  public static async generateS3GetSignedUrl(key: string, apiServer = "") {
     const url = `${apiServer}/auth/downloadS3ObjUrl?key=${key}`;
-    const resp = await ServerClient.send(url, undefined, HttpMethod.GET);
+    const resp = await ServerClient.sendToAPiServer(
+      url,
+      undefined,
+      HttpMethod.GET,
+    );
     return await resp.json();
   }
 

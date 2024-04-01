@@ -6,6 +6,9 @@ export interface IVideoStore {
   selectedSceneId: string;
   sceneContent: Record<string, IInput>;
   sceneArrayIndex: number;
+  messageBar: IMessage[];
+  setMessage: (message: IMessage) => void;
+  removeMessage: (id: string) => void;
   setSceneContent: (
     layoutId: string,
     sceneId: string,
@@ -19,6 +22,28 @@ export enum ELanguage {
   English = "en-US",
 }
 
+export interface IProject {
+  id: string;
+  projectName: string;
+  userId: string;
+}
+
+export interface IMessage {
+  id: string;
+  title: string;
+  body: string;
+  link?: {
+    url: string;
+    text: string;
+  };
+  intent: "success" | "error" | "warning";
+}
+
+export interface IGeneratedVideoInfo {
+  cloudFile: string;
+  version: string;
+}
+
 export interface IVideo {
   id: string;
   name: string;
@@ -28,6 +53,17 @@ export interface IVideo {
   updatedAt: string;
   userId: string;
   scenesId: string;
+  generatedVideoInfo?: IGeneratedVideoInfo[];
+}
+
+export enum EWorkerVersion {
+  V1 = "v1",
+  V2 = "v2",
+}
+export interface IGenerateVideoDto {
+  url: string;
+  version?: EWorkerVersion;
+  videoId: string;
 }
 
 export interface IScene {

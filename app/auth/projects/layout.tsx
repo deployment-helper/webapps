@@ -1,7 +1,9 @@
 import { Header } from "@/components/Header";
 import { ReactNode } from "react";
+import { useQueryGetProjects } from "@/src/query/video.query";
 
 export default function VideosLayout({ children }: { children: ReactNode }) {
+  const { data } = useQueryGetProjects();
   return (
     <>
       <div className="flex flex-col items-center">
@@ -13,7 +15,7 @@ export default function VideosLayout({ children }: { children: ReactNode }) {
         <Header
           title="Dashbord"
           type="auth"
-          projectList={[]}
+          projectList={data || []}
           currentProject={undefined}
           checkForCreatePath
         />

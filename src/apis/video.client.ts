@@ -2,6 +2,9 @@ import { ServerClient } from "@/src/apis/server.client";
 import { HttpMethod } from "@/src/constants";
 import {
   ELanguage,
+  EWorkerVersion,
+  IGenerateVideoDto,
+  IProject,
   IScene,
   ISceneResponse,
   IVideo,
@@ -50,7 +53,7 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async getProjects(): Promise<IVideo[]> {
+  public static async getProjects(): Promise<IProject[]> {
     const resp = await VideoClient.sendToAPiServer("projects");
     return resp.json();
   }
@@ -136,6 +139,25 @@ export class VideoClient extends ServerClient {
     const resp = await VideoClient.sendToAPiServer(
       `ai/synthesis`,
       body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
+
+  public static async generateVideoV2(
+    id: string,
+    data: Exclude<IGenerateVideoDto, "version">,
+  ): Promise<IVideo> {
+    // TODO: add description to this generated video as multiple videos can be generated
+    data = {
+      ...data,
+      version: EWorkerVersion.V1,
+    };
+
+    const resp = await VideoClient.sendToBatchServer(
+      `video/generate/v2`,
+      data,
       HttpMethod.POST,
     );
 

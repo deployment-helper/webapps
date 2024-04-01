@@ -18,12 +18,16 @@ import {
   mergeClasses,
   useToastController,
   Spinner,
-  SplitButton,
+  Button,
 } from "@fluentui/react-components";
 
 import { HeaderProps } from "./Header.types";
 import { useStyles } from "./Header.styles";
-import { ArrowLeft24Filled, Navigation24Filled } from "@fluentui/react-icons";
+import {
+  ArrowLeft24Filled,
+  Navigation24Filled,
+  Play20Filled,
+} from "@fluentui/react-icons";
 import { usePathname, useParams } from "next/navigation";
 import useSlidesStore from "@/src/stores/store";
 import { ServerClient } from "@/src/apis/server.client";
@@ -35,6 +39,9 @@ import {
 import { debounce } from "lodash";
 import Language from "@/components/Language/Language";
 import { ELanguage } from "@/src/types/video.types";
+import { VideoClient } from "@/src/apis/video.client";
+import { generatePreviewUrl } from "@/src/helpers";
+import { useMyToastController } from "@/components/MyToast";
 
 let debouncedMutation: any = undefined;
 
@@ -50,36 +57,25 @@ export const Header: FC<HeaderProps> = ({
   const path = usePathname();
   const params = useParams();
   const [presentationName, setPresentationName] = useState("");
-  const editorFile = useSlidesStore((state) => state.createSlide?.editorFile);
   const { isLoading, isFetching, data } = useQueryGetVideo(
     params.video_id as string,
   );
   const { mutate } = useMutationUpdateVideo();
-
-  // TODO: A new hook for toast creation at application level can be created
-  const { dispatchToast } = useToastController(TOASTER_ID);
-
-  const notify = () => {
-    dispatchToast(
-      <Toast>
-        <ToastTitle>{`${presentationName} Presentation created.`}</ToastTitle>
-      </Toast>,
-      { intent: "success" },
-    );
+  const { dispatchToast } = useMyToastController();
+  const createVideo = async () => {
+    VideoClient.generateVideoV2(params.video_id as string, {
+      videoId: params.video_id[0] as string,
+      url: generatePreviewUrl(params.video_id as string),
+    });
+    dispatchToast({
+      title: "Video is being created",
+      body: "You will be notified once the video is ready for download.",
+      intent: "success",
+    });
   };
 
   const goBack = () => {
     history.back();
-  };
-
-  const publish = (isDraft?: boolean) => {
-    ServerClient.createPresentation(
-      presentationName,
-      currentProject?.projectId || "",
-      editorFile,
-    ).then((res) => {
-      notify();
-    });
   };
 
   function onLanguageChange(language: ELanguage) {
@@ -139,7 +135,7 @@ export const Header: FC<HeaderProps> = ({
                 <MenuPopover>
                   <MenuList>
                     {projectList?.map((project) => (
-                      <MenuItem key={project.projectId}>
+                      <MenuItem key={project.id}>
                         {project.projectName}
                       </MenuItem>
                     ))}
@@ -174,7 +170,7 @@ export const Header: FC<HeaderProps> = ({
                 <MenuPopover>
                   <MenuList>
                     {projectList?.map((project) => (
-                      <MenuItem key={project.projectId}>
+                      <MenuItem key={project.id}>
                         {project.projectName}
                       </MenuItem>
                     ))}
@@ -199,25 +195,10 @@ export const Header: FC<HeaderProps> = ({
               )}
             </div>
             <div>
-              {/* TODO: This could be a separate component */}
-              <Menu positioning="below-end">
-                <MenuTrigger disableButtonEnhancement>
-                  {(triggerProps: MenuButtonProps) => (
-                    <SplitButton
-                      onClick={() => publish()}
-                      menuButton={triggerProps}
-                    >
-                      Publish
-                    </SplitButton>
-                  )}
-                </MenuTrigger>
-
-                <MenuPopover>
-                  <MenuList>
-                    <MenuItem onClick={() => publish(true)}>Draft</MenuItem>
-                  </MenuList>
-                </MenuPopover>
-              </Menu>
+              <Button onClick={createVideo}>
+                Create Video
+                <Play20Filled className="cursor-pointer" />
+              </Button>
             </div>
           </div>
         )}
