@@ -2,6 +2,7 @@
 import {
   useMutationPostTextToSpeech,
   useQueryGetScenes,
+  useQueryGetVideo,
   useQueryGetVideos,
 } from "@/src/query/video.query";
 import { Spinner } from "@fluentui/react-components";
@@ -18,6 +19,7 @@ export default function VideoPreview({
     video_id: string;
   };
 }) {
+  const { data: video } = useQueryGetVideo(params.video_id);
   const { data: scenesResp, isLoading } = useQueryGetScenes(params.video_id);
   const videos = scenesResp?.[0].scenes;
 
@@ -62,7 +64,11 @@ export default function VideoPreview({
   useEffect(() => {
     if (videos?.length && !audios) {
       const texts = videos.map((v) => v.description! || "");
-      mutate({ text: texts, audioLanguage: ELanguage.English, merge: false });
+      mutate({
+        text: texts,
+        audioLanguage: video?.audioLanguage || ELanguage.English,
+        merge: false,
+      });
     }
   }, [params.video_id, videos, audios, mutate]);
 
@@ -103,6 +109,7 @@ export default function VideoPreview({
                     data-name={`${scene.id}`}
                     data-description={scene.description}
                     data-sceneindex={index}
+                    data-language={video?.audioLanguage || "en-US"}
                   >
                     <RenderLayoutComponent
                       layoutId={scene.layoutId}

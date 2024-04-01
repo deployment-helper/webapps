@@ -80,7 +80,7 @@ const Videos: FC = () => {
       },
       renderCell: (item) => {
         return (
-          <Link href={`/auth/videos/${item.id}`}>
+          <Link target={"_blank"} href={`/auth/videos/${item.id}`}>
             <Body1Strong>Preview</Body1Strong>
           </Link>
         );
