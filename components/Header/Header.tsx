@@ -6,17 +6,13 @@ import {
   Input,
   Menu,
   MenuButton,
-  MenuButtonProps,
   MenuItem,
   MenuList,
   MenuPopover,
   MenuTrigger,
   Subtitle1,
-  Toast,
-  ToastTitle,
   Toaster,
   mergeClasses,
-  useToastController,
   Spinner,
   Button,
 } from "@fluentui/react-components";
@@ -29,8 +25,6 @@ import {
   Play20Filled,
 } from "@fluentui/react-icons";
 import { usePathname, useParams } from "next/navigation";
-import useSlidesStore from "@/src/stores/store";
-import { ServerClient } from "@/src/apis/server.client";
 import { TOASTER_ID } from "@/src/constants";
 import {
   useMutationUpdateVideo,
@@ -42,6 +36,7 @@ import { ELanguage } from "@/src/types/video.types";
 import { VideoClient } from "@/src/apis/video.client";
 import { generatePreviewUrl } from "@/src/helpers";
 import { useMyToastController } from "@/components/MyToast";
+import Link from "next/link";
 
 let debouncedMutation: any = undefined;
 
@@ -158,10 +153,11 @@ export const Header: FC<HeaderProps> = ({
         {(type === "create" || type === "create-new") && (
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-4">
-              <ArrowLeft24Filled
-                className={mergeClasses(classes.title, "cursor-pointer")}
-                onClick={goBack}
-              />
+              <Link href={"/auth/videos"}>
+                <ArrowLeft24Filled
+                  className={mergeClasses(classes.title, "cursor-pointer")}
+                />
+              </Link>
               <Menu>
                 <MenuTrigger>
                   <MenuButton>{currentProject?.projectName}</MenuButton>

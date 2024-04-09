@@ -10,6 +10,7 @@ import { Slide } from "@/components/Slide";
 import { SlideType } from "@/src/constants";
 import useSlidesStore from "../../../../src/stores/store";
 
+// TODO: This approach is not used anymore. We can remove this file.
 export default function Page() {
   const [slides, setSlides] = useState<any[]>([]);
   const [editor, setEditor] = useState<string>("{}");

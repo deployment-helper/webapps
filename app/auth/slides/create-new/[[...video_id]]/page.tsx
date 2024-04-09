@@ -89,7 +89,8 @@ export default function Page({ params }: { params: { video_id: string } }) {
   return (
     <div className="flex  h-screen w-full">
       <div className="w-1/12 bg-red-200 text-center">Scene</div>
-      <div className="w-1/4 bg-green-200">
+      {/*Add white background*/}
+      <div className="w-1/4 border bg-gray-100">
         <SceneEditor sceneDocId={videoData?.scenesId || ""} />
       </div>
       <div className="w-8/12 bg-white">

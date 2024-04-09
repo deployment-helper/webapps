@@ -28,7 +28,7 @@ export default function RenderLayoutComponent({
     <div>
       {content && LayoutReactComponent && (
         <LayoutReactComponent
-          isNone={false}
+          isNone={true}
           content={content}
           sceneId={sceneId}
           ref={ref}

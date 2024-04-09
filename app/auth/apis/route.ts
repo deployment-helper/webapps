@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     const message = JSON.parse(data.message);
     redirect(`${protocol}//${host}/auth?login=${message.error}`);
   } else {
-    const resp = NextResponse.redirect(`${protocol}//${host}/auth/slides`, {
+    const resp = NextResponse.redirect(`${protocol}//${host}/auth/videos`, {
       status: 302,
     });
 

@@ -8,6 +8,8 @@ import useSlidesStore from "@/src/stores/store";
 import { ISlide } from "@/src/types/types";
 import Reveal from "@/reveal.js-4.6.0/dist/reveal.esm";
 import { ServerClient } from "@/src/apis/server.client";
+
+// TODO: This approach is not used anymore. We can remove this file.
 const Page = ({
   params,
   searchParams,
