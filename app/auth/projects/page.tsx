@@ -17,10 +17,7 @@ import {
   Spinner,
 } from "@fluentui/react-components";
 
-import {
-  useQueryGetProjects,
-  useQueryGetVideos,
-} from "@/src/query/video.query";
+import { useQueryGetProjects } from "@/src/query/video.query";
 import { IProject, IVideo } from "@/src/types/video.types";
 import { useQueryClient } from "@tanstack/react-query";
 const Projects: FC = () => {

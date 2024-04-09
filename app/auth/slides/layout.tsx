@@ -19,12 +19,8 @@ export const SlidesLayout: FC<{ children: ReactNode }> = async ({
         <Header
           title="Dashbord"
           type="auth"
-          projectList={user.slideProjects}
-          currentProject={
-            user.slideProjects && user.slideProjects.length
-              ? user.slideProjects[0]
-              : undefined
-          }
+          projectList={[]}
+          currentProject={undefined}
           checkForCreatePath
         />
         {children}

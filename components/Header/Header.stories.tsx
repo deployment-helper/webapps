@@ -17,20 +17,24 @@ const meta: Meta<typeof Header> = {
     projectList: [
       {
         projectName: "Project1",
-        projectId: "p1",
+        id: "p1",
+        userId: "u1",
       },
       {
         projectName: "Project2",
-        projectId: "p2",
+        id: "p2",
+        userId: "u1",
       },
       {
         projectName: "Project3",
-        projectId: "p3",
+        id: "p3",
+        userId: "u1",
       },
     ],
     currentProject: {
       projectName: "Project1",
-      projectId: "p1",
+      id: "p1",
+      userId: "u1",
     },
   },
 };
