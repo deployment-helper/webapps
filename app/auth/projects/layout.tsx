@@ -1,9 +1,9 @@
 import { Header } from "@/components/Header";
 import { ReactNode } from "react";
-import server from "@/app/auth/apis/server";
+import HttpClient from "@/app/auth/apis/server";
 
 async function getProjects() {
-  const resp = await server.getProjects();
+  const resp = await HttpClient.getProjects();
   return resp;
 }
 
