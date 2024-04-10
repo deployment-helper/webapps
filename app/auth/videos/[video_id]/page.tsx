@@ -112,6 +112,7 @@ export default function VideoPreview({
                     data-language={video?.audioLanguage || "en-US"}
                   >
                     <RenderLayoutComponent
+                      isNone={false}
                       layoutId={scene.layoutId}
                       sceneId={scene.id}
                       content={scene.content}

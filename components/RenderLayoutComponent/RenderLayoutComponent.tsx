@@ -41,5 +41,5 @@ export default function RenderLayoutComponent({
 
 export interface IRenderLayoutComponentProps extends ILayoutProps {
   layoutId: string;
-  isNone: boolean;
+  isNone?: boolean;
 }
