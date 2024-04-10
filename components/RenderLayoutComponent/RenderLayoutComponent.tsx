@@ -7,6 +7,7 @@ export default function RenderLayoutComponent({
   layoutId,
   sceneId,
   content,
+  isNone = false,
 }: IRenderLayoutComponentProps) {
   const [LayoutReactComponent, setLayoutReactComponent] = useState<
     React.FunctionComponent<any> | undefined
@@ -28,7 +29,7 @@ export default function RenderLayoutComponent({
     <div>
       {content && LayoutReactComponent && (
         <LayoutReactComponent
-          isNone={true}
+          isNone={isNone}
           content={content}
           sceneId={sceneId}
           ref={ref}
@@ -40,4 +41,5 @@ export default function RenderLayoutComponent({
 
 export interface IRenderLayoutComponentProps extends ILayoutProps {
   layoutId: string;
+  isNone: boolean;
 }

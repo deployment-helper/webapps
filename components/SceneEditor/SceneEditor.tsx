@@ -197,6 +197,7 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
             <div>
               <img id={"canvas"} src={""} />
               <RenderLayoutComponent
+                isNone={true}
                 content={sceneContent}
                 sceneId={selectedSceneId}
                 layoutId={selectedLayoutId}
