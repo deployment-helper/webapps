@@ -1,3 +1,5 @@
+import { ELanguage } from "@/src/types/video.types";
+
 export enum Theme {
   BLUE = "BLUE",
   YELLOW = "YELLOW",
@@ -20,3 +22,16 @@ export enum HttpMethod {
   PUT = "PUT",
   DELETE = "DELETE", // You can add more methods as needed
 }
+
+export const SUPPORTED_LANGUAGES: Record<
+  string,
+  { label: string; value: ELanguage }
+> = {
+  ...Object.entries(ELanguage).reduce(
+    (acc, [key, value]) => {
+      acc[key] = { label: key, value: value as ELanguage };
+      return acc;
+    },
+    {} as Record<string, { label: string; value: ELanguage }>,
+  ),
+};

@@ -15,19 +15,27 @@ import {
   Title1,
   createTableColumn,
   Spinner,
+  Menu,
+  MenuTrigger,
+  MenuPopover,
+  MenuList,
+  MenuItem,
 } from "@fluentui/react-components";
 
 import {
+  useMutationDeleteVideo,
   useMutationDownloadVideo,
   useQueryGetVideos,
 } from "@/src/query/video.query";
 import { IVideo } from "@/src/types/video.types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMyToastController } from "@/components/MyToast/MyToast.hook";
+import { MoreVertical20Regular } from "@fluentui/react-icons";
 const Videos: FC = () => {
   const { data: videos, isFetching, isLoading } = useQueryGetVideos();
   const client = useQueryClient();
   const { mutate: downloadVideo } = useMutationDownloadVideo();
+  const deleteMutation = useMutationDeleteVideo();
   const { dispatchToast } = useMyToastController();
   const dispatchVideoDownloadToast = () => {
     dispatchToast({
@@ -35,6 +43,20 @@ const Videos: FC = () => {
       body: "Preparing video for download. You will be notified once it is ready.",
     });
   };
+
+  function copyVideo(video: IVideo) {
+    // TODO: Implement the logic to copy a video
+    console.log(`Copying video with ID: ${video.id}`);
+  }
+
+  function copyAndChangeLanguage(video: IVideo) {
+    // TODO: Implement the logic to copy a video and change its language
+    console.log(`Copying and changing language of video with ID: ${video.id}`);
+  }
+
+  function deleteVideo(video: IVideo) {
+    deleteMutation.mutate(video.id);
+  }
 
   const columns: TableColumnDefinition<IVideo>[] = [
     createTableColumn<IVideo>({
@@ -83,6 +105,38 @@ const Videos: FC = () => {
           <Link target={"_blank"} href={`/auth/videos/${item.id}`}>
             <Body1Strong>Preview</Body1Strong>
           </Link>
+        );
+      },
+    }),
+    createTableColumn<IVideo>({
+      columnId: "actions",
+      renderHeaderCell: () => {
+        return <Subtitle2></Subtitle2>;
+      },
+      renderCell: (item) => {
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              width: "100%",
+            }}
+          >
+            <Menu positioning="below-start">
+              <MenuTrigger>
+                <Button icon={<MoreVertical20Regular />} />
+              </MenuTrigger>
+              <MenuPopover>
+                <MenuList>
+                  <MenuItem onClick={() => copyVideo(item)}>Copy</MenuItem>
+                  <MenuItem onClick={() => copyAndChangeLanguage(item)}>
+                    Copy and Change Language
+                  </MenuItem>
+                  <MenuItem onClick={() => deleteVideo(item)}>Delete</MenuItem>
+                </MenuList>
+              </MenuPopover>
+            </Menu>
+          </div>
         );
       },
     }),

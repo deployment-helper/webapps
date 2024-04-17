@@ -167,3 +167,15 @@ export const useQueryGetProjects = () => {
     queryFn: () => VideoClient.getProjects(),
   });
 };
+
+export const useMutationDeleteVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => VideoClient.delete(id),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
+      });
+    },
+  });
+};

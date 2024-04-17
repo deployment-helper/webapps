@@ -1,5 +1,6 @@
 import {
   Button,
+  makeStyles,
   Menu,
   MenuItem,
   MenuList,
@@ -9,8 +10,17 @@ import {
 import { LocalLanguage20Filled } from "@fluentui/react-icons";
 import { Text } from "@fluentui/react-text";
 import { ELanguage } from "@/src/types/video.types";
+import { SUPPORTED_LANGUAGES } from "@/src/constants";
 
+const useStyles = makeStyles({
+  scrollableMenu: {
+    maxHeight: "300px",
+    overflowY: "auto",
+  },
+});
 export function Language({ language, onSelect }: ILanguageProps) {
+  const classes = useStyles();
+
   return (
     <Menu positioning="below-end">
       <MenuTrigger disableButtonEnhancement>
@@ -20,11 +30,12 @@ export function Language({ language, onSelect }: ILanguageProps) {
       </MenuTrigger>
 
       <MenuPopover>
-        <MenuList>
-          <MenuItem onClick={() => onSelect(ELanguage.Hindi)}>Hindi</MenuItem>
-          <MenuItem onClick={() => onSelect(ELanguage.English)}>
-            English
-          </MenuItem>
+        <MenuList className={classes.scrollableMenu}>
+          {Object.values(SUPPORTED_LANGUAGES).map(({ label, value }) => (
+            <MenuItem key={value} onClick={() => onSelect(value)}>
+              {label}
+            </MenuItem>
+          ))}
         </MenuList>
       </MenuPopover>
     </Menu>

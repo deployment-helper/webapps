@@ -163,4 +163,13 @@ export class VideoClient extends ServerClient {
 
     return resp.json();
   }
+
+  public static async delete(id: string): Promise<IVideo> {
+    const resp = await VideoClient.sendToAPiServer(
+      `videos/${id}`,
+      {},
+      HttpMethod.DELETE,
+    );
+    return resp.json();
+  }
 }
