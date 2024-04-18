@@ -53,7 +53,7 @@ export const Scene = (props: ISceneProps) => {
     const text = descRef.current?.value;
     postTextToSpeech({
       text: [text || ""],
-      audioLanguage: props.audioLanguage || ELanguage.English,
+      audioLanguage: props.audioLanguage || ELanguage["English (India)"],
     });
   };
 
