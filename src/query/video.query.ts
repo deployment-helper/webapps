@@ -184,8 +184,8 @@ export const useMutationDeleteVideo = () => {
 export const useMutationCopyVideo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (id: string, langTo?: string, langFrom?: string) =>
-      VideoClient.copy(id, (langTo = ""), (langFrom = "")),
+    mutationFn: (data: { id: string; langTo?: string; langFrom?: string }) =>
+      VideoClient.copy(data.id, data.langTo || "", data.langFrom || ""),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["videos"],

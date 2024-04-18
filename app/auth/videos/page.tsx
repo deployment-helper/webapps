@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Link from "next/link";
 import {
   Body1Strong,
@@ -32,6 +32,7 @@ import { IVideo } from "@/src/types/video.types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMyToastController } from "@/components/MyToast/MyToast.hook";
 import { MoreVertical20Regular } from "@fluentui/react-icons";
+import { LanguageDialog } from "@/components/Dialog/Dialog";
 const Videos: FC = () => {
   const { data: videos, isFetching, isLoading } = useQueryGetVideos();
   const client = useQueryClient();
@@ -46,12 +47,32 @@ const Videos: FC = () => {
     });
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
   function copyVideo(video: IVideo) {
-    copyMutation.mutate(video.id);
+    copyMutation.mutate({
+      id: video.id as string,
+    });
   }
 
+  function onClose() {
+    setIsOpen(false);
+    setSelectedVideo(null);
+  }
+  function onSubmit(language: string) {
+    console.log(language);
+    setIsOpen(false);
+    copyMutation.mutate({
+      id: selectedVideo?.id as string,
+      langFrom: selectedVideo?.audioLanguage,
+      langTo: language,
+    });
+
+    setSelectedVideo(null);
+  }
   function copyAndChangeLanguage(video: IVideo) {
-    copyMutation.mutate(video.id);
+    setIsOpen(true);
+    setSelectedVideo(video);
   }
 
   function deleteVideo(video: IVideo) {
@@ -145,6 +166,9 @@ const Videos: FC = () => {
   return (
     <>
       <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
+        {isOpen && (
+          <LanguageDialog open={isOpen} onClose={onClose} onSubmit={onSubmit} />
+        )}
         <div className="flex justify-between pb-6 pt-6">
           <div className={"flex items-center"}>
             <Title1>Videos</Title1>{" "}
