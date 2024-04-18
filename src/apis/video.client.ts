@@ -172,4 +172,23 @@ export class VideoClient extends ServerClient {
     );
     return resp.json();
   }
+
+  public static async copy(
+    id: string,
+    langTo?: string,
+    langFrom?: string,
+  ): Promise<IVideo> {
+    const body = {
+      langTo,
+      langFrom,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      `videos/${id}/copy?langTo=${langTo}&langFrom=${langFrom}`,
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
 }

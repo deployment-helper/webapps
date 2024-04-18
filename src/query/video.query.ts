@@ -179,3 +179,17 @@ export const useMutationDeleteVideo = () => {
     },
   });
 };
+
+// video.query.ts
+export const useMutationCopyVideo = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string, langTo?: string, langFrom?: string) =>
+      VideoClient.copy(id, (langTo = ""), (langFrom = "")),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["videos"],
+      });
+    },
+  });
+};

@@ -23,6 +23,7 @@ import {
 } from "@fluentui/react-components";
 
 import {
+  useMutationCopyVideo,
   useMutationDeleteVideo,
   useMutationDownloadVideo,
   useQueryGetVideos,
@@ -36,6 +37,7 @@ const Videos: FC = () => {
   const client = useQueryClient();
   const { mutate: downloadVideo } = useMutationDownloadVideo();
   const deleteMutation = useMutationDeleteVideo();
+  const copyMutation = useMutationCopyVideo();
   const { dispatchToast } = useMyToastController();
   const dispatchVideoDownloadToast = () => {
     dispatchToast({
@@ -45,13 +47,11 @@ const Videos: FC = () => {
   };
 
   function copyVideo(video: IVideo) {
-    // TODO: Implement the logic to copy a video
-    console.log(`Copying video with ID: ${video.id}`);
+    copyMutation.mutate(video.id);
   }
 
   function copyAndChangeLanguage(video: IVideo) {
-    // TODO: Implement the logic to copy a video and change its language
-    console.log(`Copying and changing language of video with ID: ${video.id}`);
+    copyMutation.mutate(video.id);
   }
 
   function deleteVideo(video: IVideo) {
