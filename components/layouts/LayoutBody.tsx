@@ -22,7 +22,7 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
           ref={ref}
           id={props.sceneId}
           style={{ width: "1280px", height: "720px" }}
-          className={"flex justify-center bg-white"}
+          className={"flex justify-center border-2 bg-white"}
         >
           {props.children}
         </div>
