@@ -38,6 +38,7 @@ export default function VideoPreview({
       Reveal.initialize({
         width: 1280,
         height: 720,
+        controls: false,
       }).then(() => {
         setIsRevealInitialized(true);
       });
@@ -99,7 +100,11 @@ export default function VideoPreview({
               }}
             >
               <div className="slides">
-                <section data-slideid={"start-1"} data-name="start-1">
+                <section
+                  data-slideid={"start-1"}
+                  data-name="start-1"
+                  className={"bg-green-300"}
+                >
                   START 1
                 </section>
                 {videos?.map((scene, index) => (
@@ -119,7 +124,11 @@ export default function VideoPreview({
                     />
                   </section>
                 ))}
-                <section data-slideid={"end-1"} data-name="end-1">
+                <section
+                  data-slideid={"end-1"}
+                  data-name="end-1"
+                  className={"bg-red-300"}
+                >
                   End 1
                 </section>
               </div>
