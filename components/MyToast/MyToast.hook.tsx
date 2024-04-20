@@ -9,6 +9,7 @@ export function useMyToastController() {
       dispatchToast(<MyToast title={title} body={body} intent={intent} />, {
         intent,
         position: "top-end",
+        timeout: 10000,
       });
     },
   };
