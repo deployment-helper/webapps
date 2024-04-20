@@ -192,6 +192,24 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
+  public static async createProject(
+    projectName: string,
+    projectDesc: string,
+  ): Promise<IProject> {
+    const body = {
+      projectName,
+      projectDesc,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      `projects`,
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
+
   public static async deleteScene(
     id: string,
     sceneId: string,

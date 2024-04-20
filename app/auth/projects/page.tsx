@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import Link from "next/link";
 import {
   Body1Strong,
@@ -17,14 +17,18 @@ import {
   Spinner,
 } from "@fluentui/react-components";
 
-import { useQueryGetProjects } from "@/src/query/video.query";
+import {
+  useMutationCreateProject,
+  useQueryGetProjects,
+} from "@/src/query/video.query";
 import { IProject, IVideo } from "@/src/types/video.types";
 import { useQueryClient } from "@tanstack/react-query";
+import FormAddProject from "../../../components/FormAddProject/FormAddProject";
 const Projects: FC = () => {
   const { data: projects, isFetching, isLoading } = useQueryGetProjects();
   const client = useQueryClient();
-
-  console.log("projects", projects);
+  const [isOpen, setIsOpen] = useState(false);
+  const addProjectMutation = useMutationCreateProject();
   const columns: TableColumnDefinition<IProject>[] = [
     createTableColumn<IProject>({
       columnId: "name",
@@ -40,6 +44,14 @@ const Projects: FC = () => {
       },
     }),
   ];
+
+  const onFormSubmit = (data: {
+    projectName: string;
+    projectDescription: string;
+  }) => {
+    addProjectMutation.mutate(data);
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -62,6 +74,14 @@ const Projects: FC = () => {
               }}
             >
               Refresh
+            </Button>
+            <Button
+              appearance={"primary"}
+              onClick={() => {
+                setIsOpen(true);
+              }}
+            >
+              Add Project
             </Button>
           </div>
         </div>
@@ -86,6 +106,15 @@ const Projects: FC = () => {
           </DataGrid>
         )}
       </div>
+      {isOpen && (
+        <FormAddProject
+          isOpen={true}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+          onSubmit={onFormSubmit}
+        />
+      )}
     </>
   );
 };

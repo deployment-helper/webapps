@@ -168,6 +168,19 @@ export const useQueryGetProjects = () => {
   });
 };
 
+export const useMutationCreateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: { projectName: string; projectDescription: string }) =>
+      VideoClient.createProject(data.projectName, data.projectDescription),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["projects"],
+      });
+    },
+  });
+};
+
 export const useMutationDeleteVideo = () => {
   const queryClient = useQueryClient();
   return useMutation({
