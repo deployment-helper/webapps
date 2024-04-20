@@ -38,7 +38,6 @@ export default function VideoPreview({
       Reveal.initialize({
         width: 1280,
         height: 720,
-        controls: false,
       }).then(() => {
         setIsRevealInitialized(true);
       });
