@@ -58,7 +58,7 @@ export const useQueryGetVideos = () => {
 };
 export const useMutationCreateVideo = () => {
   return useMutation({
-    mutationFn: (name: string) => VideoClient.create(name),
+    mutationFn: (data: any) => VideoClient.create(data),
   });
 };
 

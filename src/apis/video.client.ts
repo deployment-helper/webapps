@@ -11,9 +11,9 @@ import {
 } from "@/src/types/video.types";
 
 export class VideoClient extends ServerClient {
-  public static async create(name: string): Promise<IVideo> {
+  public static async create(data: any): Promise<IVideo> {
     const body = {
-      name,
+      ...data,
     };
 
     const resp = await VideoClient.sendToAPiServer(

@@ -29,6 +29,7 @@ const Projects: FC = () => {
   const client = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const addProjectMutation = useMutationCreateProject();
+
   const columns: TableColumnDefinition<IProject>[] = [
     createTableColumn<IProject>({
       columnId: "name",
@@ -37,7 +38,7 @@ const Projects: FC = () => {
       },
       renderCell: (item) => {
         return (
-          <Link href={`/auth/videos`}>
+          <Link href={`/auth/projects/${item.id}`}>
             <Body1Strong>{item.projectName}</Body1Strong>
           </Link>
         );
