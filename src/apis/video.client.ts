@@ -191,4 +191,18 @@ export class VideoClient extends ServerClient {
 
     return resp.json();
   }
+
+  public static async deleteScene(
+    id: string,
+    sceneId: string,
+    sceneArrayIndex: number,
+  ): Promise<ISceneResponse[]> {
+    const resp = await VideoClient.sendToAPiServer(
+      `videos/${id}/scenes/${sceneId}/${sceneArrayIndex}`,
+      {},
+      HttpMethod.DELETE,
+    );
+
+    return resp.json();
+  }
 }

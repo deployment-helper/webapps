@@ -193,3 +193,19 @@ export const useMutationCopyVideo = () => {
     },
   });
 };
+
+export const useMutationDeleteScene = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: {
+      id: string;
+      sceneId: string;
+      sceneArrayIndex: number;
+    }) => VideoClient.deleteScene(data.id, data.sceneId, data.sceneArrayIndex),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["video", variables.id, "scenes"],
+      });
+    },
+  });
+};

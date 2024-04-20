@@ -3,11 +3,13 @@ import { ChangeEvent, useRef, useState } from "react";
 import { debounce } from "lodash";
 import { Spinner, Textarea } from "@fluentui/react-components";
 import {
+  useMutationDeleteScene,
   useMutationPostTextToSpeech,
   useMutationUpdateScene,
 } from "@/src/query/video.query";
 import { ELanguage, IScene } from "@/src/types/video.types";
 import {
+  Delete20Filled,
   PlayCircleHint24Regular,
   ReOrderDotsVertical24Filled,
 } from "@fluentui/react-icons";
@@ -21,6 +23,7 @@ export const Scene = (props: ISceneProps) => {
     data: audios,
     isPending,
   } = useMutationPostTextToSpeech();
+  const deleteMutation = useMutationDeleteScene();
   const descRef = useRef<HTMLTextAreaElement>(null);
   const [isHover, setIsHover] = useState(false);
 
@@ -54,6 +57,14 @@ export const Scene = (props: ISceneProps) => {
     postTextToSpeech({
       text: [text || ""],
       audioLanguage: props.audioLanguage || ELanguage["English (India)"],
+    });
+  };
+
+  const deleteScene = () => {
+    deleteMutation.mutate({
+      id: props.videoId,
+      sceneId: props.sceneDocId,
+      sceneArrayIndex: props.sceneArrayIndex,
     });
   };
 
@@ -120,23 +131,28 @@ export const Scene = (props: ISceneProps) => {
           </Textarea>
           <div
             className={
-              "relative flex w-10 flex-col items-center justify-center"
+              "relative flex w-10 flex-col items-center justify-center gap-3.5"
             }
           >
-            <div>
-              {props.isSelected || isHover ? (
-                isPending ? (
+            {props.isSelected || isHover ? (
+              <>
+                {deleteMutation.isPending ? (
+                  <Spinner size={"tiny"} />
+                ) : (
+                  <Delete20Filled onClick={deleteScene} className={"block"} />
+                )}
+                {isPending ? (
                   <div className={"right-0"}>
                     <Spinner size={"tiny"} />
                   </div>
                 ) : (
                   <PlayCircleHint24Regular
                     onClick={playDescription}
-                    className={"absolute right-0"}
+                    className={"block"}
                   />
-                )
-              ) : null}
-            </div>
+                )}
+              </>
+            ) : null}
           </div>
         </div>
         {audios && audios.length && (
