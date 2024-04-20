@@ -33,6 +33,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useMyToastController } from "@/components/MyToast/MyToast.hook";
 import { MoreVertical20Regular } from "@fluentui/react-icons";
 import { LanguageDialog } from "@/components/Dialog/Dialog";
+import { VideoClient } from "@/src/apis/video.client";
+import { generatePreviewUrl } from "@/src/helpers";
 const Videos: FC = () => {
   const { data: videos, isFetching, isLoading } = useQueryGetVideos();
   const client = useQueryClient();
@@ -52,6 +54,18 @@ const Videos: FC = () => {
   function copyVideo(video: IVideo) {
     copyMutation.mutate({
       id: video.id as string,
+    });
+  }
+
+  function generateVideo(video: IVideo) {
+    VideoClient.generateVideoV2(video.id as string, {
+      videoId: video.id as string,
+      url: generatePreviewUrl(video.id as string),
+    });
+    dispatchToast({
+      title: "Video is being created",
+      body: "You will be notified once the video is ready for download.",
+      intent: "success",
     });
   }
 
@@ -149,6 +163,9 @@ const Videos: FC = () => {
               </MenuTrigger>
               <MenuPopover>
                 <MenuList>
+                  <MenuItem onClick={() => generateVideo(item)}>
+                    Generate Video
+                  </MenuItem>
                   <MenuItem onClick={() => copyVideo(item)}>Copy</MenuItem>
                   <MenuItem onClick={() => copyAndChangeLanguage(item)}>
                     Copy and Change Language
