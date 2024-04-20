@@ -79,6 +79,7 @@ export enum ELanguage {
 export interface IProject {
   id: string;
   projectName: string;
+  projectDesc?: string;
   userId: string;
 }
 

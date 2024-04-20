@@ -43,6 +43,15 @@ const Projects: FC = () => {
         );
       },
     }),
+    createTableColumn<IProject>({
+      columnId: "description",
+      renderHeaderCell: () => {
+        return <Subtitle2>Description</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return <Body1Strong>{item.projectDesc}</Body1Strong>;
+      },
+    }),
   ];
 
   const onFormSubmit = (data: {
