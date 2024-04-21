@@ -9,10 +9,12 @@ import { ELanguage, IVideo } from "@/src/types/video.types";
 import { useVideoStore } from "@/src/stores/video.store";
 import { v4 } from "uuid";
 
+// TODO: move project and scenes to their own files
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
   return useQuery({
     queryKey: ["video", id],
+    refetchOnWindowFocus: false,
     queryFn: () => VideoClient.get(id),
   });
 };
@@ -53,6 +55,7 @@ export const useMutationUpdateVideo = () => {
 export const useQueryGetVideos = () => {
   return useQuery({
     queryKey: ["videos"],
+    refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getVideos(),
   });
 };
@@ -83,6 +86,7 @@ export const useMutationCreateScene = () => {
 export const useQueryGetScenes = (id: string) => {
   return useQuery({
     queryKey: ["video", id, "scenes"],
+    refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getScenes(id),
   });
 };
@@ -164,6 +168,7 @@ export const useMutationPostTextToSpeech = () => {
 export const useQueryGetProjects = () => {
   return useQuery({
     queryKey: ["projects"],
+    refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getProjects(),
   });
 };
@@ -220,5 +225,13 @@ export const useMutationDeleteScene = () => {
         queryKey: ["video", variables.id, "scenes"],
       });
     },
+  });
+};
+
+export const useQueryGetVideosForProject = (projectId: string) => {
+  return useQuery({
+    queryKey: ["project", projectId, "videos"],
+    refetchOnWindowFocus: false,
+    queryFn: () => VideoClient.getVideosForProject(projectId),
   });
 };

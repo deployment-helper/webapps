@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Body1Strong,
@@ -29,6 +29,7 @@ import {
   useMutationDownloadVideo,
   useQueryGetProjects,
   useQueryGetVideos,
+  useQueryGetVideosForProject,
 } from "@/src/query/video.query";
 import { IVideo } from "@/src/types/video.types";
 import { useQueryClient } from "@tanstack/react-query";
@@ -46,12 +47,17 @@ function Videos({
     project_id: string;
   };
 }) {
-  const { data: videos, isFetching, isLoading } = useQueryGetVideos();
+  const {
+    data: videos,
+    isFetching,
+    isLoading,
+  } = useQueryGetVideosForProject(params.project_id);
   const client = useQueryClient();
   const { mutate: downloadVideo } = useMutationDownloadVideo();
   const deleteMutation = useMutationDeleteVideo();
   const copyMutation = useMutationCopyVideo();
   const createVideoMutation = useMutationCreateVideo();
+  // TODO: fetch single project by id
   const { data: projects } = useQueryGetProjects();
   const { dispatchToast } = useMyToastController();
   const dispatchVideoDownloadToast = () => {
@@ -113,6 +119,12 @@ function Videos({
     setIsCreateVideoOpen(false);
   }
 
+  function refreshVideos() {
+    client.invalidateQueries({
+      queryKey: ["project", params.project_id, "videos"],
+    });
+  }
+
   const columns: TableColumnDefinition<IVideo>[] = [
     createTableColumn<IVideo>({
       columnId: "name",
@@ -122,7 +134,7 @@ function Videos({
       renderCell: (item) => {
         return (
           <Link href={`/auth/slides/create-new/${item.id}`}>
-            <Body1Strong>{JSON.stringify(item.name)}</Body1Strong>
+            <Body1Strong>{item.name}</Body1Strong>
           </Link>
         );
       },
@@ -200,6 +212,24 @@ function Videos({
     }),
   ];
 
+  useEffect(() => {
+    if (createVideoMutation.isSuccess) {
+      refreshVideos();
+    }
+  }, [createVideoMutation.isSuccess]);
+
+  useEffect(() => {
+    if (deleteMutation.isSuccess) {
+      refreshVideos();
+    }
+  }, [deleteMutation.isSuccess]);
+
+  useEffect(() => {
+    if (copyMutation.isSuccess) {
+      refreshVideos();
+    }
+  }, [copyMutation.isSuccess]);
+
   return (
     <>
       <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
@@ -218,9 +248,7 @@ function Videos({
             <Button
               appearance="outline"
               onClick={() => {
-                client.invalidateQueries({
-                  queryKey: ["videos"],
-                });
+                refreshVideos();
               }}
             >
               Refresh

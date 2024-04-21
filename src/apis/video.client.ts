@@ -223,4 +223,13 @@ export class VideoClient extends ServerClient {
 
     return resp.json();
   }
+
+  public static async getVideosForProject(
+    projectId: string,
+  ): Promise<IVideo[]> {
+    const resp = await VideoClient.sendToAPiServer(
+      `videos/project/${projectId}`,
+    );
+    return resp.json();
+  }
 }
