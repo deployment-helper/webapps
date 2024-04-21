@@ -28,7 +28,6 @@ import {
   useMutationDeleteVideo,
   useMutationDownloadVideo,
   useQueryGetProjects,
-  useQueryGetVideos,
   useQueryGetVideosForProject,
 } from "@/src/query/video.query";
 import { IVideo } from "@/src/types/video.types";

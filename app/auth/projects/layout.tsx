@@ -7,11 +7,7 @@ async function getProjects() {
   return resp;
 }
 
-export default async function VideosLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default async function VideosLayout(props: any) {
   const projects = await getProjects();
   return (
     <>
@@ -28,7 +24,7 @@ export default async function VideosLayout({
           currentProject={undefined}
           checkForCreatePath
         />
-        {children}
+        {props.children}
       </div>
     </>
   );
