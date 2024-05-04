@@ -16,8 +16,8 @@ import {
   createTableColumn,
   Spinner,
   Menu,
-  MenuTrigger,
   MenuPopover,
+  MenuTrigger,
   MenuList,
   MenuItem,
 } from "@fluentui/react-components";
