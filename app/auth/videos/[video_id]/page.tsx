@@ -102,6 +102,7 @@ export default function VideoPreview({
                 <section
                   data-slideid={"start-1"}
                   data-name="start-1"
+                  data-description={"hello world"}
                   className={"bg-green-300"}
                 >
                   START 1
@@ -126,6 +127,7 @@ export default function VideoPreview({
                 <section
                   data-slideid={"end-1"}
                   data-name="end-1"
+                  data-description={"hello world"}
                   className={"bg-red-300"}
                 >
                   End 1
