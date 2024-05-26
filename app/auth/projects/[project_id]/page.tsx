@@ -1,26 +1,26 @@
-"use client";
-import { FC, useEffect, useState } from "react";
-import Link from "next/link";
+'use client';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import {
   Body1Strong,
   Button,
+  createTableColumn,
   DataGrid,
   DataGridBody,
   DataGridCell,
   DataGridHeader,
   DataGridHeaderCell,
   DataGridRow,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuPopover,
+  MenuTrigger,
+  Spinner,
   Subtitle2,
   TableColumnDefinition,
   Title1,
-  createTableColumn,
-  Spinner,
-  Menu,
-  MenuPopover,
-  MenuTrigger,
-  MenuList,
-  MenuItem,
-} from "@fluentui/react-components";
+} from '@fluentui/react-components';
 
 import {
   useMutationCopyVideo,
@@ -29,16 +29,16 @@ import {
   useMutationDownloadVideo,
   useQueryGetProjects,
   useQueryGetVideosForProject,
-} from "@/src/query/video.query";
-import { IVideo } from "@/src/types/video.types";
-import { useQueryClient } from "@tanstack/react-query";
-import { useMyToastController } from "@/components/MyToast/MyToast.hook";
-import { MoreVertical20Regular } from "@fluentui/react-icons";
-import { LanguageDialog } from "@/components/Dialog/Dialog";
-import { VideoClient } from "@/src/apis/video.client";
-import { generatePreviewUrl } from "@/src/helpers";
-import { FormAddVideo } from "@/components/FormAddVideo";
-import { useRouter } from "next/navigation";
+} from '@/src/query/video.query';
+import { IVideo } from '@/src/types/video.types';
+import { useQueryClient } from '@tanstack/react-query';
+import { useMyToastController } from '@/components/MyToast/MyToast.hook';
+import { MoreVertical20Regular } from '@fluentui/react-icons';
+import { LanguageDialog } from '@/components/Dialog/Dialog';
+import { VideoClient } from '@/src/apis/video.client';
+import { generatePreviewUrl } from '@/src/helpers';
+import { FormAddVideo } from '@/components/FormAddVideo';
+
 function Videos({
   params,
 }: {
@@ -61,8 +61,8 @@ function Videos({
   const { dispatchToast } = useMyToastController();
   const dispatchVideoDownloadToast = () => {
     dispatchToast({
-      title: "Download Video",
-      body: "Preparing video for download. You will be notified once it is ready.",
+      title: 'Download Video',
+      body: 'Preparing video for download. You will be notified once it is ready.',
     });
   };
 
@@ -71,6 +71,7 @@ function Videos({
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
   const project = projects?.find((project) => project.id === params.project_id);
+
   function copyVideo(video: IVideo) {
     copyMutation.mutate({
       id: video.id as string,
@@ -83,9 +84,9 @@ function Videos({
       url: generatePreviewUrl(video.id as string),
     });
     dispatchToast({
-      title: "Video is being created",
-      body: "You will be notified once the video is ready for download.",
-      intent: "success",
+      title: 'Video is being created',
+      body: 'You will be notified once the video is ready for download.',
+      intent: 'success',
     });
   }
 
@@ -93,6 +94,7 @@ function Videos({
     setIsOpen(false);
     setSelectedVideo(null);
   }
+
   function onSubmit(language: string) {
     console.log(language);
     setIsOpen(false);
@@ -104,6 +106,7 @@ function Videos({
 
     setSelectedVideo(null);
   }
+
   function copyAndChangeLanguage(video: IVideo) {
     setIsOpen(true);
     setSelectedVideo(video);
@@ -120,13 +123,22 @@ function Videos({
 
   function refreshVideos() {
     client.invalidateQueries({
-      queryKey: ["project", params.project_id, "videos"],
+      queryKey: ['project', params.project_id, 'videos'],
     });
   }
 
   const columns: TableColumnDefinition<IVideo>[] = [
     createTableColumn<IVideo>({
-      columnId: "name",
+      columnId: 'id',
+      renderHeaderCell: () => {
+        return <Subtitle2>ID</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return <Body1Strong>{item.id}</Body1Strong>;
+      },
+    }),
+    createTableColumn<IVideo>({
+      columnId: 'name',
       renderHeaderCell: () => {
         return <Subtitle2>Name</Subtitle2>;
       },
@@ -139,7 +151,7 @@ function Videos({
       },
     }),
     createTableColumn<IVideo>({
-      columnId: "download",
+      columnId: 'download',
       renderHeaderCell: () => {
         return <Subtitle2>Download</Subtitle2>;
       },
@@ -162,20 +174,20 @@ function Videos({
       },
     }),
     createTableColumn<IVideo>({
-      columnId: "Preview",
+      columnId: 'Preview',
       renderHeaderCell: () => {
         return <Subtitle2>Preview</Subtitle2>;
       },
       renderCell: (item) => {
         return (
-          <Link target={"_blank"} href={`/auth/videos/${item.id}`}>
+          <Link target={'_blank'} href={`/auth/videos/${item.id}`}>
             <Body1Strong>Preview</Body1Strong>
           </Link>
         );
       },
     }),
     createTableColumn<IVideo>({
-      columnId: "actions",
+      columnId: 'actions',
       renderHeaderCell: () => {
         return <Subtitle2></Subtitle2>;
       },
@@ -183,9 +195,9 @@ function Videos({
         return (
           <div
             style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              width: "100%",
+              display: 'flex',
+              justifyContent: 'flex-end',
+              width: '100%',
             }}
           >
             <Menu positioning="below-start">
@@ -231,15 +243,15 @@ function Videos({
 
   return (
     <>
-      <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
+      <div className="w-100 max-w-7xl" style={{ minWidth: '80rem' }}>
         {isOpen && (
           <LanguageDialog open={isOpen} onClose={onClose} onSubmit={onSubmit} />
         )}
         <div className="flex justify-between pb-6 pt-6">
-          <div className={"flex items-center"}>
-            <Title1>{project?.projectName} Project Videos</Title1>{" "}
+          <div className={'flex items-center'}>
+            <Title1>{project?.projectName} Project Videos</Title1>{' '}
             {(isFetching || isLoading) && (
-              <Spinner size={"tiny"} className={"pl-1"} />
+              <Spinner size={'tiny'} className={'pl-1'} />
             )}
           </div>
 
