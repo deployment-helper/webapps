@@ -80,6 +80,9 @@ export interface IProject {
   projectName: string;
   projectDesc?: string;
   userId: string;
+  createdAt: {
+    _seconds: number;
+  };
 }
 
 export interface IMessage {

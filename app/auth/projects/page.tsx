@@ -1,29 +1,31 @@
-"use client";
-import { FC, useState } from "react";
-import Link from "next/link";
+'use client';
+import { FC, useState } from 'react';
+import Link from 'next/link';
 import {
   Body1Strong,
   Button,
+  createTableColumn,
   DataGrid,
   DataGridBody,
   DataGridCell,
   DataGridHeader,
   DataGridHeaderCell,
   DataGridRow,
+  Spinner,
   Subtitle2,
   TableColumnDefinition,
   Title1,
-  createTableColumn,
-  Spinner,
-} from "@fluentui/react-components";
+} from '@fluentui/react-components';
 
 import {
   useMutationCreateProject,
   useQueryGetProjects,
-} from "@/src/query/video.query";
-import { IProject, IVideo } from "@/src/types/video.types";
-import { useQueryClient } from "@tanstack/react-query";
-import FormAddProject from "../../../components/FormAddProject/FormAddProject";
+} from '@/src/query/video.query';
+import { IProject, IVideo } from '@/src/types/video.types';
+import { useQueryClient } from '@tanstack/react-query';
+import FormAddProject from '../../../components/FormAddProject/FormAddProject';
+import { formatDate } from '@/src/helpers';
+
 const Projects: FC = () => {
   const { data: projects, isFetching, isLoading } = useQueryGetProjects();
   const client = useQueryClient();
@@ -32,7 +34,7 @@ const Projects: FC = () => {
 
   const columns: TableColumnDefinition<IProject>[] = [
     createTableColumn<IProject>({
-      columnId: "name",
+      columnId: 'name',
       renderHeaderCell: () => {
         return <Subtitle2>Name</Subtitle2>;
       },
@@ -45,12 +47,21 @@ const Projects: FC = () => {
       },
     }),
     createTableColumn<IProject>({
-      columnId: "description",
+      columnId: 'description',
       renderHeaderCell: () => {
         return <Subtitle2>Description</Subtitle2>;
       },
       renderCell: (item) => {
         return <Body1Strong>{item.projectDesc}</Body1Strong>;
+      },
+    }),
+    createTableColumn<IProject>({
+      columnId: 'Date',
+      renderHeaderCell: () => {
+        return <Subtitle2>Date</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return <Body1Strong>{formatDate(item.createdAt._seconds)}</Body1Strong>;
       },
     }),
   ];
@@ -65,12 +76,12 @@ const Projects: FC = () => {
 
   return (
     <>
-      <div className="w-100 max-w-7xl" style={{ minWidth: "80rem" }}>
+      <div className="w-100 max-w-7xl" style={{ minWidth: '80rem' }}>
         <div className="flex justify-between pb-6 pt-6">
-          <div className={"flex items-center"}>
-            <Title1>Projects</Title1>{" "}
+          <div className={'flex items-center'}>
+            <Title1>Projects</Title1>{' '}
             {(isFetching || isLoading) && (
-              <Spinner size={"tiny"} className={"pl-1"} />
+              <Spinner size={'tiny'} className={'pl-1'} />
             )}
           </div>
 
@@ -79,14 +90,14 @@ const Projects: FC = () => {
               appearance="outline"
               onClick={() => {
                 client.invalidateQueries({
-                  queryKey: ["projects"],
+                  queryKey: ['projects'],
                 });
               }}
             >
               Refresh
             </Button>
             <Button
-              appearance={"primary"}
+              appearance={'primary'}
               onClick={() => {
                 setIsOpen(true);
               }}
