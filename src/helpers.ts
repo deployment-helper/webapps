@@ -1,7 +1,7 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
 
-import { IInput, Presentation } from "./types/types";
-import layouts from "@/src/layouts";
+import { Presentation } from './types/types';
+import layouts from '@/src/layouts';
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -23,10 +23,10 @@ export function formatDateString(dateString: string) {
   const minutes = date.getMinutes();
 
   // Format components to ensure two digits
-  const formattedMonth = month.toString().padStart(2, "0");
-  const formattedDay = day.toString().padStart(2, "0");
-  const formattedHours = hours.toString().padStart(2, "0");
-  const formattedMinutes = minutes.toString().padStart(2, "0");
+  const formattedMonth = month.toString().padStart(2, '0');
+  const formattedDay = day.toString().padStart(2, '0');
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = minutes.toString().padStart(2, '0');
 
   // Construct formatted date string
   return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}`;
@@ -41,7 +41,7 @@ export function getApiServer() {
     ?.textContent;
 
   if (!apiServer) {
-    throw new Error("apiServer not found");
+    throw new Error('apiServer not found');
   }
 
   return apiServer;
@@ -52,7 +52,7 @@ export function getBatchServer() {
     ?.textContent;
 
   if (!batchServer) {
-    throw new Error("batchServer not found");
+    throw new Error('batchServer not found');
   }
 
   return batchServer;
@@ -75,11 +75,11 @@ export function getLayoutContent(currentLayoutId: string) {
 export function checkAndSetApiKey(url: string) {
   const pageUrl = document.location.href;
   const urlObj = new URL(pageUrl);
-  const apiKey = urlObj.searchParams.get("apiKey");
+  const apiKey = urlObj.searchParams.get('apiKey');
 
   if (apiKey) {
     const urlObj = new URL(url);
-    urlObj.searchParams.set("key", apiKey);
+    urlObj.searchParams.set('key', apiKey);
     return urlObj.toString();
   }
 
@@ -92,10 +92,25 @@ export function generatePreviewUrl(videoId: string) {
   return `${server}/auth/videos/${videoId}`;
 }
 
+export const formatDate = (timestamp: number) => {
+  console.log('timestamp', timestamp);
+  const date = new Date(timestamp * 1000);
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // Months are zero based
+  const year = date.getFullYear();
+
+  // Pad the day and month with a zero if they are single digit
+  const dayStr = day < 10 ? '0' + day : day;
+  const monthStr = month < 10 ? '0' + month : month;
+
+  return dayStr + '-' + monthStr + '-' + year;
+};
+
 const defaultExport = {
   addSlideIds,
   s3RandomPublicKey,
   formatDateString,
+  formatDate,
 };
 
 export default defaultExport;

@@ -103,7 +103,9 @@ export interface IVideo {
   name: string;
   description?: string;
   audioLanguage?: ELanguage;
-  createdAt: string;
+  createdAt: {
+    _seconds: number;
+  };
   updatedAt: string;
   userId: string;
   scenesId: string;

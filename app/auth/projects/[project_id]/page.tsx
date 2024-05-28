@@ -36,7 +36,7 @@ import { useMyToastController } from '@/components/MyToast/MyToast.hook';
 import { MoreVertical20Regular } from '@fluentui/react-icons';
 import { LanguageDialog } from '@/components/Dialog/Dialog';
 import { VideoClient } from '@/src/apis/video.client';
-import { generatePreviewUrl } from '@/src/helpers';
+import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';
 
 function Videos({
@@ -145,7 +145,7 @@ function Videos({
       renderCell: (item) => {
         return (
           <Link href={`/auth/slides/create-new/${item.id}`}>
-            <Body1Strong>{item.name}</Body1Strong>
+            <Body1Strong className={'underline'}>{item.name}</Body1Strong>
           </Link>
         );
       },
@@ -174,6 +174,15 @@ function Videos({
       },
     }),
     createTableColumn<IVideo>({
+      columnId: 'Date',
+      renderHeaderCell: () => {
+        return <Subtitle2>Date</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return <Body1Strong>{formatDate(item.createdAt._seconds)}</Body1Strong>;
+      },
+    }),
+    createTableColumn<IVideo>({
       columnId: 'Preview',
       renderHeaderCell: () => {
         return <Subtitle2>Preview</Subtitle2>;
@@ -181,7 +190,7 @@ function Videos({
       renderCell: (item) => {
         return (
           <Link target={'_blank'} href={`/auth/videos/${item.id}`}>
-            <Body1Strong>Preview</Body1Strong>
+            <Body1Strong className={'underline'}>Preview</Body1Strong>
           </Link>
         );
       },
