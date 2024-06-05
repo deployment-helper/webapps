@@ -1,1 +1,1 @@
-export type UploadStatus = "uploading" | "uploaded" | "error" | "idle";
+export type UploadStatus = 'uploading' | 'uploaded' | 'error' | 'idle';

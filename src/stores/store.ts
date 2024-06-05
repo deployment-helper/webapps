@@ -3,10 +3,10 @@ import {
   IProject,
   IStore,
   IUserWithProjectTypes,
-} from "@/src/types/types";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
-import { ServerClient } from "@/src/apis/server.client";
+} from '@/src/types/types';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { ServerClient } from '@/src/apis/server.client';
 
 // TODO: code duplication
 export const useSlidesStore = create<IStore>()(
@@ -41,7 +41,7 @@ export const useSlidesStore = create<IStore>()(
 
         // check for api server
         if (!store.apiServer) {
-          throw Error("API server not defined");
+          throw Error('API server not defined');
         }
 
         const resp = await ServerClient.listPresentations(
@@ -81,7 +81,7 @@ export const useSlidesStore = create<IStore>()(
 
         // check for api server
         if (!store.apiServer) {
-          throw Error("API server not defined");
+          throw Error('API server not defined');
         }
         const resp = await ServerClient.getPresentation(
           store.apiServer,
@@ -147,7 +147,7 @@ export const useSlidesStore = create<IStore>()(
       },
     }),
     {
-      name: "slide-storage",
+      name: 'slide-storage',
     },
   ),
 );
