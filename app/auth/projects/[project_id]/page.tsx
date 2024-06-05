@@ -81,7 +81,7 @@ function Videos({
   function generateVideo(video: IVideo) {
     VideoClient.generateVideoV2(video.id as string, {
       videoId: video.id as string,
-      url: generatePreviewUrl(video.id as string),
+      url: generatePreviewUrl(video.id as string, true),
     });
     dispatchToast({
       title: 'Video is being created',
