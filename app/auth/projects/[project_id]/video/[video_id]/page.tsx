@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SceneEditor from '@/components/SceneEditor/SceneEditor';
 import SceneList from '@/components/SceneList/SceneList';
 import {
@@ -18,7 +18,15 @@ import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { ELanguage } from '@/src/types/video.types';
 import { v4 as uuid } from 'uuid';
 import Link from 'next/link';
-import { Play20Filled } from '@fluentui/react-icons';
+import {
+  HeadphonesSoundWave32Filled,
+  HeadphonesSoundWave32Regular,
+  Image32Filled,
+  Image32Regular,
+  PersonVoice24Filled,
+  PersonVoice24Regular,
+  Play20Filled,
+} from '@fluentui/react-icons';
 import { useMyToastController } from '@/components/MyToast';
 
 export default function Page({
@@ -48,12 +56,16 @@ export default function Page({
   // Store values
   const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
+
+  const [trayOptions, setTrayOptions] = useState<'scenes' | 'voices' | 'music'>(
+    'scenes',
+  );
+
   const scenes = scenesData?.[0]?.scenes || [];
+
   const onCreateScene = () => {
     const content = getLayoutContent(selectedLayoutId);
-
     if (videoData?.scenesId === undefined) return;
-
     updateScene({
       id: params.video_id,
       sceneId: videoData?.scenesId,
@@ -85,9 +97,10 @@ export default function Page({
       newSceneArrayIndex,
     });
   };
+
   const createVideo = async () => {
     VideoClient.generateVideoV2(params.video_id as string, {
-      videoId: params.video_id[0] as string,
+      videoId: params.video_id as string,
       url: generatePreviewUrl(params.video_id as string, true),
     });
     dispatchToast({
@@ -96,6 +109,7 @@ export default function Page({
       intent: 'success',
     });
   };
+
   useEffect(() => {
     async function fetchVideo() {
       const video = await VideoClient.create('New Video');
@@ -153,7 +167,43 @@ export default function Page({
         <div className="w-9/12 border bg-gray-100">
           <SceneEditor sceneDocId={videoData?.scenesId || ''} />
         </div>
-        <div className="w-2/12 bg-gray-200 text-center">Scene</div>
+        <div className="flex w-2/12 flex-col items-center gap-2 bg-gray-100 pt-2">
+          <div
+            className={`flex cursor-pointer flex-col items-center  border-2 p-2 ${
+              trayOptions === 'scenes' && 'bg-gray-300'
+            }`}
+            onClick={() => setTrayOptions('scenes')}
+          >
+            {trayOptions === 'scenes' ? <Image32Filled /> : <Image32Regular />}
+            Scenes
+          </div>
+          <div
+            className={`flex cursor-pointer flex-col items-center border-2  p-2 ${
+              trayOptions === 'voices' && 'bg-gray-300'
+            }`}
+            onClick={() => setTrayOptions('voices')}
+          >
+            {trayOptions === 'voices' ? (
+              <PersonVoice24Filled />
+            ) : (
+              <PersonVoice24Regular />
+            )}
+            Voices
+          </div>
+          <div
+            className={`flex cursor-pointer flex-col items-center border-2  p-2 ${
+              trayOptions === 'music' && 'bg-gray-300'
+            }`}
+            onClick={() => setTrayOptions('music')}
+          >
+            {trayOptions === 'music' ? (
+              <HeadphonesSoundWave32Filled />
+            ) : (
+              <HeadphonesSoundWave32Regular />
+            )}
+            Music
+          </div>
+        </div>
       </div>
     </div>
   );
