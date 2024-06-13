@@ -38,6 +38,7 @@ import { LanguageDialog } from '@/components/Dialog/Dialog';
 import { VideoClient } from '@/src/apis/video.client';
 import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';
+import { useVideoStore } from '@/src/stores/video.store';
 
 function Videos({
   params,
@@ -58,7 +59,11 @@ function Videos({
   const createVideoMutation = useMutationCreateVideo();
   // TODO: fetch single project by id
   const { data: projects } = useQueryGetProjects();
+
+  const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
+
   const { dispatchToast } = useMyToastController();
+
   const dispatchVideoDownloadToast = () => {
     dispatchToast({
       title: 'Download Video',
@@ -144,7 +149,7 @@ function Videos({
       },
       renderCell: (item) => {
         return (
-          <Link href={`/auth/slides/create-new/${item.id}`}>
+          <Link href={`/auth/projects/${params.project_id}/video/${item.id}`}>
             <Body1Strong className={'underline'}>{item.name}</Body1Strong>
           </Link>
         );
@@ -249,6 +254,10 @@ function Videos({
       refreshVideos();
     }
   }, [copyMutation.isSuccess]);
+
+  useEffect(() => {
+    setCurrentProject(params.project_id);
+  }, [params.project_id]);
 
   return (
     <>

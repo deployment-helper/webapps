@@ -1,5 +1,5 @@
-import { ServerClient } from "@/src/apis/server.client";
-import { HttpMethod } from "@/src/constants";
+import { ServerClient } from '@/src/apis/server.client';
+import { HttpMethod } from '@/src/constants';
 import {
   ELanguage,
   EWorkerVersion,
@@ -8,7 +8,7 @@ import {
   IScene,
   ISceneResponse,
   IVideo,
-} from "@/src/types/video.types";
+} from '@/src/types/video.types';
 
 export class VideoClient extends ServerClient {
   public static async create(data: any): Promise<IVideo> {
@@ -17,7 +17,7 @@ export class VideoClient extends ServerClient {
     };
 
     const resp = await VideoClient.sendToAPiServer(
-      "videos",
+      'videos',
       body,
       HttpMethod.POST,
     );
@@ -49,12 +49,12 @@ export class VideoClient extends ServerClient {
   }
 
   public static async getVideos(): Promise<IVideo[]> {
-    const resp = await VideoClient.sendToAPiServer("videos");
+    const resp = await VideoClient.sendToAPiServer('videos');
     return resp.json();
   }
 
   public static async getProjects(): Promise<IProject[]> {
-    const resp = await VideoClient.sendToAPiServer("projects");
+    const resp = await VideoClient.sendToAPiServer('projects');
     return resp.json();
   }
 
@@ -98,7 +98,7 @@ export class VideoClient extends ServerClient {
 
     const resp = await VideoClient.sendToAPiServer(
       `videos/${id}/scenes/${sceneId}/${
-        sceneArrayIndex === undefined ? "" : sceneArrayIndex
+        sceneArrayIndex === undefined ? '' : sceneArrayIndex
       }`,
       body,
       HttpMethod.PUT,
@@ -125,6 +125,7 @@ export class VideoClient extends ServerClient {
 
     return resp.json();
   }
+
   public static async textToSpeech(
     text: string[],
     audioLanguage?: ELanguage,
@@ -147,7 +148,7 @@ export class VideoClient extends ServerClient {
 
   public static async generateVideoV2(
     id: string,
-    data: Exclude<IGenerateVideoDto, "version">,
+    data: Exclude<IGenerateVideoDto, 'version'>,
   ): Promise<IVideo> {
     // TODO: add description to this generated video as multiple videos can be generated
     data = {

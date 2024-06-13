@@ -8,12 +8,14 @@ export interface IVideoStore {
   messageBar: IMessage[];
   setMessage: (message: IMessage) => void;
   removeMessage: (id: string) => void;
+  currentProjectId?: string;
   setSceneContent: (
     layoutId: string,
     sceneId: string,
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
   ) => void;
+  setCurrentProjectId: (project: string) => void;
 }
 
 export enum ELanguage {
