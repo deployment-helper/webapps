@@ -267,7 +267,7 @@ function Videos({
         )}
         <div className="flex justify-between pb-6 pt-6">
           <div className={'flex items-center'}>
-            <Title1>{project?.projectName} Project Videos</Title1>{' '}
+            <Title1>{project?.projectName}</Title1>{' '}
             {(isFetching || isLoading) && (
               <Spinner size={'tiny'} className={'pl-1'} />
             )}
