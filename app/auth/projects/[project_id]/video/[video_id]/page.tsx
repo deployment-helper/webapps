@@ -113,13 +113,8 @@ export default function Page({
 
   return (
     <div className="flex  h-screen w-full">
-      <div className="w-1/12 bg-red-200 text-center">Scene</div>
-      {/*Add white background*/}
-      <div className="w-1/4 border bg-gray-100">
-        <SceneEditor sceneDocId={videoData?.scenesId || ''} />
-      </div>
-      <div className="w-8/12 bg-white">
-        <div className={'flex items-end justify-end gap-1 pl-20 pr-20 pt-3'}>
+      <div className="w-9/12 bg-white">
+        <div className={'flex items-end justify-start gap-1 pl-20 pr-20 pt-3'}>
           {audios && audios.length && (
             <AudioPlayer
               audios={audios.map((a) => a.data)}
@@ -153,6 +148,12 @@ export default function Page({
           isLoading={isScenesFetching || isScenesLoading}
           onSceneReorder={onSceneReorder}
         />
+      </div>
+      <div className={' flex w-3/12 justify-end'}>
+        <div className="w-9/12 border bg-gray-100">
+          <SceneEditor sceneDocId={videoData?.scenesId || ''} />
+        </div>
+        <div className="w-2/12 bg-gray-200 text-center">Scene</div>
       </div>
     </div>
   );
