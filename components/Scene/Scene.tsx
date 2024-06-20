@@ -1,19 +1,20 @@
-"use client";
-import { ChangeEvent, useRef, useState } from "react";
-import { debounce } from "lodash";
-import { Spinner, Textarea } from "@fluentui/react-components";
+'use client';
+import { ChangeEvent, useRef, useState } from 'react';
+import { debounce } from 'lodash';
+import { Spinner, Textarea } from '@fluentui/react-components';
 import {
   useMutationDeleteScene,
   useMutationPostTextToSpeech,
   useMutationUpdateScene,
-} from "@/src/query/video.query";
-import { ELanguage, IScene } from "@/src/types/video.types";
+} from '@/src/query/video.query';
+import { ELanguage, IScene } from '@/src/types/video.types';
 import {
   Delete20Filled,
   PlayCircleHint24Regular,
   ReOrderDotsVertical24Filled,
-} from "@fluentui/react-icons";
-import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
+} from '@fluentui/react-icons';
+import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
+import Image from '@/components/Image/Image';
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
@@ -55,8 +56,8 @@ export const Scene = (props: ISceneProps) => {
   const playDescription = () => {
     const text = descRef.current?.value;
     postTextToSpeech({
-      text: [text || ""],
-      audioLanguage: props.audioLanguage || ELanguage["English (India)"],
+      text: [text || ''],
+      audioLanguage: props.audioLanguage || ELanguage['English (India)'],
     });
   };
 
@@ -69,7 +70,7 @@ export const Scene = (props: ISceneProps) => {
   };
 
   const onAudioEnd = () => {
-    console.log("Audio ended");
+    console.log('Audio ended');
   };
 
   return (
@@ -81,19 +82,19 @@ export const Scene = (props: ISceneProps) => {
       onDragStart={(e) => props.onDragStart(e, props.id)}
       onDrop={props.onDrop}
       onDragOver={props.onDragOver}
-      className={"scene flex items-center "}
+      className={'scene flex items-center '}
     >
       <div
         className={
-          "relative flex w-10 cursor-grab flex-col items-center justify-center"
+          'relative flex w-10 cursor-grab flex-col items-center justify-center'
         }
       >
         {props.isSelected || isHover ? (
-          <ReOrderDotsVertical24Filled className={"right-8"} />
+          <ReOrderDotsVertical24Filled className={'right-8'} />
         ) : (
           <ReOrderDotsVertical24Filled
-            className={"right-8"}
-            style={{ visibility: "hidden" }}
+            className={'right-8'}
+            style={{ visibility: 'hidden' }}
           />
         )}
       </div>
@@ -101,8 +102,8 @@ export const Scene = (props: ISceneProps) => {
       <div
         className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 pr-0 ${
           props.isSelected
-            ? "border-2 border-blue-200"
-            : "border-2 border-blue-50 hover:border-blue-200"
+            ? 'border-2 border-blue-200'
+            : 'border-2 border-blue-50 hover:border-blue-200'
         }`}
         id={props.id}
         onClick={() =>
@@ -115,40 +116,42 @@ export const Scene = (props: ISceneProps) => {
           )
         }
       >
-        <div className={"flex"}>
-          <img src={props.image} alt={props.name} style={{ width: "320px" }} />
+        <div className={'flex'}>
+          <div style={{ width: '320px' }}>
+            <Image isViewOnly={true} src={props.image} isCopyable={true} />
+          </div>
 
           <Textarea
             ref={descRef}
-            style={{ width: "600px", height: "190px" }}
-            className={"border-none"}
+            style={{ width: '600px', height: '190px' }}
+            className={'border-none'}
             defaultValue={props.description}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-              onInputChange(e, "description")
+              onInputChange(e, 'description')
             }
           >
             {props.description}
           </Textarea>
           <div
             className={
-              "relative flex w-10 flex-col items-center justify-center gap-3.5"
+              'relative flex w-10 flex-col items-center justify-center gap-3.5'
             }
           >
             {props.isSelected || isHover ? (
               <>
                 {deleteMutation.isPending ? (
-                  <Spinner size={"tiny"} />
+                  <Spinner size={'tiny'} />
                 ) : (
-                  <Delete20Filled onClick={deleteScene} className={"block"} />
+                  <Delete20Filled onClick={deleteScene} className={'block'} />
                 )}
                 {isPending ? (
-                  <div className={"right-0"}>
-                    <Spinner size={"tiny"} />
+                  <div className={'right-0'}>
+                    <Spinner size={'tiny'} />
                   </div>
                 ) : (
                   <PlayCircleHint24Regular
                     onClick={playDescription}
-                    className={"block"}
+                    className={'block'}
                   />
                 )}
               </>
@@ -163,7 +166,7 @@ export const Scene = (props: ISceneProps) => {
           props.markerIndex === props.sceneArrayIndex && (
             <div
               className={
-                "mt-5 flex  h-5 items-center justify-center border-2 bg-blue-200 text-white"
+                'mt-5 flex  h-5 items-center justify-center border-2 bg-blue-200 text-white'
               }
             >
               {props.markerIndex + 1}
@@ -185,4 +188,5 @@ export interface ISceneProps extends IScene {
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
 }
+
 export default Scene;

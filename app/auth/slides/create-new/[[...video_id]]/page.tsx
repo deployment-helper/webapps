@@ -1,23 +1,25 @@
-"use client";
-import { useEffect } from "react";
-import SceneEditor from "@/components/SceneEditor/SceneEditor";
-import SceneList from "@/components/SceneList/SceneList";
+'use client';
+import { useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
+import Link from 'next/link';
+
+import SceneList from '@/components/SceneList/SceneList';
 import {
   useMutationPostTextToSpeech,
   useMutationReorderScenes,
   useMutationUpdateScene,
   useQueryGetScenes,
   useQueryGetVideo,
-} from "@/src/query/video.query";
-import { VideoClient } from "@/src/apis/video.client";
-import { useRouter } from "next/navigation";
-import { useVideoStore } from "@/src/stores/video.store";
-import { getLayoutContent } from "@/src/helpers";
-import { Body1Strong, Button, Spinner } from "@fluentui/react-components";
-import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
-import { ELanguage } from "@/src/types/video.types";
-import { v4 as uuid } from "uuid";
-import Link from "next/link";
+} from '@/src/query/video.query';
+import { VideoClient } from '@/src/apis/video.client';
+import { useRouter } from 'next/navigation';
+import { useVideoStore } from '@/src/stores/video.store';
+import { getLayoutContent } from '@/src/helpers';
+import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
+import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
+import { ELanguage } from '@/src/types/video.types';
+
+import LayoutSelector from '@/components/LayoutSelector/LayoutSelector';
 
 export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -58,10 +60,10 @@ export default function Page({ params }: { params: { video_id: string } }) {
 
   const playAll = () => {
     if (!scenesData) return;
-    const texts = scenes.map((scene) => scene.description! || "");
+    const texts = scenes.map((scene) => scene.description! || '');
     mutate({
       text: texts,
-      audioLanguage: videoData?.audioLanguage || ELanguage["English (India)"],
+      audioLanguage: videoData?.audioLanguage || ELanguage['English (India)'],
     });
   };
 
@@ -71,14 +73,14 @@ export default function Page({ params }: { params: { video_id: string } }) {
   ) => {
     reorderScene({
       id: params.video_id,
-      sceneId: videoData?.scenesId || "",
+      sceneId: videoData?.scenesId || '',
       sceneArrayIndex,
       newSceneArrayIndex,
     });
   };
   useEffect(() => {
     async function fetchVideo() {
-      const video = await VideoClient.create("New Video");
+      const video = await VideoClient.create('New Video');
       await router.push(`/auth/slides/create-new/${video.id}`);
     }
 
@@ -91,26 +93,26 @@ export default function Page({ params }: { params: { video_id: string } }) {
       <div className="w-1/12 bg-red-200 text-center">Scene</div>
       {/*Add white background*/}
       <div className="w-1/4 border bg-gray-100">
-        <SceneEditor sceneDocId={videoData?.scenesId || ""} />
+        <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
       </div>
       <div className="w-8/12 bg-white">
-        <div className={"flex items-end justify-end gap-1 pl-20 pr-20 pt-3"}>
+        <div className={'flex items-end justify-end gap-1 pl-20 pr-20 pt-3'}>
           {audios && audios.length && (
             <AudioPlayer
               audios={audios.map((a) => a.data)}
               onAudioEnd={() => {}}
             />
           )}
-          <Button appearance={"primary"} onClick={playAll}>
+          <Button appearance={'primary'} onClick={playAll}>
             Play All
-            <div className={"pl-2"}>
+            <div className={'pl-2'}>
               {isAudioPending && (
-                <Spinner appearance={"inverted"} size={"tiny"} />
+                <Spinner appearance={'inverted'} size={'tiny'} />
               )}
             </div>
           </Button>
           <Button>
-            <Link target={"_blank"} href={`/auth/videos/${params.video_id}`}>
+            <Link target={'_blank'} href={`/auth/videos/${params.video_id}`}>
               <Body1Strong>Preview</Body1Strong>
             </Link>
           </Button>
@@ -120,7 +122,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
           audioLanguage={videoData?.audioLanguage}
           createScene={onCreateScene}
           isCreating={isPending}
-          sceneDocId={videoData?.scenesId || ""}
+          sceneDocId={videoData?.scenesId || ''}
           isLoading={isScenesFetching || isScenesLoading}
           onSceneReorder={onSceneReorder}
         />

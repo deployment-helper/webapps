@@ -21,7 +21,7 @@ import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayo
 
 let debounceContent: any = undefined;
 let debounceImage: any = undefined;
-const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
+const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
   const [activeTab, setActiveTab] = useState('1');
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
@@ -153,7 +153,7 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
 
   return (
     <div className={'p-4'}>
-      <h1 className={'text-xl'}>Scene Editor</h1>
+      <h1 className={'text-xl'}>Layout Selector</h1>
       <TabList
         className={'border-b-2 border-b-gray-500'}
         selectedValue={activeTab}
@@ -232,7 +232,7 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
                       />
                     ) : (
                       <Image
-                        src={value.value}
+                        src={value.value as string}
                         onUploadSuccess={(url?: string) => {
                           onUploadSuccess(url || '', value.name);
                         }}
@@ -252,5 +252,5 @@ export interface ISceneEditorProps {
   sceneDocId: string;
 }
 
-export { SceneEditor };
-export default SceneEditor;
+export { LayoutSelector };
+export default LayoutSelector;

@@ -1,6 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
-import SceneEditor from '@/components/SceneEditor/SceneEditor';
+import { v4 as uuid } from 'uuid';
+import Link from 'next/link';
+import {
+  HeadphonesSoundWave32Filled,
+  HeadphonesSoundWave32Regular,
+  Image32Filled,
+  Image32Regular,
+  PersonVoice24Filled,
+  PersonVoice24Regular,
+  Play20Filled,
+} from '@fluentui/react-icons';
+
 import SceneList from '@/components/SceneList/SceneList';
 import {
   useMutationPostTextToSpeech,
@@ -16,18 +27,9 @@ import { generatePreviewUrl, getLayoutContent } from '@/src/helpers';
 import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { ELanguage } from '@/src/types/video.types';
-import { v4 as uuid } from 'uuid';
-import Link from 'next/link';
-import {
-  HeadphonesSoundWave32Filled,
-  HeadphonesSoundWave32Regular,
-  Image32Filled,
-  Image32Regular,
-  PersonVoice24Filled,
-  PersonVoice24Regular,
-  Play20Filled,
-} from '@fluentui/react-icons';
+
 import { useMyToastController } from '@/components/MyToast';
+import LayoutSelector from '@/components/LayoutSelector/LayoutSelector';
 
 export default function Page({
   params,
@@ -165,7 +167,7 @@ export default function Page({
       </div>
       <div className={' flex w-3/12 justify-end'}>
         <div className="w-9/12 border bg-gray-100">
-          <SceneEditor sceneDocId={videoData?.scenesId || ''} />
+          <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
         </div>
         <div className="flex w-2/12 flex-col items-center gap-2 bg-gray-100 pt-2">
           <div
