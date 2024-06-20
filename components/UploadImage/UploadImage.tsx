@@ -2,8 +2,8 @@ import { useDropzone } from 'react-dropzone';
 import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
 import { ServerClient } from '@/src/apis/server.client';
 import { UploadStatus } from '@/src/types/common.types';
-import { Button, Input } from '@fluentui/react-components';
-import { useMemo, useRef } from 'react';
+import { Button, Input, Spinner } from '@fluentui/react-components';
+import { useMemo, useRef, useState } from 'react';
 import { useMyToastController } from '@/components/MyToast';
 
 export function UploadImage({
@@ -20,9 +20,11 @@ export function UploadImage({
   // TODO: Close modal on success
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const { dispatchToast } = useMyToastController();
   const uploadImage = (file: File) => {
     onStateChange && onStateChange('uploading');
+    setIsUploading(true);
     const apiServer = getApiServer();
     ServerClient.uploadS3Object(
       apiServer,
@@ -31,6 +33,7 @@ export function UploadImage({
       true,
     ).then((resp) => {
       onStateChange && onStateChange('uploaded');
+      setIsUploading(false);
       onUploadSuccess(resp.publicUrl);
     });
   };
@@ -70,7 +73,11 @@ export function UploadImage({
         }}
       >
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        {isUploading ? (
+          <Spinner size={'medium'} />
+        ) : (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
       </div>
       {/*  Crate a horizontal line*/}
       <div className="my-4 border-t border-gray-400"></div>

@@ -23,10 +23,8 @@ export function Image({
           <img src={src} />
         </div>
       ) : (
-        <div
-          className={`relative h-48 w-48  bg-contain bg-center`}
-          style={{ backgroundImage: `url(${src})` }}
-        >
+        <div className={`relative`}>
+          <img src={src} />
           {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
           {!isViewOnly && (
             // Replace button at right top
