@@ -2,6 +2,9 @@ import { useDropzone } from 'react-dropzone';
 import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
 import { ServerClient } from '@/src/apis/server.client';
 import { UploadStatus } from '@/src/types/common.types';
+import { Button, Input } from '@fluentui/react-components';
+import { useMemo, useRef } from 'react';
+import { useMyToastController } from '@/components/MyToast';
 
 export function UploadImage({
   onUploadSuccess,
@@ -16,7 +19,8 @@ export function UploadImage({
   // TODO: Add error handling
   // TODO: Close modal on success
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { dispatchToast } = useMyToastController();
   const uploadImage = (file: File) => {
     onStateChange && onStateChange('uploading');
     const apiServer = getApiServer();
@@ -31,22 +35,52 @@ export function UploadImage({
     });
   };
 
+  // Upload image from URL
+
+  const uploadImageFromUrl = () => {
+    const url = inputRef.current?.value;
+    if (!url) {
+      dispatchToast({
+        title: 'Error',
+        body: 'Please enter a valid URL',
+        intent: 'error',
+      });
+    } else {
+      onUploadSuccess(url);
+    }
+  };
+
+  const isDisabled = useMemo(() => {
+    return !inputRef?.current?.value?.length;
+  }, [inputRef?.current?.value]);
+
   return (
-    <div
-      {...getRootProps()}
-      className={`flex h-full w-full items-center justify-center ${
-        isDragActive ? 'bg-gray-100' : 'bg-white'
-      }`}
-      style={{
-        border: '2px dashed gray',
-        padding: '20px',
-        textAlign: 'center',
-        borderRadius: '10px',
-      }}
-    >
-      <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
-    </div>
+    <>
+      <div
+        {...getRootProps()}
+        className={` flex h-full w-full items-center justify-center ${
+          isDragActive ? 'bg-gray-100' : 'bg-white'
+        }`}
+        style={{
+          border: '2px dashed gray',
+          padding: '20px',
+          textAlign: 'center',
+          borderRadius: '10px',
+          height: '150px',
+        }}
+      >
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+      {/*  Crate a horizontal line*/}
+      <div className="my-4 border-t border-gray-400"></div>
+      <div className={'flex gap-2'}>
+        <Input ref={inputRef} placeholder={'Add URL'} className={'w-full'} />
+        <Button appearance={'primary'} onClick={uploadImageFromUrl}>
+          Upload
+        </Button>
+      </div>
+    </>
   );
 }
 
