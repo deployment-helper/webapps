@@ -3,26 +3,26 @@ import {
   SelectTabEvent,
   Tab,
   TabList,
-} from "@fluentui/react-tabs";
-import { useState } from "react";
-import { debounce } from "lodash";
+} from '@fluentui/react-tabs';
+import { useState } from 'react';
+import { debounce } from 'lodash';
 
-import Image from "@/components/Image/Image";
-import html2canvas from "html2canvas";
-import layouts from "@/src/layouts";
-import { useVideoStore } from "@/src/stores/video.store";
-import { ServerClient } from "@/src/apis/server.client";
-import { getApiServer, s3RandomPublicKey } from "@/src/helpers";
-import { useMutationUpdateScene } from "@/src/query/video.query";
-import { useParams } from "next/navigation";
+import Image from '@/components/Image/Image';
+import html2canvas from 'html2canvas';
+import layouts from '@/src/layouts';
+import { useVideoStore } from '@/src/stores/video.store';
+import { ServerClient } from '@/src/apis/server.client';
+import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
+import { useMutationUpdateScene } from '@/src/query/video.query';
+import { useParams } from 'next/navigation';
 
-import { IInput } from "@/src/types/types";
-import RenderLayoutComponent from "@/components/RenderLayoutComponent/RenderLayoutComponent";
+import { IInput } from '@/src/types/types';
+import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
 
 let debounceContent: any = undefined;
 let debounceImage: any = undefined;
 const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
-  const [activeTab, setActiveTab] = useState("1");
+  const [activeTab, setActiveTab] = useState('1');
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const sceneContent = useVideoStore((state) => state.sceneContent);
@@ -68,7 +68,7 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
 
   // When image is uploaded to S3 update image URL to content template
   const onUploadSuccess = (url: string, name: string) => {
-    console.log("url", url);
+    console.log('url', url);
     setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
       ...sceneContent,
       [name]: {
@@ -76,8 +76,18 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
         value: url,
       },
     });
-    console.log("sceneContent", sceneContent);
-    createImage();
+    console.log('sceneContent', sceneContent);
+    // TODO: Commented for now as not needs now
+    // createImage();
+    updateScene({
+      id: params.video_id as string,
+      sceneId: sceneDocId,
+      layoutId: selectedLayoutId,
+      sceneArrayIndex,
+      data: {
+        image: url,
+      },
+    });
     updateSceneContent({
       ...sceneContent,
       [name]: {
@@ -93,24 +103,24 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
       debounceImage.cancel();
     }
     debounceImage = debounce(() => {
-      console.log("Canvas image creation started");
+      console.log('Canvas image creation started');
       const ref = document.getElementById(selectedSceneId);
       html2canvas(ref as HTMLElement, {
         useCORS: true,
         allowTaint: true,
         logging: true,
       }).then((canvas) => {
-        const img = document.getElementById("canvas") as HTMLImageElement;
-        const dataUrl = canvas.toDataURL("image/png");
+        const img = document.getElementById('canvas') as HTMLImageElement;
+        const dataUrl = canvas.toDataURL('image/png');
         img.src = dataUrl;
-        console.log("Uploading to S3");
+        console.log('Uploading to S3');
         ServerClient.uploadCanvasImageToS3(
           getApiServer(),
           s3RandomPublicKey(),
           dataUrl,
           true,
         ).then((res) => {
-          console.log("Updating scene");
+          console.log('Updating scene');
           if (res.publicUrl) {
             updateScene({
               id: params.video_id as string,
@@ -142,25 +152,25 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
   };
 
   return (
-    <div className={"p-4"}>
-      <h1 className={"text-xl"}>Scene Editor</h1>
+    <div className={'p-4'}>
+      <h1 className={'text-xl'}>Scene Editor</h1>
       <TabList
-        className={"border-b-2 border-b-gray-500"}
+        className={'border-b-2 border-b-gray-500'}
         selectedValue={activeTab}
         onTabSelect={onTabSelect}
       >
-        <Tab value={"1"}>Layout</Tab>
-        <Tab value={"2"}>Content</Tab>
+        <Tab value={'1'}>Layout</Tab>
+        <Tab value={'2'}>Content</Tab>
       </TabList>
       <div>
         {/*Layouts*/}
-        {activeTab === "1" && (
+        {activeTab === '1' && (
           // render current layout
           <>
             <div>
               <h2>Current Layout</h2>
               <img
-                style={{ width: "200px" }}
+                style={{ width: '200px' }}
                 src={
                   layouts.find((layout) => layout.id === selectedLayoutId)
                     ?.image
@@ -171,15 +181,15 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
 
             {/*Render layouts*/}
             <h2>Layouts</h2>
-            <div className={"flex flex-wrap"}>
+            <div className={'flex flex-wrap'}>
               {layouts.map((layout) => (
                 <div key={layout.id}>
                   <img
-                    style={{ width: "200px", cursor: "pointer" }}
+                    style={{ width: '200px', cursor: 'pointer' }}
                     className={`p-0.5 ${
                       layout.id === selectedLayoutId
-                        ? "border-2 border-blue-500"
-                        : ""
+                        ? 'border-2 border-blue-500'
+                        : ''
                     }`}
                     src={layout.image}
                     alt={layout.id}
@@ -192,10 +202,10 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
         )}
 
         {/*Content*/}
-        {activeTab === "2" && (
+        {activeTab === '2' && (
           <>
             <div>
-              <img id={"canvas"} src={""} />
+              <img id={'canvas'} src={''} />
               <RenderLayoutComponent
                 isNone={true}
                 content={sceneContent}
@@ -204,15 +214,15 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
               />
             </div>
 
-            <hr className={"my-4"} />
-            <div className={"flex flex-col"}>
+            <hr className={'my-4'} />
+            <div className={'flex flex-col'}>
               {sceneContent &&
                 Object.entries(sceneContent).map(([key, value]) => (
-                  <div key={key} className={"flex flex-col"}>
-                    <label className={"capitalize"} htmlFor={key}>
+                  <div key={key} className={'flex flex-col'}>
+                    <label className={'capitalize'} htmlFor={key}>
                       {key}
                     </label>
-                    {value.type === "input" ? (
+                    {value.type === 'input' ? (
                       <input
                         onChange={onInputChange}
                         type={value.type}
@@ -224,7 +234,7 @@ const SceneEditor = ({ sceneDocId }: ISceneEditorProps) => {
                       <Image
                         src={value.value}
                         onUploadSuccess={(url?: string) => {
-                          onUploadSuccess(url || "", value.name);
+                          onUploadSuccess(url || '', value.name);
                         }}
                       />
                     )}
