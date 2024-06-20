@@ -1,20 +1,24 @@
-import useSlidesStore from "@/src/stores/store";
-import { getApiServer, s3RandomPublicKey } from "@/src/helpers";
-import { ServerClient } from "@/src/apis/server.client";
-import { UploadStatus } from "@/src/types/common.types";
+import { useDropzone } from 'react-dropzone';
+import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
+import { ServerClient } from '@/src/apis/server.client';
+import { UploadStatus } from '@/src/types/common.types';
 
 export function UploadImage({
   onUploadSuccess,
   onStateChange,
 }: IUploadImageProps) {
-  let key = "";
-  const uploadImage = (e: any) => {
-    const file = e.target.files[0];
-    // TODO: make this component to allow private uploads as well. we need to change upload folder location make it private
-    // TODO: Add a loading spinner
-    // TODO: Add error handling
-    // TODO: Close modal on success
-    onStateChange && onStateChange("uploading");
+  const onDrop = (acceptedFiles: File[]) => {
+    uploadImage(acceptedFiles[0]);
+  };
+
+  // TODO: make this component to allow private uploads as well. we need to change upload folder location make it private
+  // TODO: Add a loading spinner
+  // TODO: Add error handling
+  // TODO: Close modal on success
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const uploadImage = (file: File) => {
+    onStateChange && onStateChange('uploading');
     const apiServer = getApiServer();
     ServerClient.uploadS3Object(
       apiServer,
@@ -22,15 +26,26 @@ export function UploadImage({
       file,
       true,
     ).then((resp) => {
-      console.log(resp);
-      onStateChange && onStateChange("uploaded");
+      onStateChange && onStateChange('uploaded');
       onUploadSuccess(resp.publicUrl);
     });
   };
 
   return (
-    <div>
-      <input type="file" onChange={uploadImage} />
+    <div
+      {...getRootProps()}
+      className={`flex h-full w-full items-center justify-center ${
+        isDragActive ? 'bg-gray-100' : 'bg-white'
+      }`}
+      style={{
+        border: '2px dashed gray',
+        padding: '20px',
+        textAlign: 'center',
+        borderRadius: '10px',
+      }}
+    >
+      <input {...getInputProps()} />
+      <p>Drag 'n' drop some files here, or click to select files</p>
     </div>
   );
 }
@@ -39,4 +54,5 @@ export interface IUploadImageProps {
   onUploadSuccess: (url?: string) => void;
   onStateChange?: (status: UploadStatus) => void;
 }
+
 export default UploadImage;
