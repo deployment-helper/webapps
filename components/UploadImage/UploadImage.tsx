@@ -76,7 +76,7 @@ export function UploadImage({
         {isUploading ? (
           <Spinner size={'medium'} />
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drag and drop some files here, or click to select files</p>
         )}
       </div>
       {/*  Crate a horizontal line*/}
