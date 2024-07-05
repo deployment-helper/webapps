@@ -130,30 +130,39 @@ export default function Page({
   return (
     <div className="flex  h-screen w-full">
       <div className="w-9/12 bg-white">
-        <div className={'flex items-end justify-start gap-1 pl-20 pr-20 pt-3'}>
-          {audios && audios.length && (
-            <AudioPlayer
-              audios={audios.map((a) => a.data)}
-              onAudioEnd={() => {}}
-            />
-          )}
-          <Button onClick={playAll}>
-            Play All
-            <div className={'pl-2'}>
-              {isAudioPending && (
-                <Spinner appearance={'inverted'} size={'tiny'} />
-              )}
-            </div>
-          </Button>
-          <Button>
-            <Link target={'_blank'} href={`/auth/videos/${params.video_id}`}>
-              <Body1Strong>Preview</Body1Strong>
-            </Link>
-          </Button>
-          <Button appearance={'primary'} onClick={createVideo}>
-            Create Video
-            <Play20Filled className="cursor-pointer" />
-          </Button>
+        <div
+          className={
+            'flex items-end justify-start justify-between gap-1 pl-20 pr-20 pt-3'
+          }
+        >
+          <div className={'flex items-end justify-start gap-1'}>
+            {audios && audios.length && (
+              <AudioPlayer
+                audios={audios.map((a) => a.data)}
+                onAudioEnd={() => {}}
+              />
+            )}
+            <Button onClick={playAll}>
+              Play All
+              <div className={'pl-2'}>
+                {isAudioPending && (
+                  <Spinner appearance={'inverted'} size={'tiny'} />
+                )}
+              </div>
+            </Button>
+            <Button>
+              <Link target={'_blank'} href={`/auth/videos/${params.video_id}`}>
+                <Body1Strong>Preview</Body1Strong>
+              </Link>
+            </Button>
+            <Button appearance={'primary'} onClick={createVideo}>
+              Create Video
+              <Play20Filled className="cursor-pointer" />
+            </Button>
+          </div>
+          <div className={'flex items-end justify-start gap-1 align-middle'}>
+            <Body1Strong># {scenes.length || 0}</Body1Strong>
+          </div>
         </div>
         <SceneList
           scenes={scenes || []}
