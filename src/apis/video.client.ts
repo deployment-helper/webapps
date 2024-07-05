@@ -90,6 +90,7 @@ export class VideoClient extends ServerClient {
     layoutId: string,
     data: Record<string, any>,
     sceneArrayIndex?: number,
+    addAfter?: boolean,
   ): Promise<ISceneResponse[]> {
     const body = {
       ...data,
@@ -99,7 +100,7 @@ export class VideoClient extends ServerClient {
     const resp = await VideoClient.sendToAPiServer(
       `videos/${id}/scenes/${sceneId}/${
         sceneArrayIndex === undefined ? '' : sceneArrayIndex
-      }`,
+      }${addAfter ? '?addAfter=true' : ''}`,
       body,
       HttpMethod.PUT,
     );

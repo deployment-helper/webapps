@@ -9,6 +9,7 @@ import {
 } from '@/src/query/video.query';
 import { ELanguage, IScene } from '@/src/types/video.types';
 import {
+  AddCircle24Filled,
   Delete20Filled,
   PlayCircleHint24Regular,
   ReOrderDotsVertical24Filled,
@@ -82,8 +83,9 @@ export const Scene = (props: ISceneProps) => {
       onDragStart={(e) => props.onDragStart(e, props.id)}
       onDrop={props.onDrop}
       onDragOver={props.onDragOver}
-      className={'scene flex items-center '}
+      className={'scene relative flex items-center'}
     >
+      {/*ReOrder handle*/}
       <div
         className={
           'relative flex w-10 cursor-grab flex-col items-center justify-center'
@@ -102,8 +104,8 @@ export const Scene = (props: ISceneProps) => {
       <div
         className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 pr-0 ${
           props.isSelected
-            ? 'border-2 border-blue-200'
-            : 'border-2 border-blue-50 hover:border-blue-200'
+            ? 'border-2 border-violet-500'
+            : 'border-2 border-violet-50 hover:border-violet-300'
         }`}
         id={props.id}
         onClick={() =>
@@ -117,13 +119,13 @@ export const Scene = (props: ISceneProps) => {
         }
       >
         <div className={'flex'}>
-          <div style={{ width: '320px' }}>
+          <div style={{ width: '220px' }}>
             <Image isViewOnly={true} src={props.image} isCopyable={true} />
           </div>
 
           <Textarea
             ref={descRef}
-            style={{ width: '600px', height: '190px' }}
+            style={{ width: '600px', height: '120px' }}
             className={'border-none'}
             defaultValue={props.description}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
@@ -142,7 +144,10 @@ export const Scene = (props: ISceneProps) => {
                 {deleteMutation.isPending ? (
                   <Spinner size={'tiny'} />
                 ) : (
-                  <Delete20Filled onClick={deleteScene} className={'block'} />
+                  <Delete20Filled
+                    onClick={deleteScene}
+                    className={'block text-red-700'}
+                  />
                 )}
                 {isPending ? (
                   <div className={'right-0'}>
@@ -150,13 +155,21 @@ export const Scene = (props: ISceneProps) => {
                   </div>
                 ) : (
                   <PlayCircleHint24Regular
+                    className={'block text-violet-700'}
                     onClick={playDescription}
-                    className={'block'}
                   />
                 )}
               </>
             ) : null}
           </div>
+          {(props.isSelected || isHover) && (
+            <div className={'absolute -bottom-1.5 flex w-full justify-center'}>
+              <AddCircle24Filled
+                className={'text-green-600'}
+                onClick={() => props.onCreateScene(true, props.sceneArrayIndex)}
+              />
+            </div>
+          )}
         </div>
         {audios && audios.length && (
           <AudioPlayer audios={[audios[0].data]} onAudioEnd={onAudioEnd} />
@@ -187,6 +200,7 @@ export interface ISceneProps extends IScene {
   onDragStart: (e: React.DragEvent<HTMLDivElement>, id: string) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+  onCreateScene: (addAfter: boolean, sceneArrayIndex?: number) => void;
 }
 
 export default Scene;

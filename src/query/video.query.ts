@@ -3,17 +3,17 @@ import {
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
-import { VideoClient } from "@/src/apis/video.client";
-import { ELanguage, IVideo } from "@/src/types/video.types";
-import { useVideoStore } from "@/src/stores/video.store";
-import { v4 } from "uuid";
+} from '@tanstack/react-query';
+import { VideoClient } from '@/src/apis/video.client';
+import { ELanguage, IVideo } from '@/src/types/video.types';
+import { useVideoStore } from '@/src/stores/video.store';
+import { v4 } from 'uuid';
 
 // TODO: move project and scenes to their own files
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
   return useQuery({
-    queryKey: ["video", id],
+    queryKey: ['video', id],
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.get(id),
   });
@@ -26,12 +26,12 @@ export const useMutationDownloadVideo = () => {
     onSuccess: (data) => {
       setMessage({
         id: v4(),
-        title: "Download Video",
-        body: "Video is ready for download. Click the link below to download.",
-        intent: "success",
+        title: 'Download Video',
+        body: 'Video is ready for download. Click the link below to download.',
+        intent: 'success',
         link: {
           url: data.url,
-          text: "Download",
+          text: 'Download',
         },
       });
     },
@@ -45,7 +45,7 @@ export const useMutationUpdateVideo = () => {
       VideoClient.update(data.id, data.name, data.data),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["video", variables.id],
+        queryKey: ['video', variables.id],
       });
     },
   });
@@ -54,7 +54,7 @@ export const useMutationUpdateVideo = () => {
 // get List of video query
 export const useQueryGetVideos = () => {
   return useQuery({
-    queryKey: ["videos"],
+    queryKey: ['videos'],
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getVideos(),
   });
@@ -77,7 +77,7 @@ export const useMutationCreateScene = () => {
     }) => VideoClient.createScene(data.id, data.name, data.layoutId, data.data),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["video", variables.id, "scenes"],
+        queryKey: ['video', variables.id, 'scenes'],
       });
     },
   });
@@ -85,7 +85,7 @@ export const useMutationCreateScene = () => {
 
 export const useQueryGetScenes = (id: string) => {
   return useQuery({
-    queryKey: ["video", id, "scenes"],
+    queryKey: ['video', id, 'scenes'],
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getScenes(id),
   });
@@ -94,13 +94,14 @@ export const useQueryGetScenes = (id: string) => {
 export const useMutationUpdateScene = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationKey: ["video", "updateScene"],
+    mutationKey: ['video', 'updateScene'],
     mutationFn: (data: {
       id: string;
       sceneId: string;
       layoutId: string;
       data: Record<string, any>;
       sceneArrayIndex?: number;
+      addAfter?: boolean;
     }) =>
       VideoClient.updateScene(
         data.id,
@@ -108,10 +109,11 @@ export const useMutationUpdateScene = () => {
         data.layoutId,
         data.data,
         data.sceneArrayIndex,
+        data.addAfter,
       ),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["video", variables.id, "scenes"],
+        queryKey: ['video', variables.id, 'scenes'],
       });
     },
   });
@@ -134,7 +136,7 @@ export const useMutationReorderScenes = () => {
       ),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["video", variables.id, "scenes"],
+        queryKey: ['video', variables.id, 'scenes'],
       });
     },
   });
@@ -167,7 +169,7 @@ export const useMutationPostTextToSpeech = () => {
 // get List of video query
 export const useQueryGetProjects = () => {
   return useQuery({
-    queryKey: ["projects"],
+    queryKey: ['projects'],
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getProjects(),
   });
@@ -180,7 +182,7 @@ export const useMutationCreateProject = () => {
       VideoClient.createProject(data.projectName, data.projectDescription),
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ["projects"],
+        queryKey: ['projects'],
       });
     },
   });
@@ -192,7 +194,7 @@ export const useMutationDeleteVideo = () => {
     mutationFn: (id: string) => VideoClient.delete(id),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["videos"],
+        queryKey: ['videos'],
       });
     },
   });
@@ -203,10 +205,10 @@ export const useMutationCopyVideo = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: { id: string; langTo?: string; langFrom?: string }) =>
-      VideoClient.copy(data.id, data.langTo || "", data.langFrom || ""),
+      VideoClient.copy(data.id, data.langTo || '', data.langFrom || ''),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["videos"],
+        queryKey: ['videos'],
       });
     },
   });
@@ -222,7 +224,7 @@ export const useMutationDeleteScene = () => {
     }) => VideoClient.deleteScene(data.id, data.sceneId, data.sceneArrayIndex),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["video", variables.id, "scenes"],
+        queryKey: ['video', variables.id, 'scenes'],
       });
     },
   });
@@ -230,7 +232,7 @@ export const useMutationDeleteScene = () => {
 
 export const useQueryGetVideosForProject = (projectId: string) => {
   return useQuery({
-    queryKey: ["project", projectId, "videos"],
+    queryKey: ['project', projectId, 'videos'],
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getVideosForProject(projectId),
   });

@@ -1,11 +1,11 @@
-import Scene from "@/components/Scene/Scene";
-import { Spinner } from "@fluentui/react-components";
-import { ELanguage, IScene } from "@/src/types/video.types";
-import { useParams } from "next/navigation";
-import { useVideoStore } from "@/src/stores/video.store";
-import { useEffect, useState } from "react";
-import { IInput } from "@/src/types/types";
-import { DEFAULT_LAYOUT } from "@/src/layouts";
+import Scene from '@/components/Scene/Scene';
+import { Spinner } from '@fluentui/react-components';
+import { ELanguage, IScene } from '@/src/types/video.types';
+import { useParams } from 'next/navigation';
+import { useVideoStore } from '@/src/stores/video.store';
+import { useEffect, useState } from 'react';
+import { IInput } from '@/src/types/types';
+import { DEFAULT_LAYOUT } from '@/src/layouts';
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
@@ -26,25 +26,25 @@ export function SceneList(props: ISceneListProps) {
   };
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
-    e.dataTransfer.setData("text/plain", id);
-    const sceneIndex = e.currentTarget.getAttribute("data-index");
+    e.dataTransfer.setData('text/plain', id);
+    const sceneIndex = e.currentTarget.getAttribute('data-index');
     setDraggedSceneIndex(Number(sceneIndex));
   };
 
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const markerIndex = e.currentTarget.getAttribute("data-index");
+    const markerIndex = e.currentTarget.getAttribute('data-index');
     setMarkerIndex(Number(markerIndex));
   };
 
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log("Dropped");
+    console.log('Dropped');
     setMarkerIndex(undefined);
-    const sceneIndex = e.currentTarget.getAttribute("data-index");
+    const sceneIndex = e.currentTarget.getAttribute('data-index');
     const targetSceneIndex = Number(sceneIndex);
-    console.log("Dragged scene index", draggedSceneIndex);
-    console.log("Target scene index", targetSceneIndex);
+    console.log('Dragged scene index', draggedSceneIndex);
+    console.log('Target scene index', targetSceneIndex);
     props.onSceneReorder?.(draggedSceneIndex!, targetSceneIndex);
     updateScenesOrder(draggedSceneIndex!, targetSceneIndex);
   };
@@ -91,21 +91,22 @@ export function SceneList(props: ISceneListProps) {
             sceneDocId={props.sceneDocId}
             layoutId={scene.layoutId || DEFAULT_LAYOUT.id}
             isSelected={scene.id === selectedSceneId}
+            onCreateScene={props.createScene}
           />
         ))}
       </div>
       <button
         className="rounded-md bg-blue-500 p-2 text-white"
-        onClick={props.createScene}
+        onClick={() => props.createScene(false)}
       >
-        {props.isCreating ? <Spinner size="small" /> : "Create Scene"}
+        {props.isCreating ? <Spinner size="small" /> : 'Create Scene'}
       </button>
     </div>
   );
 }
 
 export interface ISceneListProps {
-  createScene: () => void;
+  createScene: (addAfter: boolean, sceneArrayIndex?: number) => void;
   isCreating?: boolean;
   isLoading?: boolean;
   scenes: IScene[];
@@ -116,4 +117,5 @@ export interface ISceneListProps {
     newSceneArrayIndex: number,
   ) => void;
 }
+
 export default SceneList;

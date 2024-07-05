@@ -65,7 +65,7 @@ export default function Page({
 
   const scenes = scenesData?.[0]?.scenes || [];
 
-  const onCreateScene = () => {
+  const onCreateScene = (addAfter = false, sceneArrayIndex?: number) => {
     const content = getLayoutContent(selectedLayoutId);
     if (videoData?.scenesId === undefined) return;
     updateScene({
@@ -76,6 +76,8 @@ export default function Page({
         id: uuid(),
         content,
       },
+      addAfter,
+      sceneArrayIndex,
     });
   };
 
