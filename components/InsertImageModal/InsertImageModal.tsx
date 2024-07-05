@@ -15,6 +15,7 @@ import { useState } from 'react';
 export function InsertImageModal({
   onUploadSuccess,
   onOpenChange,
+  isOpen = false,
 }: IInsertImageModalProps) {
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
 
@@ -22,7 +23,7 @@ export function InsertImageModal({
     setUploadStatus(status);
   };
   return (
-    <Dialog defaultOpen onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogSurface>
         <DialogBody>
           <DialogTitle>Insert Image</DialogTitle>
@@ -40,6 +41,7 @@ export function InsertImageModal({
 
 export interface IInsertImageModalProps extends IInsertImageProps {
   onOpenChange?: DialogOpenChangeEventHandler;
+  isOpen?: boolean;
 }
 
 export default InsertImageModal;

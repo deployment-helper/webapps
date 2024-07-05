@@ -17,7 +17,6 @@ export function UploadImage({
   // TODO: make this component to allow private uploads as well. we need to change upload folder location make it private
   // TODO: Add a loading spinner
   // TODO: Add error handling
-  // TODO: Close modal on success
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const inputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);

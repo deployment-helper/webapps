@@ -15,6 +15,11 @@ export function Image({
     setIsModalOpen(data.open);
   };
 
+  const onSuccessfulUpload = (url: string) => {
+    setIsModalOpen(false);
+    onUploadSuccess && onUploadSuccess(url);
+  };
+  
   return (
     <>
       {isViewOnly ? (
@@ -43,8 +48,9 @@ export function Image({
       {isModalOpen && (
         <InsertImageModal
           // @ts-ignore
-          onUploadSuccess={onUploadSuccess}
+          onUploadSuccess={onSuccessfulUpload}
           onOpenChange={onOpenChange}
+          isOpen={isModalOpen}
         />
       )}
     </>
