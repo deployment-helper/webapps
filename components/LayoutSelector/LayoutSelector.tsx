@@ -232,6 +232,8 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
                       />
                     ) : (
                       <Image
+                        isViewOnly={false}
+                        isCopyable={true}
                         src={value.value as string}
                         onUploadSuccess={(url?: string) => {
                           onUploadSuccess(url || '', value.name);
