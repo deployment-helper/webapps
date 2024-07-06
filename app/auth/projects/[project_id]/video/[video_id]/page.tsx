@@ -25,11 +25,11 @@ import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
 import { generatePreviewUrl, getLayoutContent } from '@/src/helpers';
 import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
-import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { ELanguage } from '@/src/types/video.types';
 
 import { useMyToastController } from '@/components/MyToast';
 import LayoutSelector from '@/components/LayoutSelector/LayoutSelector';
+import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 
 export default function Page({
   params,
@@ -138,12 +138,6 @@ export default function Page({
           }
         >
           <div className={'flex items-end justify-start gap-1'}>
-            {audios && audios.length && (
-              <AudioPlayer
-                audios={audios.map((a) => a.data)}
-                onAudioEnd={() => {}}
-              />
-            )}
             <Button onClick={playAll}>
               Play All
               <div className={'pl-2'}>
@@ -165,6 +159,18 @@ export default function Page({
           <div className={'flex items-end justify-start gap-1 align-middle'}>
             <Body1Strong># {scenes.length || 0}</Body1Strong>
           </div>
+        </div>
+        <div
+          className={
+            'flex items-end justify-start justify-between gap-1 pl-20 pr-20 pt-3'
+          }
+        >
+          {audios && audios.length && (
+            <AudioPlayer
+              audios={audios.map((a) => a.data)}
+              onAudioEnd={() => {}}
+            />
+          )}
         </div>
         <SceneList
           scenes={scenes || []}
