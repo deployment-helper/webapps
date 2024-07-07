@@ -8,7 +8,6 @@ export const Image = forwardRef<HTMLImageElement, ILayoutProps>(
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
         <img
           height={'100%'}
-          crossOrigin={'anonymous'}
           src={content?.image?.value}
           alt={content?.image?.name}
           className={'max-h-full'}
