@@ -19,7 +19,7 @@ export function Image({
     setIsModalOpen(false);
     onUploadSuccess && onUploadSuccess(url);
   };
-  
+
   return (
     <>
       {isViewOnly ? (
@@ -51,6 +51,7 @@ export function Image({
           onUploadSuccess={onSuccessfulUpload}
           onOpenChange={onOpenChange}
           isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
         />
       )}
     </>

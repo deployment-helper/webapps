@@ -37,6 +37,7 @@ export function Video({
           // @ts-ignore
           onUploadSuccess={onSuccessfulUpload}
           isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
         />
       )}
     </>

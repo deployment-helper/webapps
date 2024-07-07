@@ -7,14 +7,17 @@ import {
   DialogContent,
   DialogSurface,
   DialogTitle,
+  Subtitle1,
 } from '@fluentui/react-components';
 import { DialogOpenChangeEventHandler } from '@fluentui/react-dialog';
 import { UploadStatus } from '@/src/types/common.types';
 import { useState } from 'react';
+import { DismissCircle24Filled } from '@fluentui/react-icons';
 
 export function InsertImageModal({
   onUploadSuccess,
   onOpenChange,
+  onClose,
   isOpen = false,
 }: IInsertImageModalProps) {
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
@@ -26,7 +29,19 @@ export function InsertImageModal({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogSurface>
         <DialogBody>
-          <DialogTitle>Insert Image</DialogTitle>
+          <DialogTitle>
+            <div className={'flex justify-between'}>
+              <Subtitle1>Select Object</Subtitle1>
+              <div
+                className={
+                  'relative -right-4 -top-4 cursor-pointer text-gray-600'
+                }
+                onClick={onClose}
+              >
+                <DismissCircle24Filled />
+              </div>
+            </div>
+          </DialogTitle>
           <DialogContent className={'block'} style={{ height: '350px' }}>
             <InsertImage
               onUploadSuccess={onUploadSuccess}
@@ -41,6 +56,7 @@ export function InsertImageModal({
 
 export interface IInsertImageModalProps extends IInsertImageProps {
   onOpenChange?: DialogOpenChangeEventHandler;
+  onClose?: () => void;
   isOpen?: boolean;
 }
 
