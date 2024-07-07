@@ -165,7 +165,7 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
       <div>
         {/*Layouts*/}
         {activeTab === '1' && (
-          // render current layout
+          // render current layouts
           <>
             <div>
               <h2>Current Layout</h2>
@@ -205,9 +205,11 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
         {activeTab === '2' && (
           <>
             <div>
+              {/*This image element to render imageToCanvas generate image in this section*/}
               <img id={'canvas'} src={''} />
+              {/*Render currently selected component with latest content*/}
               <RenderLayoutComponent
-                isNone={true}
+                isDisplayNone={true}
                 content={sceneContent}
                 sceneId={selectedSceneId}
                 layoutId={selectedLayoutId}

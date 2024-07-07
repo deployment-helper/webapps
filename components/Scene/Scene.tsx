@@ -15,7 +15,7 @@ import {
   ReOrderDotsVertical24Filled,
 } from '@fluentui/react-icons';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
-import Image from '@/components/Image/Image';
+import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
@@ -120,7 +120,11 @@ export const Scene = (props: ISceneProps) => {
       >
         <div className={'flex'}>
           <div style={{ width: '220px' }}>
-            <Image isViewOnly={true} src={props.image} isCopyable={true} />
+            <RenderLayoutComponent
+              layoutId={props.layoutId}
+              sceneId={props.sceneDocId}
+              content={props.content}
+            />
           </div>
 
           <Textarea

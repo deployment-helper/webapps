@@ -1,7 +1,7 @@
-import { IInput } from "@/src/types/types";
+import { IInput } from '@/src/types/types';
 
 export interface ILayoutProps {
   sceneId: string;
-  isNone?: boolean;
+  isDisplayNone?: boolean;
   content?: Record<string, IInput>;
 }
