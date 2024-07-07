@@ -47,8 +47,9 @@ export interface IProject {
 }
 
 export enum ProjectTypes {
-  slideProjects = "slideProjects",
+  slideProjects = 'slideProjects',
 }
+
 export interface IUser {
   email: string;
   updatedAt: Date;
@@ -87,24 +88,34 @@ export interface IStore {
     editorFile: any;
   };
   s3PublicUrls?: Record<string, string>;
+
   addServer(server: string, batchApiServer: string): void;
+
   addEditorFile(content: any): void;
+
   addUser(user: IUserWithProjectTypes): void;
+
   listPresentations(projectId: string): void;
+
   getPresentation(pid: string, updateAt: string, apiKey?: string): void;
+
   getS3PublicUrl(key: string): void;
+
   uploadS3Object(file: File, key: string, isPublic: boolean): Promise<any>;
+
   removeS3PublicUrl(key: string): void;
+
   removeS3PublicUrl(key: string): void;
 }
 
 // Video types
 export interface IInput {
-  type: "input" | "image";
+  type: 'input' | 'image' | 'video';
   name: string;
   value?: string;
   placeholder?: string;
 }
+
 export interface ILayout {
   image: string;
   id: string;

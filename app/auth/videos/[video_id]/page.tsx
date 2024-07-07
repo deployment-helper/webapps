@@ -1,16 +1,15 @@
-"use client";
+'use client';
 import {
   useMutationPostTextToSpeech,
   useQueryGetScenes,
   useQueryGetVideo,
-  useQueryGetVideos,
-} from "@/src/query/video.query";
-import { Spinner } from "@fluentui/react-components";
-import { useEffect, useState } from "react";
-import Reveal from "reveal.js";
-import RenderLayoutComponent from "@/components/RenderLayoutComponent/RenderLayoutComponent";
-import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
-import { ELanguage } from "@/src/types/video.types";
+} from '@/src/query/video.query';
+import { Spinner } from '@fluentui/react-components';
+import { useEffect, useState } from 'react';
+import Reveal from 'reveal.js';
+import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
+import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
+import { ELanguage } from '@/src/types/video.types';
 
 export default function VideoPreview({
   params,
@@ -33,7 +32,7 @@ export default function VideoPreview({
   } = useMutationPostTextToSpeech();
   useEffect(() => {
     if (Reveal && videos?.length) {
-      console.log("Reveal initialized");
+      console.log('Reveal initialized');
       // @ts-ignore
       Reveal.initialize({
         width: 1280,
@@ -43,13 +42,13 @@ export default function VideoPreview({
       });
 
       //Reveal js slide change listener
-      Reveal.addEventListener("slidechanged", function (event: any) {
+      Reveal.addEventListener('slidechanged', function (event: any) {
         // read data attribute of the slide
-        const slideId = event.currentSlide.getAttribute("data-slideid");
-        const sceneIndex = event.currentSlide.getAttribute("data-sceneindex");
-        console.log("Slide changed to ", slideId);
-        console.log("Slide changed to ", event.indexh);
-        console.log("Scene Index ", sceneIndex);
+        const slideId = event.currentSlide.getAttribute('data-slideid');
+        const sceneIndex = event.currentSlide.getAttribute('data-sceneindex');
+        console.log('Slide changed to ', slideId);
+        console.log('Slide changed to ', event.indexh);
+        console.log('Scene Index ', sceneIndex);
         if (sceneIndex !== null && sceneIndex !== undefined) {
           setSceneIndex(parseInt(sceneIndex));
           setPlay(true);
@@ -63,10 +62,10 @@ export default function VideoPreview({
   // Fetch audio for the first time
   useEffect(() => {
     if (videos?.length && !audios) {
-      const texts = videos.map((v) => v.description! || "");
+      const texts = videos.map((v) => v.description! || '');
       mutate({
         text: texts,
-        audioLanguage: video?.audioLanguage || ELanguage["English (India)"],
+        audioLanguage: video?.audioLanguage || ELanguage['English (India)'],
         merge: false,
       });
     }
@@ -82,28 +81,28 @@ export default function VideoPreview({
         ) : (
           <div
             style={{
-              width: "90vw",
-              height: "90vh",
-              minHeight: "600px",
-              display: "flex",
-              flexDirection: "row",
+              width: '90vw',
+              height: '90vh',
+              minHeight: '600px',
+              display: 'flex',
+              flexDirection: 'row',
             }}
           >
             <div
               className="reveal"
               style={{
-                minWidth: "500px",
-                maxWidth: "100%",
-                width: "100%",
-                height: "90vh",
+                minWidth: '500px',
+                maxWidth: '100%',
+                width: '100%',
+                height: '90vh',
               }}
             >
               <div className="slides">
                 <section
-                  data-slideid={"start-1"}
+                  data-slideid={'start-1'}
                   data-name="start-1"
-                  data-description={"hello world"}
-                  className={"bg-green-300"}
+                  data-description={'hello world'}
+                  className={'bg-green-300'}
                 >
                   START 1
                 </section>
@@ -114,10 +113,10 @@ export default function VideoPreview({
                     data-name={`${scene.id}`}
                     data-description={scene.description}
                     data-sceneindex={index}
-                    data-language={video?.audioLanguage || "en-US"}
+                    data-language={video?.audioLanguage || 'en-US'}
                   >
                     <RenderLayoutComponent
-                      isNone={false}
+                      isDisplayNone={false}
                       layoutId={scene.layoutId}
                       sceneId={scene.id}
                       content={scene.content}
@@ -125,10 +124,10 @@ export default function VideoPreview({
                   </section>
                 ))}
                 <section
-                  data-slideid={"end-1"}
+                  data-slideid={'end-1'}
                   data-name="end-1"
-                  data-description={"hello world"}
-                  className={"bg-red-300"}
+                  data-description={'hello world'}
+                  className={'bg-red-300'}
                 >
                   End 1
                 </section>
@@ -137,12 +136,12 @@ export default function VideoPreview({
           </div>
         )}
         {isAudioPending ? (
-          <Spinner appearance={"inverted"} size={"tiny"} />
+          <Spinner appearance={'inverted'} size={'tiny'} />
         ) : (
           <AudioPlayer
             audios={audios ? audios.map((a) => a.data) : []}
             onAudioEnd={() => {
-              console.log("Audio Ended");
+              console.log('Audio Ended');
             }}
             nextIndex={sceneIndex}
             play={play}

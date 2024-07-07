@@ -1,4 +1,4 @@
-import { forwardRef, MutableRefObject, useEffect } from "react";
+import { forwardRef } from 'react';
 
 export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
   (props, ref) => {
@@ -15,14 +15,14 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
     return (
       <div
         style={
-          props.isNone ? { width: "0px", height: "0px", overflow: "auto" } : {}
+          props.isNone ? { width: '0px', height: '0px', overflow: 'auto' } : {}
         }
       >
         <div
           ref={ref}
           id={props.sceneId}
-          style={{ width: "1280px", height: "720px" }}
-          className={"flex justify-center border-2 bg-white"}
+          style={{ width: '100%' }}
+          className={'flex justify-center border-2 bg-white'}
         >
           {props.children}
         </div>
@@ -37,6 +37,6 @@ export interface ILayoutBodyProps {
   sceneId: string;
 }
 
-LayoutBody.displayName = "LayoutBody";
+LayoutBody.displayName = 'LayoutBody';
 
 export default LayoutBody;

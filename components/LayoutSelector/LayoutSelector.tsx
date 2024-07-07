@@ -18,6 +18,7 @@ import { useParams } from 'next/navigation';
 
 import { IInput } from '@/src/types/types';
 import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
+import { Video } from '@/components/Video/Video';
 
 let debounceContent: any = undefined;
 let debounceImage: any = undefined;
@@ -224,7 +225,7 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
                     <label className={'capitalize'} htmlFor={key}>
                       {key}
                     </label>
-                    {value.type === 'input' ? (
+                    {value.type === 'input' && (
                       <input
                         onChange={onInputChange}
                         type={value.type}
@@ -232,8 +233,19 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
                         value={value.value}
                         placeholder={value.placeholder}
                       />
-                    ) : (
+                    )}
+                    {value.type === 'image' && (
                       <Image
+                        isViewOnly={false}
+                        isCopyable={true}
+                        src={value.value as string}
+                        onUploadSuccess={(url?: string) => {
+                          onUploadSuccess(url || '', value.name);
+                        }}
+                      />
+                    )}
+                    {value.type === 'video' && (
+                      <Video
                         isViewOnly={false}
                         isCopyable={true}
                         src={value.value as string}
