@@ -15,12 +15,12 @@ export function Video({
     setIsModalOpen(false);
     onUploadSuccess && onUploadSuccess(url);
   };
-  
+
   return (
     <>
       <div className={'relative'}>
+        <video controls src={src} />
         {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
-        <video src={src} />
         {!isViewOnly && (
           <div
             className={
