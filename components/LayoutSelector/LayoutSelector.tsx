@@ -8,11 +8,9 @@ import { useState } from 'react';
 import { debounce } from 'lodash';
 
 import Image from '@/components/Image/Image';
-import html2canvas from 'html2canvas';
+
 import layouts from '@/src/layouts';
 import { useVideoStore } from '@/src/stores/video.store';
-import { ServerClient } from '@/src/apis/server.client';
-import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
 import { useMutationUpdateScene } from '@/src/query/video.query';
 import { useParams } from 'next/navigation';
 
@@ -21,7 +19,6 @@ import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayo
 import { Video } from '@/components/Video/Video';
 
 let debounceContent: any = undefined;
-let debounceImage: any = undefined;
 const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
   const [activeTab, setActiveTab] = useState('1');
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
@@ -69,7 +66,6 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
 
   // When image is uploaded to S3 update image URL to content template
   const onUploadSuccess = (url: string, name: string) => {
-    console.log('url', url);
     setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
       ...sceneContent,
       [name]: {
@@ -77,7 +73,6 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
         value: url,
       },
     });
-    console.log('sceneContent', sceneContent);
     // TODO: Commented for now as not needs now
     // createImage();
     updateScene({
@@ -98,47 +93,6 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
     });
   };
 
-  // Create image with selected layout and content template with canvas APIs and upload to S3
-  const createImage = () => {
-    if (debounceImage) {
-      debounceImage.cancel();
-    }
-    debounceImage = debounce(() => {
-      console.log('Canvas image creation started');
-      const ref = document.getElementById(selectedSceneId);
-      html2canvas(ref as HTMLElement, {
-        useCORS: true,
-        allowTaint: true,
-        logging: true,
-      }).then((canvas) => {
-        const img = document.getElementById('canvas') as HTMLImageElement;
-        const dataUrl = canvas.toDataURL('image/png');
-        img.src = dataUrl;
-        console.log('Uploading to S3');
-        ServerClient.uploadCanvasImageToS3(
-          getApiServer(),
-          s3RandomPublicKey(),
-          dataUrl,
-          true,
-        ).then((res) => {
-          console.log('Updating scene');
-          if (res.publicUrl) {
-            updateScene({
-              id: params.video_id as string,
-              sceneId: sceneDocId,
-              layoutId: selectedLayoutId,
-              sceneArrayIndex,
-              data: {
-                image: res.publicUrl,
-              },
-            });
-          }
-        });
-      });
-    }, 2000);
-    debounceImage();
-  };
-
   // Listener for content data change and update the content in state
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
@@ -148,7 +102,6 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
         value: e.target.value,
       },
     });
-    createImage();
     updateSceneContent();
   };
 

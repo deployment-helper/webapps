@@ -67,8 +67,52 @@ const layouts: Array<{
       },
     },
   },
+  {
+    id: 'layout5',
+    componentName: 'Layout5',
+    image: '/layout5.png',
+    content: {
+      image: {
+        type: 'image',
+        name: 'image',
+        value: '/layout5.png',
+        placeholder: 'video',
+      },
+      title: {
+        type: 'input',
+        name: 'title',
+        value: 'Title',
+        placeholder: 'Title',
+      },
+    },
+  },
+  {
+    id: 'layout6',
+    componentName: 'Layout6',
+    image: '/layout6.png',
+    content: {
+      video: {
+        type: 'video',
+        name: 'video',
+        value: '/layout6.png',
+        placeholder: 'video',
+      },
+      title: {
+        type: 'input',
+        name: 'title',
+        value: 'Title',
+        placeholder: 'Title',
+      },
+    },
+  },
 ];
 
-export const ALLOWED_LAYOUTS = ['layout1', 'layout2', 'layout4'];
+export const ALLOWED_LAYOUTS = [
+  'layout1',
+  'layout2',
+  'layout4',
+  'layout5',
+  'layout6',
+];
 export const DEFAULT_LAYOUT = layouts[1];
 export default layouts;
