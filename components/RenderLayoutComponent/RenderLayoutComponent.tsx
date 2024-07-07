@@ -31,6 +31,7 @@ export default function RenderLayoutComponent({
       {content && LayoutReactComponent && (
         <LayoutReactComponent
           isNone={isDisplayNone}
+          isViewOnly={true}
           content={content}
           sceneId={sceneId}
           ref={ref}

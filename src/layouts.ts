@@ -30,7 +30,7 @@ const layouts: Array<{
   },
   {
     id: 'layout2',
-    componentName: 'Image',
+    componentName: 'LayoutImage',
     image: '/layout2.png',
     content: {
       image: {

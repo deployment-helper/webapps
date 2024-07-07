@@ -1,22 +1,22 @@
 import { forwardRef } from 'react';
 import { ILayoutProps } from '@/components/layouts/types';
 import LayoutBody from '@/components/layouts/LayoutBody';
-import { Video } from '@/components/Video/Video';
+import Image from '@/components/Image/Image';
 
-export const LayoutVideo = forwardRef<HTMLImageElement, ILayoutProps>(
+export const LayoutImage = forwardRef<HTMLImageElement, ILayoutProps>(
   ({ content, sceneId, isDisplayNone, isViewOnly }: ILayoutProps, ref) => {
     return (
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
-        <Video
-          src={content?.video?.value as string}
-          isCopyable={true}
+        <Image
+          src={content?.image?.value as string}
           isViewOnly={isViewOnly}
+          isCopyable={true}
         />
       </LayoutBody>
     );
   },
 );
 
-LayoutVideo.displayName = 'LayoutVideo';
+LayoutImage.displayName = 'LayoutImage';
 
-export default LayoutVideo;
+export default LayoutImage;
