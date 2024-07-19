@@ -17,12 +17,14 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
       subtitle: {
         type: 'input',
         name: 'subtitle',
+        bodyCopyType: 'subtitle',
         value: 'Subtitle',
         placeholder: 'Subtitle',
       },
@@ -49,6 +51,7 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
@@ -81,6 +84,7 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
@@ -100,6 +104,7 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
