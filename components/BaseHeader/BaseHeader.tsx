@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { mergeClasses } from '@fluentui/react-components';
 import { useStyles } from './BaseHeader.style';
 
