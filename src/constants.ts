@@ -36,7 +36,9 @@ export const SUPPORTED_LANGUAGES: Record<
   ),
 };
 
-export const LANGUAGE_SUPPORTED_VOICES: Record<ELanguage, Array<IVoice>> = {
+export const LANGUAGE_SUPPORTED_VOICES: Partial<
+  Record<ELanguage, Array<IVoice>>
+> = {
   [ELanguage['English (US)']]: [
     {
       name: 'Journey-D',
