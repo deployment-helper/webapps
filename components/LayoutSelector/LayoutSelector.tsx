@@ -95,14 +95,22 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
 
   // Listener for content data change and update the content in state
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
+    const content = {
       ...sceneContent,
       [e.target.name]: {
         ...sceneContent[e.target.name],
         value: e.target.value,
       },
-    });
-    updateSceneContent();
+    };
+
+    setSceneContent(
+      selectedLayoutId,
+      selectedSceneId,
+      sceneArrayIndex,
+      content,
+    );
+
+    updateSceneContent(content);
   };
 
   return (
