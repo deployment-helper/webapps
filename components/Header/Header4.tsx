@@ -78,6 +78,7 @@ const Slot2 = ({ projectList }: { projectList?: Array<IProject> }) => {
         language={data?.audioLanguage || ''}
         onSelect={onLanguageChange}
       />
+      <Input disabled={true} value={data?.voiceCode || ''} />
       {(isLoading || isFetching) && (
         <div style={{ position: 'relative' }}>
           <Spinner size={'small'} />

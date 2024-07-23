@@ -81,6 +81,7 @@ export function SceneList(props: ISceneListProps) {
             {...scene}
             videoId={params.video_id as string}
             audioLanguage={props.audioLanguage}
+            voiceCode={props.voiceCode}
             key={scene.id}
             onClick={onSceneChange}
             onDragStart={onDragStart}
@@ -112,6 +113,7 @@ export interface ISceneListProps {
   scenes: IScene[];
   sceneDocId: string;
   audioLanguage?: ELanguage;
+  voiceCode?: string;
   onSceneReorder?: (
     sceneArrayIndex: number,
     newSceneArrayIndex: number,

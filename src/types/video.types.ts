@@ -108,6 +108,7 @@ export interface IVideo {
   name: string;
   description?: string;
   audioLanguage?: ELanguage;
+  voiceCode?: string;
   createdAt: {
     _seconds: number;
   };
@@ -147,4 +148,12 @@ export interface IScene {
 export interface ISceneResponse {
   videoId: string;
   scenes: IScene[];
+}
+
+export interface IVoice {
+  name: string;
+  voiceCode: string;
+  ssmlGender: 'Male' | 'Female';
+  mp3: string;
+  rating: 'H' | 'M' | 'L';
 }

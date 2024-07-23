@@ -17,6 +17,7 @@ import {
   useMutationPostTextToSpeech,
   useMutationReorderScenes,
   useMutationUpdateScene,
+  useMutationUpdateVideo,
   useQueryGetScenes,
   useQueryGetVideo,
 } from '@/src/query/video.query';
@@ -25,11 +26,12 @@ import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
 import { generatePreviewUrl, getLayoutContent } from '@/src/helpers';
 import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
-import { ELanguage } from '@/src/types/video.types';
+import { ELanguage, IVoice } from '@/src/types/video.types';
 
 import { useMyToastController } from '@/components/MyToast';
 import LayoutSelector from '@/components/LayoutSelector/LayoutSelector';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
+import { SupportedVoices } from '@/components/SupportedVoices/SupportedVoices';
 
 export default function Page({
   params,
@@ -44,6 +46,7 @@ export default function Page({
   } = useQueryGetScenes(params.video_id);
   const { data: videoData } = useQueryGetVideo(params.video_id);
   const { mutate: updateScene, isPending } = useMutationUpdateScene();
+  const { mutate: updateVideo } = useMutationUpdateVideo();
   const {
     isPending: isAudioPending,
     data: audios,
@@ -59,7 +62,7 @@ export default function Page({
   const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
 
-  const [trayOptions, setTrayOptions] = useState<'scenes' | 'voices' | 'music'>(
+  const [trayOption, setTrayOption] = useState<'scenes' | 'voices' | 'music'>(
     'scenes',
   );
 
@@ -87,6 +90,7 @@ export default function Page({
     mutate({
       text: texts,
       audioLanguage: videoData?.audioLanguage || ELanguage['English (India)'],
+      voiceCode: videoData?.voiceCode as string,
     });
   };
 
@@ -111,6 +115,17 @@ export default function Page({
       title: 'Video is being created',
       body: 'You will be notified once the video is ready for download.',
       intent: 'success',
+    });
+  };
+
+  const onUpdateVoice = (voice: IVoice) => {
+    updateVideo({
+      id: videoData?.id as string,
+      name: videoData?.name as string,
+      data: {
+        ...videoData,
+        voiceCode: voice.voiceCode,
+      },
     });
   };
 
@@ -175,6 +190,7 @@ export default function Page({
         <SceneList
           scenes={scenes || []}
           audioLanguage={videoData?.audioLanguage}
+          voiceCode={videoData?.voiceCode}
           createScene={onCreateScene}
           isCreating={isPending}
           sceneDocId={videoData?.scenesId || ''}
@@ -182,27 +198,39 @@ export default function Page({
           onSceneReorder={onSceneReorder}
         />
       </div>
+      {/*Right section*/}
       <div className={' flex w-3/12 justify-end'}>
         <div className="w-9/12 border bg-gray-100">
-          <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
+          {trayOption === 'scenes' && (
+            <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
+          )}
+          {trayOption === 'voices' && (
+            <SupportedVoices
+              onUpdateVoice={onUpdateVoice}
+              audioLanguage={videoData?.audioLanguage}
+            />
+          )}
+          {trayOption === 'music' && <div>Music</div>}
         </div>
+
+        {/*Tray options*/}
         <div className="flex w-2/12 flex-col items-center gap-2 bg-gray-100 pt-2">
           <div
             className={`flex cursor-pointer flex-col items-center  border-2 p-2 ${
-              trayOptions === 'scenes' && 'bg-gray-300'
+              trayOption === 'scenes' && 'bg-gray-300'
             }`}
-            onClick={() => setTrayOptions('scenes')}
+            onClick={() => setTrayOption('scenes')}
           >
-            {trayOptions === 'scenes' ? <Image32Filled /> : <Image32Regular />}
+            {trayOption === 'scenes' ? <Image32Filled /> : <Image32Regular />}
             Scenes
           </div>
           <div
             className={`flex cursor-pointer flex-col items-center border-2  p-2 ${
-              trayOptions === 'voices' && 'bg-gray-300'
+              trayOption === 'voices' && 'bg-gray-300'
             }`}
-            onClick={() => setTrayOptions('voices')}
+            onClick={() => setTrayOption('voices')}
           >
-            {trayOptions === 'voices' ? (
+            {trayOption === 'voices' ? (
               <PersonVoice24Filled />
             ) : (
               <PersonVoice24Regular />
@@ -211,11 +239,11 @@ export default function Page({
           </div>
           <div
             className={`flex cursor-pointer flex-col items-center border-2  p-2 ${
-              trayOptions === 'music' && 'bg-gray-300'
+              trayOption === 'music' && 'bg-gray-300'
             }`}
-            onClick={() => setTrayOptions('music')}
+            onClick={() => setTrayOption('music')}
           >
-            {trayOptions === 'music' ? (
+            {trayOption === 'music' ? (
               <HeadphonesSoundWave32Filled />
             ) : (
               <HeadphonesSoundWave32Regular />

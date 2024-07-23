@@ -130,11 +130,13 @@ export class VideoClient extends ServerClient {
   public static async textToSpeech(
     text: string[],
     audioLanguage?: ELanguage,
+    voiceCode?: string,
     merge = true,
   ): Promise<{ type: string; data: string }[]> {
     const body = {
       text,
       audioLanguage,
+      voiceCode,
       merge,
     };
 

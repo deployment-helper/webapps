@@ -59,6 +59,7 @@ export const Scene = (props: ISceneProps) => {
     postTextToSpeech({
       text: [text || ''],
       audioLanguage: props.audioLanguage || ELanguage['English (India)'],
+      voiceCode: props.voiceCode as string,
     });
   };
 
@@ -201,6 +202,7 @@ export interface ISceneProps extends IScene {
   markerIndex?: number;
   sceneDocId: string;
   audioLanguage?: ELanguage;
+  voiceCode?: string;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, id: string) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
