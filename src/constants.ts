@@ -83,4 +83,48 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       rating: 'M',
     },
   ],
+  [ELanguage['Hindi (India)']]: [
+    {
+      name: 'Neural2-C',
+      voiceCode: 'hi-IN-Neural2-C',
+      ssmlGender: 'Female',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/hi-IN-Neural2-C.wav',
+      rating: 'H',
+    },
+    {
+      name: 'Neural2-D',
+      voiceCode: 'hi-IN-Neural2-C',
+      ssmlGender: 'Female',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/hi-IN-Neural2-D.wav',
+      rating: 'H',
+    },
+    {
+      name: 'Neural2-A',
+      voiceCode: 'hi-IN-Neural2-A',
+      ssmlGender: 'Female',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/hi-IN-Neural2-A.wav',
+      rating: 'H',
+    },
+    {
+      name: 'Neural2-B',
+      voiceCode: 'hi-IN-Neural2-B',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/hi-IN-Neural2-B.wav',
+      rating: 'H',
+    },
+    {
+      name: 'Wavenet-F',
+      voiceCode: 'hi-IN-Wavenet-F',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Wavenet-F.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Wavenet-E',
+      voiceCode: 'hi-IN-Wavenet-E',
+      ssmlGender: 'Female',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/hi-IN-Wavenet-E.wav',
+      rating: 'M',
+    },
+  ],
 };

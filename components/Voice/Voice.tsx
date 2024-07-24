@@ -1,6 +1,5 @@
 import { IVoice } from '@/src/types/video.types';
 import {
-  Check24Regular,
   CheckmarkCircle24Filled,
   PlayCircle24Filled,
 } from '@fluentui/react-icons';
