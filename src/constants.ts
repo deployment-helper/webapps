@@ -93,7 +93,7 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
     },
     {
       name: 'Neural2-D',
-      voiceCode: 'hi-IN-Neural2-C',
+      voiceCode: 'hi-IN-Neural2-D',
       ssmlGender: 'Female',
       mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/hi-IN-Neural2-D.wav',
       rating: 'H',
