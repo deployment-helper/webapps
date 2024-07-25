@@ -139,4 +139,39 @@ export const SUPPORTED_BACKGROUND_MUSIC: Array<{
     src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/deep-meditation-192828.mp3',
     rating: 'H',
   },
+  {
+    name: 'BioDynamic Impact Braam Tonal Dark',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/biodynamic-impact-braam-tonal-dark-176441.mp3',
+    rating: 'H',
+  },
+  {
+    name: 'Production Elements Impactor E',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/production-elements-impactor-e-188986.mp3',
+    rating: 'H',
+  },
+  {
+    name: 'calm-65770',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/calm-65770.mp3',
+    rating: 'H',
+  },
+  {
+    name: 'A calm ambient atmosphere',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/a-calm-ambient-atmosphere-158464.mp3',
+    rating: 'H',
+  },
+  {
+    name: 'Ambient Piano Logo',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/ambient-piano-logo-165357.mp3',
+    rating: 'H',
+  },
+  {
+    name: 'Uplifting Pad Texture',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/uplifting-pad-texture-113842.mp3',
+    rating: 'H',
+  },
+  {
+    name: 'Calming Music',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/calm-music-64526.mp3',
+    rating: 'H',
+  },
 ];
