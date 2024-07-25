@@ -162,15 +162,17 @@ function Videos({
       },
       renderCell: (item) => {
         return item.generatedVideoInfo && item.generatedVideoInfo.length ? (
-          item.generatedVideoInfo.map((videoInfo) => (
+          item.generatedVideoInfo.map((videoInfo, index) => (
+            // TODO: Download UX needs to be improved.
             <Button
               key={videoInfo.cloudFile}
               onClick={() => {
                 dispatchVideoDownloadToast();
                 downloadVideo(videoInfo.cloudFile);
               }}
+              size={'small'}
             >
-              Download
+              {index + 1}
             </Button>
           ))
         ) : (
