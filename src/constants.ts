@@ -128,3 +128,15 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
     },
   ],
 };
+
+export const SUPPORTED_BACKGROUND_MUSIC: Array<{
+  name: string;
+  src: string;
+  rating: 'H' | 'M' | 'L';
+}> = [
+  {
+    name: 'Deep meditation',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/deep-meditation-192828.mp3',
+    rating: 'H',
+  },
+];

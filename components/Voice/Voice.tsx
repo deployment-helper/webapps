@@ -1,11 +1,14 @@
-import { IVoice } from '@/src/types/video.types';
+import { IBackgroundMusic, IVoice } from '@/src/types/video.types';
 import {
   CheckmarkCircle24Filled,
   PlayCircle24Filled,
 } from '@fluentui/react-icons';
 import { useRef, useState } from 'react';
 
-export const Voice = ({ voice, onUpdateVoice }: IVoiceProps) => {
+export const Voice = ({
+  voice,
+  onUpdateVoice,
+}: IVoiceProps<IVoice | IBackgroundMusic>) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const playAudio = () => {
@@ -41,7 +44,9 @@ export const Voice = ({ voice, onUpdateVoice }: IVoiceProps) => {
           }`}
         />
         <CheckmarkCircle24Filled
-          onClick={() => onUpdateVoice(voice)}
+          onClick={() =>
+            onUpdateVoice((voice as IVoice).voiceCode || (voice.src as string))
+          }
           className={'cursor-pointer text-green-600'}
         />
         <audio
@@ -50,7 +55,7 @@ export const Voice = ({ voice, onUpdateVoice }: IVoiceProps) => {
           onEnded={() => {
             setIsPlaying(false);
           }}
-          src={voice.mp3}
+          src={voice.src || (voice as IVoice).mp3}
           controls
         />
       </div>
@@ -58,7 +63,7 @@ export const Voice = ({ voice, onUpdateVoice }: IVoiceProps) => {
   );
 };
 
-export interface IVoiceProps {
-  voice: IVoice;
-  onUpdateVoice: (voice: IVoice) => void;
+export interface IVoiceProps<T> {
+  voice: T;
+  onUpdateVoice: (keyInfo: string) => void;
 }

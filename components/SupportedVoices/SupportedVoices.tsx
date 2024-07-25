@@ -28,5 +28,5 @@ export const SupportedVoices = ({
 
 export interface ISupportedVoicesProps {
   audioLanguage?: ELanguage;
-  onUpdateVoice: (voice: IVoice) => void;
+  onUpdateVoice: (voiceCode: string) => void;
 }

@@ -109,6 +109,7 @@ export interface IVideo {
   description?: string;
   audioLanguage?: ELanguage;
   voiceCode?: string;
+  backgroundMusic?: string;
   createdAt: {
     _seconds: number;
   };
@@ -155,5 +156,12 @@ export interface IVoice {
   voiceCode: string;
   ssmlGender: 'Male' | 'Female';
   mp3: string;
+  src?: string;
+  rating: 'H' | 'M' | 'L';
+}
+
+export interface IBackgroundMusic {
+  name: string;
+  src: string;
   rating: 'H' | 'M' | 'L';
 }

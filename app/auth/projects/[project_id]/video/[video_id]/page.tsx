@@ -32,6 +32,7 @@ import { useMyToastController } from '@/components/MyToast';
 import LayoutSelector from '@/components/LayoutSelector/LayoutSelector';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { SupportedVoices } from '@/components/SupportedVoices/SupportedVoices';
+import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
 
 export default function Page({
   params,
@@ -118,13 +119,23 @@ export default function Page({
     });
   };
 
-  const onUpdateVoice = (voice: IVoice) => {
+  const onUpdateVoice = (voiceCode: string) => {
     updateVideo({
       id: videoData?.id as string,
       name: videoData?.name as string,
       data: {
         ...videoData,
-        voiceCode: voice.voiceCode,
+        voiceCode: voiceCode,
+      },
+    });
+  };
+  const onUpdateBackground = (bgSrc: string) => {
+    updateVideo({
+      id: videoData?.id as string,
+      name: videoData?.name as string,
+      data: {
+        ...videoData,
+        backgroundMusic: bgSrc,
       },
     });
   };
@@ -210,7 +221,9 @@ export default function Page({
               audioLanguage={videoData?.audioLanguage}
             />
           )}
-          {trayOption === 'music' && <div>Music</div>}
+          {trayOption === 'music' && (
+            <SupportedBackgroundMusic onUpdate={onUpdateBackground} />
+          )}
         </div>
 
         {/*Tray options*/}
