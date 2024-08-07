@@ -39,6 +39,7 @@ import { VideoClient } from '@/src/apis/video.client';
 import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';
 import { useVideoStore } from '@/src/stores/video.store';
+import WorkflowList from '@/components/WorkflowList/WorkflowList';
 
 function Videos({
   params,
@@ -73,6 +74,7 @@ function Videos({
 
   const [isOpen, setIsOpen] = useState(false);
   const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
+  const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
   const project = projects?.find((project) => project.id === params.project_id);
@@ -292,6 +294,14 @@ function Videos({
             >
               Create
             </Button>
+            <Button
+              appearance="primary"
+              onClick={() => {
+                setIsWorkFlowOpen(true);
+              }}
+            >
+              Create With Workflow
+            </Button>
           </div>
         </div>
         {videos && videos.length && (
@@ -323,6 +333,12 @@ function Videos({
             onSubmit={createNewVideo}
             projectId={params.project_id}
             projectName={project?.projectName}
+          />
+        )}
+        {isWorkFlowOpen && (
+          <WorkflowList
+            isOpen={isWorkFlowOpen}
+            onClose={() => setIsWorkFlowOpen(false)}
           />
         )}
       </div>

@@ -175,3 +175,29 @@ export const SUPPORTED_BACKGROUND_MUSIC: Array<{
     rating: 'H',
   },
 ];
+
+export const WORKFLOWS: Array<{
+  id: string;
+  name: string;
+  url: string;
+  desc?: string;
+}> = [
+  {
+    id: 'youtube-video-clone',
+    name: 'Youtube video clone',
+    url: '/workflows/youtube-video-clone',
+    desc: 'Clone of youtube video for given URL',
+  },
+  {
+    id: 'google-slides-to-video',
+    name: 'Google slides to video',
+    url: '/workflows/google-slides-to-video',
+    desc: 'Convert google slides to video',
+  },
+  {
+    id: 'html-page-to-video',
+    name: 'HTML page to video',
+    url: '/workflows/html-page-to-video',
+    desc: 'Convert HTML page to video',
+  },
+];
