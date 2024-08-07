@@ -201,3 +201,5 @@ export const WORKFLOWS: Array<{
     desc: 'Convert HTML page to video',
   },
 ];
+
+export const SUPPORTED_WORKFLOWS: Array<string> = ['youtube-video-clone'];

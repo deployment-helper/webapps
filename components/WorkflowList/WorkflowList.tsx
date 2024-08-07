@@ -1,19 +1,24 @@
 import {
+  Button,
   Drawer,
   DrawerBody,
+  DrawerFooter,
   DrawerHeader,
   DrawerHeaderTitle,
+  Input,
 } from '@fluentui/react-components';
-import { WORKFLOWS } from '@/src/constants';
+import { SUPPORTED_WORKFLOWS, WORKFLOWS } from '@/src/constants';
 import List from '@/components/List/List';
 import { ListItem } from '@/components/ListItem';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowLeft32Filled } from '@fluentui/react-icons';
+import { Controller, useForm } from 'react-hook-form';
 
 export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
   const [workflowId, setWorkflowId] = useState<string>('');
   const [workflowName, setWorkflowName] = useState<string>('');
-
+  const { handleSubmit, control } = useForm();
+  const formRef = useRef<HTMLFormElement>(null);
   const Workflows = () => (
     <List>
       {WORKFLOWS.map((workflow) => (
@@ -30,6 +35,14 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
       ))}
     </List>
   );
+
+  const onSubmit = () => {
+    formRef.current?.requestSubmit();
+  };
+
+  const youtubeCloneVideoSubmit = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <div>
@@ -65,11 +78,51 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
             <Workflows />
           ) : (
             <div>
-              <h3>Workflow Id: {workflowId}</h3>
-              <h3>Workflow Name: {workflowName}</h3>
+              {SUPPORTED_WORKFLOWS.includes(workflowId) &&
+                workflowId === 'youtube-video-clone' && (
+                  <div>
+                    <form
+                      ref={formRef}
+                      onSubmit={handleSubmit(youtubeCloneVideoSubmit)}
+                    >
+                      <div>
+                        <Controller
+                          render={({ field }) => (
+                            <Input
+                              {...field}
+                              required={true}
+                              placeholder="Enter youtube video url"
+                              className={'w-full'}
+                            />
+                          )}
+                          control={control}
+                          name={'video-url'}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                )}
+              {!SUPPORTED_WORKFLOWS.includes(workflowId) && (
+                <div className={'bg-red-200 p-2 text-xl'}>
+                  {' '}
+                  Workflow not supported
+                </div>
+              )}
             </div>
           )}
         </DrawerBody>
+        <DrawerFooter>
+          <div className={'flex w-full justify-end gap-2'}>
+            <Button onClick={onClose} appearance={'secondary'} size={'large'}>
+              Cancel
+            </Button>
+            {workflowId !== '' && (
+              <Button onClick={onSubmit} appearance={'primary'} size={'large'}>
+                Submit
+              </Button>
+            )}
+          </div>
+        </DrawerFooter>
       </Drawer>
     </div>
   );
