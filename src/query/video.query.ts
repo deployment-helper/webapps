@@ -65,6 +65,19 @@ export const useMutationCreateVideo = () => {
   });
 };
 
+export const useMutationCreateVideoWithWorkflowYoutubeVideoClone = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: any) =>
+      VideoClient.createWithWorkflowYoutubeVideoClone(data),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ['videos'],
+      });
+    },
+  });
+};
+
 // Scene queries and mutations
 export const useMutationCreateScene = () => {
   const queryClient = useQueryClient();

@@ -13,12 +13,15 @@ import { ListItem } from '@/components/ListItem';
 import { useRef, useState } from 'react';
 import { ArrowLeft32Filled } from '@fluentui/react-icons';
 import { Controller, useForm } from 'react-hook-form';
+import { useMutationCreateVideoWithWorkflowYoutubeVideoClone } from '@/src/query/video.query';
 
 export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
   const [workflowId, setWorkflowId] = useState<string>('');
   const [workflowName, setWorkflowName] = useState<string>('');
   const { handleSubmit, control } = useForm();
   const formRef = useRef<HTMLFormElement>(null);
+  const { mutate: createVideoWithYoutubeVideoClone } =
+    useMutationCreateVideoWithWorkflowYoutubeVideoClone();
   const Workflows = () => (
     <List>
       {WORKFLOWS.map((workflow) => (
@@ -41,7 +44,9 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
   };
 
   const youtubeCloneVideoSubmit = (data: any) => {
-    console.log(data);
+    createVideoWithYoutubeVideoClone({
+      videoUrl: data['video-url'],
+    });
   };
 
   return (

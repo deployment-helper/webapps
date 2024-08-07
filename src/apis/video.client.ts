@@ -29,6 +29,13 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
+  public static createWithWorkflowYoutubeVideoClone(
+    data: any,
+  ): Promise<IVideo> {
+    console.log('createWithWorkflowYoutubeVideoClone', data);
+    throw new Error('Method not implemented.');
+  }
+
   public static async update(
     id: string,
     name: string,
