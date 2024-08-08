@@ -33,7 +33,7 @@ import {
 import { IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
-import { MoreVertical20Regular } from '@fluentui/react-icons';
+import { MoreVertical20Regular, Settings32Filled } from '@fluentui/react-icons';
 import { LanguageDialog } from '@/components/Dialog/Dialog';
 import { VideoClient } from '@/src/apis/video.client';
 import { formatDate, generatePreviewUrl } from '@/src/helpers';
@@ -277,7 +277,7 @@ function Videos({
             )}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2 align-middle">
             <Button
               appearance="outline"
               onClick={() => {
@@ -302,6 +302,12 @@ function Videos({
             >
               Create With Workflow
             </Button>
+            <Link
+              className={'rounded-md p-2 hover:bg-gray-100'}
+              href={`/auth/projects/${params.project_id}/settings`}
+            >
+              <Settings32Filled />
+            </Link>
           </div>
         </div>
         {videos && videos.length && (
