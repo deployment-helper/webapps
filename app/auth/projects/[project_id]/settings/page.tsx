@@ -5,7 +5,7 @@ import {
   useQueryGetProject,
   useQueryGetProjects,
 } from '@/src/query/video.query';
-import { Button, Title1 } from '@fluentui/react-components';
+import { Button, Subtitle1, Title1, Title2 } from '@fluentui/react-components';
 import List from '@/components/List/List';
 import { ListItem } from '@/components/ListItem';
 import { Group24Filled, GroupFilled } from '@fluentui/react-icons';
@@ -76,6 +76,12 @@ function Page({
             </Button>
           </div>
           <div className={'flex flex-row flex-wrap gap-1'}>
+            {!data?.assets?.length && (
+              <div className={'flex w-full flex-col items-center p-5'}>
+                <Subtitle1>No assets found</Subtitle1>
+                <Title2>Upload assets to get started</Title2>
+              </div>
+            )}
             {data?.assets?.map((asset: string, index: number) => {
               const fileType = getFileType(asset);
               if (fileType.type === 'image') {

@@ -32,7 +32,6 @@ export class VideoClient extends ServerClient {
   public static createWithWorkflowYoutubeVideoClone(
     data: any,
   ): Promise<IVideo> {
-    console.log('createWithWorkflowYoutubeVideoClone', data);
     throw new Error('Method not implemented.');
   }
 
