@@ -1,5 +1,5 @@
 import { useDropzone } from 'react-dropzone';
-import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
+import { getApiServer, getFileType, s3RandomPublicKey } from '@/src/helpers';
 import { ServerClient } from '@/src/apis/server.client';
 import { UploadStatus } from '@/src/types/common.types';
 import { Button, Input, Spinner } from '@fluentui/react-components';
@@ -9,6 +9,7 @@ import { useMyToastController } from '@/components/MyToast';
 export function UploadImage({
   onUploadSuccess,
   onStateChange,
+  isDisplayURLUpload = true,
 }: IUploadImageProps) {
   const onDrop = (acceptedFiles: File[]) => {
     uploadImage(acceptedFiles[0]);
@@ -25,9 +26,12 @@ export function UploadImage({
     onStateChange && onStateChange('uploading');
     setIsUploading(true);
     const apiServer = getApiServer();
+    const s3Key = s3RandomPublicKey();
+    const fileType = getFileType(file);
+
     ServerClient.uploadS3Object(
       apiServer,
-      s3RandomPublicKey(),
+      `${s3Key}.${fileType.extension}`,
       file,
       true,
     ).then((resp) => {
@@ -78,14 +82,22 @@ export function UploadImage({
           <p>Drag and drop some files here, or click to select files</p>
         )}
       </div>
-      {/*  Crate a horizontal line*/}
-      <div className="my-4 border-t border-gray-400"></div>
-      <div className={'flex gap-2'}>
-        <Input ref={inputRef} placeholder={'Add URL'} className={'w-full'} />
-        <Button appearance={'primary'} onClick={uploadImageFromUrl}>
-          Upload
-        </Button>
-      </div>
+      {isDisplayURLUpload && (
+        <>
+          {/*  Crate a horizontal line*/}
+          <div className="my-4 border-t border-gray-400"></div>
+          <div className={'flex gap-2'}>
+            <Input
+              ref={inputRef}
+              placeholder={'Type already uploaded asset URL.'}
+              className={'w-full'}
+            />
+            <Button appearance={'primary'} onClick={uploadImageFromUrl}>
+              Upload
+            </Button>
+          </div>
+        </>
+      )}
     </>
   );
 }
@@ -93,6 +105,7 @@ export function UploadImage({
 export interface IUploadImageProps {
   onUploadSuccess: (url?: string) => void;
   onStateChange?: (status: UploadStatus) => void;
+  isDisplayURLUpload?: boolean;
 }
 
 export default UploadImage;

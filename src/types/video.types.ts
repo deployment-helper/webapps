@@ -82,6 +82,7 @@ export interface IProject {
   projectName: string;
   projectDesc?: string;
   userId: string;
+  assets: string[];
   createdAt: {
     _seconds: number;
   };

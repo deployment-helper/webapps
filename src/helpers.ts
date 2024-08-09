@@ -107,11 +107,60 @@ export const formatDate = (timestamp: number) => {
   return dayStr + '-' + monthStr + '-' + year;
 };
 
+export const getFileType = (
+  file: File | string,
+): {
+  extension: string;
+  type: 'image' | 'video' | 'audio' | 'application' | 'text' | 'other';
+} => {
+  const extension =
+    typeof file === 'string'
+      ? file.split('.').pop() || ''
+      : file.name.split('.').pop() || '';
+  const imageTypes = ['jpeg', 'png', 'gif', 'bmp', 'webp'];
+  const videoTypes = ['mp4', 'webm', 'ogg'];
+  const audioTypes = ['mp3', 'wav', 'ogg'];
+  const textTypes = ['pdf', 'txt'];
+  const applicationTypes = ['json', 'xml', 'csv', 'zip'];
+
+  if (imageTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'image',
+    };
+  } else if (videoTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'video',
+    };
+  } else if (audioTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'audio',
+    };
+  } else if (textTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'text',
+    };
+  } else if (applicationTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'application',
+    };
+  } else {
+    return {
+      extension,
+      type: 'other',
+    };
+  }
+};
 const defaultExport = {
   addSlideIds,
   s3RandomPublicKey,
   formatDateString,
   formatDate,
+  getFileType,
 };
 
 export default defaultExport;
