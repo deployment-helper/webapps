@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { getFileType } from '@/src/helpers';
 import Image from '@/components/Image/Image';
 import { Video } from '@/components/Video/Video';
+import Link from 'next/link';
 
 function Page({
   params,
@@ -52,13 +53,15 @@ function Page({
   return (
     <div className={'w-100 flex w-full max-w-7xl flex-col'}>
       <div className={'flex  justify-start pb-1 pt-1'}>
-        <Title1> {data?.projectName}</Title1>
+        <Link href={`/auth/projects/${params.project_id}`}>
+          <Title1> {data?.projectName}</Title1>
+        </Link>
       </div>
 
       <div className="flex flex-row">
         <div className="w-1/4">
           <List>
-            <ListItem>
+            <ListItem selected={true}>
               <Group24Filled />
               Assets
             </ListItem>
