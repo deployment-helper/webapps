@@ -70,7 +70,12 @@ function Page({
           </List>
         </div>
         <div className="flex w-3/4 flex-col">
-          <div className={'flex justify-end border-b-2 border-b-gray-200 pb-2'}>
+          <div
+            className={
+              'flex justify-end gap-2 border-b-2 border-b-gray-200 pb-2'
+            }
+          >
+            <Subtitle1># {data?.assets?.length}</Subtitle1>
             <Button appearance={'primary'} onClick={() => setIsModalOpen(true)}>
               Upload Assets
             </Button>
