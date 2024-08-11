@@ -118,7 +118,7 @@ export const getFileType = (
       ? file.split('.').pop() || ''
       : file.name.split('.').pop() || '';
   const imageTypes = ['jpeg', 'png', 'gif', 'bmp', 'webp'];
-  const videoTypes = ['mp4', 'webm', 'ogg'];
+  const videoTypes = ['mp4', 'webm', 'ogg', 'mov'];
   const audioTypes = ['mp3', 'wav', 'ogg'];
   const textTypes = ['pdf', 'txt'];
   const applicationTypes = ['json', 'xml', 'csv', 'zip'];

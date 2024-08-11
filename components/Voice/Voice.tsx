@@ -1,14 +1,17 @@
-import { IBackgroundMusic, IVoice } from '@/src/types/video.types';
+import { IAsset, IVoice } from '@/src/types/video.types';
 import {
   CheckmarkCircle24Filled,
+  PauseCircle24Filled,
   PlayCircle24Filled,
 } from '@fluentui/react-icons';
 import { useRef, useState } from 'react';
-
+import { Tag } from '@fluentui/react-tags';
+// TODO: Rename this component to AudioCard
 export const Voice = ({
+  isSelected,
   voice,
   onUpdateVoice,
-}: IVoiceProps<IVoice | IBackgroundMusic>) => {
+}: IVoiceProps<IVoice | IAsset>) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const playAudio = () => {
@@ -25,30 +28,46 @@ export const Voice = ({
 
   return (
     <div
-      className={`flex justify-between bg-gray-200 p-1 align-middle hover:bg-gray-300 ${
-        isPlaying ? 'border-2 border-gray-500' : ''
+      className={`flex justify-between bg-violet-50 p-1 align-middle hover:bg-violet-100 ${
+        isPlaying ? 'border-2 border-violet-200' : ''
       }`}
     >
       <div>
-        <div>
-          {voice.name}{' '}
-          <span className={'bg-green-200 p-0.5 font-bold'}>{voice.rating}</span>
+        <div className={'flex items-center gap-1'}>
+          {voice.name} <Tag appearance={'brand'}>{voice.rating}</Tag>
+          {isSelected && (
+            <div className={'rounded border-2 border-violet-500'}>
+              <Tag appearance={'brand'} className={'bg-amber-100'}>
+                Current
+              </Tag>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className={'flex gap-1'}>
-        <PlayCircle24Filled
-          onClick={playAudio}
-          className={`cursor-pointer ${
-            isPlaying ? 'text-violet-900' : 'text-violet-700'
-          }`}
-        />
-        <CheckmarkCircle24Filled
-          onClick={() =>
-            onUpdateVoice((voice as IVoice).voiceCode || (voice.src as string))
-          }
-          className={'cursor-pointer text-green-600'}
-        />
+      <div className={'flex items-center gap-1'}>
+        {isPlaying ? (
+          <PauseCircle24Filled
+            onClick={playAudio}
+            className={'cursor-pointer text-violet-400'}
+          />
+        ) : (
+          <PlayCircle24Filled
+            onClick={playAudio}
+            className={`cursor-pointer text-violet-400`}
+          />
+        )}
+        {!isSelected && (
+          <CheckmarkCircle24Filled
+            onClick={() =>
+              onUpdateVoice(
+                (voice as IVoice).voiceCode || (voice.src as string),
+              )
+            }
+            className={'cursor-pointer text-green-600'}
+          />
+        )}
+
         <audio
           ref={audioRef}
           hidden={true}
@@ -66,4 +85,5 @@ export const Voice = ({
 export interface IVoiceProps<T> {
   voice: T;
   onUpdateVoice: (keyInfo: string) => void;
+  isSelected?: boolean;
 }

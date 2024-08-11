@@ -6,26 +6,30 @@ import {
   MenuList,
   MenuPopover,
   MenuTrigger,
-} from "@fluentui/react-components";
-import { LocalLanguage20Filled } from "@fluentui/react-icons";
-import { Text } from "@fluentui/react-text";
-import { ELanguage } from "@/src/types/video.types";
-import { SUPPORTED_LANGUAGES } from "@/src/constants";
+} from '@fluentui/react-components';
+import { Text } from '@fluentui/react-text';
+import { ELanguage } from '@/src/types/video.types';
+import { SUPPORTED_LANGUAGES } from '@/src/constants';
+import { Globe24Regular } from '@fluentui/react-icons';
 
 const useStyles = makeStyles({
   scrollableMenu: {
-    maxHeight: "300px",
-    overflowY: "auto",
+    maxHeight: '300px',
+    overflowY: 'auto',
   },
 });
-export function Language({ language, onSelect }: ILanguageProps) {
+
+export function Language({
+  currentLanguage = 'Select Language',
+  onSelect,
+}: ILanguageProps) {
   const classes = useStyles();
 
   return (
     <Menu positioning="below-end">
       <MenuTrigger disableButtonEnhancement>
         <Button>
-          <Text className={"pr-2"}>{language}</Text> <LocalLanguage20Filled />
+          <Text className={'pr-2'}>{currentLanguage}</Text> <Globe24Regular />
         </Button>
       </MenuTrigger>
 
@@ -44,7 +48,7 @@ export function Language({ language, onSelect }: ILanguageProps) {
 
 export interface ILanguageProps {
   onSelect: (language: ELanguage) => void;
-  language: string;
+  currentLanguage?: ELanguage | 'Select Language';
 }
 
 export default Language;

@@ -1,11 +1,16 @@
 import { FC } from 'react';
 
-export const ListItem: FC<IListItemProps> = ({ children, selected }) => {
+export const ListItem: FC<IListItemProps> = ({
+  children,
+  selected,
+  onClick,
+}) => {
   return (
     <div
       className={`flex cursor-pointer items-center ${
-        selected ? 'bg-gray-400' : 'bg-gray-200'
-      } p-2 hover:bg-gray-300`}
+        selected ? 'bg-violet-100' : 'bg-violet-50'
+      } p-2 hover:bg-violet-200`}
+      onClick={onClick}
     >
       {children}{' '}
     </div>
@@ -15,6 +20,7 @@ export const ListItem: FC<IListItemProps> = ({ children, selected }) => {
 export interface IListItemProps {
   children?: React.ReactNode;
   selected?: boolean;
+  onClick?: () => void;
 }
 
 export default ListItem;

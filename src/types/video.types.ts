@@ -83,6 +83,8 @@ export interface IProject {
   projectDesc?: string;
   userId: string;
   assets: string[];
+  defaultLanguage: ELanguage;
+  defaultVoice: string;
   createdAt: {
     _seconds: number;
   };
@@ -152,6 +154,7 @@ export interface ISceneResponse {
   scenes: IScene[];
 }
 
+// TODO: This interface should extend IAsset
 export interface IVoice {
   name: string;
   voiceCode: string;
@@ -161,8 +164,12 @@ export interface IVoice {
   rating: 'H' | 'M' | 'L';
 }
 
-export interface IBackgroundMusic {
+export interface IAsset {
   name: string;
   src: string;
   rating: 'H' | 'M' | 'L';
+}
+
+export interface IOverlay extends IAsset {
+  exampleSrc: string;
 }
