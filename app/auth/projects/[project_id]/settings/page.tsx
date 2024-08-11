@@ -269,8 +269,11 @@ function Page({
             {OVERLAYS.map((_overlay) => (
               <div
                 key={_overlay.src}
-                className={'max-w-md border-2 border-violet-200'}
+                className={
+                  'flex max-w-md flex-col gap-1 border-2 border-violet-200'
+                }
               >
+                <div className={'text-center text-2xl'}>{_overlay.name}</div>
                 <Video src={_overlay.exampleSrc} isViewOnly />
                 {data?.defaultOverlay === _overlay.src ? (
                   <div className={'text-center text-2xl'}>Current</div>
