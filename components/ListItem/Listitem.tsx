@@ -8,7 +8,7 @@ export const ListItem: FC<IListItemProps> = ({
   return (
     <div
       className={`flex cursor-pointer items-center ${
-        selected ? 'bg-violet-100' : 'bg-violet-50'
+        selected ? 'bg-violet-200' : 'bg-violet-50'
       } p-2 hover:bg-violet-200`}
       onClick={onClick}
     >

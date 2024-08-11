@@ -29,6 +29,8 @@ import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
 import { SupportedVoices } from '@/components/SupportedVoices';
 import Language from '@/components/Language/Language';
 import { IProject } from '@/src/types/video.types';
+import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
+import { OVERLAYS } from '@/src/constants';
 
 function Page({
   params,
@@ -205,11 +207,92 @@ function Page({
   };
 
   const BackgroundMusic = () => {
-    return <h1>Background Music</h1>;
+    return (
+      <>
+        <div
+          className={
+            'mb-2 flex items-center justify-between  gap-2 bg-violet-50 p-2'
+          }
+        >
+          <div className={'flex'}>
+            <Subtitle1>Background Music</Subtitle1>
+            {isPending && <Spinner size={'tiny'} className={'ml-1'} />}
+          </div>
+          <div className={'flex items-center gap-2'}></div>
+        </div>
+        <hr />
+        <div className={'p-2'}>
+          <div>
+            <div className={' pt-2'}>
+              <Subtitle1 className={'block'}>
+                Default Background Music
+              </Subtitle1>
+            </div>
+          </div>
+
+          <SupportedBackgroundMusic
+            title={''}
+            onUpdate={(bgMusic: string) => {
+              updateProject({
+                defaultBackgroundMusic: bgMusic,
+              });
+            }}
+            currentBackgroundMusic={data?.defaultBackgroundMusic}
+          />
+        </div>
+      </>
+    );
   };
 
   const Overlays = () => {
-    return <h1>Overlays</h1>;
+    return (
+      <>
+        <div
+          className={
+            'mb-2 flex items-center justify-between  gap-2 bg-violet-50 p-2'
+          }
+        >
+          <div className={'flex'}>
+            <Subtitle1>Overlays</Subtitle1>
+            {isPending && <Spinner size={'tiny'} className={'ml-1'} />}
+          </div>
+          <div className={'flex items-center gap-2'}></div>
+        </div>
+        <hr />
+        <div className={'p-2'}>
+          <div>
+            <div className={' pt-2'}>
+              <Subtitle1 className={'block'}>Default Overlays</Subtitle1>
+            </div>
+          </div>
+          <div className={'flex flex-grow gap-1'}>
+            {OVERLAYS.map((_overlay) => (
+              <div
+                key={_overlay.src}
+                className={'max-w-md border-2 border-violet-200'}
+              >
+                <Video src={_overlay.exampleSrc} isViewOnly />
+                {data?.defaultOverlay === _overlay.src ? (
+                  <div className={'text-center text-2xl'}>Current</div>
+                ) : (
+                  <Button
+                    className={'w-full'}
+                    appearance={'primary'}
+                    onClick={() => {
+                      updateProject({
+                        defaultOverlay: _overlay.src,
+                      });
+                    }}
+                  >
+                    Apply
+                  </Button>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </>
+    );
   };
 
   return (

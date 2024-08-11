@@ -83,8 +83,10 @@ export interface IProject {
   projectDesc?: string;
   userId: string;
   assets: string[];
-  defaultLanguage: ELanguage;
-  defaultVoice: string;
+  defaultLanguage?: ELanguage;
+  defaultVoice?: string;
+  defaultBackgroundMusic?: string;
+  defaultOverlay?: string;
   createdAt: {
     _seconds: number;
   };
