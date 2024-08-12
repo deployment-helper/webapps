@@ -7,6 +7,7 @@ import {
 import {
   Body1,
   Button,
+  Checkbox,
   Spinner,
   Subtitle1,
   Title1,
@@ -19,6 +20,7 @@ import {
   GlobeRegular,
   Group24Filled,
   HeadphonesSoundWave24Filled,
+  Settings24Filled,
 } from '@fluentui/react-icons';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -42,7 +44,7 @@ function Page({
   const { data } = useQueryGetProject(params.project_id);
   const { mutate, isPending } = useMutationUpdateProject();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(4);
 
   const updateProject = (_data: Partial<IProject>) => {
     mutate({
@@ -297,6 +299,55 @@ function Page({
       </>
     );
   };
+  const General = () => {
+    return (
+      <>
+        <div
+          className={
+            'mb-2 flex items-center justify-between  gap-2 bg-violet-50 p-2'
+          }
+        >
+          <div className={'flex'}>
+            <Subtitle1>General Settings</Subtitle1>
+            {isPending && <Spinner size={'tiny'} className={'ml-1'} />}
+          </div>
+          <div className={'flex items-center gap-2'}></div>
+        </div>
+        <hr />
+        <div className={'p-2'}>
+          <div>
+            <div className={' pt-2'}>
+              <h3 className={'text-xl'}>Create scene with random asset</h3>
+              <h5>
+                When enabled, a random asset will be selected for each scene
+              </h5>
+              <Checkbox
+                checked={data?.sceneRandomAsset}
+                onChange={(e, data) => {
+                  updateProject({
+                    sceneRandomAsset: !!data.checked,
+                  });
+                }}
+                label={'Enable'}
+              />
+              <hr />
+              <h3 className={'text-xl'}>Create video with default settings</h3>
+              <h5>When enabled, Video will be created with default settings</h5>
+              <Checkbox
+                checked={data?.videoWithDefaultSettings}
+                onChange={(e, data) => {
+                  updateProject({
+                    videoWithDefaultSettings: !!data.checked,
+                  });
+                }}
+                label={'Enable'}
+              />
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
 
   return (
     <div className={'w-100 flex w-full max-w-7xl flex-col'}>
@@ -309,6 +360,13 @@ function Page({
       <div className="flex flex-row ">
         <div className="w-1/4 pt-10">
           <List>
+            <ListItem
+              selected={activeTab === 4}
+              onClick={() => setActiveTab(4)}
+            >
+              <Settings24Filled />
+              <Body1 className={'ml-1'}>General</Body1>
+            </ListItem>
             <ListItem
               selected={activeTab === 0}
               onClick={() => setActiveTab(0)}
@@ -344,6 +402,7 @@ function Page({
           {activeTab === 1 && <LanguageVoices />}
           {activeTab === 2 && <BackgroundMusic />}
           {activeTab === 3 && <Overlays />}
+          {activeTab === 4 && <General />}
         </div>
       </div>
     </div>

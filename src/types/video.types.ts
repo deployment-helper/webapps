@@ -87,6 +87,8 @@ export interface IProject {
   defaultVoice?: string;
   defaultBackgroundMusic?: string;
   defaultOverlay?: string;
+  sceneRandomAsset?: boolean;
+  videoWithDefaultSettings?: boolean;
   createdAt: {
     _seconds: number;
   };
@@ -115,6 +117,7 @@ export interface IVideo {
   audioLanguage?: ELanguage;
   voiceCode?: string;
   backgroundMusic?: string;
+  overlay?: string;
   createdAt: {
     _seconds: number;
   };
