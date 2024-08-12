@@ -214,14 +214,14 @@ export const OVERLAYS: Array<IOverlay> = [
     rating: 'M',
   },
   {
-    name: 'Star 1',
+    name: 'Confetti',
     src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/7aebc7e3-86a8-4e2b-9994-634e7aeda3f2.mov',
     exampleSrc:
       'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/d12baf21-5d23-4c6c-af3d-95b47ef9bd73.mp4',
     rating: 'M',
   },
   {
-    name: 'Confetti',
+    name: 'Star 1',
     src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/29a9bebd-9534-45e6-b377-5986897ceae7.mov',
     exampleSrc:
       'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/8d3282ad-3f8b-4286-bc52-2714860504bf.mp4',
