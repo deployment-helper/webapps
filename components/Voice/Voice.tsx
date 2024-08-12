@@ -3,6 +3,7 @@ import {
   CheckmarkCircle24Filled,
   PauseCircle24Filled,
   PlayCircle24Filled,
+  Star24Filled,
 } from '@fluentui/react-icons';
 import { useRef, useState } from 'react';
 import { Tag } from '@fluentui/react-tags';
@@ -36,10 +37,8 @@ export const Voice = ({
         <div className={'flex items-center gap-1'}>
           {voice.name} <Tag appearance={'brand'}>{voice.rating}</Tag>
           {isSelected && (
-            <div className={'rounded border-2 border-violet-500'}>
-              <Tag appearance={'brand'} className={'bg-amber-100'}>
-                Current
-              </Tag>
+            <div>
+              <Star24Filled className={'text-yellow-400'} />
             </div>
           )}
         </div>

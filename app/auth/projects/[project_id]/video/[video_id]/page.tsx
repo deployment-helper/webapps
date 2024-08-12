@@ -219,10 +219,14 @@ export default function Page({
             <SupportedVoices
               onUpdateVoice={onUpdateVoice}
               audioLanguage={videoData?.audioLanguage}
+              currentVoice={videoData?.voiceCode}
             />
           )}
           {trayOption === 'music' && (
-            <SupportedBackgroundMusic onUpdate={onUpdateBackground} />
+            <SupportedBackgroundMusic
+              onUpdate={onUpdateBackground}
+              currentBackgroundMusic={videoData?.backgroundMusic}
+            />
           )}
         </div>
 
