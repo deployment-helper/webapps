@@ -127,6 +127,36 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       rating: 'M',
     },
   ],
+  [ELanguage['Urdu (India)']]: [
+    {
+      name: 'Wavenet-A',
+      voiceCode: 'ur-IN-Wavenet-A',
+      ssmlGender: 'Female',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/ur-IN-Wavenet-A.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Wavenet-B',
+      voiceCode: 'ur-IN-Wavenet-B',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/ur-IN-Wavenet-B.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Basic A',
+      voiceCode: 'ur-IN-Standard-A',
+      ssmlGender: 'Female',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/ur-IN-Standard-A.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Basic B',
+      voiceCode: 'ur-IN-Standard-B',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/ur-IN-Standard-B.wav',
+      rating: 'M',
+    },
+  ],
 };
 
 export const SUPPORTED_BACKGROUND_MUSIC: Array<{

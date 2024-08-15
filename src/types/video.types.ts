@@ -74,6 +74,7 @@ export enum ELanguage {
   'Thai (Thailand)' = 'th-TH',
   'Turkish (Turkey)' = 'tr-TR',
   'Ukrainian (Ukraine)' = 'uk-UA',
+  'Urdu (India)' = 'ur-IN',
   'Vietnamese (Vietnam)' = 'vi-VN',
 }
 
