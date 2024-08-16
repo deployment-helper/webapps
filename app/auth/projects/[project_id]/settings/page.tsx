@@ -34,7 +34,7 @@ import { SupportedVoices } from '@/components/SupportedVoices';
 import Language from '@/components/Language/Language';
 import { IProject } from '@/src/types/video.types';
 import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
-import { OVERLAYS } from '@/src/constants';
+import { MP3_SPEAKING_RATES, OVERLAYS } from '@/src/constants';
 import { LAYOUT_IDS } from '@/src/layouts';
 
 function Page({
@@ -395,6 +395,33 @@ function Page({
                     key={layout}
                   >
                     {layout}
+                  </option>
+                ))}
+              </Select>
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Default Mp3 Speaking Rate</h3>
+              <h5>
+                This is the default speaking rate for the mp3 audio files.
+              </h5>
+              <Select
+                onChange={(
+                  ev: ChangeEvent<HTMLSelectElement>,
+                  data: SelectOnChangeData,
+                ) => {
+                  updateProject({
+                    defaultMp3SpeakingRate: Number(data?.value),
+                  });
+                }}
+              >
+                <option>Select Speaking Rate</option>
+                {MP3_SPEAKING_RATES.map((rate) => (
+                  <option
+                    selected={data?.defaultMp3SpeakingRate === rate}
+                    className={'capitalize'}
+                    value={rate}
+                    key={rate}
+                  >
+                    {rate}
                   </option>
                 ))}
               </Select>

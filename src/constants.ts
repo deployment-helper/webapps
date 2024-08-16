@@ -230,3 +230,6 @@ export const OVERLAYS: Array<IOverlay> = [
 ];
 
 export const SUPPORTED_WORKFLOWS: Array<string> = ['youtube-video-clone'];
+
+export const MP3_SPEAKING_RATES = [0.5, 0.6, 0.7, 0.8, 0.9];
+export const DEFAULT_MP3_SPEAKING_RATE = 0.9;

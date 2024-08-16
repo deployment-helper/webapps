@@ -91,6 +91,7 @@ export interface IProject {
   sceneRandomAsset?: boolean;
   videoWithDefaultSettings?: boolean;
   videoSubtitles?: boolean;
+  defaultMp3SpeakingRate?: number;
   createdAt: {
     _seconds: number;
   };
