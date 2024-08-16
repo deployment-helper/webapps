@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 import { Presentation } from './types/types';
-import layouts from '@/src/layouts';
+import { layouts } from '@/src/layouts';
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -63,10 +63,16 @@ export function getFrontendServerUrl() {
   return `${window.location.protocol}//${window.location.host}`;
 }
 
-export function getLayoutContent(currentLayoutId: string) {
+export function getLayout(
+  currentLayoutId: string,
+  addRandomAssets = false,
+  assets?: string[],
+) {
   const layout = layouts.find((layout) => layout.id === currentLayoutId);
-
-  return layout?.content;
+  if (addRandomAssets && layout?.addDefaultAsset && assets) {
+    layout.addDefaultAsset.call(layout, assets);
+  }
+  return layout;
 }
 
 /**
@@ -162,5 +168,18 @@ const defaultExport = {
   formatDate,
   getFileType,
 };
+
+export function getVideosFromAssets(assets: string[]) {
+  return assets.filter((asset) => getFileType(asset).type === 'video');
+}
+
+export function getImagesFromAssets(assets: string[]) {
+  return assets.filter((asset) => getFileType(asset).type === 'image');
+}
+
+export function getRandomValueFromArray(array: string[]) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
 
 export default defaultExport;

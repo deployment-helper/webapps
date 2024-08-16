@@ -8,6 +8,8 @@ import {
   Body1,
   Button,
   Checkbox,
+  Select,
+  SelectOnChangeData,
   Spinner,
   Subtitle1,
   Title1,
@@ -22,7 +24,7 @@ import {
   HeadphonesSoundWave24Filled,
   Settings24Filled,
 } from '@fluentui/react-icons';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Link from 'next/link';
 import { getFileType } from '@/src/helpers';
 import Image from '@/components/Image/Image';
@@ -33,6 +35,7 @@ import Language from '@/components/Language/Language';
 import { IProject } from '@/src/types/video.types';
 import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
 import { OVERLAYS } from '@/src/constants';
+import { LAYOUT_IDS } from '@/src/layouts';
 
 function Page({
   params,
@@ -278,7 +281,17 @@ function Page({
                 <div className={'text-center text-2xl'}>{_overlay.name}</div>
                 <Video src={_overlay.exampleSrc} isViewOnly />
                 {data?.defaultOverlay === _overlay.src ? (
-                  <div className={'text-center text-2xl'}>Current</div>
+                  <Button
+                    className={'w-full'}
+                    appearance={'secondary'}
+                    onClick={() => {
+                      updateProject({
+                        defaultOverlay: '',
+                      });
+                    }}
+                  >
+                    UnApply
+                  </Button>
                 ) : (
                   <Button
                     className={'w-full'}
@@ -330,7 +343,7 @@ function Page({
                 }}
                 label={'Enable'}
               />
-              <hr />
+              <hr className={'mb-2 mt-2'} />
               <h3 className={'text-xl'}>Create video with default settings</h3>
               <h5>When enabled, Video will be created with default settings</h5>
               <Checkbox
@@ -342,6 +355,49 @@ function Page({
                 }}
                 label={'Enable'}
               />
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Enable subtitles</h3>
+              <h5>
+                When enabled, Subtitles will be displayed on the screen.
+                Currently some languages do support the subtitles.
+              </h5>
+              <Checkbox
+                checked={data?.videoSubtitles}
+                onChange={(e, data) => {
+                  updateProject({
+                    videoSubtitles: !!data.checked,
+                  });
+                }}
+                label={'Enable'}
+              />
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Default layout</h3>
+              <h5>
+                When enabled, Subtitles will be displayed on the screen.
+                Currently some languages do support the subtitles.
+              </h5>
+              <Select
+                onChange={(
+                  ev: ChangeEvent<HTMLSelectElement>,
+                  data: SelectOnChangeData,
+                ) => {
+                  updateProject({
+                    defaultLayout: data?.value as string,
+                  });
+                }}
+              >
+                <option>Select Layout</option>
+                {LAYOUT_IDS.map((layout) => (
+                  <option
+                    selected={data?.defaultLayout === layout}
+                    className={'capitalize'}
+                    value={layout}
+                    key={layout}
+                  >
+                    {layout}
+                  </option>
+                ))}
+              </Select>
             </div>
           </div>
         </div>

@@ -18,13 +18,14 @@ import {
   useMutationReorderScenes,
   useMutationUpdateScene,
   useMutationUpdateVideo,
+  useQueryGetProject,
   useQueryGetScenes,
   useQueryGetVideo,
 } from '@/src/query/video.query';
 import { VideoClient } from '@/src/apis/video.client';
 import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
-import { generatePreviewUrl, getLayoutContent } from '@/src/helpers';
+import { generatePreviewUrl, getLayout } from '@/src/helpers';
 import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
 import { ELanguage, IVoice } from '@/src/types/video.types';
 
@@ -39,13 +40,27 @@ export default function Page({
 }: {
   params: { video_id: string; project_id: string };
 }) {
+  // Routes
+  const router = useRouter();
+  const { dispatchToast } = useMyToastController();
+
+  // Store values
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
+  const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
+  const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
+
+  const [trayOption, setTrayOption] = useState<'scenes' | 'voices' | 'music'>(
+    'scenes',
+  );
+
   const {
     data: scenesData,
     isFetching: isScenesFetching,
     isLoading: isScenesLoading,
   } = useQueryGetScenes(params.video_id);
   const { data: videoData } = useQueryGetVideo(params.video_id);
+  const { data: projectData } = useQueryGetProject(params.project_id);
+
   const { mutate: updateScene, isPending } = useMutationUpdateScene();
   const { mutate: updateVideo } = useMutationUpdateVideo();
   const {
@@ -54,31 +69,27 @@ export default function Page({
     mutate,
   } = useMutationPostTextToSpeech();
   const { mutate: reorderScene } = useMutationReorderScenes();
-  // Routes
-  const router = useRouter();
-
-  const { dispatchToast } = useMyToastController();
-
-  // Store values
-  const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
-  const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
-
-  const [trayOption, setTrayOption] = useState<'scenes' | 'voices' | 'music'>(
-    'scenes',
-  );
 
   const scenes = scenesData?.[0]?.scenes || [];
+  const defaultProjectLayout =
+    projectData?.sceneRandomAsset && projectData?.defaultLayout;
 
   const onCreateScene = (addAfter = false, sceneArrayIndex?: number) => {
-    const content = getLayoutContent(selectedLayoutId);
+    const _layoutId = selectedLayoutId || defaultProjectLayout || '';
+    const _layout = getLayout(
+      _layoutId,
+      projectData?.sceneRandomAsset,
+      projectData?.assets,
+    );
     if (videoData?.scenesId === undefined) return;
     updateScene({
       id: params.video_id,
       sceneId: videoData?.scenesId,
-      layoutId: selectedLayout,
+      layoutId: _layoutId,
       data: {
         id: uuid(),
-        content,
+        content: _layout?.content,
+        image: _layout?.image,
       },
       addAfter,
       sceneArrayIndex,

@@ -9,7 +9,7 @@ import { debounce } from 'lodash';
 
 import Image from '@/components/Image/Image';
 
-import layouts from '@/src/layouts';
+import { layouts } from '@/src/layouts';
 import { useVideoStore } from '@/src/stores/video.store';
 import { useMutationUpdateScene } from '@/src/query/video.query';
 import { useParams } from 'next/navigation';

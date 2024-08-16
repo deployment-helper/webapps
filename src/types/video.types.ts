@@ -87,8 +87,10 @@ export interface IProject {
   defaultVoice?: string;
   defaultBackgroundMusic?: string;
   defaultOverlay?: string;
+  defaultLayout: string;
   sceneRandomAsset?: boolean;
   videoWithDefaultSettings?: boolean;
+  videoSubtitles?: boolean;
   createdAt: {
     _seconds: number;
   };
