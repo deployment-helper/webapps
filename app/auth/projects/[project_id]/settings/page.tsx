@@ -34,7 +34,11 @@ import { SupportedVoices } from '@/components/SupportedVoices';
 import Language from '@/components/Language/Language';
 import { IProject } from '@/src/types/video.types';
 import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
-import { MP3_SPEAKING_RATES, OVERLAYS } from '@/src/constants';
+import {
+  MP3_SPEAKING_RATES,
+  OVERLAYS,
+  SILENT_MP3_FILES,
+} from '@/src/constants';
 import { LAYOUT_IDS } from '@/src/layouts';
 
 function Page({
@@ -386,7 +390,7 @@ function Page({
                   });
                 }}
               >
-                <option>Select Layout</option>
+                <option value={''}>Select Layout</option>
                 {LAYOUT_IDS.map((layout) => (
                   <option
                     selected={data?.defaultLayout === layout}
@@ -413,7 +417,7 @@ function Page({
                   });
                 }}
               >
-                <option>Select Speaking Rate</option>
+                <option value={''}>Select Speaking Rate</option>
                 {MP3_SPEAKING_RATES.map((rate) => (
                   <option
                     selected={data?.defaultMp3SpeakingRate === rate}
@@ -422,6 +426,34 @@ function Page({
                     key={rate}
                   >
                     {rate}
+                  </option>
+                ))}
+              </Select>
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Postfix Silence</h3>
+              <h5>
+                This setting adds given seconds of silence at the end of each
+                scene.
+              </h5>
+              <Select
+                onChange={(
+                  ev: ChangeEvent<HTMLSelectElement>,
+                  data: SelectOnChangeData,
+                ) => {
+                  updateProject({
+                    postFixSilence: data?.value as string,
+                  });
+                }}
+              >
+                <option value={''}>Select Silence</option>
+                {SILENT_MP3_FILES.map((asset) => (
+                  <option
+                    selected={data?.postFixSilence === asset.src}
+                    className={'capitalize'}
+                    value={asset.src}
+                    key={asset.src}
+                  >
+                    {asset.name}
                   </option>
                 ))}
               </Select>

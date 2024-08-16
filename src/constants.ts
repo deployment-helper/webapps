@@ -55,6 +55,13 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       rating: 'H',
     },
     {
+      name: 'Studio-Q',
+      voiceCode: 'en-US-Studio-Q',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/en-US-Studio-Q.wav',
+      rating: 'H',
+    },
+    {
       name: 'Neural2-C',
       voiceCode: 'en-US-Neural2-C',
       ssmlGender: 'Female',
@@ -229,7 +236,61 @@ export const OVERLAYS: Array<IOverlay> = [
   },
 ];
 
+export const SILENT_MP3_FILES: Array<IAsset> = [
+  {
+    name: '1 Second',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-1.mp3',
+    rating: 'H',
+  },
+  {
+    name: '2 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-2.mp3',
+    rating: 'H',
+  },
+  {
+    name: '3 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-3.mp3',
+    rating: 'H',
+  },
+  {
+    name: '4 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-4.mp3',
+    rating: 'H',
+  },
+  {
+    name: '5 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-5.mp3',
+    rating: 'H',
+  },
+  {
+    name: '6 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-6.mp3',
+    rating: 'H',
+  },
+  {
+    name: '7 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-7.mp3',
+    rating: 'H',
+  },
+  {
+    name: '8 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-8.mp3',
+    rating: 'H',
+  },
+  {
+    name: '9 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-9.mp3',
+    rating: 'H',
+  },
+  {
+    name: '10 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-10.mp3',
+    rating: 'H',
+  },
+];
 export const SUPPORTED_WORKFLOWS: Array<string> = ['youtube-video-clone'];
 
-export const MP3_SPEAKING_RATES = [0.5, 0.6, 0.7, 0.8, 0.9];
+export const MP3_SPEAKING_RATES = [
+  0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5,
+];
 export const DEFAULT_MP3_SPEAKING_RATE = 0.9;

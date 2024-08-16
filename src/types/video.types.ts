@@ -92,6 +92,7 @@ export interface IProject {
   videoWithDefaultSettings?: boolean;
   videoSubtitles?: boolean;
   defaultMp3SpeakingRate?: number;
+  postFixSilence?: string;
   createdAt: {
     _seconds: number;
   };
