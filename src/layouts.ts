@@ -1,14 +1,20 @@
 import { IInput } from '@/src/types/types';
+import { getRandomValueFromArray, getVideosFromAssets } from '@/src/helpers';
 
 /**
  * Do not change layout orders and ids as database already do have data with these ids
  */
-const layouts: Array<{
+// TODO: Add name and description to layouts to show in the UI
+// TODO: layout should have add default asset behaviour to add default asset to the layout
+type TLayout = {
   id: string;
   componentName: string;
   image: string;
   content: Record<string, IInput>;
-}> = [
+  addDefaultAsset?: (assets: string[]) => void;
+};
+
+export const layouts: Array<TLayout> = [
   {
     id: 'layout1',
     componentName: 'TitleSubtitle',
@@ -17,12 +23,14 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
       subtitle: {
         type: 'input',
         name: 'subtitle',
+        bodyCopyType: 'subtitle',
         value: 'Subtitle',
         placeholder: 'Subtitle',
       },
@@ -49,6 +57,7 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
@@ -66,6 +75,20 @@ const layouts: Array<{
         placeholder: 'video',
       },
     },
+    addDefaultAsset: function (assets: string[]) {
+      if (this === undefined) {
+        console.warn(
+          'This is undefined, call this function with parent layout.addDefaultAsset(assets)',
+        );
+        return;
+      }
+
+      const _videoAssets = getVideosFromAssets(assets);
+      const video = getRandomValueFromArray(_videoAssets);
+      // TODO: needs to check why this is undefined, currently passing this as argument
+      this.content.video.value = video;
+      this.image = video;
+    },
   },
   {
     id: 'layout5',
@@ -81,6 +104,7 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
@@ -100,9 +124,24 @@ const layouts: Array<{
       title: {
         type: 'input',
         name: 'title',
+        bodyCopyType: 'title',
         value: 'Title',
         placeholder: 'Title',
       },
+    },
+    addDefaultAsset: function (assets: string[]) {
+      if (this === undefined) {
+        console.warn(
+          'This is undefined, call this function with parent layout.addDefaultAsset(assets)',
+        );
+        return;
+      }
+
+      const _videoAssets = getVideosFromAssets(assets);
+      const video = getRandomValueFromArray(_videoAssets);
+      // TODO: needs to check why this is undefined, currently passing this as argument
+      this.content.video.value = video;
+      this.image = video;
     },
   },
 ];
@@ -114,5 +153,8 @@ export const ALLOWED_LAYOUTS = [
   'layout5',
   'layout6',
 ];
+
+export const LAYOUT_IDS = layouts.map((layout: TLayout) => layout.id);
+
 export const DEFAULT_LAYOUT = layouts[1];
 export default layouts;

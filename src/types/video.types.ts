@@ -74,6 +74,7 @@ export enum ELanguage {
   'Thai (Thailand)' = 'th-TH',
   'Turkish (Turkey)' = 'tr-TR',
   'Ukrainian (Ukraine)' = 'uk-UA',
+  'Urdu (India)' = 'ur-IN',
   'Vietnamese (Vietnam)' = 'vi-VN',
 }
 
@@ -82,6 +83,17 @@ export interface IProject {
   projectName: string;
   projectDesc?: string;
   userId: string;
+  assets: string[];
+  defaultLanguage?: ELanguage;
+  defaultVoice?: string;
+  defaultBackgroundMusic?: string;
+  defaultOverlay?: string;
+  defaultLayout: string;
+  sceneRandomAsset?: boolean;
+  videoWithDefaultSettings?: boolean;
+  videoSubtitles?: boolean;
+  defaultMp3SpeakingRate?: number;
+  postFixSilence?: string;
   createdAt: {
     _seconds: number;
   };
@@ -108,6 +120,9 @@ export interface IVideo {
   name: string;
   description?: string;
   audioLanguage?: ELanguage;
+  voiceCode?: string;
+  backgroundMusic?: string;
+  overlay?: string;
   createdAt: {
     _seconds: number;
   };
@@ -147,4 +162,24 @@ export interface IScene {
 export interface ISceneResponse {
   videoId: string;
   scenes: IScene[];
+}
+
+// TODO: This interface should extend IAsset
+export interface IVoice {
+  name: string;
+  voiceCode: string;
+  ssmlGender: 'Male' | 'Female';
+  mp3: string;
+  src?: string;
+  rating: 'H' | 'M' | 'L';
+}
+
+export interface IAsset {
+  name: string;
+  src: string;
+  rating: 'H' | 'M' | 'L';
+}
+
+export interface IOverlay extends IAsset {
+  exampleSrc: string;
 }

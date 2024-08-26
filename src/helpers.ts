@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 import { Presentation } from './types/types';
-import layouts from '@/src/layouts';
+import { layouts } from '@/src/layouts';
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -63,10 +63,16 @@ export function getFrontendServerUrl() {
   return `${window.location.protocol}//${window.location.host}`;
 }
 
-export function getLayoutContent(currentLayoutId: string) {
+export function getLayout(
+  currentLayoutId: string,
+  addRandomAssets = false,
+  assets?: string[],
+) {
   const layout = layouts.find((layout) => layout.id === currentLayoutId);
-
-  return layout?.content;
+  if (addRandomAssets && layout?.addDefaultAsset && assets) {
+    layout.addDefaultAsset.call(layout, assets);
+  }
+  return layout;
 }
 
 /**
@@ -107,11 +113,73 @@ export const formatDate = (timestamp: number) => {
   return dayStr + '-' + monthStr + '-' + year;
 };
 
+export const getFileType = (
+  file: File | string,
+): {
+  extension: string;
+  type: 'image' | 'video' | 'audio' | 'application' | 'text' | 'other';
+} => {
+  const extension =
+    typeof file === 'string'
+      ? file.split('.').pop() || ''
+      : file.name.split('.').pop() || '';
+  const imageTypes = ['jpeg', 'png', 'gif', 'bmp', 'webp'];
+  const videoTypes = ['mp4', 'webm', 'ogg', 'mov'];
+  const audioTypes = ['mp3', 'wav', 'ogg'];
+  const textTypes = ['pdf', 'txt'];
+  const applicationTypes = ['json', 'xml', 'csv', 'zip'];
+
+  if (imageTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'image',
+    };
+  } else if (videoTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'video',
+    };
+  } else if (audioTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'audio',
+    };
+  } else if (textTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'text',
+    };
+  } else if (applicationTypes.includes(extension)) {
+    return {
+      extension,
+      type: 'application',
+    };
+  } else {
+    return {
+      extension,
+      type: 'other',
+    };
+  }
+};
 const defaultExport = {
   addSlideIds,
   s3RandomPublicKey,
   formatDateString,
   formatDate,
+  getFileType,
 };
+
+export function getVideosFromAssets(assets: string[]) {
+  return assets.filter((asset) => getFileType(asset).type === 'video');
+}
+
+export function getImagesFromAssets(assets: string[]) {
+  return assets.filter((asset) => getFileType(asset).type === 'image');
+}
+
+export function getRandomValueFromArray(array: string[]) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+}
 
 export default defaultExport;

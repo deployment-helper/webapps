@@ -14,7 +14,7 @@ import { useVideoStore } from '@/src/stores/video.store';
 import { useParams, useRouter } from 'next/navigation';
 import Language from '@/components/Language/Language';
 import { useEffect, useState } from 'react';
-import { ELanguage } from '@/src/types/video.types';
+import { ELanguage, IProject } from '@/src/types/video.types';
 import { debounce } from 'lodash';
 import {
   useMutationUpdateVideo,
@@ -24,29 +24,16 @@ import Link from 'next/link';
 
 let debouncedMutation: any = undefined;
 
-export const Header4 = ({ projectList }: HeaderProps) => {
+const Slot2 = ({ projectList }: { projectList?: Array<IProject> }) => {
   const router = useRouter();
   const params = useParams();
 
-  const classes = useStyles();
-
   const [presentationName, setPresentationName] = useState('');
+  const currentProject = useVideoStore((state) => state.currentProjectId);
   const { mutate } = useMutationUpdateVideo();
   const { isLoading, isFetching, data } = useQueryGetVideo(
     params.video_id as string,
   );
-
-  function onLanguageChange(language: ELanguage) {
-    mutate({
-      id: params.video_id as string,
-      name: presentationName,
-      data: { audioLanguage: language },
-    });
-  }
-
-  const onProjectSelect = (projectId: string) => {
-    router.push(`/auth/projects/${projectId}`);
-  };
 
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (debouncedMutation) {
@@ -59,38 +46,53 @@ export const Header4 = ({ projectList }: HeaderProps) => {
     setPresentationName(e.target.value);
   }
 
-  const Slot2 = () => {
-    const currentProject = useVideoStore((state) => state.currentProjectId);
-    return (
-      <>
-        <ProjectDropdown
-          readonly={true}
-          projects={projectList || []}
-          defaultProject={currentProject}
-          onProjectSelect={onProjectSelect}
-        />
-        <Input
-          placeholder="Enter name"
-          size="medium"
-          value={presentationName}
-          onChange={onNameChange}
-        />
-        <Language
-          language={data?.audioLanguage || ''}
-          onSelect={onLanguageChange}
-        />
-        {(isLoading || isFetching) && (
-          <div style={{ position: 'relative' }}>
-            <Spinner size={'small'} />
-          </div>
-        )}
-      </>
-    );
+  const onProjectSelect = (projectId: string) => {
+    router.push(`/auth/projects/${projectId}`);
   };
 
+  function onLanguageChange(language: ELanguage) {
+    mutate({
+      id: params.video_id as string,
+      name: data?.name || 'UnTitled',
+      data: { audioLanguage: language },
+    });
+  }
+
   useEffect(() => {
-    setPresentationName(data?.name || 'UnTitled');
-  }, [data]);
+    setPresentationName(data?.name || '');
+  }, [data?.name]);
+
+  return (
+    <>
+      <ProjectDropdown
+        readonly={true}
+        projects={projectList || []}
+        defaultProject={currentProject}
+        onProjectSelect={onProjectSelect}
+      />
+      <Input
+        placeholder="Enter name"
+        size="medium"
+        value={presentationName}
+        onChange={onNameChange}
+      />
+      <Language
+        currentLanguage={data?.audioLanguage}
+        onSelect={onLanguageChange}
+      />
+      <Input disabled={true} value={data?.voiceCode || ''} />
+      {(isLoading || isFetching) && (
+        <div style={{ position: 'relative' }}>
+          <Spinner size={'small'} />
+        </div>
+      )}
+    </>
+  );
+};
+
+export const Header4 = ({ projectList }: HeaderProps) => {
+  const classes = useStyles();
+  const params = useParams();
 
   return (
     <BaseHeader
@@ -101,7 +103,7 @@ export const Header4 = ({ projectList }: HeaderProps) => {
           />
         </Link>
       }
-      slot2={<Slot2 />}
+      slot2={<Slot2 projectList={projectList} />}
       slot3={
         <div>
           <Avatar

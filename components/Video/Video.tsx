@@ -3,12 +3,14 @@ import { IInsertImageProps } from '@/components/InsertImage/InsertImage';
 import { ArrowSync24Filled } from '@fluentui/react-icons';
 import { useState } from 'react';
 import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
+import DeleteIcon from '@/components/DeleteIcon/DeleteIcon';
 
 export function Video({
   src,
   isCopyable,
   isViewOnly,
   onUploadSuccess,
+  onDelete,
 }: IVideoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onSuccessfulUpload = (url: string) => {
@@ -21,6 +23,7 @@ export function Video({
       <div className={'relative'}>
         <video controls src={src} />
         {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
+        {onDelete && <DeleteIcon onClick={onDelete} />}
         {!isViewOnly && (
           <div
             className={
@@ -48,4 +51,5 @@ export interface IVideoProps extends Partial<IInsertImageProps> {
   isViewOnly?: boolean;
   src: string;
   isCopyable?: boolean;
+  onDelete?: () => void;
 }

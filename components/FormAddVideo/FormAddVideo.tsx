@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from 'react-hook-form';
 import {
   Button,
   Drawer,
@@ -9,8 +9,9 @@ import {
   Input,
   Label,
   Textarea,
-} from "@fluentui/react-components";
-import { useRef } from "react";
+} from '@fluentui/react-components';
+import { useRef } from 'react';
+import { IVideo } from '@/src/types/video.types';
 
 export function FormAddVideo({
   isOpen,
@@ -25,10 +26,10 @@ export function FormAddVideo({
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      description: "",
-      projectId: "",
-      projectName: "",
+      name: '',
+      description: '',
+      projectId: '',
+      projectName: '',
     },
     values: {
       projectId: projectId,
@@ -44,11 +45,11 @@ export function FormAddVideo({
   return (
     <div>
       <Drawer
-        type={"overlay"}
+        type={'overlay'}
         onOpenChange={onClose}
         open={isOpen}
-        position={"end"}
-        size={"medium"}
+        position={'end'}
+        size={'medium'}
       >
         <DrawerHeader>
           <DrawerHeaderTitle>Add Video</DrawerHeaderTitle>
@@ -74,7 +75,7 @@ export function FormAddVideo({
                       type="text"
                       id="projectName"
                       placeholder="Project Name"
-                      className={"w-full"}
+                      className={'w-full'}
                       disabled={!!projectId}
                     />
                   )}
@@ -91,7 +92,7 @@ export function FormAddVideo({
                       type="text"
                       id="videoName"
                       placeholder="video Name"
-                      className={"w-full"}
+                      className={'w-full'}
                     />
                   )}
                 />
@@ -107,7 +108,7 @@ export function FormAddVideo({
                       {...field}
                       id="videoDescription"
                       placeholder="Video Description"
-                      className={"w-full"}
+                      className={'w-full'}
                     />
                   )}
                 />
@@ -117,8 +118,8 @@ export function FormAddVideo({
           </form>
         </DrawerBody>
         <DrawerFooter>
-          <div className={"flex w-full justify-end gap-5"}>
-            <Button size={"large"} onClick={onClose}>
+          <div className={'flex w-full justify-end gap-5'}>
+            <Button size={'large'} onClick={onClose}>
               Cancel
             </Button>
             <Button
@@ -126,8 +127,8 @@ export function FormAddVideo({
               onClick={() => {
                 formRef.current?.requestSubmit();
               }}
-              size={"large"}
-              appearance={"primary"}
+              size={'large'}
+              appearance={'primary'}
             >
               Submit
             </Button>
@@ -143,6 +144,6 @@ interface IFormAddProjectProps {
   projectId?: string;
   projectName?: string;
   onClose: () => void;
-  onSubmit: (data: { projectName: string; projectDescription: string }) => void;
+  onSubmit: (data: Partial<IVideo>) => void;
 }
 export default FormAddVideo;

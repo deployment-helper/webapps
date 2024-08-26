@@ -18,7 +18,9 @@ export function InsertImageModal({
   onUploadSuccess,
   onOpenChange,
   onClose,
+  title,
   isOpen = false,
+  isDisplayURLUpload = true,
 }: IInsertImageModalProps) {
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
 
@@ -31,7 +33,7 @@ export function InsertImageModal({
         <DialogBody>
           <DialogTitle>
             <div className={'flex justify-between'}>
-              <Subtitle1>Select Object</Subtitle1>
+              <Subtitle1>{title ? title : 'Select Object'}</Subtitle1>
               <div
                 className={
                   'relative -right-4 -top-4 cursor-pointer text-gray-600'
@@ -46,6 +48,7 @@ export function InsertImageModal({
             <InsertImage
               onUploadSuccess={onUploadSuccess}
               onStateChange={onUploadStatusChange}
+              isDisplayURLUpload={isDisplayURLUpload}
             />
           </DialogContent>
         </DialogBody>
@@ -58,6 +61,7 @@ export interface IInsertImageModalProps extends IInsertImageProps {
   onOpenChange?: DialogOpenChangeEventHandler;
   onClose?: () => void;
   isOpen?: boolean;
+  title?: string;
 }
 
 export default InsertImageModal;

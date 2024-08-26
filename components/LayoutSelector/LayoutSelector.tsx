@@ -9,7 +9,7 @@ import { debounce } from 'lodash';
 
 import Image from '@/components/Image/Image';
 
-import layouts from '@/src/layouts';
+import { layouts } from '@/src/layouts';
 import { useVideoStore } from '@/src/stores/video.store';
 import { useMutationUpdateScene } from '@/src/query/video.query';
 import { useParams } from 'next/navigation';
@@ -95,14 +95,22 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
 
   // Listener for content data change and update the content in state
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSceneContent(selectedLayoutId, selectedSceneId, sceneArrayIndex, {
+    const content = {
       ...sceneContent,
       [e.target.name]: {
         ...sceneContent[e.target.name],
         value: e.target.value,
       },
-    });
-    updateSceneContent();
+    };
+
+    setSceneContent(
+      selectedLayoutId,
+      selectedSceneId,
+      sceneArrayIndex,
+      content,
+    );
+
+    updateSceneContent(content);
   };
 
   return (
