@@ -1,16 +1,18 @@
 import UploadImage, {
   IUploadImageProps,
-} from "@/components/UploadImage/UploadImage";
+} from '@/components/UploadImage/UploadImage';
 
 export function InsertImage({
   onUploadSuccess,
   onStateChange,
+  isDisplayURLUpload = true,
 }: IInsertImageProps) {
   return (
     <div>
       <UploadImage
         onUploadSuccess={onUploadSuccess}
         onStateChange={onStateChange}
+        isDisplayURLUpload={isDisplayURLUpload}
       />
     </div>
   );

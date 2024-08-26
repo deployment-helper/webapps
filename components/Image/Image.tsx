@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { InsertImageModal } from '@/components/InsertImageModal/InsertImageModal';
 import { IInsertImageProps } from '@/components/InsertImage/InsertImage';
-import { ArrowSync24Filled } from '@fluentui/react-icons';
+import { ArrowSync24Filled, Delete20Filled } from '@fluentui/react-icons';
 import CopyIcon from '@/components/CopyIcon/CopyIcon';
+import DeleteIcon from '@/components/DeleteIcon/DeleteIcon';
 
 export function Image({
   isViewOnly,
   onUploadSuccess,
+  onDelete,
   src,
   isCopyable,
 }: IImageProps) {
@@ -25,6 +27,7 @@ export function Image({
       {isViewOnly ? (
         <div className={'relative'}>
           {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
+          {onDelete && <DeleteIcon onClick={onDelete} />}
           <img src={src} />
         </div>
       ) : (
@@ -62,6 +65,7 @@ export interface IImageProps extends Partial<IInsertImageProps> {
   isViewOnly?: boolean;
   src: string;
   isCopyable?: boolean;
+  onDelete?: () => void;
 }
 
 export default Image;

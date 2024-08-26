@@ -34,6 +34,7 @@ const Slot2 = ({ projectList }: { projectList?: Array<IProject> }) => {
   const { isLoading, isFetching, data } = useQueryGetVideo(
     params.video_id as string,
   );
+
   function onNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (debouncedMutation) {
       debouncedMutation.cancel();
@@ -44,6 +45,7 @@ const Slot2 = ({ projectList }: { projectList?: Array<IProject> }) => {
     debouncedMutation({ id: params.video_id, name: e.target.value });
     setPresentationName(e.target.value);
   }
+
   const onProjectSelect = (projectId: string) => {
     router.push(`/auth/projects/${projectId}`);
   };
@@ -75,7 +77,7 @@ const Slot2 = ({ projectList }: { projectList?: Array<IProject> }) => {
         onChange={onNameChange}
       />
       <Language
-        language={data?.audioLanguage || ''}
+        currentLanguage={data?.audioLanguage}
         onSelect={onLanguageChange}
       />
       <Input disabled={true} value={data?.voiceCode || ''} />

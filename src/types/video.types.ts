@@ -83,6 +83,17 @@ export interface IProject {
   projectName: string;
   projectDesc?: string;
   userId: string;
+  assets: string[];
+  defaultLanguage?: ELanguage;
+  defaultVoice?: string;
+  defaultBackgroundMusic?: string;
+  defaultOverlay?: string;
+  defaultLayout: string;
+  sceneRandomAsset?: boolean;
+  videoWithDefaultSettings?: boolean;
+  videoSubtitles?: boolean;
+  defaultMp3SpeakingRate?: number;
+  postFixSilence?: string;
   createdAt: {
     _seconds: number;
   };
@@ -111,6 +122,7 @@ export interface IVideo {
   audioLanguage?: ELanguage;
   voiceCode?: string;
   backgroundMusic?: string;
+  overlay?: string;
   createdAt: {
     _seconds: number;
   };
@@ -152,6 +164,7 @@ export interface ISceneResponse {
   scenes: IScene[];
 }
 
+// TODO: This interface should extend IAsset
 export interface IVoice {
   name: string;
   voiceCode: string;
@@ -161,8 +174,12 @@ export interface IVoice {
   rating: 'H' | 'M' | 'L';
 }
 
-export interface IBackgroundMusic {
+export interface IAsset {
   name: string;
   src: string;
   rating: 'H' | 'M' | 'L';
+}
+
+export interface IOverlay extends IAsset {
+  exampleSrc: string;
 }

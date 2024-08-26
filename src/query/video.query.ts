@@ -42,7 +42,7 @@ export const useMutationUpdateVideo = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: { id: string; name: string; data?: Partial<IVideo> }) =>
-      VideoClient.update(data.id, data.name, data.data),
+      VideoClient.updateVideo(data.id, data.name, data.data),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ['video', variables.id],
@@ -62,6 +62,19 @@ export const useQueryGetVideos = () => {
 export const useMutationCreateVideo = () => {
   return useMutation({
     mutationFn: (data: any) => VideoClient.create(data),
+  });
+};
+
+export const useMutationCreateVideoWithWorkflowYoutubeVideoClone = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: any) =>
+      VideoClient.createWithWorkflowYoutubeVideoClone(data),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ['videos'],
+      });
+    },
   });
 };
 
@@ -182,6 +195,14 @@ export const useQueryGetProjects = () => {
   });
 };
 
+export const useQueryGetProject = (id: string) => {
+  return useQuery({
+    queryKey: ['project', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => VideoClient.getProject(id),
+  });
+};
+
 export const useMutationCreateProject = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -190,6 +211,18 @@ export const useMutationCreateProject = () => {
     onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ['projects'],
+      });
+    },
+  });
+};
+
+export const useMutationUpdateProject = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: any) => VideoClient.updateProject(data.id, data),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['project', data.id],
       });
     },
   });

@@ -27,18 +27,19 @@ import {
   useMutationCreateVideo,
   useMutationDeleteVideo,
   useMutationDownloadVideo,
-  useQueryGetProjects,
+  useQueryGetProject,
   useQueryGetVideosForProject,
 } from '@/src/query/video.query';
 import { IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
-import { MoreVertical20Regular } from '@fluentui/react-icons';
+import { MoreVertical20Regular, Settings32Filled } from '@fluentui/react-icons';
 import { LanguageDialog } from '@/components/Dialog/Dialog';
 import { VideoClient } from '@/src/apis/video.client';
 import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';
 import { useVideoStore } from '@/src/stores/video.store';
+import WorkflowList from '@/components/WorkflowList/WorkflowList';
 
 function Videos({
   params,
@@ -57,8 +58,6 @@ function Videos({
   const deleteMutation = useMutationDeleteVideo();
   const copyMutation = useMutationCopyVideo();
   const createVideoMutation = useMutationCreateVideo();
-  // TODO: fetch single project by id
-  const { data: projects } = useQueryGetProjects();
 
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
 
@@ -71,11 +70,12 @@ function Videos({
     });
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
+  const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
-  const project = projects?.find((project) => project.id === params.project_id);
+  const { data: project } = useQueryGetProject(params.project_id);
 
   function copyVideo(video: IVideo) {
     copyMutation.mutate({
@@ -83,6 +83,7 @@ function Videos({
     });
   }
 
+  // Generate video on batch server
   function generateVideo(video: IVideo) {
     VideoClient.generateVideoV2(video.id as string, {
       videoId: video.id as string,
@@ -96,13 +97,12 @@ function Videos({
   }
 
   function onClose() {
-    setIsOpen(false);
+    setIsLanguageDropdownOpen(false);
     setSelectedVideo(null);
   }
 
-  function onSubmit(language: string) {
-    console.log(language);
-    setIsOpen(false);
+  function copyWithNewLanguage(language: string) {
+    setIsLanguageDropdownOpen(false);
     copyMutation.mutate({
       id: selectedVideo?.id as string,
       langFrom: selectedVideo?.audioLanguage,
@@ -113,7 +113,7 @@ function Videos({
   }
 
   function copyAndChangeLanguage(video: IVideo) {
-    setIsOpen(true);
+    setIsLanguageDropdownOpen(true);
     setSelectedVideo(video);
   }
 
@@ -121,7 +121,16 @@ function Videos({
     deleteMutation.mutate(video.id);
   }
 
-  function createNewVideo(data: any) {
+  function createNewVideo(data: Partial<IVideo>) {
+    if (project?.videoWithDefaultSettings) {
+      data = {
+        ...data,
+        audioLanguage: project?.defaultLanguage,
+        voiceCode: project?.defaultVoice,
+        backgroundMusic: project?.defaultBackgroundMusic,
+        overlay: project?.defaultOverlay,
+      };
+    }
     createVideoMutation.mutate(data);
     setIsCreateVideoOpen(false);
   }
@@ -264,8 +273,12 @@ function Videos({
   return (
     <>
       <div className="w-100 max-w-7xl" style={{ minWidth: '80rem' }}>
-        {isOpen && (
-          <LanguageDialog open={isOpen} onClose={onClose} onSubmit={onSubmit} />
+        {isLanguageDropdownOpen && (
+          <LanguageDialog
+            open={isLanguageDropdownOpen}
+            onClose={onClose}
+            onSubmit={copyWithNewLanguage}
+          />
         )}
         <div className="flex justify-between pb-6 pt-6">
           <div className={'flex items-center'}>
@@ -275,7 +288,7 @@ function Videos({
             )}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2 align-middle">
             <Button
               appearance="outline"
               onClick={() => {
@@ -292,6 +305,20 @@ function Videos({
             >
               Create
             </Button>
+            <Button
+              appearance="primary"
+              onClick={() => {
+                setIsWorkFlowOpen(true);
+              }}
+            >
+              Create With Workflow
+            </Button>
+            <Link
+              className={'rounded-md p-2 hover:bg-gray-100'}
+              href={`/auth/projects/${params.project_id}/settings`}
+            >
+              <Settings32Filled />
+            </Link>
           </div>
         </div>
         {videos && videos.length && (
@@ -323,6 +350,12 @@ function Videos({
             onSubmit={createNewVideo}
             projectId={params.project_id}
             projectName={project?.projectName}
+          />
+        )}
+        {isWorkFlowOpen && (
+          <WorkflowList
+            isOpen={isWorkFlowOpen}
+            onClose={() => setIsWorkFlowOpen(false)}
           />
         )}
       </div>

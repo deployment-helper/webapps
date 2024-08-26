@@ -14,7 +14,7 @@ import {
 import { VideoClient } from '@/src/apis/video.client';
 import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
-import { getLayoutContent } from '@/src/helpers';
+import { getLayout } from '@/src/helpers';
 import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { ELanguage } from '@/src/types/video.types';
@@ -43,7 +43,7 @@ export default function Page({ params }: { params: { video_id: string } }) {
   const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
   const scenes = scenesData?.[0]?.scenes || [];
   const onCreateScene = () => {
-    const content = getLayoutContent(selectedLayoutId);
+    const content = getLayout(selectedLayoutId);
 
     if (videoData?.scenesId === undefined) return;
 

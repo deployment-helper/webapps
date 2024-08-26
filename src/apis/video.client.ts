@@ -29,7 +29,13 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async update(
+  public static createWithWorkflowYoutubeVideoClone(
+    data: any,
+  ): Promise<IVideo> {
+    throw new Error('Method not implemented.');
+  }
+
+  public static async updateVideo(
     id: string,
     name: string,
     data?: Partial<IVideo>,
@@ -48,6 +54,16 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
+  public static async updateProject(id: string, data: any): Promise<IProject> {
+    const resp = await VideoClient.sendToAPiServer(
+      `projects/${id}`,
+      data,
+      HttpMethod.PUT,
+    );
+
+    return resp.json();
+  }
+
   public static async getVideos(): Promise<IVideo[]> {
     const resp = await VideoClient.sendToAPiServer('videos');
     return resp.json();
@@ -55,6 +71,11 @@ export class VideoClient extends ServerClient {
 
   public static async getProjects(): Promise<IProject[]> {
     const resp = await VideoClient.sendToAPiServer('projects');
+    return resp.json();
+  }
+
+  public static async getProject(id: string): Promise<IProject> {
+    const resp = await VideoClient.sendToAPiServer(`projects/${id}`);
     return resp.json();
   }
 

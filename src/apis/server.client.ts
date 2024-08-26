@@ -1,12 +1,12 @@
-import cookies from "@/src/cookies";
-import { IPresentation, Presentation } from "../types/types";
+import cookies from '@/src/cookies';
+import { IPresentation, Presentation } from '../types/types';
 import {
   addSlideIds,
   checkAndSetApiKey,
   getApiServer,
   getBatchServer,
-} from "../helpers";
-import { HttpMethod } from "../constants";
+} from '../helpers';
+import { HttpMethod } from '../constants';
 
 export class ServerClient {
   public static send(
@@ -15,13 +15,13 @@ export class ServerClient {
     method: HttpMethod = HttpMethod.GET,
   ): Promise<any> {
     const cookieStore = cookies();
-    const token = cookieStore.get("access_token");
+    const token = cookieStore.get('access_token');
     return fetch(checkAndSetApiKey(url), {
       method,
       body: JSON.stringify(body),
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
   }
@@ -55,10 +55,10 @@ export class ServerClient {
       file: addSlideIds(presentation),
     };
 
-    const resp = await fetch("/auth/apis", {
-      method: "POST",
+    const resp = await fetch('/auth/apis', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     });
@@ -92,11 +92,11 @@ export class ServerClient {
   ): Promise<any> {
     const url = `${apiServer}/slides/list?projectId=${projectId}`;
     const cookieStore = cookies();
-    const token = cookieStore.get("access_token");
+    const token = cookieStore.get('access_token');
     const resp = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -110,14 +110,14 @@ export class ServerClient {
     apiKey?: string,
   ) {
     const url = `${apiServer}/slides/${pid}?updatedAt=${updateAt} ${
-      apiKey ? "&key=" + apiKey + "" : ""
+      apiKey ? '&key=' + apiKey + '' : ''
     }`;
     const cookieStore = cookies();
-    const token = cookieStore.get("access_token");
+    const token = cookieStore.get('access_token');
     const resp = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -156,7 +156,7 @@ export class ServerClient {
    * @param key key should be the s3 object key ex: 'folder/file.png'
    * @param apiServer
    */
-  public static async generateS3GetSignedUrl(key: string, apiServer = "") {
+  public static async generateS3GetSignedUrl(key: string, apiServer = '') {
     const url = `${apiServer}/auth/downloadS3ObjUrl?key=${key}`;
     const resp = await ServerClient.sendToAPiServer(
       url,
@@ -174,7 +174,7 @@ export class ServerClient {
     isPublic: boolean = false,
   ) {
     const url = `${apiServer}/auth/uploadS3ObjUrl?key=${key}${
-      isPublic ? "&public=true" : ""
+      isPublic ? '&public=true' : ''
     }`;
     const resp = await ServerClient.send(url, undefined, HttpMethod.GET);
     return await resp.json();
@@ -193,15 +193,15 @@ export class ServerClient {
     );
 
     const s3Resp = await fetch(resp.url, {
-      method: "PUT",
+      method: 'PUT',
       body: file,
       headers: {
-        "Content-Type": file.type,
+        'Content-Type': file.type,
       },
     });
 
     if (s3Resp.status !== 200) {
-      throw new Error("File upload error");
+      throw new Error('File upload error');
     }
 
     return resp;
@@ -220,20 +220,20 @@ export class ServerClient {
     );
 
     // Extract base64 data from the canvas data URL
-    const base64Data = canvasDataURL.replace(/^data:image\/\w+;base64,/, "");
-    const buffer = Buffer.from(base64Data, "base64");
+    const base64Data = canvasDataURL.replace(/^data:image\/\w+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
 
     const s3Resp = await fetch(resp.url, {
-      method: "PUT",
+      method: 'PUT',
       body: buffer,
       headers: {
-        "Content-Type": "image/png", // Adjust content type based on your image type
-        "Content-Encoding": "base64", // Specify content encoding as base64
+        'Content-Type': 'image/png', // Adjust content type based on your image type
+        'Content-Encoding': 'base64', // Specify content encoding as base64
       },
     });
 
     if (s3Resp.status !== 200) {
-      throw new Error("File upload error");
+      throw new Error('File upload error');
     }
 
     return resp;

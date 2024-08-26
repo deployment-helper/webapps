@@ -1,4 +1,4 @@
-import { ELanguage, IVoice } from '@/src/types/video.types';
+import { ELanguage, IAsset, IOverlay, IVoice } from '@/src/types/video.types';
 
 export enum Theme {
   BLUE = 'BLUE',
@@ -52,6 +52,13 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       voiceCode: 'en-US-Journey-F',
       ssmlGender: 'Female',
       mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/en-us-Journey-F.wav',
+      rating: 'H',
+    },
+    {
+      name: 'Studio-Q',
+      voiceCode: 'en-US-Studio-Q',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/en-US-Studio-Q.wav',
       rating: 'H',
     },
     {
@@ -159,11 +166,7 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
   ],
 };
 
-export const SUPPORTED_BACKGROUND_MUSIC: Array<{
-  name: string;
-  src: string;
-  rating: 'H' | 'M' | 'L';
-}> = [
+export const SUPPORTED_BACKGROUND_MUSIC: Array<IAsset> = [
   {
     name: 'Deep meditation',
     src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/background-music/deep-meditation-192828.mp3',
@@ -205,3 +208,119 @@ export const SUPPORTED_BACKGROUND_MUSIC: Array<{
     rating: 'H',
   },
 ];
+
+export const WORKFLOWS: Array<{
+  id: string;
+  name: string;
+  url: string;
+  desc?: string;
+}> = [
+  {
+    id: 'youtube-video-clone',
+    name: 'Youtube video clone',
+    url: '/workflows/youtube-video-clone',
+    desc: 'Clone of youtube video for given URL',
+  },
+  {
+    id: 'google-slides-to-video',
+    name: 'Google slides to video',
+    url: '/workflows/google-slides-to-video',
+    desc: 'Convert google slides to video',
+  },
+  {
+    id: 'html-page-to-video',
+    name: 'HTML page to video',
+    url: '/workflows/html-page-to-video',
+    desc: 'Convert HTML page to video',
+  },
+];
+
+export const OVERLAYS: Array<IOverlay> = [
+  {
+    name: 'Smoke1',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/123dc96f-520a-484f-a803-2c9868c7b692.mov',
+    exampleSrc:
+      'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/b205cff9-cd15-4c77-8c56-c56ec6ecf18b.mp4',
+    rating: 'M',
+  },
+  {
+    name: 'Orange Dust Particles',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/c873647f-e108-4561-a203-7327873b2469.mov',
+    exampleSrc:
+      'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/9dca1792-fa98-410c-a7e9-1c5f9d8978c0.mp4',
+    rating: 'M',
+  },
+  {
+    name: 'Confetti',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/7aebc7e3-86a8-4e2b-9994-634e7aeda3f2.mov',
+    exampleSrc:
+      'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/d12baf21-5d23-4c6c-af3d-95b47ef9bd73.mp4',
+    rating: 'M',
+  },
+  {
+    name: 'Star 1',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/29a9bebd-9534-45e6-b377-5986897ceae7.mov',
+    exampleSrc:
+      'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/8d3282ad-3f8b-4286-bc52-2714860504bf.mp4',
+    rating: 'M',
+  },
+];
+
+export const SILENT_MP3_FILES: Array<IAsset> = [
+  {
+    name: '1 Second',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-1.mp3',
+    rating: 'H',
+  },
+  {
+    name: '2 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-2.mp3',
+    rating: 'H',
+  },
+  {
+    name: '3 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-3.mp3',
+    rating: 'H',
+  },
+  {
+    name: '4 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-4.mp3',
+    rating: 'H',
+  },
+  {
+    name: '5 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-5.mp3',
+    rating: 'H',
+  },
+  {
+    name: '6 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-6.mp3',
+    rating: 'H',
+  },
+  {
+    name: '7 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-7.mp3',
+    rating: 'H',
+  },
+  {
+    name: '8 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-8.mp3',
+    rating: 'H',
+  },
+  {
+    name: '9 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-9.mp3',
+    rating: 'H',
+  },
+  {
+    name: '10 Seconds',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-10.mp3',
+    rating: 'H',
+  },
+];
+export const SUPPORTED_WORKFLOWS: Array<string> = ['youtube-video-clone'];
+
+export const MP3_SPEAKING_RATES = [
+  0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5,
+];
+export const DEFAULT_MP3_SPEAKING_RATE = 0.9;
