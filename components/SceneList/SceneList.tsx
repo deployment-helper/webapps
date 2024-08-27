@@ -1,11 +1,22 @@
 import Scene from '@/components/Scene/Scene';
-import { Spinner } from '@fluentui/react-components';
+import {
+  Button,
+  Menu,
+  MenuButtonProps,
+  MenuItem,
+  MenuList,
+  MenuPopover,
+  MenuTrigger,
+  Spinner,
+  SplitButton,
+} from '@fluentui/react-components';
 import { ELanguage, IScene } from '@/src/types/video.types';
 import { useParams } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
 import { useEffect, useState } from 'react';
 import { IInput } from '@/src/types/types';
 import { DEFAULT_LAYOUT } from '@/src/layouts';
+import { CreateSceneWithTextModal } from '@/components/CreateSceneWithTextModal';
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
@@ -16,6 +27,8 @@ export function SceneList(props: ISceneListProps) {
   const [draggedSceneIndex, setDraggedSceneIndex] = useState<
     number | undefined
   >(undefined);
+  const [isSceneWithTextModalOpen, setIsSceneWithTextModalOpen] =
+    useState<boolean>(false);
   const onSceneChange = (
     sceneId: string,
     layoutId: string,
@@ -96,12 +109,37 @@ export function SceneList(props: ISceneListProps) {
           />
         ))}
       </div>
-      <button
-        className="rounded-md bg-blue-500 p-2 text-white"
-        onClick={() => props.createScene(false)}
-      >
-        {props.isCreating ? <Spinner size="small" /> : 'Create Scene'}
-      </button>
+      {isSceneWithTextModalOpen && (
+        <CreateSceneWithTextModal
+          isOpen={isSceneWithTextModalOpen}
+          onClose={() => setIsSceneWithTextModalOpen(false)}
+          onSceneCreate={(scene) => console.log(scene)}
+        />
+      )}
+      <Menu positioning="below-end">
+        <MenuTrigger disableButtonEnhancement>
+          {(triggerProps: MenuButtonProps) => (
+            <SplitButton
+              className="rounded-md p-2 text-white"
+              appearance={'primary'}
+              menuButton={triggerProps}
+              primaryActionButton={{
+                onClick: () => props.createScene(false),
+              }}
+            >
+              {props.isCreating ? <Spinner size="small" /> : 'Create Scene'}
+            </SplitButton>
+          )}
+        </MenuTrigger>
+
+        <MenuPopover>
+          <MenuList>
+            <MenuItem onClick={() => setIsSceneWithTextModalOpen(true)}>
+              Create with text
+            </MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
     </div>
   );
 }
