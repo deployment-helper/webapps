@@ -11,7 +11,11 @@ type TLayout = {
   componentName: string;
   image: string;
   content: Record<string, IInput>;
-  addDefaultAsset?: (assets: string[]) => void;
+  addDefaultAsset?: (
+    layout: TLayout,
+    assets: string[],
+    content?: Record<string, any>,
+  ) => TLayout;
 };
 
 export const layouts: Array<TLayout> = [
@@ -75,19 +79,13 @@ export const layouts: Array<TLayout> = [
         placeholder: 'video',
       },
     },
-    addDefaultAsset: function (assets: string[]) {
-      if (this === undefined) {
-        console.warn(
-          'This is undefined, call this function with parent layout.addDefaultAsset(assets)',
-        );
-        return;
-      }
-
+    addDefaultAsset: function (layout, assets: string[]) {
       const _videoAssets = getVideosFromAssets(assets);
       const video = getRandomValueFromArray(_videoAssets);
       // TODO: needs to check why this is undefined, currently passing this as argument
-      this.content.video.value = video;
-      this.image = video;
+      layout.content.video.value = video;
+      layout.image = video;
+      return layout;
     },
   },
   {
@@ -129,19 +127,21 @@ export const layouts: Array<TLayout> = [
         placeholder: 'Title',
       },
     },
-    addDefaultAsset: function (assets: string[]) {
-      if (this === undefined) {
-        console.warn(
-          'This is undefined, call this function with parent layout.addDefaultAsset(assets)',
-        );
-        return;
-      }
-
+    addDefaultAsset: function (
+      layout: TLayout,
+      assets: string[],
+      content?: Record<string, any>,
+    ) {
       const _videoAssets = getVideosFromAssets(assets);
       const video = getRandomValueFromArray(_videoAssets);
       // TODO: needs to check why this is undefined, currently passing this as argument
-      this.content.video.value = video;
-      this.image = video;
+      layout.content.video.value = video;
+      layout.image = video;
+      //   Add title if passed
+      if (content?.desc) {
+        layout.content.title.value = content.desc;
+      }
+      return layout;
     },
   },
 ];

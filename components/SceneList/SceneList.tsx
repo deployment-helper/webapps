@@ -113,7 +113,7 @@ export function SceneList(props: ISceneListProps) {
         <CreateSceneWithTextModal
           isOpen={isSceneWithTextModalOpen}
           onClose={() => setIsSceneWithTextModalOpen(false)}
-          onSceneCreate={(scene) => console.log(scene)}
+          onSceneCreate={(text) => props?.createBulkScenes?.(text)}
         />
       )}
       <Menu positioning="below-end">
@@ -146,6 +146,7 @@ export function SceneList(props: ISceneListProps) {
 
 export interface ISceneListProps {
   createScene: (addAfter: boolean, sceneArrayIndex?: number) => void;
+  createBulkScenes?: (text: string) => void;
   isCreating?: boolean;
   isLoading?: boolean;
   scenes: IScene[];
