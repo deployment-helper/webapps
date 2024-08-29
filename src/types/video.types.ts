@@ -116,20 +116,21 @@ export interface IGeneratedVideoInfo {
 }
 
 export interface IVideo {
-  id: string;
-  name: string;
-  description?: string;
   audioLanguage?: ELanguage;
-  voiceCode?: string;
   backgroundMusic?: string;
-  overlay?: string;
   createdAt: {
     _seconds: number;
   };
+  defaultAsset?: string;
+  description?: string;
+  generatedVideoInfo?: IGeneratedVideoInfo[];
+  id: string;
+  name: string;
+  overlay?: string;
+  scenesId: string;
   updatedAt: string;
   userId: string;
-  scenesId: string;
-  generatedVideoInfo?: IGeneratedVideoInfo[];
+  voiceCode?: string;
 }
 
 export enum EWorkerVersion {

@@ -1,4 +1,4 @@
-import CopyIcon from '@/components/CopyIcon/CopyIcon';
+import CopyIcon, { ICopyIconProps } from '@/components/CopyIcon/CopyIcon';
 import { IInsertImageProps } from '@/components/InsertImage/InsertImage';
 import { ArrowSync24Filled } from '@fluentui/react-icons';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import DeleteIcon from '@/components/DeleteIcon/DeleteIcon';
 export function Video({
   src,
   isCopyable,
+  copyPosition,
   isViewOnly,
   onUploadSuccess,
   onDelete,
@@ -22,7 +23,9 @@ export function Video({
     <>
       <div className={'relative'}>
         <video controls src={src} />
-        {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
+        {isCopyable && (
+          <CopyIcon position={copyPosition || 'top-right'} copyText={src} />
+        )}
         {onDelete && <DeleteIcon onClick={onDelete} />}
         {!isViewOnly && (
           <div
@@ -51,5 +54,6 @@ export interface IVideoProps extends Partial<IInsertImageProps> {
   isViewOnly?: boolean;
   src: string;
   isCopyable?: boolean;
+  copyPosition?: ICopyIconProps['position'];
   onDelete?: () => void;
 }

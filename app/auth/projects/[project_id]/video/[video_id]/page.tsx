@@ -73,12 +73,14 @@ export default function Page({
   const scenes = scenesData?.[0]?.scenes || [];
   const defaultProjectLayout =
     projectData?.sceneRandomAsset && projectData?.defaultLayout;
-
+  const defaultAssets = videoData?.defaultAsset
+    ? [videoData?.defaultAsset]
+    : projectData?.assets;
   const onCreateSceneFromText = (text: string) => {
     const scenesDesc = splitIntoLines(text);
     const _layoutId = selectedLayoutId || defaultProjectLayout || '';
     const layoutsWithContent = scenesDesc.map((sceneDesc) =>
-      getLayout(_layoutId, projectData?.sceneRandomAsset, projectData?.assets, {
+      getLayout(_layoutId, projectData?.sceneRandomAsset, defaultAssets, {
         desc: sceneDesc,
       }),
     );
