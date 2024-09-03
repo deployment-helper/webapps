@@ -19,10 +19,12 @@ import { useRef, useState } from 'react';
 import { ArrowLeft32Filled } from '@fluentui/react-icons';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutationCreateVideoWithWorkflowYoutubeVideoClone } from '@/src/query/video.query';
+import { IProject } from '@/src/types/video.types';
 
 export function WorkflowList({
   isOpen,
   projectID,
+  prompts,
   onClose,
 }: IWorkflowListProps) {
   const [workflowId, setWorkflowId] = useState<string>('');
@@ -100,6 +102,11 @@ export function WorkflowList({
                       ref={formRef}
                       onSubmit={handleSubmit(youtubeCloneVideoSubmit)}
                     >
+                      {(!prompts || !prompts[WORKFLOW_YOUTUBE_VIDEO_CLONE]) && (
+                        <div className={'bg-red-200 p-2 text-xl'}>
+                          Need to add Youtube clone prompts in project settings.
+                        </div>
+                      )}
                       <div>
                         <Controller
                           render={({ field }) => (
@@ -108,6 +115,10 @@ export function WorkflowList({
                               required={true}
                               placeholder="Enter youtube video url"
                               className={'w-full'}
+                              disabled={
+                                !prompts ||
+                                !prompts[WORKFLOW_YOUTUBE_VIDEO_CLONE]
+                              }
                             />
                           )}
                           control={control}
@@ -148,5 +159,6 @@ export interface IWorkflowListProps {
   isOpen: boolean;
   projectID: string;
   onClose: () => void;
+  prompts: IProject['prompts'];
 }
 export default WorkflowList;

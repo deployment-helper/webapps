@@ -357,6 +357,7 @@ function Videos({
             isOpen={isWorkFlowOpen}
             projectID={params.project_id}
             onClose={() => setIsWorkFlowOpen(false)}
+            prompts={project?.prompts}
           />
         )}
       </div>
