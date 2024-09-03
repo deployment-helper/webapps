@@ -8,7 +8,11 @@ import {
   Input,
   Spinner,
 } from '@fluentui/react-components';
-import { SUPPORTED_WORKFLOWS, WORKFLOWS } from '@/src/constants';
+import {
+  SUPPORTED_WORKFLOWS,
+  WORKFLOW_YOUTUBE_VIDEO_CLONE,
+  WORKFLOWS,
+} from '@/src/constants';
 import List from '@/components/List/List';
 import { ListItem } from '@/components/ListItem';
 import { useRef, useState } from 'react';
@@ -90,7 +94,7 @@ export function WorkflowList({
           ) : (
             <div>
               {SUPPORTED_WORKFLOWS.includes(workflowId) &&
-                workflowId === 'youtube-video-clone' && (
+                workflowId === WORKFLOW_YOUTUBE_VIDEO_CLONE && (
                   <div>
                     <form
                       ref={formRef}

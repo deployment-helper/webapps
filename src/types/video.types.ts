@@ -94,6 +94,7 @@ export interface IProject {
   videoSubtitles?: boolean;
   defaultMp3SpeakingRate?: number;
   postFixSilence?: string;
+  prompts?: Record<string, any>;
   createdAt: {
     _seconds: number;
   };
