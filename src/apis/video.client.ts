@@ -29,10 +29,20 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static createWithWorkflowYoutubeVideoClone(
+  public static async createWithWorkflowYoutubeVideoClone(
     data: any,
   ): Promise<IVideo> {
-    throw new Error('Method not implemented.');
+    const body = {
+      ...data,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      '/workflows/youtube',
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
   }
 
   public static async updateVideo(

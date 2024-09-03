@@ -45,7 +45,7 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
 
   const youtubeCloneVideoSubmit = (data: any) => {
     createVideoWithYoutubeVideoClone({
-      videoUrl: data['video-url'],
+      videoURL: data['video-url'],
     });
   };
 
