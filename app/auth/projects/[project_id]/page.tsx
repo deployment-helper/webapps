@@ -355,6 +355,7 @@ function Videos({
         {isWorkFlowOpen && (
           <WorkflowList
             isOpen={isWorkFlowOpen}
+            projectID={params.project_id}
             onClose={() => setIsWorkFlowOpen(false)}
           />
         )}

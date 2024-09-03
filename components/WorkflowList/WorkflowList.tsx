@@ -6,6 +6,7 @@ import {
   DrawerHeader,
   DrawerHeaderTitle,
   Input,
+  Spinner,
 } from '@fluentui/react-components';
 import { SUPPORTED_WORKFLOWS, WORKFLOWS } from '@/src/constants';
 import List from '@/components/List/List';
@@ -15,13 +16,17 @@ import { ArrowLeft32Filled } from '@fluentui/react-icons';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutationCreateVideoWithWorkflowYoutubeVideoClone } from '@/src/query/video.query';
 
-export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
+export function WorkflowList({
+  isOpen,
+  projectID,
+  onClose,
+}: IWorkflowListProps) {
   const [workflowId, setWorkflowId] = useState<string>('');
   const [workflowName, setWorkflowName] = useState<string>('');
   const { handleSubmit, control } = useForm();
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutate: createVideoWithYoutubeVideoClone } =
-    useMutationCreateVideoWithWorkflowYoutubeVideoClone();
+  const { mutate: createVideoWithYoutubeVideoClone, isPending } =
+    useMutationCreateVideoWithWorkflowYoutubeVideoClone(onClose);
   const Workflows = () => (
     <List>
       {WORKFLOWS.map((workflow) => (
@@ -46,6 +51,7 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
   const youtubeCloneVideoSubmit = (data: any) => {
     createVideoWithYoutubeVideoClone({
       videoURL: data['video-url'],
+      projectID: projectID,
     });
   };
 
@@ -124,6 +130,7 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
             {workflowId !== '' && (
               <Button onClick={onSubmit} appearance={'primary'} size={'large'}>
                 Submit
+                {isPending && <Spinner size={'small'} />}
               </Button>
             )}
           </div>
@@ -135,6 +142,7 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
 
 export interface IWorkflowListProps {
   isOpen: boolean;
+  projectID: string;
   onClose: () => void;
 }
 export default WorkflowList;
