@@ -67,12 +67,19 @@ export function getLayout(
   currentLayoutId: string,
   addRandomAssets = false,
   assets?: string[],
+  content?: Record<string, any>,
 ) {
   const layout = layouts.find((layout) => layout.id === currentLayoutId);
+  let updatedLayout = layout;
   if (addRandomAssets && layout?.addDefaultAsset && assets) {
-    layout.addDefaultAsset.call(layout, assets);
+    updatedLayout = layout.addDefaultAsset?.(
+      JSON.parse(JSON.stringify(layout)),
+      assets,
+      content,
+    );
   }
-  return layout;
+
+  return updatedLayout;
 }
 
 /**
@@ -161,13 +168,6 @@ export const getFileType = (
     };
   }
 };
-const defaultExport = {
-  addSlideIds,
-  s3RandomPublicKey,
-  formatDateString,
-  formatDate,
-  getFileType,
-};
 
 export function getVideosFromAssets(assets: string[]) {
   return assets.filter((asset) => getFileType(asset).type === 'video');
@@ -182,4 +182,16 @@ export function getRandomValueFromArray(array: string[]) {
   return array[randomIndex];
 }
 
+export function splitIntoLines(text: string) {
+  return text.split('\n').map((line) => line.trim());
+}
+
+const defaultExport = {
+  addSlideIds,
+  s3RandomPublicKey,
+  formatDateString,
+  splitIntoLines,
+  formatDate,
+  getFileType,
+};
 export default defaultExport;

@@ -115,6 +115,8 @@ function Page({
                 <div key={asset} className={'max-w-md'}>
                   <Image
                     onDelete={() => deleteAsset(asset)}
+                    isCopyable={true}
+                    copyPosition={'bottom-right'}
                     isViewOnly={true}
                     key={index}
                     src={asset}
@@ -126,6 +128,8 @@ function Page({
                 <div key={asset} className={'max-w-md'}>
                   <Video
                     onDelete={() => deleteAsset(asset)}
+                    isCopyable={true}
+                    copyPosition={'bottom-right'}
                     isViewOnly={true}
                     key={index}
                     src={asset}
@@ -137,6 +141,8 @@ function Page({
                 <div key={asset} className={'max-w-md'}>
                   <Image
                     onDelete={() => deleteAsset(asset)}
+                    isCopyable={true}
+                    copyPosition={'bottom-right'}
                     isViewOnly={true}
                     key={index}
                     src={asset}

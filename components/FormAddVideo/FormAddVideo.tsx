@@ -1,6 +1,8 @@
 import { useForm, Controller } from 'react-hook-form';
 import {
+  Body2,
   Button,
+  Caption1,
   Drawer,
   DrawerBody,
   DrawerFooter,
@@ -30,6 +32,7 @@ export function FormAddVideo({
       description: '',
       projectId: '',
       projectName: '',
+      properties: '',
     },
     values: {
       projectId: projectId,
@@ -113,6 +116,30 @@ export function FormAddVideo({
                   )}
                 />
                 {errors.description && <Label>This field is required</Label>}
+              </div>
+              <div>
+                <div className={'flex flex-col'}>
+                  <Body2>Properties</Body2>
+                  <Caption1>
+                    Video object other properties can be passed here.
+                  </Caption1>
+                </div>
+
+                <Controller
+                  name={'properties'}
+                  control={control}
+                  render={({ field }) => (
+                    <Textarea
+                      {...field}
+                      id={'properties'}
+                      className={'w-full'}
+                      placeholder={
+                        'Enter properties here in form of ENV variables'
+                      }
+                      rows={6}
+                    />
+                  )}
+                />
               </div>
             </div>
           </form>

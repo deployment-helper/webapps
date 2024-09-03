@@ -39,6 +39,7 @@ export const SUPPORTED_LANGUAGES: Record<
 export const LANGUAGE_SUPPORTED_VOICES: Partial<
   Record<ELanguage, Array<IVoice>>
 > = {
+  // TODO: Generate mp3 of the following voices dynamically with user given text.
   [ELanguage['English (US)']]: [
     {
       name: 'Journey-D',
