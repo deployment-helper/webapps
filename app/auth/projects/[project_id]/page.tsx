@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { ElementType, FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Body1Strong,
@@ -23,17 +23,23 @@ import {
 } from '@fluentui/react-components';
 
 import {
+  getProjectVideoQueryKey,
   useMutationCopyVideo,
   useMutationCreateVideo,
   useMutationDeleteVideo,
   useMutationDownloadVideo,
+  useMutationUpdateVideo,
   useQueryGetProject,
   useQueryGetVideosForProject,
 } from '@/src/query/video.query';
 import { IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
-import { MoreVertical20Regular, Settings32Filled } from '@fluentui/react-icons';
+import {
+  CheckmarkCircle24Filled,
+  MoreVertical20Regular,
+  Settings32Filled,
+} from '@fluentui/react-icons';
 import { LanguageDialog } from '@/components/Dialog/Dialog';
 import { VideoClient } from '@/src/apis/video.client';
 import { formatDate, generatePreviewUrl } from '@/src/helpers';
@@ -58,6 +64,11 @@ function Videos({
   const deleteMutation = useMutationDeleteVideo();
   const copyMutation = useMutationCopyVideo();
   const createVideoMutation = useMutationCreateVideo();
+  const { mutate: updateVideo } = useMutationUpdateVideo(() => {
+    client.invalidateQueries({
+      queryKey: getProjectVideoQueryKey(params.project_id),
+    });
+  });
 
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
 
@@ -77,6 +88,18 @@ function Videos({
 
   const { data: project } = useQueryGetProject(params.project_id);
 
+  function publishVideo(video: IVideo) {
+    if (video) {
+      updateVideo({
+        id: video.id,
+        name: video.name,
+        data: {
+          ...video,
+          isPublished: true,
+        },
+      });
+    }
+  }
   function copyVideo(video: IVideo) {
     copyMutation.mutate({
       id: video.id as string,
@@ -149,6 +172,21 @@ function Videos({
       },
       renderCell: (item) => {
         return <Body1Strong>{item.id}</Body1Strong>;
+      },
+    }),
+    createTableColumn<IVideo>({
+      columnId: 'Published',
+      renderHeaderCell: () => {
+        return <Subtitle2>Published</Subtitle2>;
+      },
+      renderCell: (item) => {
+        return (
+          <div className={'pl-4'}>
+            {item.isPublished && (
+              <CheckmarkCircle24Filled className={'text-green-700'} />
+            )}
+          </div>
+        );
       },
     }),
     createTableColumn<IVideo>({
@@ -238,7 +276,11 @@ function Videos({
                   <MenuItem onClick={() => copyAndChangeLanguage(item)}>
                     Copy and Change Language
                   </MenuItem>
+                  {/*TODO: add confirm to delete the video*/}
                   <MenuItem onClick={() => deleteVideo(item)}>Delete</MenuItem>
+                  <MenuItem onClick={() => publishVideo(item)}>
+                    Mark Published
+                  </MenuItem>
                 </MenuList>
               </MenuPopover>
             </Menu>

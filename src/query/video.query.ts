@@ -9,7 +9,7 @@ import { ELanguage, IVideo } from '@/src/types/video.types';
 import { useVideoStore } from '@/src/stores/video.store';
 import { v4 } from 'uuid';
 
-function getProjectVideoQueryKey(projectId: string) {
+export function getProjectVideoQueryKey(projectId: string) {
   return ['project', projectId, 'videos'];
 }
 
@@ -42,7 +42,7 @@ export const useMutationDownloadVideo = () => {
   });
 };
 
-export const useMutationUpdateVideo = () => {
+export const useMutationUpdateVideo = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: { id: string; name: string; data?: Partial<IVideo> }) =>
@@ -51,6 +51,7 @@ export const useMutationUpdateVideo = () => {
       queryClient.invalidateQueries({
         queryKey: ['video', variables.id],
       });
+      onSuccess?.();
     },
   });
 };

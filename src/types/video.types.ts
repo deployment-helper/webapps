@@ -126,6 +126,7 @@ export interface IVideo {
   description?: string;
   generatedVideoInfo?: IGeneratedVideoInfo[];
   id: string;
+  isPublished?: boolean;
   name: string;
   overlay?: string;
   scenesId: string;
