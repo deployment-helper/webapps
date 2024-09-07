@@ -6,22 +6,33 @@ import {
   DrawerHeader,
   DrawerHeaderTitle,
   Input,
+  Spinner,
 } from '@fluentui/react-components';
-import { SUPPORTED_WORKFLOWS, WORKFLOWS } from '@/src/constants';
+import {
+  SUPPORTED_WORKFLOWS,
+  WORKFLOW_YOUTUBE_VIDEO_CLONE,
+  WORKFLOWS,
+} from '@/src/constants';
 import List from '@/components/List/List';
 import { ListItem } from '@/components/ListItem';
 import { useRef, useState } from 'react';
 import { ArrowLeft32Filled } from '@fluentui/react-icons';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutationCreateVideoWithWorkflowYoutubeVideoClone } from '@/src/query/video.query';
+import { IProject } from '@/src/types/video.types';
 
-export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
+export function WorkflowList({
+  isOpen,
+  projectID,
+  prompts,
+  onClose,
+}: IWorkflowListProps) {
   const [workflowId, setWorkflowId] = useState<string>('');
   const [workflowName, setWorkflowName] = useState<string>('');
   const { handleSubmit, control } = useForm();
   const formRef = useRef<HTMLFormElement>(null);
-  const { mutate: createVideoWithYoutubeVideoClone } =
-    useMutationCreateVideoWithWorkflowYoutubeVideoClone();
+  const { mutate: createVideoWithYoutubeVideoClone, isPending } =
+    useMutationCreateVideoWithWorkflowYoutubeVideoClone(onClose);
   const Workflows = () => (
     <List>
       {WORKFLOWS.map((workflow) => (
@@ -45,7 +56,8 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
 
   const youtubeCloneVideoSubmit = (data: any) => {
     createVideoWithYoutubeVideoClone({
-      videoUrl: data['video-url'],
+      videoURL: data['video-url'],
+      projectID: projectID,
     });
   };
 
@@ -84,12 +96,17 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
           ) : (
             <div>
               {SUPPORTED_WORKFLOWS.includes(workflowId) &&
-                workflowId === 'youtube-video-clone' && (
+                workflowId === WORKFLOW_YOUTUBE_VIDEO_CLONE && (
                   <div>
                     <form
                       ref={formRef}
                       onSubmit={handleSubmit(youtubeCloneVideoSubmit)}
                     >
+                      {(!prompts || !prompts[WORKFLOW_YOUTUBE_VIDEO_CLONE]) && (
+                        <div className={'bg-red-200 p-2 text-xl'}>
+                          Need to add Youtube clone prompts in project settings.
+                        </div>
+                      )}
                       <div>
                         <Controller
                           render={({ field }) => (
@@ -98,6 +115,10 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
                               required={true}
                               placeholder="Enter youtube video url"
                               className={'w-full'}
+                              disabled={
+                                !prompts ||
+                                !prompts[WORKFLOW_YOUTUBE_VIDEO_CLONE]
+                              }
                             />
                           )}
                           control={control}
@@ -124,6 +145,7 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
             {workflowId !== '' && (
               <Button onClick={onSubmit} appearance={'primary'} size={'large'}>
                 Submit
+                {isPending && <Spinner size={'small'} />}
               </Button>
             )}
           </div>
@@ -135,6 +157,8 @@ export function WorkflowList({ isOpen, onClose }: IWorkflowListProps) {
 
 export interface IWorkflowListProps {
   isOpen: boolean;
+  projectID: string;
   onClose: () => void;
+  prompts: IProject['prompts'];
 }
 export default WorkflowList;

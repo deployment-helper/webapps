@@ -12,6 +12,7 @@ import {
   SelectOnChangeData,
   Spinner,
   Subtitle1,
+  Textarea,
   Title1,
   Title2,
 } from '@fluentui/react-components';
@@ -22,9 +23,10 @@ import {
   GlobeRegular,
   Group24Filled,
   HeadphonesSoundWave24Filled,
+  Prompt24Filled,
   Settings24Filled,
 } from '@fluentui/react-icons';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import Link from 'next/link';
 import { getFileType } from '@/src/helpers';
 import Image from '@/components/Image/Image';
@@ -38,6 +40,7 @@ import {
   MP3_SPEAKING_RATES,
   OVERLAYS,
   SILENT_MP3_FILES,
+  WORKFLOW_YOUTUBE_VIDEO_CLONE,
 } from '@/src/constants';
 import { LAYOUT_IDS } from '@/src/layouts';
 
@@ -53,6 +56,8 @@ function Page({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(4);
 
+  const promptVideoCloneRef = useRef<HTMLTextAreaElement>(null);
+
   const updateProject = (_data: Partial<IProject>) => {
     mutate({
       ...data,
@@ -67,6 +72,15 @@ function Page({
 
     updateProject({
       assets: assets,
+    });
+  };
+
+  const updatePrompt = (promptsName: string, value?: string) => {
+    updateProject({
+      prompts: {
+        ...data?.prompts,
+        [promptsName]: value,
+      },
     });
   };
 
@@ -470,6 +484,51 @@ function Page({
     );
   };
 
+  const Prompts = () => {
+    return (
+      <>
+        <div
+          className={
+            'mb-2 flex items-center justify-between  gap-2 bg-violet-50 p-2'
+          }
+        >
+          <div className={'flex'}>
+            <Subtitle1>Prompts</Subtitle1>
+            {isPending && <Spinner size={'tiny'} className={'ml-1'} />}
+          </div>
+          <div className={'flex items-center gap-2'}></div>
+        </div>
+        <hr />
+        <div className={'p-2'}>
+          <div>
+            <div className={'flex flex-col gap-1 pt-2'}>
+              <h3 className={'text-xl'}>Youtube copy</h3>
+              <h5>Prompts for youtube copy video workflow</h5>
+              <Textarea
+                defaultValue={data?.prompts?.[WORKFLOW_YOUTUBE_VIDEO_CLONE]}
+                ref={promptVideoCloneRef}
+                className={'w-full'}
+                rows={10}
+              />
+              <Button
+                appearance={'primary'}
+                onClick={() => {
+                  updatePrompt(
+                    WORKFLOW_YOUTUBE_VIDEO_CLONE,
+                    promptVideoCloneRef.current?.value,
+                  );
+                }}
+              >
+                Save
+                {isPending && <Spinner size={'small'} />}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className={'w-100 flex w-full max-w-7xl flex-col'}>
       <div className={'flex  justify-start pb-1 pt-1'}>
@@ -516,6 +575,13 @@ function Page({
               <FilmstripImage24Filled />
               <Body1 className={'ml-1'}>Overlays</Body1>
             </ListItem>
+            <ListItem
+              selected={activeTab === 5}
+              onClick={() => setActiveTab(5)}
+            >
+              <Prompt24Filled />
+              <Body1 className={'ml-1'}>Prompts</Body1>
+            </ListItem>
           </List>
         </div>
         <div className="flex w-3/4 flex-col">
@@ -524,6 +590,7 @@ function Page({
           {activeTab === 2 && <BackgroundMusic />}
           {activeTab === 3 && <Overlays />}
           {activeTab === 4 && <General />}
+          {activeTab === 5 && <Prompts />}
         </div>
       </div>
     </div>
