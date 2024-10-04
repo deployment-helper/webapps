@@ -28,6 +28,7 @@ export const Scene = (props: ISceneProps) => {
   const deleteMutation = useMutationDeleteScene();
   const descRef = useRef<HTMLTextAreaElement>(null);
   const [isHover, setIsHover] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const onHover = () => {
     setIsHover(true);
@@ -120,11 +121,12 @@ export const Scene = (props: ISceneProps) => {
         }
       >
         <div className={'flex'}>
-          <div style={{ width: '220px' }}>
+          <div style={{ width: '220px' }} ref={ref}>
             <RenderLayoutComponent
               layoutId={props.layoutId}
               sceneId={props.sceneDocId}
               content={props.content}
+              parentEl={ref?.current}
             />
           </div>
 

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@fluentui/react-components": "~9.47.2",
-    "@fluentui/react-icons": "^2.0.212",
+    "@fluentui/react-icons": "^2.0.256",
     "@tanstack/react-query": "^5.28.0",
     "@tanstack/react-query-devtools": "^5.28.0",
     "@types/node": "20.4.9",

@@ -39,6 +39,7 @@ export const SUPPORTED_LANGUAGES: Record<
 export const LANGUAGE_SUPPORTED_VOICES: Partial<
   Record<ELanguage, Array<IVoice>>
 > = {
+  // TODO: Generate mp3 of the following voices dynamically with user given text.
   [ELanguage['English (US)']]: [
     {
       name: 'Journey-D',
@@ -209,6 +210,7 @@ export const SUPPORTED_BACKGROUND_MUSIC: Array<IAsset> = [
   },
 ];
 
+export const WORKFLOW_YOUTUBE_VIDEO_CLONE = 'youtubeVideoClone';
 export const WORKFLOWS: Array<{
   id: string;
   name: string;
@@ -216,7 +218,7 @@ export const WORKFLOWS: Array<{
   desc?: string;
 }> = [
   {
-    id: 'youtube-video-clone',
+    id: WORKFLOW_YOUTUBE_VIDEO_CLONE,
     name: 'Youtube video clone',
     url: '/workflows/youtube-video-clone',
     desc: 'Clone of youtube video for given URL',
@@ -233,6 +235,10 @@ export const WORKFLOWS: Array<{
     url: '/workflows/html-page-to-video',
     desc: 'Convert HTML page to video',
   },
+];
+
+export const SUPPORTED_WORKFLOWS: Array<string> = [
+  WORKFLOW_YOUTUBE_VIDEO_CLONE,
 ];
 
 export const OVERLAYS: Array<IOverlay> = [
@@ -318,7 +324,6 @@ export const SILENT_MP3_FILES: Array<IAsset> = [
     rating: 'H',
   },
 ];
-export const SUPPORTED_WORKFLOWS: Array<string> = ['youtube-video-clone'];
 
 export const MP3_SPEAKING_RATES = [
   0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5,

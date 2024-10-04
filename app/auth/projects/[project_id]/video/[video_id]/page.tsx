@@ -25,7 +25,7 @@ import {
 import { VideoClient } from '@/src/apis/video.client';
 import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
-import { generatePreviewUrl, getLayout } from '@/src/helpers';
+import { generatePreviewUrl, getLayout, splitIntoLines } from '@/src/helpers';
 import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
 import { ELanguage, IVoice } from '@/src/types/video.types';
 
@@ -73,6 +73,34 @@ export default function Page({
   const scenes = scenesData?.[0]?.scenes || [];
   const defaultProjectLayout =
     projectData?.sceneRandomAsset && projectData?.defaultLayout;
+  const defaultAssets = videoData?.defaultAsset
+    ? [videoData?.defaultAsset]
+    : projectData?.assets;
+  const onCreateSceneFromText = (text: string) => {
+    const scenesDesc = splitIntoLines(text);
+    const _layoutId = selectedLayoutId || defaultProjectLayout || '';
+    const layoutsWithContent = scenesDesc.map((sceneDesc) =>
+      getLayout(_layoutId, projectData?.sceneRandomAsset, defaultAssets, {
+        desc: sceneDesc,
+      }),
+    );
+
+    if (videoData?.scenesId === undefined) return;
+    updateScene({
+      id: params.video_id,
+      sceneId: videoData?.scenesId,
+      layoutId: _layoutId,
+      data: {
+        scenes: layoutsWithContent.map((layout, index) => ({
+          id: uuid(),
+          content: layout?.content,
+          image: layout?.image,
+          description: scenesDesc[index],
+          layoutId: _layoutId,
+        })),
+      },
+    });
+  };
 
   const onCreateScene = (addAfter = false, sceneArrayIndex?: number) => {
     const _layoutId = selectedLayoutId || defaultProjectLayout || '';
@@ -214,6 +242,7 @@ export default function Page({
           audioLanguage={videoData?.audioLanguage}
           voiceCode={videoData?.voiceCode}
           createScene={onCreateScene}
+          createBulkScenes={onCreateSceneFromText}
           isCreating={isPending}
           sceneDocId={videoData?.scenesId || ''}
           isLoading={isScenesFetching || isScenesLoading}

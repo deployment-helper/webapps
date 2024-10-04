@@ -9,6 +9,10 @@ import { ELanguage, IVideo } from '@/src/types/video.types';
 import { useVideoStore } from '@/src/stores/video.store';
 import { v4 } from 'uuid';
 
+export function getProjectVideoQueryKey(projectId: string) {
+  return ['project', projectId, 'videos'];
+}
+
 // TODO: move project and scenes to their own files
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
@@ -38,7 +42,7 @@ export const useMutationDownloadVideo = () => {
   });
 };
 
-export const useMutationUpdateVideo = () => {
+export const useMutationUpdateVideo = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: { id: string; name: string; data?: Partial<IVideo> }) =>
@@ -47,6 +51,7 @@ export const useMutationUpdateVideo = () => {
       queryClient.invalidateQueries({
         queryKey: ['video', variables.id],
       });
+      onSuccess?.();
     },
   });
 };
@@ -65,15 +70,18 @@ export const useMutationCreateVideo = () => {
   });
 };
 
-export const useMutationCreateVideoWithWorkflowYoutubeVideoClone = () => {
+export const useMutationCreateVideoWithWorkflowYoutubeVideoClone = (
+  onSuccess?: () => void,
+) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data: any) =>
       VideoClient.createWithWorkflowYoutubeVideoClone(data),
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({
-        queryKey: ['videos'],
+        queryKey: getProjectVideoQueryKey(data.projectId),
       });
+      if (onSuccess) onSuccess();
     },
   });
 };
@@ -272,7 +280,7 @@ export const useMutationDeleteScene = () => {
 
 export const useQueryGetVideosForProject = (projectId: string) => {
   return useQuery({
-    queryKey: ['project', projectId, 'videos'],
+    queryKey: getProjectVideoQueryKey(projectId),
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getVideosForProject(projectId),
   });
