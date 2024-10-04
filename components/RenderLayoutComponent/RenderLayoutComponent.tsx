@@ -8,6 +8,7 @@ export default function RenderLayoutComponent({
   layoutId,
   sceneId,
   content,
+  parentEl,
   isDisplayNone = false,
 }: IRenderLayoutComponentProps) {
   const [LayoutReactComponent, setLayoutReactComponent] = useState<
@@ -34,6 +35,7 @@ export default function RenderLayoutComponent({
           isViewOnly={true}
           content={content}
           sceneId={sceneId}
+          parentEl={parentEl}
           ref={ref}
         />
       )}
@@ -44,4 +46,5 @@ export default function RenderLayoutComponent({
 export interface IRenderLayoutComponentProps extends ILayoutProps {
   layoutId: string;
   isDisplayNone?: boolean;
+  parentEl?: HTMLElement | null;
 }
