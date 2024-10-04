@@ -22,7 +22,9 @@ export function CopyIcon({ position = 'top-right', copyText }: ICopyIconProps) {
   }
 
   return (
-    <div className={`${positionClass} cursor-pointer rounded bg-amber-200`}>
+    <div
+      className={`${positionClass} z-10 cursor-pointer rounded bg-amber-200`}
+    >
       <Copy32Filled
         onClick={() => {
           navigator.clipboard.writeText(copyText).then(() => {

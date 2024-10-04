@@ -191,7 +191,7 @@ export class VideoClient extends ServerClient {
     };
 
     const resp = await VideoClient.sendToBatchServer(
-      `video/generate/v2`,
+      `batch/generate/v2`,
       data,
       HttpMethod.POST,
     );

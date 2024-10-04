@@ -5,4 +5,5 @@ export interface ILayoutProps {
   isDisplayNone?: boolean;
   isViewOnly?: boolean;
   content?: Record<string, IInput>;
+  parentEl?: HTMLElement | null;
 }
