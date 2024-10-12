@@ -242,7 +242,7 @@ export const useMutationDeleteVideo = () => {
     mutationFn: (id: string) => VideoClient.delete(id),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ['videos'],
+        queryKey: getProjectVideoQueryKey(data.projectId || ''),
       });
     },
   });
