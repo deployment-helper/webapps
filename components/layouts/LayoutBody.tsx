@@ -10,6 +10,7 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
      * 1366 x 768 (WXGA)
      * 1600 x 900 (HD+)
      * 1920 x 1080 (Full HD)
+     * 2560 x 1440 (Quad HD)
      */
 
     return (
