@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import usePrintPdf from '@/hooks/usePrintPdf';
 
 export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
   (props, ref) => {
@@ -13,6 +14,8 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
      * 2560 x 1440 (Quad HD)
      */
 
+    const isPrintPdf = usePrintPdf();
+
     return (
       <div
         style={
@@ -23,7 +26,9 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
           ref={ref}
           id={props.sceneId}
           style={{ width: '100%' }}
-          className={'relative flex justify-center border-2 bg-white'}
+          className={`relative flex justify-center ${
+            isPrintPdf ? '' : 'border-2'
+          } bg-white`}
         >
           {props.children}
         </div>
