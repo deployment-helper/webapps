@@ -33,8 +33,10 @@ export function InsertImageModal({
   isOpen = false,
   isDisplayURLUpload = true,
 }: IInsertImageModalProps) {
+  const TAB_DESKTOP = 'desktop';
+  const TAB_PROJECT = 'project';
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>('idle');
-  const [selectedTab, setSelectedTab] = useState<string>('desktop');
+  const [selectedTab, setSelectedTab] = useState<string>(TAB_DESKTOP);
   const [selectedAsset, setSelectedAsset] = useState<string | null>(null);
 
   const onUploadStatusChange = (status: UploadStatus) => {
@@ -42,8 +44,6 @@ export function InsertImageModal({
   };
   const projectId = useVideoStore((state) => state.currentProjectId);
   const { data: projectData } = useQueryGetProject(projectId as string);
-  const TAB_DESKTOP = 'desktop';
-  const TAB_PROJECT = 'project';
 
   const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
     setSelectedTab((data.value as string) || TAB_DESKTOP);
