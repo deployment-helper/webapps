@@ -64,6 +64,7 @@ export function InsertImageModal({
                 defaultSelectedValue={selectedTab}
                 onTabSelect={onTabSelect}
               >
+                {/*TODO: Upload from a URL should be a new tab.*/}
                 <Tab value={TAB_DESKTOP}>
                   <Subtitle1>{title ? title : 'Select From Desktop'}</Subtitle1>
                 </Tab>
