@@ -129,6 +129,7 @@ export interface IVideo {
   isPublished?: boolean;
   name: string;
   overlay?: string;
+  projectId?: string;
   scenesId: string;
   updatedAt: string;
   userId: string;

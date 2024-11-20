@@ -11,6 +11,11 @@ import {
   DataGridHeader,
   DataGridHeaderCell,
   DataGridRow,
+  Menu,
+  MenuItem,
+  MenuList,
+  MenuPopover,
+  MenuTrigger,
   Spinner,
   Subtitle2,
   TableColumnDefinition,
@@ -19,18 +24,23 @@ import {
 
 import {
   useMutationCreateProject,
+  useMutationUpdateProject,
   useQueryGetProjects,
 } from '@/src/query/video.query';
 import { IProject, IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import FormAddProject from '../../../components/FormAddProject/FormAddProject';
 import { formatDate } from '@/src/helpers';
+import { MoreVertical20Regular } from '@fluentui/react-icons';
 
 const Projects: FC = () => {
   const { data: projects, isFetching, isLoading } = useQueryGetProjects();
   const client = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
+  const [currentProject, setCurrentProject] =
+    useState<Partial<IProject> | null>(null);
   const addProjectMutation = useMutationCreateProject();
+  const updateProjectMutation = useMutationUpdateProject();
 
   const columns: TableColumnDefinition<IProject>[] = [
     createTableColumn<IProject>({
@@ -64,13 +74,54 @@ const Projects: FC = () => {
         return <Body1Strong>{formatDate(item.createdAt._seconds)}</Body1Strong>;
       },
     }),
+    createTableColumn<IProject>({
+      columnId: 'actions',
+      renderCell: (item) => {
+        return (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              width: '100%',
+            }}
+          >
+            <Menu positioning="below-start">
+              <MenuTrigger>
+                <Button icon={<MoreVertical20Regular />} />
+              </MenuTrigger>
+              <MenuPopover>
+                <MenuList>
+                  <MenuItem
+                    onClick={() => {
+                      console.log(item);
+                      setCurrentProject(item);
+                      setIsOpen(true);
+                    }}
+                  >
+                    Update
+                  </MenuItem>
+                </MenuList>
+              </MenuPopover>
+            </Menu>
+          </div>
+        );
+      },
+      renderHeaderCell: () => {
+        return <Subtitle2></Subtitle2>;
+      },
+    }),
   ];
 
   const onFormSubmit = (data: {
     projectName: string;
     projectDescription: string;
   }) => {
-    addProjectMutation.mutate(data);
+    if (currentProject?.id) {
+      updateProjectMutation.mutate({ ...currentProject, ...data });
+    } else {
+      addProjectMutation.mutate(data);
+    }
+
     setIsOpen(false);
   };
 
@@ -129,6 +180,9 @@ const Projects: FC = () => {
       </div>
       {isOpen && (
         <FormAddProject
+          formTitle={currentProject?.id ? 'Update Project' : 'Add Project'}
+          name={currentProject?.projectName}
+          description={currentProject?.projectDesc}
           isOpen={true}
           onClose={() => {
             setIsOpen(false);

@@ -26,14 +26,20 @@ import { VideoClient } from '@/src/apis/video.client';
 import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
 import { generatePreviewUrl, getLayout, splitIntoLines } from '@/src/helpers';
-import { Body1Strong, Button, Spinner } from '@fluentui/react-components';
-import { ELanguage, IVoice } from '@/src/types/video.types';
+import {
+  Body1Strong,
+  Button,
+  Spinner,
+  Title1,
+} from '@fluentui/react-components';
+import { ELanguage } from '@/src/types/video.types';
 
 import { useMyToastController } from '@/components/MyToast';
 import LayoutSelector from '@/components/LayoutSelector/LayoutSelector';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { SupportedVoices } from '@/components/SupportedVoices/SupportedVoices';
 import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
+import CopyIcon from '@/components/CopyIcon/CopyIcon';
 
 export default function Page({
   params,
@@ -69,6 +75,8 @@ export default function Page({
     mutate,
   } = useMutationPostTextToSpeech();
   const { mutate: reorderScene } = useMutationReorderScenes();
+
+  const [hoverState, setHoverState] = useState<Record<string, boolean>>({});
 
   const scenes = scenesData?.[0]?.scenes || [];
   const defaultProjectLayout =
@@ -220,6 +228,38 @@ export default function Page({
               Create Video
               <Play20Filled className="cursor-pointer" />
             </Button>
+          </div>
+          <div className={'flex flex-col gap-2'}>
+            <div
+              className={'relative'}
+              onMouseOver={() => {
+                setHoverState({ ...hoverState, videoName: true });
+              }}
+              onMouseLeave={() => {
+                setHoverState({ ...hoverState, videoName: false });
+              }}
+            >
+              <Title1>{videoData?.name}</Title1>
+              {hoverState?.videoName && (
+                <CopyIcon copyText={videoData?.name || ''} />
+              )}
+            </div>
+            <div
+              className={'relative'}
+              onMouseOver={() => {
+                setHoverState({ ...hoverState, videoDesc: true });
+              }}
+              onMouseLeave={() => {
+                setHoverState({ ...hoverState, videoDesc: false });
+              }}
+            >
+              <Body1Strong title={videoData?.description}>
+                {`${videoData?.description?.substr(0, 100)}...`}
+              </Body1Strong>
+              {hoverState?.videoDesc && (
+                <CopyIcon copyText={videoData?.description || ''} />
+              )}
+            </div>
           </div>
           <div className={'flex items-end justify-start gap-1 align-middle'}>
             <Body1Strong># {scenes.length || 0}</Body1Strong>

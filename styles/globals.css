@@ -3,25 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --r-block-margin: 5px !important;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+    --r-block-margin: 5px !important;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: #fff;
+    color: rgb(var(--foreground-rgb));
+    background: #fff;
 }
 
 .controls-arrow {
-  color: transparent;
+    color: transparent;
+}
+
+/*Print mode hide div with class audio-player */
+html.print-pdf {
+    .audio-player {
+        display: none;
+    }
+}
+
+html.print-pdf div.reveal {
+    min-width: 1280px !important;
+}
+
+div.tsqd-parent-container {
+    display: none;
 }
