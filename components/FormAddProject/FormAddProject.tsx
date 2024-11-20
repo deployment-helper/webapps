@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from 'react-hook-form';
 import {
   Button,
   Drawer,
@@ -9,10 +9,13 @@ import {
   Input,
   Label,
   Textarea,
-} from "@fluentui/react-components";
-import { useRef } from "react";
+} from '@fluentui/react-components';
+import { useRef } from 'react';
 
 export function FormAddProject({
+  description,
+  formTitle,
+  name,
   isOpen,
   onClose,
   onSubmit,
@@ -23,8 +26,8 @@ export function FormAddProject({
     formState: { errors },
   } = useForm({
     defaultValues: {
-      projectName: "",
-      projectDescription: "",
+      projectName: name || '',
+      projectDescription: description || '',
     },
   });
 
@@ -36,14 +39,14 @@ export function FormAddProject({
   return (
     <div>
       <Drawer
-        type={"overlay"}
+        type={'overlay'}
         onOpenChange={onClose}
         open={isOpen}
-        position={"end"}
-        size={"medium"}
+        position={'end'}
+        size={'medium'}
       >
         <DrawerHeader>
-          <DrawerHeaderTitle>Add Project</DrawerHeaderTitle>
+          <DrawerHeaderTitle>{formTitle || 'Add Project'}</DrawerHeaderTitle>
         </DrawerHeader>
         <DrawerBody>
           <form ref={formRef} onSubmit={handleSubmit(handleFormSubmit)}>
@@ -59,7 +62,7 @@ export function FormAddProject({
                       type="text"
                       id="projectName"
                       placeholder="Project Name"
-                      className={"w-full"}
+                      className={'w-full'}
                     />
                   )}
                 />
@@ -75,7 +78,7 @@ export function FormAddProject({
                       {...field}
                       id="projectDescription"
                       placeholder="Project Description"
-                      className={"w-full"}
+                      className={'w-full'}
                     />
                   )}
                 />
@@ -87,8 +90,8 @@ export function FormAddProject({
           </form>
         </DrawerBody>
         <DrawerFooter>
-          <div className={"flex w-full justify-end gap-5"}>
-            <Button size={"large"} onClick={onClose}>
+          <div className={'flex w-full justify-end gap-5'}>
+            <Button size={'large'} onClick={onClose}>
               Cancel
             </Button>
             <Button
@@ -96,8 +99,8 @@ export function FormAddProject({
               onClick={() => {
                 formRef.current?.requestSubmit();
               }}
-              size={"large"}
-              appearance={"primary"}
+              size={'large'}
+              appearance={'primary'}
             >
               Submit
             </Button>
@@ -109,8 +112,12 @@ export function FormAddProject({
 }
 
 interface IFormAddProjectProps {
+  name?: string;
+  description?: string;
+  formTitle?: string;
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (data: { projectName: string; projectDescription: string }) => void;
 }
+
 export default FormAddProject;

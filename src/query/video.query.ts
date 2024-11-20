@@ -13,6 +13,10 @@ export function getProjectVideoQueryKey(projectId: string) {
   return ['project', projectId, 'videos'];
 }
 
+export function getProjectsQueryKey() {
+  return ['projects'];
+}
+
 // TODO: move project and scenes to their own files
 // Video quires and mutations
 export const useQueryGetVideo = (id: string) => {
@@ -197,7 +201,7 @@ export const useMutationPostTextToSpeech = () => {
 // get List of video query
 export const useQueryGetProjects = () => {
   return useQuery({
-    queryKey: ['projects'],
+    queryKey: getProjectsQueryKey(),
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getProjects(),
   });
@@ -218,7 +222,7 @@ export const useMutationCreateProject = () => {
       VideoClient.createProject(data.projectName, data.projectDescription),
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: ['projects'],
+        queryKey: getProjectsQueryKey(),
       });
     },
   });
@@ -230,7 +234,7 @@ export const useMutationUpdateProject = () => {
     mutationFn: (data: any) => VideoClient.updateProject(data.id, data),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ['project', data.id],
+        queryKey: getProjectsQueryKey(),
       });
     },
   });

@@ -144,6 +144,19 @@ export const layouts: Array<TLayout> = [
       return layout;
     },
   },
+  {
+    id: 'layout7',
+    componentName: 'Layout7',
+    image: '/layout7.png',
+    content: {
+      image: {
+        type: 'image',
+        name: 'image',
+        value: '/layout7.png',
+        placeholder: 'image',
+      },
+    },
+  },
 ];
 
 export const ALLOWED_LAYOUTS = [
@@ -152,6 +165,7 @@ export const ALLOWED_LAYOUTS = [
   'layout4',
   'layout5',
   'layout6',
+  'layout7',
 ];
 
 export const LAYOUT_IDS = layouts.map((layout: TLayout) => layout.id);

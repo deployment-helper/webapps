@@ -25,6 +25,7 @@ export default function VideoPreview({
   const [sceneIndex, setSceneIndex] = useState<number | undefined>(undefined);
   const [play, setPlay] = useState(false);
   const [isRevealInitialized, setIsRevealInitialized] = useState(false);
+  const [isPrintPdf, setIsPrintPdf] = useState(false);
   const {
     isPending: isAudioPending,
     data: audios,
@@ -71,6 +72,15 @@ export default function VideoPreview({
     }
   }, [params.video_id, videos, audios, mutate]);
 
+  useEffect(() => {
+    // read query string value print-pdf and set a flag to print pdf
+    const urlParams = new URLSearchParams(window.location.search);
+    const printPdf = urlParams.has('print-pdf');
+    if (printPdf) {
+      setIsPrintPdf(true);
+    }
+  }, []);
+
   if (!params.video_id) return <h1>No video id provided</h1>;
 
   return (
@@ -82,10 +92,11 @@ export default function VideoPreview({
           <div
             style={{
               width: '90vw',
-              height: '90vh',
+              height: isPrintPdf ? '100%' : '90vh',
               minHeight: '600px',
               display: 'flex',
-              flexDirection: 'row',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
           >
             <div

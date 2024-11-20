@@ -83,7 +83,7 @@ function Page({
       },
     });
   };
-
+  // TODO: use this function as hook as we are using this at multiple places
   const deleteAsset = (url: string) => {
     const assets: string[] = data?.assets?.length ? data.assets : [];
     const index = assets.indexOf(url);
@@ -122,6 +122,7 @@ function Page({
               <Title2>Upload assets to get started</Title2>
             </div>
           )}
+          {/*TODO: Need to use ProjectAssets component*/}
           {data?.assets?.map((asset: string, index: number) => {
             const fileType = getFileType(asset);
             if (fileType.type === 'image') {
