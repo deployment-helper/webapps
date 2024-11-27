@@ -154,7 +154,7 @@ export default function Page({
     const _layout = getLayout(
       _layoutId,
       projectData?.sceneRandomAsset,
-      projectData?.assets,
+      videoData?.defaultAsset ? [videoData?.defaultAsset] : projectData?.assets,
     );
     if (videoData?.scenesId === undefined) return;
     updateScene({
