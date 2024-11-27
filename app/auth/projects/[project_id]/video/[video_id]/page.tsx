@@ -23,7 +23,12 @@ import {
 import { VideoClient } from '@/src/apis/video.client';
 import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
-import { generatePreviewUrl, getLayout, splitIntoLines } from '@/src/helpers';
+import {
+  generatePreviewUrl,
+  getLayout,
+  splitIntoLines,
+  updateDefaultAsset,
+} from '@/src/helpers';
 import {
   Body1Strong,
   Button,
@@ -221,6 +226,36 @@ export default function Page({
     });
   };
 
+  const onUpdateDefaultAsset = (
+    defaultAsset: string,
+    isUpdateExistingScenes?: boolean,
+  ) => {
+    updateVideo({
+      id: videoData?.id as string,
+      name: videoData?.name as string,
+      data: {
+        ...videoData,
+        defaultAsset,
+      },
+    });
+    if (isUpdateExistingScenes) {
+      updateExistingScenes(defaultAsset);
+    }
+  };
+
+  const updateExistingScenes = (defaultAsset: string) => {
+    const updatedScenes = updateDefaultAsset(scenes, defaultAsset);
+    const _layoutId = updatedScenes[0].layoutId;
+    updateScene({
+      id: params.video_id,
+      sceneId: videoData?.scenesId || '',
+      layoutId: _layoutId,
+      data: {
+        scenes: updatedScenes,
+      },
+    });
+  };
+
   useEffect(() => {
     async function fetchVideo() {
       const video = await VideoClient.create('New Video');
@@ -326,6 +361,7 @@ export default function Page({
       </div>
       {/*Right section*/}
       <div className={' flex w-3/12 justify-end'}>
+        {/*TODO: Use inline drawer from fluent UI*/}
         <div className="w-9/12 border bg-gray-100">
           {trayOption === TRAY_OPTIONS_SCENES && (
             <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
@@ -343,7 +379,12 @@ export default function Page({
               currentBackgroundMusic={videoData?.backgroundMusic}
             />
           )}
-          {trayOption === TRAY_OPTIONS_SETTINGS && <VideoSettings />}
+          {trayOption === TRAY_OPTIONS_SETTINGS && (
+            <VideoSettings
+              currentDefaultAsset={videoData?.defaultAsset}
+              onUploadSuccess={onUpdateDefaultAsset}
+            />
+          )}
         </div>
 
         {/*Tray options*/}
