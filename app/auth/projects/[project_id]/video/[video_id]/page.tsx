@@ -1,15 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { ComponentType, useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import Link from 'next/link';
 import {
-  HeadphonesSoundWave32Filled,
   HeadphonesSoundWave32Regular,
-  Image32Filled,
   Image32Regular,
-  PersonVoice24Filled,
   PersonVoice24Regular,
   Play20Filled,
+  SlideSettings24Regular,
 } from '@fluentui/react-icons';
 
 import SceneList from '@/components/SceneList/SceneList';
@@ -25,7 +23,12 @@ import {
 import { VideoClient } from '@/src/apis/video.client';
 import { useRouter } from 'next/navigation';
 import { useVideoStore } from '@/src/stores/video.store';
-import { generatePreviewUrl, getLayout, splitIntoLines } from '@/src/helpers';
+import {
+  generatePreviewUrl,
+  getLayout,
+  splitIntoLines,
+  updateDefaultAsset,
+} from '@/src/helpers';
 import {
   Body1Strong,
   Button,
@@ -40,6 +43,7 @@ import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import { SupportedVoices } from '@/components/SupportedVoices/SupportedVoices';
 import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
 import CopyIcon from '@/components/CopyIcon/CopyIcon';
+import VideoSettings from '@/components/VideoSettings/VideoSettings';
 
 export default function Page({
   params,
@@ -55,9 +59,44 @@ export default function Page({
   const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
 
-  const [trayOption, setTrayOption] = useState<'scenes' | 'voices' | 'music'>(
-    'scenes',
-  );
+  const TRAY_OPTIONS_MUSIC = 'music';
+  const TRAY_OPTIONS_SCENES = 'scenes';
+  const TRAY_OPTIONS_VOICES = 'voices';
+  const TRAY_OPTIONS_SETTINGS = 'settings';
+  type TrayOptions =
+    | typeof TRAY_OPTIONS_MUSIC
+    | typeof TRAY_OPTIONS_SCENES
+    | typeof TRAY_OPTIONS_VOICES
+    | typeof TRAY_OPTIONS_SETTINGS;
+  const [trayOption, setTrayOption] =
+    useState<TrayOptions>(TRAY_OPTIONS_SCENES);
+
+  const TRAY_OPTIONS: Array<{
+    name: TrayOptions;
+    Icon: ComponentType;
+    label: string;
+  }> = [
+    {
+      name: 'scenes',
+      Icon: Image32Regular,
+      label: 'Scenes',
+    },
+    {
+      name: 'voices',
+      Icon: PersonVoice24Regular,
+      label: 'Voices',
+    },
+    {
+      name: 'music',
+      Icon: HeadphonesSoundWave32Regular,
+      label: 'Music',
+    },
+    {
+      name: 'settings',
+      Icon: SlideSettings24Regular,
+      label: 'Settings',
+    },
+  ];
 
   const {
     data: scenesData,
@@ -115,7 +154,7 @@ export default function Page({
     const _layout = getLayout(
       _layoutId,
       projectData?.sceneRandomAsset,
-      projectData?.assets,
+      videoData?.defaultAsset ? [videoData?.defaultAsset] : projectData?.assets,
     );
     if (videoData?.scenesId === undefined) return;
     updateScene({
@@ -187,6 +226,36 @@ export default function Page({
     });
   };
 
+  const onUpdateDefaultAsset = (
+    defaultAsset: string,
+    isUpdateExistingScenes?: boolean,
+  ) => {
+    updateVideo({
+      id: videoData?.id as string,
+      name: videoData?.name as string,
+      data: {
+        ...videoData,
+        defaultAsset,
+      },
+    });
+    if (isUpdateExistingScenes) {
+      updateExistingScenes(defaultAsset);
+    }
+  };
+
+  const updateExistingScenes = (defaultAsset: string) => {
+    const updatedScenes = updateDefaultAsset(scenes, defaultAsset);
+    const _layoutId = updatedScenes[0].layoutId;
+    updateScene({
+      id: params.video_id,
+      sceneId: videoData?.scenesId || '',
+      layoutId: _layoutId,
+      data: {
+        scenes: updatedScenes,
+      },
+    });
+  };
+
   useEffect(() => {
     async function fetchVideo() {
       const video = await VideoClient.create('New Video');
@@ -205,6 +274,7 @@ export default function Page({
   return (
     <div className="flex  h-screen w-full">
       <div className="w-9/12 bg-white">
+        {/*Sub Header*/}
         <div
           className={
             'flex items-end justify-start justify-between gap-1 pl-20 pr-20 pt-3'
@@ -291,62 +361,46 @@ export default function Page({
       </div>
       {/*Right section*/}
       <div className={' flex w-3/12 justify-end'}>
+        {/*TODO: Use inline drawer from fluent UI*/}
         <div className="w-9/12 border bg-gray-100">
-          {trayOption === 'scenes' && (
+          {trayOption === TRAY_OPTIONS_SCENES && (
             <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
           )}
-          {trayOption === 'voices' && (
+          {trayOption === TRAY_OPTIONS_VOICES && (
             <SupportedVoices
               onUpdateVoice={onUpdateVoice}
               audioLanguage={videoData?.audioLanguage}
               currentVoice={videoData?.voiceCode}
             />
           )}
-          {trayOption === 'music' && (
+          {trayOption === TRAY_OPTIONS_MUSIC && (
             <SupportedBackgroundMusic
               onUpdate={onUpdateBackground}
               currentBackgroundMusic={videoData?.backgroundMusic}
+            />
+          )}
+          {trayOption === TRAY_OPTIONS_SETTINGS && (
+            <VideoSettings
+              currentDefaultAsset={videoData?.defaultAsset}
+              onUploadSuccess={onUpdateDefaultAsset}
             />
           )}
         </div>
 
         {/*Tray options*/}
         <div className="flex w-2/12 flex-col items-center gap-2 bg-gray-100 pt-2">
-          <div
-            className={`flex cursor-pointer flex-col items-center  border-2 p-2 ${
-              trayOption === 'scenes' && 'bg-gray-300'
-            }`}
-            onClick={() => setTrayOption('scenes')}
-          >
-            {trayOption === 'scenes' ? <Image32Filled /> : <Image32Regular />}
-            Scenes
-          </div>
-          <div
-            className={`flex cursor-pointer flex-col items-center border-2  p-2 ${
-              trayOption === 'voices' && 'bg-gray-300'
-            }`}
-            onClick={() => setTrayOption('voices')}
-          >
-            {trayOption === 'voices' ? (
-              <PersonVoice24Filled />
-            ) : (
-              <PersonVoice24Regular />
-            )}
-            Voices
-          </div>
-          <div
-            className={`flex cursor-pointer flex-col items-center border-2  p-2 ${
-              trayOption === 'music' && 'bg-gray-300'
-            }`}
-            onClick={() => setTrayOption('music')}
-          >
-            {trayOption === 'music' ? (
-              <HeadphonesSoundWave32Filled />
-            ) : (
-              <HeadphonesSoundWave32Regular />
-            )}
-            Music
-          </div>
+          {TRAY_OPTIONS.map((option) => (
+            <div
+              key={option.name}
+              className={`flex cursor-pointer flex-col items-center border-2 p-2 ${
+                trayOption === option.name && 'bg-gray-300'
+              }`}
+              onClick={() => setTrayOption(option.name)}
+            >
+              {trayOption === option.name ? <option.Icon /> : <option.Icon />}
+              {option.label}
+            </div>
+          ))}
         </div>
       </div>
     </div>

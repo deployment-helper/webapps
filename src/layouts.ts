@@ -11,11 +11,11 @@ type TLayout = {
   componentName: string;
   image: string;
   content: Record<string, IInput>;
-  addDefaultAsset?: (
-    layout: TLayout,
+  addDefaultAsset?: <T extends Partial<TLayout>>(
+    layout: T,
     assets: string[],
     content?: Record<string, any>,
-  ) => TLayout;
+  ) => T;
 };
 
 export const layouts: Array<TLayout> = [
@@ -83,7 +83,9 @@ export const layouts: Array<TLayout> = [
       const _videoAssets = getVideosFromAssets(assets);
       const video = getRandomValueFromArray(_videoAssets);
       // TODO: needs to check why this is undefined, currently passing this as argument
-      layout.content.video.value = video;
+      if (layout.content) {
+        layout.content.video.value = video;
+      }
       layout.image = video;
       return layout;
     },
@@ -128,17 +130,17 @@ export const layouts: Array<TLayout> = [
       },
     },
     addDefaultAsset: function (
-      layout: TLayout,
+      layout,
       assets: string[],
       content?: Record<string, any>,
     ) {
       const _videoAssets = getVideosFromAssets(assets);
       const video = getRandomValueFromArray(_videoAssets);
       // TODO: needs to check why this is undefined, currently passing this as argument
-      layout.content.video.value = video;
+      if (layout.content) layout.content.video.value = video;
       layout.image = video;
       //   Add title if passed
-      if (content?.desc) {
+      if (content?.desc && layout.content) {
         layout.content.title.value = content.desc;
       }
       return layout;

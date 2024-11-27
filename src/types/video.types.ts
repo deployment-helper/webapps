@@ -15,6 +15,7 @@ export interface IVideoStore {
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
   ) => void;
+  setSelectedSceneId: (sceneId: string) => void;
   setCurrentProjectId: (project: string) => void;
 }
 

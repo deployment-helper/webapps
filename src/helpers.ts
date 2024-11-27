@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 import { Presentation } from './types/types';
 import { layouts } from '@/src/layouts';
+import { IScene } from '@/src/types/video.types';
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -80,6 +81,30 @@ export function getLayout(
   }
 
   return updatedLayout;
+}
+
+export function updateDefaultAsset(scenes: IScene[], asset: string) {
+  const updatedScenes = scenes.map((scene) => {
+    const layout = layouts.find((layout) => layout.id === scene.layoutId);
+
+    if (layout?.addDefaultAsset) {
+      const updatedScene = layout.addDefaultAsset(
+        {
+          content: scene.content,
+          id: scene.id,
+          image: scene.image,
+        },
+        [asset],
+      );
+
+      return {
+        ...scene,
+        ...updatedScene,
+      };
+    }
+    return scene;
+  });
+  return updatedScenes;
 }
 
 /**
