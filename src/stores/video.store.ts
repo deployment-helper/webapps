@@ -33,7 +33,12 @@ export const useVideoStore = create<IVideoStore>()(
         sceneContent: content,
       }));
     },
-
+    setSelectedSceneId: (sceneId) => {
+      set((state) => ({
+        ...state,
+        selectedSceneId: sceneId,
+      }));
+    },
     setCurrentProjectId: (project) => {
       set((state) => ({
         ...state,

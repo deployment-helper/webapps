@@ -15,6 +15,7 @@ export enum SlideType {
 export const TOASTER_ID = 'defaultToaster';
 
 export const DEFAULT_THEME = Theme.BLUE;
+export const DEFAULT_NO_IMAGE_URL = '/no-image.png';
 
 export enum HttpMethod {
   GET = 'GET',

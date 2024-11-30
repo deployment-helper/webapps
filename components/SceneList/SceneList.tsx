@@ -1,6 +1,5 @@
 import Scene from '@/components/Scene/Scene';
 import {
-  Button,
   Menu,
   MenuButtonProps,
   MenuItem,
@@ -22,6 +21,7 @@ export function SceneList(props: ISceneListProps) {
   const params = useParams();
   const setSelectedContent = useVideoStore((state) => state.setSceneContent);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
+  const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
   const [markerIndex, setMarkerIndex] = useState<number | undefined>(undefined);
   const [scenes, setScenes] = useState<IScene[]>(props.scenes);
   const [draggedSceneIndex, setDraggedSceneIndex] = useState<
@@ -85,6 +85,12 @@ export function SceneList(props: ISceneListProps) {
       );
     }
   }, [selectedSceneId, props.scenes, setSelectedContent]);
+
+  useEffect(() => {
+    if (Array.isArray(scenes) && scenes.length > 0 && !selectedSceneId) {
+      setSelectedSceneId(scenes[0].id);
+    }
+  }, [selectedSceneId]);
 
   return (
     <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10 pt-10">
