@@ -23,7 +23,7 @@ export function MyMessageBar() {
             <MessageBarBody>
               <MessageBarTitle>{message.title}</MessageBarTitle>
               {message.body}
-              <Link target={"_blank"} href={message.link?.url}>
+              <Link target={"_blank"} href={message.link?.url} onClick={() => removeMessage(message.id)}>
                 {message.link?.text}
               </Link>
             </MessageBarBody>
