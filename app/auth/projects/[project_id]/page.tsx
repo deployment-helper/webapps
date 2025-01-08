@@ -90,12 +90,18 @@ function Videos({
 
   function publishVideo(video: IVideo) {
     if (video) {
+      let youtubeUrl = prompt('Enter youtube url of the published video');
+
+      // Ensure that youtube url is provided
+      if (youtubeUrl === null || youtubeUrl === '') return;
+
       updateVideo({
         id: video.id,
         name: video.name,
         data: {
           ...video,
           isPublished: true,
+          youtubeUrl: youtubeUrl
         },
       });
     }
@@ -183,7 +189,12 @@ function Videos({
         return (
           <div className={'pl-4'}>
             {item.isPublished && (
-              <CheckmarkCircle24Filled className={'text-green-700'} />
+              <>
+                <a href={item.youtubeUrl} target='_blank'>
+                  Video Link
+                </a>
+                <CheckmarkCircle24Filled className={'text-green-700'} />
+              </>
             )}
           </div>
         );
