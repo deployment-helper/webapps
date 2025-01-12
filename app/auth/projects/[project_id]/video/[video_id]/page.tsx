@@ -281,11 +281,11 @@ export default function Page({
           }
         >
           <div className={'flex items-end justify-start gap-1'}>
-            <Button onClick={playAll}>
+            <Button disabled={isAudioPending} onClick={playAll}>
               Play All
               <div className={'pl-2'}>
                 {isAudioPending && (
-                  <Spinner appearance={'inverted'} size={'tiny'} />
+                  <Spinner appearance={'primary'} size={'tiny'} />
                 )}
               </div>
             </Button>
