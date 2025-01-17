@@ -176,7 +176,7 @@ export default function Page({
     const texts = scenes.map((scene) => scene.description! || '');
     mutate({
       text: texts,
-      audioLanguage: videoData?.audioLanguage || ELanguage['English (India)'],
+      audioLanguage: videoData?.audioLanguage || ELanguage['English (US)'],
       voiceCode: videoData?.voiceCode as string,
     });
   };

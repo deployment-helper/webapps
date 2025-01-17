@@ -66,7 +66,7 @@ export default function VideoPreview({
       const texts = videos.map((v) => v.description! || '');
       mutate({
         text: texts,
-        audioLanguage: video?.audioLanguage || ELanguage['English (India)'],
+        audioLanguage: video?.audioLanguage || ELanguage['English (US)'],
         merge: false,
       });
     }
