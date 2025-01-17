@@ -147,7 +147,9 @@ function Videos({
   }
 
   function deleteVideo(video: IVideo) {
-    deleteMutation.mutate(video.id);
+    if (confirm('Are you sure to delete the video?')) {
+      deleteMutation.mutate(video.id);
+    }
   }
 
   function createNewVideo(data: Partial<IVideo>) {

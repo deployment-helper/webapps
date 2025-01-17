@@ -65,11 +65,13 @@ export const Scene = (props: ISceneProps) => {
   };
 
   const deleteScene = () => {
-    deleteMutation.mutate({
-      id: props.videoId,
-      sceneId: props.sceneDocId,
-      sceneArrayIndex: props.sceneArrayIndex,
-    });
+    if (confirm('Are you sure to delete this scene?')) {
+      deleteMutation.mutate({
+        id: props.videoId,
+        sceneId: props.sceneDocId,
+        sceneArrayIndex: props.sceneArrayIndex,
+      });
+    }
   };
 
   const onAudioEnd = () => {
