@@ -109,13 +109,24 @@ export default function VideoPreview({
               }}
             >
               <div className="slides">
+                {/*
+                  This slide is meant to be static, it will be shown immediately as the
+                  page loads and give time to other slides to load correctly and also
+                  allow sound to be played as user navigates.
+                */}
                 <section
                   data-slideid={'start-1'}
                   data-name="start-1"
                   data-description={'hello world'}
                   className={'bg-green-300'}
+                  style={{ position: "relative" }}
                 >
-                  START 1
+                  Navigate between slides using arrow keys
+                  <span style ={{
+                    position: "absolute", right: "10px"
+                  }}>
+                    ➡️
+                  </span>
                 </section>
                 {videos?.map((scene, index) => (
                   <section
@@ -139,8 +150,15 @@ export default function VideoPreview({
                   data-name="end-1"
                   data-description={'hello world'}
                   className={'bg-red-300'}
+                  style={{ position: 'relative' }}
                 >
-                  End 1
+                  <span style={{
+                    position: 'absolute',
+                    left: '10px'
+                  }}>
+                    ⬅️
+                  </span>
+                  The End
                 </section>
               </div>
             </div>

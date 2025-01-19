@@ -138,6 +138,7 @@ export interface IVideo {
   generatedVideoInfo?: IGeneratedVideoInfo[];
   id: string;
   isPublished?: boolean;
+  youtubeUrl?: string;
   name: string;
   overlay?: string;
   projectId?: string;
