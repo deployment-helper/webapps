@@ -87,6 +87,8 @@ export enum ELanguage {
   'English (US)' = 'en-US',
   'Hindi (India)' = 'hi-IN',
   'Urdu (India)' = 'ur-IN',
+  'TTS English (US)' = 'tts-en-US',
+  'TTS Hindi (India)' = 'tts-hi-IN',
 }
 
 export interface IProject {

@@ -166,6 +166,38 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       rating: 'M',
     },
   ],
+  [ELanguage['TTS English (US)']]: [
+    {
+      name: 'Quotes1',
+      voiceCode: 'tts-quotes1',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Quotes140.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Quotes2',
+      voiceCode: 'tts-quotes2',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Quotes340.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Quotes3',
+      voiceCode: 'tts-quotes3',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Quotes240.wav',
+      rating: 'M',
+    },
+  ],
+  [ELanguage['TTS Hindi (India)']]: [
+    {
+      name: 'Kahani',
+      voiceCode: 'tts-kahani',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/output_20s.wav',
+      rating: 'M',
+    },
+  ],
 };
 
 export const SUPPORTED_BACKGROUND_MUSIC: Array<IAsset> = [
