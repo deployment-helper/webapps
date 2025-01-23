@@ -177,6 +177,7 @@ export const useMutationPostTextToSpeech = () => {
       audioLanguage: ELanguage;
       voiceCode?: string;
       merge?: boolean;
+      speakerRefFile?: string | null;
     }
   >({
     mutationFn: async (data: {
@@ -184,12 +185,14 @@ export const useMutationPostTextToSpeech = () => {
       audioLanguage: ELanguage;
       voiceCode?: string;
       merge?: boolean;
+      speakerRefFile?: string | null;
     }) => {
       const resp = await VideoClient.textToSpeech(
         data.text,
         data.audioLanguage,
         data.voiceCode,
         data.merge,
+        data.speakerRefFile,
       );
       return resp;
     },

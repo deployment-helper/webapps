@@ -163,12 +163,14 @@ export class VideoClient extends ServerClient {
     audioLanguage?: ELanguage,
     voiceCode?: string,
     merge = true,
+    speakerRefFile?: string | null,
   ): Promise<{ type: string; data: string }[]> {
     const body = {
       text,
       audioLanguage,
       voiceCode,
       merge,
+      speakerRefFile,
     };
 
     const resp = await VideoClient.sendToAPiServer(
