@@ -166,6 +166,38 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       rating: 'M',
     },
   ],
+  [ELanguage['TTS English (US)']]: [
+    {
+      name: 'Quotes1',
+      voiceCode: 'tts-quotes1',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Quotes140.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Quotes2',
+      voiceCode: 'tts-quotes2',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Quotes340.wav',
+      rating: 'M',
+    },
+    {
+      name: 'Quotes3',
+      voiceCode: 'tts-quotes3',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/Quotes240.wav',
+      rating: 'M',
+    },
+  ],
+  [ELanguage['TTS Hindi (India)']]: [
+    {
+      name: 'Kahani',
+      voiceCode: 'tts-kahani',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/output_20s.wav',
+      rating: 'M',
+    },
+  ],
 };
 
 export const SUPPORTED_BACKGROUND_MUSIC: Array<IAsset> = [
@@ -276,52 +308,52 @@ export const OVERLAYS: Array<IOverlay> = [
 export const SILENT_MP3_FILES: Array<IAsset> = [
   {
     name: '1 Second',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-1.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_1s.wav',
     rating: 'H',
   },
   {
     name: '2 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-2.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_2s.wav',
     rating: 'H',
   },
   {
     name: '3 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-3.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_3s.wav',
     rating: 'H',
   },
   {
     name: '4 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-4.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_4s.wav',
     rating: 'H',
   },
   {
     name: '5 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-5.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_5s.wav',
     rating: 'H',
   },
   {
     name: '6 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-6.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_6s.wav',
     rating: 'H',
   },
   {
     name: '7 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-7.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_7s.wav',
     rating: 'H',
   },
   {
     name: '8 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-8.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_8s.wav',
     rating: 'H',
   },
   {
     name: '9 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-9.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_9s.wav',
     rating: 'H',
   },
   {
     name: '10 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-10.mp3',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_10s.wav',
     rating: 'H',
   },
 ];

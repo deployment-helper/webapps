@@ -5,10 +5,7 @@
  * This audio component will provide control to parent component to handle the video end events.
  */
 
-import React, { useState, useRef, useEffect, ChangeEvent } from "react";
-import classNames from "classnames";
-import { Simulate } from "react-dom/test-utils";
-import play = Simulate.play;
+import React, { useEffect, useRef, useState } from 'react';
 
 const AudioPlayer = ({
   audios,
@@ -32,11 +29,11 @@ const AudioPlayer = ({
       }
     };
 
-    audioRef.current && audioRef.current.addEventListener("ended", handleEnded);
+    audioRef.current && audioRef.current.addEventListener('ended', handleEnded);
 
     return () => {
       audioRef.current &&
-        audioRef.current.removeEventListener("ended", handleEnded);
+        audioRef.current.removeEventListener('ended', handleEnded);
     };
   }, [currentIndex, isPlaying, audioRef, audios, onAudioEnd]); // Update deps
 
@@ -65,17 +62,17 @@ const AudioPlayer = ({
       audioRef.current?.pause();
     }
   }, [stop, isPlaying]);
-  const audioSource = `data:audio/mp3;base64,${audios[currentIndex]}`; // Assuming MP3 format
+  const audioSource = `data:audio/wav;base64,${audios[currentIndex]}`; // Assuming MP3 format
 
   return (
-    <div className="audio-player" style={{ width: "100%" }}>
+    <div className="audio-player" style={{ width: '100%' }}>
       <audio
         ref={audioRef}
         src={audioSource}
         controls={!isPlaying}
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
       >
-        <source src={audioSource} type="audio/mp3" />
+        <source src={audioSource} type="audio/wav" />
         Your browser does not support the audio tag.
       </audio>
     </div>

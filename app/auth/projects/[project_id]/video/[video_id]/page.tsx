@@ -26,6 +26,7 @@ import { useVideoStore } from '@/src/stores/video.store';
 import {
   generatePreviewUrl,
   getLayout,
+  getSpeakerRefFile,
   splitIntoLines,
   updateDefaultAsset,
 } from '@/src/helpers';
@@ -176,7 +177,7 @@ export default function Page({
     const texts = scenes.map((scene) => scene.description! || '');
     mutate({
       text: texts,
-      audioLanguage: videoData?.audioLanguage || ELanguage['English (India)'],
+      audioLanguage: videoData?.audioLanguage || ELanguage['English (US)'],
       voiceCode: videoData?.voiceCode as string,
     });
   };
@@ -194,8 +195,13 @@ export default function Page({
   };
 
   const createVideo = async () => {
+    const speakerRefFile = getSpeakerRefFile(
+      videoData?.audioLanguage as ELanguage,
+      videoData?.voiceCode || '',
+    );
     VideoClient.generateVideoV2(params.video_id as string, {
       videoId: params.video_id as string,
+      speakerRefFile,
       url: generatePreviewUrl(params.video_id as string, true),
     });
     dispatchToast({
@@ -281,11 +287,11 @@ export default function Page({
           }
         >
           <div className={'flex items-end justify-start gap-1'}>
-            <Button onClick={playAll}>
+            <Button disabled={isAudioPending} onClick={playAll}>
               Play All
               <div className={'pl-2'}>
                 {isAudioPending && (
-                  <Spinner appearance={'inverted'} size={'tiny'} />
+                  <Spinner appearance={'primary'} size={'tiny'} />
                 )}
               </div>
             </Button>
