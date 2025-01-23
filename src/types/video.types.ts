@@ -157,6 +157,7 @@ export enum EWorkerVersion {
 
 export interface IGenerateVideoDto {
   url: string;
+  speakerRefFile?: string | null;
   version?: EWorkerVersion;
   videoId: string;
 }

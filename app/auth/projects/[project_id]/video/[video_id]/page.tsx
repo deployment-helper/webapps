@@ -26,6 +26,7 @@ import { useVideoStore } from '@/src/stores/video.store';
 import {
   generatePreviewUrl,
   getLayout,
+  getSpeakerRefFile,
   splitIntoLines,
   updateDefaultAsset,
 } from '@/src/helpers';
@@ -194,8 +195,13 @@ export default function Page({
   };
 
   const createVideo = async () => {
+    const speakerRefFile = getSpeakerRefFile(
+      videoData?.audioLanguage as ELanguage,
+      videoData?.voiceCode || '',
+    );
     VideoClient.generateVideoV2(params.video_id as string, {
       videoId: params.video_id as string,
+      speakerRefFile,
       url: generatePreviewUrl(params.video_id as string, true),
     });
     dispatchToast({

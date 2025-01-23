@@ -2,7 +2,8 @@ import { v4 as uuid } from 'uuid';
 
 import { Presentation } from './types/types';
 import { layouts } from '@/src/layouts';
-import { IScene } from '@/src/types/video.types';
+import { ELanguage, IScene } from '@/src/types/video.types';
+import { LANGUAGE_SUPPORTED_VOICES } from '@/src/constants';
 
 export const addSlideIds = (presentation: Presentation) => {
   for (const slide of presentation.slides) {
@@ -211,6 +212,12 @@ export function splitIntoLines(text: string) {
   return text.split('\n').map((line) => line.trim());
 }
 
+export function getSpeakerRefFile(lang: ELanguage, voiceCode: string) {
+  const voices = LANGUAGE_SUPPORTED_VOICES?.[lang];
+  const voice = voices?.find((voice) => voice.voiceCode === voiceCode);
+  return voice?.mp3 || null;
+}
+
 const defaultExport = {
   addSlideIds,
   s3RandomPublicKey,
@@ -219,4 +226,5 @@ const defaultExport = {
   formatDate,
   getFileType,
 };
+
 export default defaultExport;
