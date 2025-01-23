@@ -213,6 +213,9 @@ export function splitIntoLines(text: string) {
 }
 
 export function getSpeakerRefFile(lang: ELanguage, voiceCode: string) {
+  if (!lang.includes('tts')) {
+    return null;
+  }
   const voices = LANGUAGE_SUPPORTED_VOICES?.[lang];
   const voice = voices?.find((voice) => voice.voiceCode === voiceCode);
   return voice?.mp3 || null;
