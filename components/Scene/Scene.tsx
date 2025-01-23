@@ -16,6 +16,7 @@ import {
 } from '@fluentui/react-icons';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
+import { getSpeakerRefFile } from '@/src/helpers';
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
@@ -57,10 +58,15 @@ export const Scene = (props: ISceneProps) => {
 
   const playDescription = () => {
     const text = descRef.current?.value;
+    const speakerRefFile = getSpeakerRefFile(
+      props.audioLanguage as ELanguage,
+      props.voiceCode as string,
+    );
     postTextToSpeech({
       text: [text || ''],
       audioLanguage: props.audioLanguage || ELanguage['English (US)'],
       voiceCode: props.voiceCode as string,
+      speakerRefFile,
     });
   };
 
