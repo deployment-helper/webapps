@@ -49,6 +49,10 @@ import { useVideoStore } from '@/src/stores/video.store';
 import WorkflowList from '@/components/WorkflowList/WorkflowList';
 import ArtifactList from '@/components/ArtifactList/ArtifactList';
 
+const DOWNLOADS_DESC =
+  'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
+const ARTIFACTS_DESC = 'This is list of the artifacts.';
+
 function Videos({
   params,
 }: {
@@ -61,6 +65,7 @@ function Videos({
     isFetching,
     isLoading,
   } = useQueryGetVideosForProject(params.project_id);
+
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
   const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
@@ -69,11 +74,13 @@ function Videos({
     isOpen: boolean;
     artifacts: IArtifacts[];
     title: string;
+    desc: string;
   }>({
     id: '',
     isOpen: false,
     artifacts: [],
     title: '',
+    desc: '',
   });
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
@@ -277,6 +284,7 @@ function Videos({
                     )
                   : [],
                 title: 'Downloads',
+                desc: DOWNLOADS_DESC,
               });
             }}
           >
@@ -340,6 +348,7 @@ function Videos({
                         isOpen: true,
                         artifacts: item.artifacts || [],
                         title: 'Artifacts',
+                        desc: ARTIFACTS_DESC,
                       })
                     }
                   >
@@ -484,9 +493,11 @@ function Videos({
                 isOpen: false,
                 artifacts: [],
                 title: '',
+                desc: '',
               });
             }}
             title={artifactsSt.title}
+            desc={artifactsSt.desc}
             artifacts={artifactsSt.artifacts}
             onDownload={(s3Key: string) => {
               dispatchVideoDownloadToast();
