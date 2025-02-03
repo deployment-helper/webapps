@@ -270,10 +270,15 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async deleteArtifact(id: string, s3Key: string): Promise<void> {
+  public static async deleteArtifact(
+    id: string,
+    s3Key: string,
+    dbKey?: string,
+    propertyToCompare?: string,
+  ): Promise<void> {
     const resp = await VideoClient.sendToAPiServer(
       `/videos/${id}/artifact`,
-      { s3Key },
+      { s3Key, dbKey, propertyToCompare },
       HttpMethod.DELETE,
     );
     return resp.json();

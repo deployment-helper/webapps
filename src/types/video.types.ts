@@ -124,14 +124,22 @@ export interface IMessage {
   intent: 'success' | 'error' | 'warning';
 }
 
+/**
+ * @Deprecated
+ * This interface is deprecated and should not be used
+ * Use IArtifacts instead
+ */
 export interface IGeneratedVideoInfo {
   cloudFile: string;
   version: string;
+  date?: string;
 }
 
 export interface IArtifacts {
   name: string;
   s3Key: string;
+  dbKey?: string;
+  propertyToCompare?: string;
 }
 
 export interface IVideo {

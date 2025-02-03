@@ -68,10 +68,12 @@ function Videos({
     id: string;
     isOpen: boolean;
     artifacts: IArtifacts[];
+    title: string;
   }>({
     id: '',
     isOpen: false,
     artifacts: [],
+    title: '',
   });
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
@@ -250,19 +252,36 @@ function Videos({
       },
       renderCell: (item) => {
         return item.generatedVideoInfo && item.generatedVideoInfo.length ? (
-          item.generatedVideoInfo.map((videoInfo, index) => (
-            // TODO: Download UX needs to be improved.
-            <Button
-              key={videoInfo.cloudFile}
-              onClick={() => {
-                dispatchVideoDownloadToast();
-                S3GetSignedUrl(videoInfo.cloudFile);
-              }}
-              size={'small'}
-            >
-              {index + 1}
-            </Button>
-          ))
+          <Body1Strong
+            className={'cursor-pointer underline'}
+            onClick={() => {
+              setArtifactsSt({
+                id: item.id,
+                isOpen: true,
+                artifacts: item.generatedVideoInfo?.length
+                  ? item.generatedVideoInfo?.map<IArtifacts>(
+                      (videoInfo, index) => ({
+                        name: `${new Date(
+                          videoInfo.date as string,
+                        ).toLocaleString('en-US', {
+                          month: '2-digit',
+                          day: '2-digit',
+                          year: '2-digit',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}`,
+                        s3Key: videoInfo.cloudFile,
+                        dbKey: 'generatedVideoInfo',
+                        propertyToCompare: 'cloudFile',
+                      }),
+                    )
+                  : [],
+                title: 'Downloads',
+              });
+            }}
+          >
+            Download
+          </Body1Strong>
         ) : (
           <Body1Strong>Not Available</Body1Strong>
         );
@@ -320,6 +339,7 @@ function Videos({
                         id: item.id,
                         isOpen: true,
                         artifacts: item.artifacts || [],
+                        title: 'Artifacts',
                       })
                     }
                   >
@@ -463,18 +483,25 @@ function Videos({
                 id: '',
                 isOpen: false,
                 artifacts: [],
+                title: '',
               });
             }}
-            title={'Artifacts'}
+            title={artifactsSt.title}
             artifacts={artifactsSt.artifacts}
             onDownload={(s3Key: string) => {
               dispatchVideoDownloadToast();
               S3GetSignedUrl(s3Key);
             }}
-            onRemove={(s3Key: string) => {
+            onRemove={(
+              s3Key: string,
+              dbKey?: string,
+              propertyToCompare?: string,
+            ) => {
               deleteArtifacts({
                 id: artifactsSt.id,
                 s3Key,
+                dbKey,
+                propertyToCompare,
               });
             }}
           />

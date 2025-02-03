@@ -11,8 +11,8 @@ interface ArtifactListProps {
   onClose: () => void;
   title: string;
   artifacts: IArtifacts[];
-  onDownload: (id: string) => void;
-  onRemove: (id: string) => void;
+  onDownload: (s3Key: string) => void;
+  onRemove: (s3Key: string, dbKey?: string, propertyToCompare?: string) => void;
 }
 
 const ArtifactList: React.FC<ArtifactListProps> = ({
@@ -38,7 +38,13 @@ const ArtifactList: React.FC<ArtifactListProps> = ({
                   Download
                 </Button>
                 <Button
-                  onClick={() => onRemove(artifact.s3Key)}
+                  onClick={() =>
+                    onRemove(
+                      artifact.s3Key,
+                      artifact.dbKey,
+                      artifact.propertyToCompare,
+                    )
+                  }
                   appearance="secondary"
                 >
                   Remove

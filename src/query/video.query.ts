@@ -297,8 +297,18 @@ export const useMutationDeleteArtifact = (
   onSuccess?: (variables: any) => void,
 ) => {
   return useMutation({
-    mutationFn: (data: { id: string; s3Key: string }) =>
-      VideoClient.deleteArtifact(data.id, data.s3Key),
+    mutationFn: (data: {
+      id: string;
+      s3Key: string;
+      dbKey?: string;
+      propertyToCompare?: string;
+    }) =>
+      VideoClient.deleteArtifact(
+        data.id,
+        data.s3Key,
+        data.dbKey,
+        data.propertyToCompare,
+      ),
     onSuccess: (data, variables, context) => {
       onSuccess?.(variables);
     },
