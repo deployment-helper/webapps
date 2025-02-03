@@ -308,52 +308,52 @@ export const OVERLAYS: Array<IOverlay> = [
 export const SILENT_MP3_FILES: Array<IAsset> = [
   {
     name: '1 Second',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_1s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-1.mp3',
     rating: 'H',
   },
   {
     name: '2 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_2s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-2.mp3',
     rating: 'H',
   },
   {
     name: '3 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_3s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-3.mp3',
     rating: 'H',
   },
   {
     name: '4 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_4s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-4.mp3',
     rating: 'H',
   },
   {
     name: '5 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_5s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-5.mp3',
     rating: 'H',
   },
   {
     name: '6 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_6s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-6.mp3',
     rating: 'H',
   },
   {
     name: '7 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_7s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-7.mp3',
     rating: 'H',
   },
   {
     name: '8 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_8s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-8.mp3',
     rating: 'H',
   },
   {
     name: '9 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_9s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-9.mp3',
     rating: 'H',
   },
   {
     name: '10 Seconds',
-    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-wavs/silent_10s.wav',
+    src: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/silent-mp3/silence-10.mp3',
     rating: 'H',
   },
 ];
