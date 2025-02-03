@@ -269,4 +269,13 @@ export class VideoClient extends ServerClient {
     );
     return resp.json();
   }
+
+  public static async deleteArtifact(id: string, s3Key: string): Promise<void> {
+    const resp = await VideoClient.sendToAPiServer(
+      `/videos/${id}/artifact`,
+      { s3Key },
+      HttpMethod.DELETE,
+    );
+    return resp.json();
+  }
 }

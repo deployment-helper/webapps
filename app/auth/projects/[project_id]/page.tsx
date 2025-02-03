@@ -1,5 +1,5 @@
 'use client';
-import { ElementType, FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Body1Strong,
@@ -26,6 +26,7 @@ import {
   getProjectVideoQueryKey,
   useMutationCopyVideo,
   useMutationCreateVideo,
+  useMutationDeleteArtifact,
   useMutationDeleteVideo,
   useMutationDownloadVideo,
   useMutationUpdateVideo,
@@ -46,6 +47,7 @@ import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';
 import { useVideoStore } from '@/src/stores/video.store';
 import WorkflowList from '@/components/WorkflowList/WorkflowList';
+import ArtifactList from '@/components/ArtifactList/ArtifactList';
 
 function Videos({
   params,
@@ -59,16 +61,46 @@ function Videos({
     isFetching,
     isLoading,
   } = useQueryGetVideosForProject(params.project_id);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
+  const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
+  const [artifactsSt, setArtifactsSt] = useState<{
+    id: string;
+    isOpen: boolean;
+    artifacts: string[];
+  }>({
+    id: '',
+    isOpen: false,
+    artifacts: [],
+  });
+  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
+
   const client = useQueryClient();
+
+  const invalidateProject = () => {
+    client.invalidateQueries({
+      queryKey: getProjectVideoQueryKey(params.project_id),
+    });
+  };
+
   const { mutate: downloadVideo } = useMutationDownloadVideo();
   const deleteMutation = useMutationDeleteVideo();
   const copyMutation = useMutationCopyVideo();
   const createVideoMutation = useMutationCreateVideo();
-  const { mutate: updateVideo } = useMutationUpdateVideo(() => {
-    client.invalidateQueries({
-      queryKey: getProjectVideoQueryKey(params.project_id),
-    });
-  });
+  const { mutate: updateVideo } = useMutationUpdateVideo(invalidateProject);
+
+  const { mutate: deleteArtifacts } = useMutationDeleteArtifact(
+    (variables: any) => {
+      invalidateProject();
+      setArtifactsSt({
+        ...artifactsSt,
+        id: variables.id,
+        artifacts: artifactsSt?.artifacts?.filter(
+          (s3Key: string) => s3Key !== variables.s3Key,
+        ),
+      });
+    },
+  );
 
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
 
@@ -80,11 +112,6 @@ function Videos({
       body: 'Preparing video for download. You will be notified once it is ready.',
     });
   };
-
-  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
-  const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
-  const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
   const { data: project } = useQueryGetProject(params.project_id);
 
@@ -101,11 +128,12 @@ function Videos({
         data: {
           ...video,
           isPublished: true,
-          youtubeUrl: youtubeUrl
+          youtubeUrl: youtubeUrl,
         },
       });
     }
   }
+
   function copyVideo(video: IVideo) {
     copyMutation.mutate({
       id: video.id as string,
@@ -192,7 +220,7 @@ function Videos({
           <div className={'pl-4'}>
             {item.isPublished && (
               <>
-                <a href={item.youtubeUrl} target='_blank'>
+                <a href={item.youtubeUrl} target="_blank">
                   Video Link
                 </a>
                 <CheckmarkCircle24Filled className={'text-green-700'} />
@@ -284,6 +312,18 @@ function Videos({
                 <MenuList>
                   <MenuItem onClick={() => generateVideo(item)}>
                     Generate Video
+                  </MenuItem>
+                  <MenuItem
+                    disabled={!item.artifacts?.length}
+                    onClick={() =>
+                      setArtifactsSt({
+                        id: item.id,
+                        isOpen: true,
+                        artifacts: item.artifacts || [],
+                      })
+                    }
+                  >
+                    Artifacts
                   </MenuItem>
                   <MenuItem onClick={() => copyVideo(item)}>Copy</MenuItem>
                   <MenuItem onClick={() => copyAndChangeLanguage(item)}>
@@ -413,6 +453,29 @@ function Videos({
             projectID={params.project_id}
             onClose={() => setIsWorkFlowOpen(false)}
             prompts={project?.prompts}
+          />
+        )}
+        {artifactsSt.isOpen && (
+          <ArtifactList
+            isOpen={true}
+            onClose={() => {
+              setArtifactsSt({
+                id: '',
+                isOpen: false,
+                artifacts: [],
+              });
+            }}
+            title={'Artifacts'}
+            artifacts={artifactsSt.artifacts}
+            onDownload={() => {
+              alert('Download');
+            }}
+            onRemove={(s3Key: string) => {
+              deleteArtifacts({
+                id: artifactsSt.id,
+                s3Key,
+              });
+            }}
           />
         )}
       </div>

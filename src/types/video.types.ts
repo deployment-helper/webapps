@@ -148,6 +148,7 @@ export interface IVideo {
   updatedAt: string;
   userId: string;
   voiceCode?: string;
+  artifacts?: string[];
 }
 
 export enum EWorkerVersion {

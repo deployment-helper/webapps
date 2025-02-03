@@ -292,3 +292,15 @@ export const useQueryGetVideosForProject = (projectId: string) => {
     queryFn: () => VideoClient.getVideosForProject(projectId),
   });
 };
+
+export const useMutationDeleteArtifact = (
+  onSuccess?: (variables: any) => void,
+) => {
+  return useMutation({
+    mutationFn: (data: { id: string; s3Key: string }) =>
+      VideoClient.deleteArtifact(data.id, data.s3Key),
+    onSuccess: (data, variables, context) => {
+      onSuccess?.(variables);
+    },
+  });
+};
