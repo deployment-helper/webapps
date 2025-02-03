@@ -28,12 +28,12 @@ import {
   useMutationCreateVideo,
   useMutationDeleteArtifact,
   useMutationDeleteVideo,
-  useMutationDownloadVideo,
+  useMutationS3GetSignedUrl,
   useMutationUpdateVideo,
   useQueryGetProject,
   useQueryGetVideosForProject,
 } from '@/src/query/video.query';
-import { IVideo } from '@/src/types/video.types';
+import { IArtifacts, IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
 import {
@@ -67,7 +67,7 @@ function Videos({
   const [artifactsSt, setArtifactsSt] = useState<{
     id: string;
     isOpen: boolean;
-    artifacts: string[];
+    artifacts: IArtifacts[];
   }>({
     id: '',
     isOpen: false,
@@ -83,7 +83,7 @@ function Videos({
     });
   };
 
-  const { mutate: downloadVideo } = useMutationDownloadVideo();
+  const { mutate: S3GetSignedUrl } = useMutationS3GetSignedUrl();
   const deleteMutation = useMutationDeleteVideo();
   const copyMutation = useMutationCopyVideo();
   const createVideoMutation = useMutationCreateVideo();
@@ -96,7 +96,7 @@ function Videos({
         ...artifactsSt,
         id: variables.id,
         artifacts: artifactsSt?.artifacts?.filter(
-          (s3Key: string) => s3Key !== variables.s3Key,
+          (_ar) => _ar.s3Key !== variables.s3Key,
         ),
       });
     },
@@ -108,8 +108,8 @@ function Videos({
 
   const dispatchVideoDownloadToast = () => {
     dispatchToast({
-      title: 'Download Video',
-      body: 'Preparing video for download. You will be notified once it is ready.',
+      title: 'Download',
+      body: 'Preparing for download. You will be notified once it is ready.',
     });
   };
 
@@ -256,7 +256,7 @@ function Videos({
               key={videoInfo.cloudFile}
               onClick={() => {
                 dispatchVideoDownloadToast();
-                downloadVideo(videoInfo.cloudFile);
+                S3GetSignedUrl(videoInfo.cloudFile);
               }}
               size={'small'}
             >
@@ -467,8 +467,9 @@ function Videos({
             }}
             title={'Artifacts'}
             artifacts={artifactsSt.artifacts}
-            onDownload={() => {
-              alert('Download');
+            onDownload={(s3Key: string) => {
+              dispatchVideoDownloadToast();
+              S3GetSignedUrl(s3Key);
             }}
             onRemove={(s3Key: string) => {
               deleteArtifacts({

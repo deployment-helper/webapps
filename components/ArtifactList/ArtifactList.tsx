@@ -4,12 +4,13 @@ import { Button } from '@fluentui/react-components';
 import DrawerHOC from '@/components/DrawerHOC/DrawerHOC';
 import List from '@/components/List/List';
 import { ListItem } from '@/components/ListItem/Listitem';
+import { IArtifacts } from '@/src/types/video.types';
 
 interface ArtifactListProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  artifacts: string[];
+  artifacts: IArtifacts[];
   onDownload: (id: string) => void;
   onRemove: (id: string) => void;
 }
@@ -26,18 +27,18 @@ const ArtifactList: React.FC<ArtifactListProps> = ({
     <DrawerHOC isOpen={isOpen} onClose={onClose} title={title}>
       <List>
         {artifacts.map((artifact, index) => (
-          <ListItem key={artifact}>
+          <ListItem key={artifact.s3Key}>
             <div className="flex w-full items-center justify-between">
-              <span>{index + 1}</span>
+              <span>{artifact.name}</span>
               <div className="flex gap-2">
                 <Button
-                  onClick={() => onDownload(artifact)}
+                  onClick={() => onDownload(artifact.s3Key)}
                   appearance="primary"
                 >
                   Download
                 </Button>
                 <Button
-                  onClick={() => onRemove(artifact)}
+                  onClick={() => onRemove(artifact.s3Key)}
                   appearance="secondary"
                 >
                   Remove

@@ -129,6 +129,11 @@ export interface IGeneratedVideoInfo {
   version: string;
 }
 
+export interface IArtifacts {
+  name: string;
+  s3Key: string;
+}
+
 export interface IVideo {
   audioLanguage?: ELanguage;
   backgroundMusic?: string;
@@ -148,7 +153,7 @@ export interface IVideo {
   updatedAt: string;
   userId: string;
   voiceCode?: string;
-  artifacts?: string[];
+  artifacts?: IArtifacts[];
 }
 
 export enum EWorkerVersion {

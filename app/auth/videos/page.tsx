@@ -25,7 +25,7 @@ import {
 import {
   useMutationCopyVideo,
   useMutationDeleteVideo,
-  useMutationDownloadVideo,
+  useMutationS3GetSignedUrl,
   useQueryGetVideos,
 } from '@/src/query/video.query';
 import { IVideo } from '@/src/types/video.types';
@@ -39,7 +39,7 @@ import { generatePreviewUrl } from '@/src/helpers';
 const Videos: FC = () => {
   const { data: videos, isFetching, isLoading } = useQueryGetVideos();
   const client = useQueryClient();
-  const { mutate: downloadVideo } = useMutationDownloadVideo();
+  const { mutate: downloadVideo } = useMutationS3GetSignedUrl();
   const deleteMutation = useMutationDeleteVideo();
   const copyMutation = useMutationCopyVideo();
   const { dispatchToast } = useMyToastController();

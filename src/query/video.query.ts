@@ -27,19 +27,19 @@ export const useQueryGetVideo = (id: string) => {
   });
 };
 
-export const useMutationDownloadVideo = () => {
+export const useMutationS3GetSignedUrl = () => {
   const setMessage = useVideoStore((state) => state.setMessage);
   return useMutation({
     mutationFn: (key: string) => VideoClient.generateS3GetSignedUrl(key),
     onSuccess: (data) => {
       setMessage({
         id: v4(),
-        title: 'Download Video',
-        body: 'Video is ready for download. Click the link below to download.',
+        title: '',
+        body: 'Your download is ready. Click the download link  to start the download.',
         intent: 'success',
         link: {
           url: data.url,
-          text: 'Download',
+          text: 'Download Link',
         },
       });
     },
