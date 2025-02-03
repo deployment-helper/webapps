@@ -288,7 +288,7 @@ function Videos({
               });
             }}
           >
-            Download
+            Downloads ({item.generatedVideoInfo.length})
           </Body1Strong>
         ) : (
           <Body1Strong>Not Available</Body1Strong>
