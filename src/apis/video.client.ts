@@ -283,4 +283,18 @@ export class VideoClient extends ServerClient {
     );
     return resp.json();
   }
+
+  public static async getSceneImages(sceneDesc: string): Promise<string[]> {
+    const body = {
+      sceneDesc,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      'ai/chatgpt/scene-images',
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
 }

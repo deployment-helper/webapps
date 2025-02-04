@@ -4,6 +4,7 @@ export interface IVideoStore {
   selectedLayoutId: string;
   selectedSceneId: string;
   sceneContent: Record<string, IInput>;
+  sceneDesc?: string;
   sceneArrayIndex: number;
   messageBar: IMessage[];
   setMessage: (message: IMessage) => void;
@@ -14,9 +15,11 @@ export interface IVideoStore {
     sceneId: string,
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
+    desc?: string,
   ) => void;
   setSelectedSceneId: (sceneId: string) => void;
   setCurrentProjectId: (project: string) => void;
+  setSceneDesc: (desc: string) => void;
 }
 
 /**
@@ -189,6 +192,7 @@ export interface IScene {
     layoutId: string,
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
+    desc?: string,
   ) => void;
 }
 

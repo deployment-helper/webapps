@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { InsertImageModal } from '@/components/InsertImageModal/InsertImageModal';
 import { IInsertImageProps } from '@/components/InsertImage/InsertImage';
-import { ArrowSync24Filled, Delete20Filled } from '@fluentui/react-icons';
+import { ArrowSync24Filled } from '@fluentui/react-icons';
 import CopyIcon, { ICopyIconProps } from '@/components/CopyIcon/CopyIcon';
 import DeleteIcon from '@/components/DeleteIcon/DeleteIcon';
+import ImageSparkle from '@/components/ImageSparkle/ImageSparkle';
 
 export function Image({
+  isAIImage,
   isViewOnly,
   onUploadSuccess,
   onDelete,
@@ -24,6 +26,8 @@ export function Image({
   };
 
   return (
+    // TODO: This component can be improved by adding a loading state when uploading an image.
+    // TODO: className relative can be moved to the parent div
     <>
       {isViewOnly ? (
         <div className={'relative'}>
@@ -41,13 +45,14 @@ export function Image({
             // Replace button at right top
             <div
               className={
-                'absolute bottom-1 right-1 cursor-pointer rounded bg-amber-200'
+                'absolute bottom-1 right-1 cursor-pointer rounded bg-violet-100'
               }
               onClick={() => setIsModalOpen(!isModalOpen)}
             >
               <ArrowSync24Filled />
             </div>
           )}
+          {isAIImage && <ImageSparkle onSubmit={onUploadSuccess} />}
         </div>
       )}
 
@@ -70,6 +75,8 @@ export interface IImageProps extends Partial<IInsertImageProps> {
   isCopyable?: boolean;
   copyPosition?: ICopyIconProps['position'];
   onDelete?: () => void;
+  isAIImage?: boolean;
+  alt?: string;
 }
 
 export default Image;

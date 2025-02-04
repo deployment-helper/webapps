@@ -1,5 +1,5 @@
-import { Copy32Filled } from '@fluentui/react-icons';
 import useMyToastController from '../MyToast/MyToast.hook';
+import { Copy24Filled } from '@fluentui/react-icons';
 
 export function CopyIcon({ position = 'top-right', copyText }: ICopyIconProps) {
   let positionClass = '';
@@ -23,9 +23,9 @@ export function CopyIcon({ position = 'top-right', copyText }: ICopyIconProps) {
 
   return (
     <div
-      className={`${positionClass} z-10 cursor-pointer rounded bg-amber-200`}
+      className={`${positionClass} z-10 cursor-pointer rounded bg-violet-100`}
     >
-      <Copy32Filled
+      <Copy24Filled
         onClick={() => {
           navigator.clipboard.writeText(copyText).then(() => {
             dispatchToast({
