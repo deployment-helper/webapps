@@ -279,7 +279,7 @@ function Videos({
                         })}`,
                         s3Key: videoInfo.cloudFile,
                         dbKey: 'generatedVideoInfo',
-                        propertyToCompare: 'cloudFile',
+                        keyToCompare: 'cloudFile',
                       }),
                     )
                   : [],
@@ -506,13 +506,13 @@ function Videos({
             onRemove={(
               s3Key: string,
               dbKey?: string,
-              propertyToCompare?: string,
+              keyToCompare?: string,
             ) => {
               deleteArtifacts({
                 id: artifactsSt.id,
                 s3Key,
                 dbKey,
-                propertyToCompare,
+                keyToCompare,
               });
             }}
           />

@@ -46,7 +46,7 @@ const ArtifactList: React.FC<ArtifactListProps> = ({
                       onRemove(
                         artifact.s3Key,
                         artifact.dbKey,
-                        artifact.propertyToCompare,
+                        artifact.keyToCompare,
                       )
                     }
                     appearance="secondary"

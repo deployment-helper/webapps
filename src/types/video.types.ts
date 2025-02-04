@@ -139,7 +139,7 @@ export interface IArtifacts {
   name: string;
   s3Key: string;
   dbKey?: string;
-  propertyToCompare?: string;
+  keyToCompare?: string;
 }
 
 export interface IVideo {

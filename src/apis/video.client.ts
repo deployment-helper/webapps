@@ -274,11 +274,11 @@ export class VideoClient extends ServerClient {
     id: string,
     s3Key: string,
     dbKey?: string,
-    propertyToCompare?: string,
+    keyToCompare?: string,
   ): Promise<void> {
     const resp = await VideoClient.sendToAPiServer(
       `/videos/${id}/artifact`,
-      { s3Key, dbKey, propertyToCompare },
+      { s3Key, dbKey, keyToCompare },
       HttpMethod.DELETE,
     );
     return resp.json();

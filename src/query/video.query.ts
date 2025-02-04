@@ -301,13 +301,13 @@ export const useMutationDeleteArtifact = (
       id: string;
       s3Key: string;
       dbKey?: string;
-      propertyToCompare?: string;
+      keyToCompare?: string;
     }) =>
       VideoClient.deleteArtifact(
         data.id,
         data.s3Key,
         data.dbKey,
-        data.propertyToCompare,
+        data.keyToCompare,
       ),
     onSuccess: (data, variables, context) => {
       onSuccess?.(variables);
