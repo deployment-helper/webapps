@@ -18,7 +18,7 @@ export function MyMessageBar() {
   const messages = useVideoStore((state) => state.messageBar);
 
   return (
-    <div className={'absolute top-10 flex w-full justify-center'}>
+    <div className={'sticky top-10 flex w-full justify-center'}>
       <MessageBarGroup animate={'both'}>
         {messages.map((message, index) => (
           <MessageBar key={message.id} intent={message.intent}>
