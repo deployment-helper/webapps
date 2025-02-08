@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { InsertImageModal } from '@/components/InsertImageModal/InsertImageModal';
 import { IInsertImageProps } from '@/components/InsertImage/InsertImage';
 import { ArrowSync24Filled } from '@fluentui/react-icons';
@@ -11,6 +11,7 @@ export function Image({
   isViewOnly,
   onUploadSuccess,
   onDelete,
+  onError,
   src,
   isCopyable,
   copyPosition,
@@ -25,6 +26,10 @@ export function Image({
     onUploadSuccess && onUploadSuccess(url);
   };
 
+  const onImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    onError && onError('Image not found');
+  };
+
   return (
     // TODO: This component can be improved by adding a loading state when uploading an image.
     // TODO: className relative can be moved to the parent div
@@ -35,11 +40,11 @@ export function Image({
             <CopyIcon position={copyPosition || 'top-right'} copyText={src} />
           )}
           {onDelete && <DeleteIcon onClick={onDelete} />}
-          <img src={src} />
+          <img src={src} onError={onImageError} />
         </div>
       ) : (
         <div className={`relative`}>
-          <img src={src} />
+          <img src={src} onError={onImageError} />
           {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
           {!isViewOnly && (
             // Replace button at right top
@@ -77,6 +82,7 @@ export interface IImageProps extends Partial<IInsertImageProps> {
   onDelete?: () => void;
   isAIImage?: boolean;
   alt?: string;
+  onError?: (error: string) => void;
 }
 
 export default Image;

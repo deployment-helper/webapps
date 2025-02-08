@@ -1,5 +1,5 @@
 'use client';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 import { Spinner, Textarea } from '@fluentui/react-components';
 import {
@@ -22,7 +22,11 @@ import { useVideoStore } from '@/src/stores/video.store';
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
   const setSceneDesc = useVideoStore((state) => state.setSceneDesc);
-
+  const descRef = useRef<HTMLTextAreaElement>(null);
+  const [isHover, setIsHover] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [errors, setErrors] = useState<string[]>([]);
+  const [sceneCSSClasses, setSceneCSSClasses] = useState('');
   const { mutate: updateScene } = useMutationUpdateScene();
   const {
     mutate: postTextToSpeech,
@@ -30,10 +34,6 @@ export const Scene = (props: ISceneProps) => {
     isPending,
   } = useMutationPostTextToSpeech();
   const deleteMutation = useMutationDeleteScene();
-
-  const descRef = useRef<HTMLTextAreaElement>(null);
-  const [isHover, setIsHover] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
 
   const onHover = () => {
     setIsHover(true);
@@ -90,6 +90,23 @@ export const Scene = (props: ISceneProps) => {
     console.log('Audio ended');
   };
 
+  useEffect(() => {
+    if (errors.length) {
+      setSceneCSSClasses(
+        `border-2 ${
+          props.isSelected
+            ? 'border-red-500'
+            : ' border-red-300 hover:border-red-500'
+        } `,
+      );
+    } else {
+      setSceneCSSClasses(
+        `border-2  ${
+          props.isSelected ? 'border-violet-500' : 'hover:border-violet-300'
+        } `,
+      );
+    }
+  }, [props.isSelected, errors]);
   return (
     <div
       onMouseEnter={onHover}
@@ -118,11 +135,7 @@ export const Scene = (props: ISceneProps) => {
       </div>
       {/*Scene body start*/}
       <div
-        className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 pr-0 ${
-          props.isSelected
-            ? 'border-2 border-violet-500'
-            : 'border-2 border-violet-50 hover:border-violet-300'
-        }`}
+        className={`m-1 flex cursor-pointer flex-col border-r-2 p-2 pr-0 ${sceneCSSClasses}`}
         id={props.id}
         onClick={() =>
           props.onClick &&
@@ -135,13 +148,19 @@ export const Scene = (props: ISceneProps) => {
           )
         }
       >
-        <div className={'flex'}>
-          <div style={{ width: '220px' }} ref={ref}>
+        <div className={`flex`}>
+          <div
+            style={{
+              width: '220px',
+            }}
+            ref={ref}
+          >
             <RenderLayoutComponent
               layoutId={props.layoutId}
               sceneId={props.sceneDocId}
               content={props.content}
               parentEl={ref?.current}
+              onError={(error) => setErrors([...errors, error])}
             />
           </div>
 
