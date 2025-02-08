@@ -1,5 +1,5 @@
 'use client';
-import { ElementType, FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Body1Strong,
@@ -26,13 +26,14 @@ import {
   getProjectVideoQueryKey,
   useMutationCopyVideo,
   useMutationCreateVideo,
+  useMutationDeleteArtifact,
   useMutationDeleteVideo,
-  useMutationDownloadVideo,
+  useMutationS3GetSignedUrl,
   useMutationUpdateVideo,
   useQueryGetProject,
   useQueryGetVideosForProject,
 } from '@/src/query/video.query';
-import { IVideo } from '@/src/types/video.types';
+import { IArtifacts, IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
 import {
@@ -46,6 +47,11 @@ import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';
 import { useVideoStore } from '@/src/stores/video.store';
 import WorkflowList from '@/components/WorkflowList/WorkflowList';
+import ArtifactList from '@/components/ArtifactList/ArtifactList';
+
+const DOWNLOADS_DESC =
+  'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
+const ARTIFACTS_DESC = 'This is list of the artifacts.';
 
 function Videos({
   params,
@@ -59,16 +65,51 @@ function Videos({
     isFetching,
     isLoading,
   } = useQueryGetVideosForProject(params.project_id);
+
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
+  const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
+  const [artifactsSt, setArtifactsSt] = useState<{
+    id: string;
+    isOpen: boolean;
+    artifacts: IArtifacts[];
+    title: string;
+    desc: string;
+  }>({
+    id: '',
+    isOpen: false,
+    artifacts: [],
+    title: '',
+    desc: '',
+  });
+  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
+
   const client = useQueryClient();
-  const { mutate: downloadVideo } = useMutationDownloadVideo();
-  const deleteMutation = useMutationDeleteVideo();
-  const copyMutation = useMutationCopyVideo();
-  const createVideoMutation = useMutationCreateVideo();
-  const { mutate: updateVideo } = useMutationUpdateVideo(() => {
+
+  const invalidateProject = () => {
     client.invalidateQueries({
       queryKey: getProjectVideoQueryKey(params.project_id),
     });
-  });
+  };
+
+  const { mutate: S3GetSignedUrl } = useMutationS3GetSignedUrl();
+  const deleteMutation = useMutationDeleteVideo();
+  const copyMutation = useMutationCopyVideo();
+  const createVideoMutation = useMutationCreateVideo();
+  const { mutate: updateVideo } = useMutationUpdateVideo(invalidateProject);
+
+  const { mutate: deleteArtifacts } = useMutationDeleteArtifact(
+    (variables: any) => {
+      invalidateProject();
+      setArtifactsSt({
+        ...artifactsSt,
+        id: variables.id,
+        artifacts: artifactsSt?.artifacts?.filter(
+          (_ar) => _ar.s3Key !== variables.s3Key,
+        ),
+      });
+    },
+  );
 
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
 
@@ -76,15 +117,10 @@ function Videos({
 
   const dispatchVideoDownloadToast = () => {
     dispatchToast({
-      title: 'Download Video',
-      body: 'Preparing video for download. You will be notified once it is ready.',
+      title: 'Download',
+      body: 'Preparing for download. You will be notified once it is ready.',
     });
   };
-
-  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
-  const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
-  const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
 
   const { data: project } = useQueryGetProject(params.project_id);
 
@@ -101,11 +137,12 @@ function Videos({
         data: {
           ...video,
           isPublished: true,
-          youtubeUrl: youtubeUrl
+          youtubeUrl: youtubeUrl,
         },
       });
     }
   }
+
   function copyVideo(video: IVideo) {
     copyMutation.mutate({
       id: video.id as string,
@@ -192,7 +229,7 @@ function Videos({
           <div className={'pl-4'}>
             {item.isPublished && (
               <>
-                <a href={item.youtubeUrl} target='_blank'>
+                <a href={item.youtubeUrl} target="_blank">
                   Video Link
                 </a>
                 <CheckmarkCircle24Filled className={'text-green-700'} />
@@ -222,19 +259,37 @@ function Videos({
       },
       renderCell: (item) => {
         return item.generatedVideoInfo && item.generatedVideoInfo.length ? (
-          item.generatedVideoInfo.map((videoInfo, index) => (
-            // TODO: Download UX needs to be improved.
-            <Button
-              key={videoInfo.cloudFile}
-              onClick={() => {
-                dispatchVideoDownloadToast();
-                downloadVideo(videoInfo.cloudFile);
-              }}
-              size={'small'}
-            >
-              {index + 1}
-            </Button>
-          ))
+          <Body1Strong
+            className={'cursor-pointer underline'}
+            onClick={() => {
+              setArtifactsSt({
+                id: item.id,
+                isOpen: true,
+                artifacts: item.generatedVideoInfo?.length
+                  ? item.generatedVideoInfo?.map<IArtifacts>(
+                      (videoInfo, index) => ({
+                        name: `${new Date(
+                          videoInfo.date as string,
+                        ).toLocaleString('en-US', {
+                          month: '2-digit',
+                          day: '2-digit',
+                          year: '2-digit',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}`,
+                        s3Key: videoInfo.cloudFile,
+                        dbKey: 'generatedVideoInfo',
+                        keyToCompare: 'cloudFile',
+                      }),
+                    )
+                  : [],
+                title: 'Downloads',
+                desc: DOWNLOADS_DESC,
+              });
+            }}
+          >
+            Downloads ({item.generatedVideoInfo.length})
+          </Body1Strong>
         ) : (
           <Body1Strong>Not Available</Body1Strong>
         );
@@ -284,6 +339,20 @@ function Videos({
                 <MenuList>
                   <MenuItem onClick={() => generateVideo(item)}>
                     Generate Video
+                  </MenuItem>
+                  <MenuItem
+                    disabled={!item.artifacts?.length}
+                    onClick={() =>
+                      setArtifactsSt({
+                        id: item.id,
+                        isOpen: true,
+                        artifacts: item.artifacts || [],
+                        title: 'Artifacts',
+                        desc: ARTIFACTS_DESC,
+                      })
+                    }
+                  >
+                    Artifacts
                   </MenuItem>
                   <MenuItem onClick={() => copyVideo(item)}>Copy</MenuItem>
                   <MenuItem onClick={() => copyAndChangeLanguage(item)}>
@@ -413,6 +482,39 @@ function Videos({
             projectID={params.project_id}
             onClose={() => setIsWorkFlowOpen(false)}
             prompts={project?.prompts}
+          />
+        )}
+        {artifactsSt.isOpen && (
+          <ArtifactList
+            isOpen={true}
+            onClose={() => {
+              setArtifactsSt({
+                id: '',
+                isOpen: false,
+                artifacts: [],
+                title: '',
+                desc: '',
+              });
+            }}
+            title={artifactsSt.title}
+            desc={artifactsSt.desc}
+            artifacts={artifactsSt.artifacts}
+            onDownload={(s3Key: string) => {
+              dispatchVideoDownloadToast();
+              S3GetSignedUrl(s3Key);
+            }}
+            onRemove={(
+              s3Key: string,
+              dbKey?: string,
+              keyToCompare?: string,
+            ) => {
+              deleteArtifacts({
+                id: artifactsSt.id,
+                s3Key,
+                dbKey,
+                keyToCompare,
+              });
+            }}
           />
         )}
       </div>

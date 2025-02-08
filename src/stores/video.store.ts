@@ -45,5 +45,11 @@ export const useVideoStore = create<IVideoStore>()(
         currentProjectId: project,
       }));
     },
+    setSceneDesc: (desc) => {
+      set((state) => ({
+        ...state,
+        sceneDesc: desc,
+      }));
+    },
   })),
 );

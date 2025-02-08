@@ -27,19 +27,19 @@ export const useQueryGetVideo = (id: string) => {
   });
 };
 
-export const useMutationDownloadVideo = () => {
+export const useMutationS3GetSignedUrl = () => {
   const setMessage = useVideoStore((state) => state.setMessage);
   return useMutation({
     mutationFn: (key: string) => VideoClient.generateS3GetSignedUrl(key),
     onSuccess: (data) => {
       setMessage({
         id: v4(),
-        title: 'Download Video',
-        body: 'Video is ready for download. Click the link below to download.',
+        title: '',
+        body: 'Your download is ready. Click the download link  to start the download.',
         intent: 'success',
         link: {
           url: data.url,
-          text: 'Download',
+          text: 'Download Link',
         },
       });
     },
@@ -290,5 +290,33 @@ export const useQueryGetVideosForProject = (projectId: string) => {
     queryKey: getProjectVideoQueryKey(projectId),
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getVideosForProject(projectId),
+  });
+};
+
+export const useMutationDeleteArtifact = (
+  onSuccess?: (variables: any) => void,
+) => {
+  return useMutation({
+    mutationFn: (data: {
+      id: string;
+      s3Key: string;
+      dbKey?: string;
+      keyToCompare?: string;
+    }) =>
+      VideoClient.deleteArtifact(
+        data.id,
+        data.s3Key,
+        data.dbKey,
+        data.keyToCompare,
+      ),
+    onSuccess: (data, variables, context) => {
+      onSuccess?.(variables);
+    },
+  });
+};
+
+export const useMutationGetSceneImages = () => {
+  return useMutation({
+    mutationFn: (sceneDesc: string) => VideoClient.getSceneImages(sceneDesc),
   });
 };

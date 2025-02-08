@@ -1,4 +1,4 @@
-import { Copy32Filled, Delete20Filled } from '@fluentui/react-icons';
+import { Delete20Filled } from '@fluentui/react-icons';
 import useMyToastController from '../MyToast/MyToast.hook';
 
 export function DeleteIcon({
@@ -25,7 +25,7 @@ export function DeleteIcon({
   }
 
   return (
-    <div className={`${positionClass} cursor-pointer rounded`}>
+    <div className={`${positionClass} cursor-pointer rounded bg-violet-100`}>
       <Delete20Filled className={'text-red-500'} onClick={onClick} />
     </div>
   );

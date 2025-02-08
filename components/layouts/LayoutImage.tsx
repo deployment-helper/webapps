@@ -11,6 +11,7 @@ export const LayoutImage = forwardRef<HTMLImageElement, ILayoutProps>(
           src={content?.image?.value as string}
           isViewOnly={isViewOnly}
           isCopyable={true}
+          isAIImage={true}
         />
       </LayoutBody>
     );

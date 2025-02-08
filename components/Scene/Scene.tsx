@@ -17,9 +17,12 @@ import {
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
 import { getSpeakerRefFile } from '@/src/helpers';
+import { useVideoStore } from '@/src/stores/video.store';
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
+  const setSceneDesc = useVideoStore((state) => state.setSceneDesc);
+
   const { mutate: updateScene } = useMutationUpdateScene();
   const {
     mutate: postTextToSpeech,
@@ -27,6 +30,7 @@ export const Scene = (props: ISceneProps) => {
     isPending,
   } = useMutationPostTextToSpeech();
   const deleteMutation = useMutationDeleteScene();
+
   const descRef = useRef<HTMLTextAreaElement>(null);
   const [isHover, setIsHover] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -54,6 +58,8 @@ export const Scene = (props: ISceneProps) => {
       sceneArrayIndex: props.sceneArrayIndex,
       data: { [name]: e.target.value },
     });
+
+    setSceneDesc(e.target.value);
   };
 
   const playDescription = () => {
@@ -125,6 +131,7 @@ export const Scene = (props: ISceneProps) => {
             props.layoutId,
             props.sceneArrayIndex,
             props.content,
+            props.description,
           )
         }
       >

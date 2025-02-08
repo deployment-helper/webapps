@@ -175,10 +175,16 @@ export default function Page({
   const playAll = () => {
     if (!scenesData) return;
     const texts = scenes.map((scene) => scene.description! || '');
+    const speakerRefFile = getSpeakerRefFile(
+      videoData?.audioLanguage as ELanguage,
+      videoData?.voiceCode as string,
+    );
+
     mutate({
       text: texts,
       audioLanguage: videoData?.audioLanguage || ELanguage['English (US)'],
       voiceCode: videoData?.voiceCode as string,
+      speakerRefFile,
     });
   };
 

@@ -269,4 +269,32 @@ export class VideoClient extends ServerClient {
     );
     return resp.json();
   }
+
+  public static async deleteArtifact(
+    id: string,
+    s3Key: string,
+    dbKey?: string,
+    keyToCompare?: string,
+  ): Promise<void> {
+    const resp = await VideoClient.sendToAPiServer(
+      `/videos/${id}/artifact`,
+      { s3Key, dbKey, keyToCompare },
+      HttpMethod.DELETE,
+    );
+    return resp.json();
+  }
+
+  public static async getSceneImages(sceneDesc: string): Promise<string[]> {
+    const body = {
+      sceneDesc,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      'ai/chatgpt/scene-images',
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
 }

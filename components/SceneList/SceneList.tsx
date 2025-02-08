@@ -20,6 +20,7 @@ import { CreateSceneWithTextModal } from '@/components/CreateSceneWithTextModal'
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
   const setSelectedContent = useVideoStore((state) => state.setSceneContent);
+  const setSceneDesc = useVideoStore((state) => state.setSceneDesc);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
   const [markerIndex, setMarkerIndex] = useState<number | undefined>(undefined);
@@ -34,8 +35,10 @@ export function SceneList(props: ISceneListProps) {
     layoutId: string,
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
+    desc?: string,
   ) => {
     setSelectedContent(layoutId, sceneId, sceneArrayIndex, content);
+    setSceneDesc(desc || '');
   };
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
@@ -83,8 +86,9 @@ export function SceneList(props: ISceneListProps) {
         0,
         scene.content || DEFAULT_LAYOUT.content,
       );
+      setSceneDesc(scene.description);
     }
-  }, [selectedSceneId, props.scenes, setSelectedContent]);
+  }, [selectedSceneId, props.scenes, setSelectedContent, setSceneDesc]);
 
   useEffect(() => {
     if (Array.isArray(scenes) && scenes.length > 0 && !selectedSceneId) {

@@ -72,7 +72,7 @@ const AudioPlayer = ({
         controls={!isPlaying}
         style={{ width: '100%' }}
       >
-        <source src={audioSource} type="audio/wav" />
+        <source src={audioSource} type="audio/mpeg" />
         Your browser does not support the audio tag.
       </audio>
     </div>

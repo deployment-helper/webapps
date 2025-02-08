@@ -63,6 +63,7 @@ export function WorkflowList({
 
   return (
     <div>
+      {/*TODO: This Drawer code looks repeated can use used as HOC*/}
       <Drawer
         type={'overlay'}
         onOpenChange={onClose}
@@ -161,4 +162,5 @@ export interface IWorkflowListProps {
   onClose: () => void;
   prompts: IProject['prompts'];
 }
+
 export default WorkflowList;

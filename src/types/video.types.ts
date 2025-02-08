@@ -4,6 +4,7 @@ export interface IVideoStore {
   selectedLayoutId: string;
   selectedSceneId: string;
   sceneContent: Record<string, IInput>;
+  sceneDesc?: string;
   sceneArrayIndex: number;
   messageBar: IMessage[];
   setMessage: (message: IMessage) => void;
@@ -14,9 +15,11 @@ export interface IVideoStore {
     sceneId: string,
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
+    desc?: string,
   ) => void;
   setSelectedSceneId: (sceneId: string) => void;
   setCurrentProjectId: (project: string) => void;
+  setSceneDesc: (desc: string) => void;
 }
 
 /**
@@ -124,9 +127,22 @@ export interface IMessage {
   intent: 'success' | 'error' | 'warning';
 }
 
+/**
+ * @Deprecated
+ * This interface is deprecated and should not be used
+ * Use IArtifacts instead
+ */
 export interface IGeneratedVideoInfo {
   cloudFile: string;
   version: string;
+  date?: string;
+}
+
+export interface IArtifacts {
+  name: string;
+  s3Key: string;
+  dbKey?: string;
+  keyToCompare?: string;
 }
 
 export interface IVideo {
@@ -148,6 +164,7 @@ export interface IVideo {
   updatedAt: string;
   userId: string;
   voiceCode?: string;
+  artifacts?: IArtifacts[];
 }
 
 export enum EWorkerVersion {
@@ -175,6 +192,7 @@ export interface IScene {
     layoutId: string,
     sceneArrayIndex: number,
     content?: Record<string, IInput>,
+    desc?: string,
   ) => void;
 }
 
