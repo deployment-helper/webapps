@@ -10,6 +10,8 @@ export interface IVideoStore {
   setMessage: (message: IMessage) => void;
   removeMessage: (id: string) => void;
   currentProjectId?: string;
+  videoErrors?: string[];
+  setVideoErrors?: (errors: string[]) => void;
   setSceneContent: (
     layoutId: string,
     sceneId: string,

@@ -106,6 +106,7 @@ export const Scene = (props: ISceneProps) => {
         } `,
       );
     }
+    props.onErrors && props.onErrors(errors);
   }, [props.isSelected, errors]);
   return (
     <div
@@ -243,6 +244,7 @@ export interface ISceneProps extends IScene {
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onCreateScene: (addAfter: boolean, sceneArrayIndex?: number) => void;
+  onErrors: (errors: string[]) => void;
 }
 
 export default Scene;

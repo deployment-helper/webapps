@@ -45,6 +45,7 @@ import { SupportedVoices } from '@/components/SupportedVoices/SupportedVoices';
 import { SupportedBackgroundMusic } from '@/components/SupportedBackgroundMusic';
 import CopyIcon from '@/components/CopyIcon/CopyIcon';
 import VideoSettings from '@/components/VideoSettings/VideoSettings';
+import { ReusableDialog } from '@/components/Dialog';
 
 export default function Page({
   params,
@@ -55,10 +56,7 @@ export default function Page({
   const router = useRouter();
   const { dispatchToast } = useMyToastController();
 
-  // Store values
-  const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
-  const selectedLayout = useVideoStore((state) => state.selectedLayoutId);
-  const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
+  const [hoverState, setHoverState] = useState<Record<string, boolean>>({});
 
   const TRAY_OPTIONS_MUSIC = 'music';
   const TRAY_OPTIONS_SCENES = 'scenes';
@@ -71,6 +69,11 @@ export default function Page({
     | typeof TRAY_OPTIONS_SETTINGS;
   const [trayOption, setTrayOption] =
     useState<TrayOptions>(TRAY_OPTIONS_SCENES);
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+  // Store values
+  const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
+  const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
+  const videoErrors = useVideoStore((state) => state.videoErrors);
 
   const TRAY_OPTIONS: Array<{
     name: TrayOptions;
@@ -115,8 +118,6 @@ export default function Page({
     mutate,
   } = useMutationPostTextToSpeech();
   const { mutate: reorderScene } = useMutationReorderScenes();
-
-  const [hoverState, setHoverState] = useState<Record<string, boolean>>({});
 
   const scenes = scenesData?.[0]?.scenes || [];
   const defaultProjectLayout =
@@ -201,6 +202,11 @@ export default function Page({
   };
 
   const createVideo = async () => {
+    if (videoErrors?.length) {
+      setIsErrorDialogOpen(true);
+      return;
+    }
+
     const speakerRefFile = getSpeakerRefFile(
       videoData?.audioLanguage as ELanguage,
       videoData?.voiceCode || '',
@@ -286,6 +292,20 @@ export default function Page({
   return (
     <div className="flex  h-screen w-full">
       <div className="w-9/12 bg-white">
+        {videoErrors?.length && isErrorDialogOpen && (
+          <ReusableDialog
+            open={isErrorDialogOpen}
+            title={'Video Creation Error'}
+            onClose={() => {
+              setIsErrorDialogOpen(false);
+            }}
+          >
+            <Body1Strong>
+              This video cannot be generated as some image/video are not
+              loading. Please check red bordered scenes on the page.
+            </Body1Strong>
+          </ReusableDialog>
+        )}
         {/*Sub Header*/}
         <div
           className={

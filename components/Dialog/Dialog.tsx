@@ -1,62 +1,54 @@
-"use client";
-import * as React from "react";
+import * as React from 'react';
 import {
+  Button,
   Dialog,
+  DialogActions,
+  DialogBody,
+  DialogContent,
   DialogSurface,
   DialogTitle,
-  DialogBody,
-  DialogActions,
-  Button,
-  Dropdown,
-  Option,
-  OptionOnSelectData,
-  SelectionEvents,
-} from "@fluentui/react-components";
-import { SUPPORTED_LANGUAGES } from "@/src/constants";
+} from '@fluentui/react-components';
 
-interface LanguageDialogProps {
+interface DialogProps {
   open: boolean;
+  title: string;
+  children: React.ReactNode;
   onClose: () => void;
-  onSubmit: (language: string) => void;
+  onSubmit?: () => void;
+  submitButtonText?: string;
+  closeButtonText?: string;
 }
 
-export const LanguageDialog: React.FC<LanguageDialogProps> = ({
+export const ReusableDialog: React.FC<DialogProps> = ({
   open,
+  title,
+  children,
   onClose,
   onSubmit,
+  submitButtonText = 'Submit',
+  closeButtonText = 'Close',
 }) => {
-  const [language, setLanguage] = React.useState<string>("");
-
-  const handleChange = (event: SelectionEvents, data: OptionOnSelectData) => {
-    setLanguage(data.optionValue as string);
-  };
-
   return (
     <Dialog open={open}>
       <DialogSurface>
         <DialogBody>
-          <DialogTitle>Select Language</DialogTitle>
-          <Dropdown
-            positioning={"below"}
-            placeholder="Select an option"
-            onOptionSelect={handleChange}
-          >
-            {Object.entries(SUPPORTED_LANGUAGES).map(([key, value]) => (
-              <Option key={key} value={value.value}>
-                {value.label}
-              </Option>
-            ))}
-          </Dropdown>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogContent>{children}</DialogContent>
+
           <DialogActions>
             <Button appearance="secondary" onClick={onClose}>
-              Close
+              {closeButtonText}
             </Button>
-            <Button appearance="primary" onClick={() => onSubmit(language)}>
-              Submit
-            </Button>
+            {onSubmit && (
+              <Button appearance="primary" onClick={onSubmit}>
+                {submitButtonText}
+              </Button>
+            )}
           </DialogActions>
         </DialogBody>
       </DialogSurface>
     </Dialog>
   );
 };
+
+export default ReusableDialog;
