@@ -4,7 +4,10 @@ import LayoutBody from '@/components/layouts/LayoutBody';
 import Image from '@/components/Image/Image';
 
 export const LayoutImage = forwardRef<HTMLImageElement, ILayoutProps>(
-  ({ content, sceneId, isDisplayNone, isViewOnly }: ILayoutProps, ref) => {
+  (
+    { content, sceneId, isDisplayNone, isViewOnly, onError }: ILayoutProps,
+    ref,
+  ) => {
     return (
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
         <Image
@@ -12,6 +15,7 @@ export const LayoutImage = forwardRef<HTMLImageElement, ILayoutProps>(
           isViewOnly={isViewOnly}
           isCopyable={true}
           isAIImage={true}
+          onError={onError}
         />
       </LayoutBody>
     );

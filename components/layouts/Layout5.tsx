@@ -5,13 +5,17 @@ import Image from '@/components/Image/Image';
 import { Title1 } from '@fluentui/react-components';
 
 export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
-  ({ content, sceneId, isDisplayNone, isViewOnly }: ILayoutProps, ref) => {
+  (
+    { content, sceneId, isDisplayNone, isViewOnly, onError }: ILayoutProps,
+    ref,
+  ) => {
     return (
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
         <Image
           src={content?.image?.value as string}
           isCopyable={true}
           isViewOnly={isViewOnly}
+          onError={onError}
         />
         <div
           className={' absolute flex h-full w-full items-center justify-center'}

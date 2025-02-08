@@ -6,7 +6,14 @@ import useResizeFont from '@/hooks/useResizeFont';
 
 export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
   (
-    { content, sceneId, isDisplayNone, isViewOnly, parentEl }: ILayoutProps,
+    {
+      content,
+      sceneId,
+      isDisplayNone,
+      isViewOnly,
+      parentEl,
+      onError,
+    }: ILayoutProps,
     ref,
   ) => {
     const fontSize = useResizeFont(parentEl);
@@ -16,6 +23,7 @@ export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
           src={content?.video?.value as string}
           isCopyable={true}
           isViewOnly={isViewOnly}
+          onError={onError}
         />
         <div
           className={' absolute flex h-full w-full items-center justify-center'}

@@ -19,10 +19,7 @@ import { CreateSceneWithTextModal } from '@/components/CreateSceneWithTextModal'
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
-  const setSelectedContent = useVideoStore((state) => state.setSceneContent);
-  const setSceneDesc = useVideoStore((state) => state.setSceneDesc);
-  const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
-  const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
+
   const [markerIndex, setMarkerIndex] = useState<number | undefined>(undefined);
   const [scenes, setScenes] = useState<IScene[]>(props.scenes);
   const [draggedSceneIndex, setDraggedSceneIndex] = useState<
@@ -30,6 +27,14 @@ export function SceneList(props: ISceneListProps) {
   >(undefined);
   const [isSceneWithTextModalOpen, setIsSceneWithTextModalOpen] =
     useState<boolean>(false);
+
+  const setSelectedContent = useVideoStore((state) => state.setSceneContent);
+  const setSceneDesc = useVideoStore((state) => state.setSceneDesc);
+  const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
+  const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
+  const setVideoErrors = useVideoStore((state) => state.setVideoErrors);
+  const videoErrors = useVideoStore((state) => state.videoErrors);
+
   const onSceneChange = (
     sceneId: string,
     layoutId: string,
@@ -74,6 +79,11 @@ export function SceneList(props: ISceneListProps) {
     newScenes.splice(newSceneArrayIndex, 0, scene);
     setScenes(newScenes);
   };
+
+  const onError = (error: string[]) => {
+    setVideoErrors && setVideoErrors(error);
+  };
+
   useEffect(() => {
     setScenes(props.scenes);
   }, [props.scenes]);
@@ -96,6 +106,12 @@ export function SceneList(props: ISceneListProps) {
     }
   }, [selectedSceneId]);
 
+  useEffect(() => {
+    return () => {
+      setVideoErrors && setVideoErrors([]);
+    };
+  }, []);
+
   return (
     <div className="flex- flex max-h-screen flex-col items-center overflow-auto pb-10 pt-10">
       <div className="flex flex-col">
@@ -116,6 +132,7 @@ export function SceneList(props: ISceneListProps) {
             layoutId={scene.layoutId || DEFAULT_LAYOUT.id}
             isSelected={scene.id === selectedSceneId}
             onCreateScene={props.createScene}
+            onErrors={onError}
           />
         ))}
       </div>

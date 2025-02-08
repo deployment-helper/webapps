@@ -41,7 +41,7 @@ import {
   MoreVertical20Regular,
   Settings32Filled,
 } from '@fluentui/react-icons';
-import { LanguageDialog } from '@/components/Dialog/Dialog';
+import { LanguageDialog } from '@/components/LanguageDialog/LanguageDialog';
 import { VideoClient } from '@/src/apis/video.client';
 import { formatDate, generatePreviewUrl } from '@/src/helpers';
 import { FormAddVideo } from '@/components/FormAddVideo';

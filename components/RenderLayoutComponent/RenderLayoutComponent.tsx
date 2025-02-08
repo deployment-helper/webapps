@@ -8,6 +8,7 @@ export default function RenderLayoutComponent({
   layoutId,
   sceneId,
   content,
+  onError,
   parentEl,
   isDisplayNone = false,
 }: IRenderLayoutComponentProps) {
@@ -37,6 +38,7 @@ export default function RenderLayoutComponent({
           sceneId={sceneId}
           parentEl={parentEl}
           ref={ref}
+          onError={onError}
         />
       )}
     </div>
@@ -47,4 +49,5 @@ export interface IRenderLayoutComponentProps extends ILayoutProps {
   layoutId: string;
   isDisplayNone?: boolean;
   parentEl?: HTMLElement | null;
+  onError?: (error: string) => void;
 }

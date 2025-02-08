@@ -6,4 +6,5 @@ export interface ILayoutProps {
   isViewOnly?: boolean;
   content?: Record<string, IInput>;
   parentEl?: HTMLElement | null;
+  onError?: (error: string) => void;
 }

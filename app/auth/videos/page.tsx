@@ -32,7 +32,7 @@ import { IVideo } from '@/src/types/video.types';
 import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
 import { MoreVertical20Regular } from '@fluentui/react-icons';
-import { LanguageDialog } from '@/components/Dialog/Dialog';
+import { LanguageDialog } from '@/components/LanguageDialog/LanguageDialog';
 import { VideoClient } from '@/src/apis/video.client';
 import { generatePreviewUrl } from '@/src/helpers';
 

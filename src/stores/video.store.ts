@@ -51,5 +51,11 @@ export const useVideoStore = create<IVideoStore>()(
         sceneDesc: desc,
       }));
     },
+    setVideoErrors: (errors) => {
+      set((state) => ({
+        ...state,
+        videoErrors: errors,
+      }));
+    },
   })),
 );
