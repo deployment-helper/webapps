@@ -5,6 +5,7 @@ import {
   checkAndSetApiKey,
   getApiServer,
   getBatchServer,
+  getImageGenerationServer,
 } from '../helpers';
 import { HttpMethod } from '../constants';
 
@@ -44,6 +45,21 @@ export class ServerClient {
     const BATCH_SERVER = getBatchServer();
     return ServerClient.send(new URL(url, BATCH_SERVER).href, body, method);
   }
+
+  // Generate a method sendToImageGenerationServer
+  public static sendToImageGenerationServer(
+    url: string,
+    body?: any,
+    method: HttpMethod = HttpMethod.GET,
+  ): Promise<any> {
+    const IMAGE_GENERATION_SERVER = getImageGenerationServer();
+    return ServerClient.send(
+      new URL(url, IMAGE_GENERATION_SERVER).href,
+      body,
+      method,
+    );
+  }
+
   public static async createPresentation(
     name: string,
     projectId: string,

@@ -60,6 +60,19 @@ export function getBatchServer() {
   return batchServer;
 }
 
+// generate a function getImageGenerationServer
+export function getImageGenerationServer() {
+  const imageGenerationServer = document.querySelector(
+    "[data-store='imageGenerationServer']",
+  )?.textContent;
+
+  if (!imageGenerationServer) {
+    throw new Error('imageGenerationServer not found');
+  }
+
+  return imageGenerationServer;
+}
+
 // Generate current web app frontend server URL with scheme and port
 export function getFrontendServerUrl() {
   return `${window.location.protocol}//${window.location.host}`;
