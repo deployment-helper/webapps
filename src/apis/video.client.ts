@@ -289,8 +289,8 @@ export class VideoClient extends ServerClient {
       sceneDesc,
     };
 
-    const resp = await VideoClient.sendToAPiServer(
-      'ai/chatgpt/scene-images',
+    const resp = await VideoClient.sendToImageGenerationServer(
+      '/ai/images/scene-images',
       body,
       HttpMethod.POST,
     );

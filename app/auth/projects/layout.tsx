@@ -13,6 +13,9 @@ export default async function VideosLayout(props: any) {
         <div style={{ display: 'none' }}>
           <div data-store="apiServer">{process.env.API_SERVER}</div>
           <div data-store="batchApiServer">{process.env.BATCH_API_SERVER}</div>
+          <div data-store="imageGenerationServer">
+            {process.env.IMAGE_GENERATION_SERVER_URL}
+          </div>
         </div>
 
         <Header projectList={projects || []} />
