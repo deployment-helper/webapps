@@ -317,6 +317,7 @@ export const useMutationDeleteArtifact = (
 
 export const useMutationGetSceneImages = () => {
   return useMutation({
-    mutationFn: (sceneDesc: string) => VideoClient.getSceneImages(sceneDesc),
+    mutationFn: (data: { sceneDesc: string; visualDesc?: string }) =>
+      VideoClient.getSceneImages(data.sceneDesc, data.visualDesc),
   });
 };

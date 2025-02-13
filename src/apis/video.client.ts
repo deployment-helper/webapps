@@ -284,9 +284,13 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
-  public static async getSceneImages(sceneDesc: string): Promise<string[]> {
+  public static async getSceneImages(
+    sceneDesc: string,
+    visualDesc?: string,
+  ): Promise<{ visualDesc: string; links: string[] }> {
     const body = {
       sceneDesc,
+      visualDesc,
     };
 
     const resp = await VideoClient.sendToImageGenerationServer(
