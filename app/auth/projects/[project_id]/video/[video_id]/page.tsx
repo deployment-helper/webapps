@@ -292,7 +292,7 @@ export default function Page({
   return (
     <div className="flex  h-screen w-full">
       <div className="w-9/12 bg-white">
-        {videoErrors?.length && isErrorDialogOpen && (
+        {(videoErrors?.length && isErrorDialogOpen && (
           <ReusableDialog
             open={isErrorDialogOpen}
             title={'Video Creation Error'}
@@ -305,7 +305,8 @@ export default function Page({
               loading. Please check red bordered scenes on the page.
             </Body1Strong>
           </ReusableDialog>
-        )}
+        )) ||
+          ''}
         {/*Sub Header*/}
         <div
           className={
