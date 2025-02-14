@@ -197,6 +197,13 @@ export const LANGUAGE_SUPPORTED_VOICES: Partial<
       mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/output_20s.wav',
       rating: 'M',
     },
+    {
+      name: 'Kahani2',
+      voiceCode: 'tts-kahani2',
+      ssmlGender: 'Male',
+      mp3: 'https://vm-presentations.s3.ap-south-1.amazonaws.com/public/text-to-voice-samples/ElevenLabs_m2.wav',
+      rating: 'M',
+    },
   ],
 };
 
