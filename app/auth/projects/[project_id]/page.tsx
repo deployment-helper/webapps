@@ -48,6 +48,7 @@ import { FormAddVideo } from '@/components/FormAddVideo';
 import { useVideoStore } from '@/src/stores/video.store';
 import WorkflowList from '@/components/WorkflowList/WorkflowList';
 import ArtifactList from '@/components/ArtifactList/ArtifactList';
+import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
 
 const DOWNLOADS_DESC =
   'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
@@ -83,7 +84,8 @@ function Videos({
     desc: '',
   });
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
-
+  const [isThumbNailModelOpen, setIsThumbNailModelOpen] =
+    useState<boolean>(false);
   const client = useQueryClient();
 
   const invalidateProject = () => {
@@ -141,6 +143,28 @@ function Videos({
         },
       });
     }
+  }
+
+  // Upload video thumbnail
+  function uploadThumbnail(thumbnailUrl: string) {
+    if (!selectedVideo) {
+      console.log("Selected video doesn't exist");
+      return;
+    }
+    updateVideo({
+      id: selectedVideo.id,
+      name: selectedVideo.name,
+      data: {
+        ...selectedVideo,
+        thumbnailUrl: thumbnailUrl,
+      },
+    });
+
+    dispatchToast({
+      title: 'Thumbnail uploaded',
+      body: 'Thumbnail has been uploaded successfully',
+      intent: 'success',
+    });
   }
 
   function copyVideo(video: IVideo) {
@@ -341,6 +365,14 @@ function Videos({
                     Generate Video
                   </MenuItem>
                   <MenuItem
+                    onClick={() => {
+                      setSelectedVideo(item);
+                      setIsThumbNailModelOpen(true);
+                    }}
+                  >
+                    Upload Thumbnail
+                  </MenuItem>
+                  <MenuItem
                     disabled={!item.artifacts?.length}
                     onClick={() =>
                       setArtifactsSt({
@@ -482,6 +514,18 @@ function Videos({
             projectID={params.project_id}
             onClose={() => setIsWorkFlowOpen(false)}
             prompts={project?.prompts}
+          />
+        )}
+        {isThumbNailModelOpen && (
+          <InsertImageModal
+            onUploadSuccess={(url?: string) => {
+              if (url) {
+                uploadThumbnail(url);
+                setIsThumbNailModelOpen(false);
+              }
+            }}
+            isOpen={isThumbNailModelOpen}
+            onClose={() => setIsThumbNailModelOpen(false)}
           />
         )}
         {artifactsSt.isOpen && (

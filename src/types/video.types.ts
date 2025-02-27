@@ -168,6 +168,7 @@ export interface IVideo {
   userId: string;
   voiceCode?: string;
   artifacts?: IArtifacts[];
+  thumbnailUrl?: string;
 }
 
 export enum EWorkerVersion {
