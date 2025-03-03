@@ -284,6 +284,24 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
+  public static async uploadVideo(
+    id: string,
+    branch: string,
+    title: string,
+    desc: string,
+  ) {
+    const resp = await VideoClient.sendToAPiServer(
+      `/videos/${id}/upload`,
+      {
+        branch,
+        title,
+        desc,
+      },
+      HttpMethod.POST,
+    );
+    return resp.json();
+  }
+
   public static async getSceneImages(
     sceneDesc: string,
     visualDesc?: string,

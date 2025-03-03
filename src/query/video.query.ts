@@ -321,3 +321,17 @@ export const useMutationGetSceneImages = () => {
       VideoClient.getSceneImages(data.sceneDesc, data.visualDesc),
   });
 };
+
+// write a mutation to upload the video with following parameters
+// branch - string, title - string, desc - string, thumbnail_url - string, video_url - string, video_id - string
+
+export const useMutationUploadVideo = () => {
+  return useMutation({
+    mutationFn: (data: {
+      id: string;
+      branch: string;
+      title: string;
+      desc: string;
+    }) => VideoClient.uploadVideo(data.id, data.branch, data.title, data.desc),
+  });
+};

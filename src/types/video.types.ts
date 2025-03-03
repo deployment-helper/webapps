@@ -117,6 +117,7 @@ export interface IProject {
   createdAt: {
     _seconds: number;
   };
+  CIBranchName?: string;
 }
 
 export interface IMessage {

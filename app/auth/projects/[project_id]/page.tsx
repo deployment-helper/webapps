@@ -49,6 +49,7 @@ import { useVideoStore } from '@/src/stores/video.store';
 import WorkflowList from '@/components/WorkflowList/WorkflowList';
 import ArtifactList from '@/components/ArtifactList/ArtifactList';
 import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
+import { useRouter } from 'next/navigation';
 
 const DOWNLOADS_DESC =
   'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
@@ -61,6 +62,7 @@ function Videos({
     project_id: string;
   };
 }) {
+  const router = useRouter();
   const {
     data: videos,
     isFetching,
@@ -371,6 +373,15 @@ function Videos({
                     }}
                   >
                     Upload Thumbnail
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      router.push(
+                        `/auth/projects/${params.project_id}/video/${item.id}/upload`,
+                      );
+                    }}
+                  >
+                    Upload Video
                   </MenuItem>
                   <MenuItem
                     disabled={!item.artifacts?.length}
