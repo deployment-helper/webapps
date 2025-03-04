@@ -342,7 +342,7 @@ function Page({
     const [CIBranchName, setCIBranchName] = useState<string>(
       data?.CIBranchName || '',
     );
-    const SCENES_MERGE_EFFECTS = ['concat', 'blend'];
+    const SCENES_MERGE_EFFECTS = ['concat', 'fade'];
     return (
       <>
         <div
@@ -523,6 +523,33 @@ function Page({
                   <option
                     selected={data?.postFixSilence === asset.src}
                     className={'capitalize'}
+                    value={asset.src}
+                    key={asset.src}
+                  >
+                    {asset.name}
+                  </option>
+                ))}
+              </Select>
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Prefix Silence</h3>
+              <h5>
+                This setting adds given seconds of silence at the start of each
+                scene.
+              </h5>
+              <Select
+                onChange={(
+                  ev: ChangeEvent<HTMLSelectElement>,
+                  data: SelectOnChangeData,
+                ) => {
+                  updateProject({
+                    preFixSilence: data?.value as string,
+                  });
+                }}
+              >
+                <option value={''}>Select Silence</option>
+                {SILENT_MP3_FILES.map((asset) => (
+                  <option
+                    selected={data?.preFixSilence === asset.src}
                     value={asset.src}
                     key={asset.src}
                   >
