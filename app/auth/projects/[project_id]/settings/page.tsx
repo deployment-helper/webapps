@@ -342,7 +342,7 @@ function Page({
     const [CIBranchName, setCIBranchName] = useState<string>(
       data?.CIBranchName || '',
     );
-
+    const SCENES_MERGE_EFFECTS = ['concat', 'blend'];
     return (
       <>
         <div
@@ -402,6 +402,10 @@ function Page({
               />
               <hr className={'mb-2 mt-2'} />
               <h5 className={'text-xl'}>CI Branch Name</h5>
+              <h5>
+                This CI branch name will be used to upload the video on youtube
+                channel
+              </h5>
               <Input
                 defaultValue={CIBranchName}
                 onChange={(e, data) => {
@@ -416,6 +420,33 @@ function Page({
                   }
                 }}
               />
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Scenes Merge Effect</h3>
+              <h5>
+                This setting will be applied to merge the scenes videos. default
+                is concat.
+              </h5>
+              <Select
+                onChange={(
+                  ev: ChangeEvent<HTMLSelectElement>,
+                  data: SelectOnChangeData,
+                ) => {
+                  updateProject({
+                    mergeEffect: data?.value as string,
+                  });
+                }}
+              >
+                <option value={''}>Select Effect</option>
+                {SCENES_MERGE_EFFECTS.map((effect) => (
+                  <option
+                    selected={data?.mergeEffect === effect}
+                    value={effect}
+                    key={effect}
+                  >
+                    {effect}
+                  </option>
+                ))}
+              </Select>
               <hr className={'mb-2 mt-2'} />
               <h3 className={'text-xl'}>Default layout</h3>
               <h5>

@@ -118,6 +118,7 @@ export interface IProject {
     _seconds: number;
   };
   CIBranchName?: string;
+  mergeEffect?: string;
 }
 
 export interface IMessage {
