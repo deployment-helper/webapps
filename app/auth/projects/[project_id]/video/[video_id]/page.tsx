@@ -57,7 +57,8 @@ export default function Page({
   const { dispatchToast } = useMyToastController();
 
   const [hoverState, setHoverState] = useState<Record<string, boolean>>({});
-
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+  const [isVideoLanguageError, setIsVideoLanguageError] = useState(false);
   const TRAY_OPTIONS_MUSIC = 'music';
   const TRAY_OPTIONS_SCENES = 'scenes';
   const TRAY_OPTIONS_VOICES = 'voices';
@@ -69,7 +70,7 @@ export default function Page({
     | typeof TRAY_OPTIONS_SETTINGS;
   const [trayOption, setTrayOption] =
     useState<TrayOptions>(TRAY_OPTIONS_SCENES);
-  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+
   // Store values
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const setCurrentProject = useVideoStore((state) => state.setCurrentProjectId);
@@ -125,6 +126,7 @@ export default function Page({
   const defaultAssets = videoData?.defaultAsset
     ? [videoData?.defaultAsset]
     : projectData?.assets;
+
   const onCreateSceneFromText = (text: string) => {
     const scenesDesc = splitIntoLines(text);
     const _layoutId = selectedLayoutId || defaultProjectLayout || '';
@@ -202,7 +204,7 @@ export default function Page({
   };
 
   const createVideo = async () => {
-    if (videoErrors?.length) {
+    if (videoErrors?.length || isVideoLanguageError) {
       setIsErrorDialogOpen(true);
       return;
     }
@@ -289,6 +291,13 @@ export default function Page({
     setCurrentProject(params.project_id);
   }, [params.project_id]);
 
+  useEffect(() => {
+    if (!videoData?.audioLanguage || !videoData?.voiceCode) {
+      setIsVideoLanguageError(true);
+    } else {
+      setIsVideoLanguageError(false);
+    }
+  }, [videoData?.audioLanguage, videoData?.voiceCode]);
   return (
     <div className="flex  h-screen w-full">
       <div className="w-9/12 bg-white">
@@ -300,10 +309,23 @@ export default function Page({
               setIsErrorDialogOpen(false);
             }}
           >
-            <Body1Strong>
-              This video cannot be generated as some image/video are not
-              loading. Please check red bordered scenes on the page.
-            </Body1Strong>
+            <>
+              <ul className={'list-inside list-disc pl-5 text-red-700'}>
+                <li>
+                  <Body1Strong>
+                    This video cannot be generated as some image/video are not
+                    loading. Please check red bordered scenes on the page.
+                  </Body1Strong>
+                </li>
+                {isVideoLanguageError && (
+                  <li>
+                    <Body1Strong>
+                      Video language or voice is not selected.
+                    </Body1Strong>
+                  </li>
+                )}
+              </ul>
+            </>
           </ReusableDialog>
         )) ||
           ''}
