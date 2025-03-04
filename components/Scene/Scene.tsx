@@ -22,11 +22,14 @@ import { useVideoStore } from '@/src/stores/video.store';
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
   const setSceneDesc = useVideoStore((state) => state.setSceneDesc);
+
   const descRef = useRef<HTMLTextAreaElement>(null);
-  const [isHover, setIsHover] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  const [isHover, setIsHover] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
   const [sceneCSSClasses, setSceneCSSClasses] = useState('');
+
   const { mutate: updateScene } = useMutationUpdateScene();
   const {
     mutate: postTextToSpeech,

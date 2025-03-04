@@ -54,7 +54,7 @@ const Slot2 = ({ projectList }: { projectList?: Array<IProject> }) => {
     mutate({
       id: params.video_id as string,
       name: data?.name || 'UnTitled',
-      data: { audioLanguage: language },
+      data: { audioLanguage: language, voiceCode: '' },
     });
   }
 
