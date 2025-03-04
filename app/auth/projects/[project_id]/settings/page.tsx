@@ -27,7 +27,7 @@ import {
   Prompt24Filled,
   Settings24Filled,
 } from '@fluentui/react-icons';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import Link from 'next/link';
 import { getFileType } from '@/src/helpers';
 import Image from '@/components/Image/Image';
@@ -56,7 +56,6 @@ function Page({
   const { mutate, isPending } = useMutationUpdateProject();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(4);
-  const [CIBranchName, setCIBranchName] = useState<string>('');
 
   const promptVideoCloneRef = useRef<HTMLTextAreaElement>(null);
 
@@ -340,6 +339,10 @@ function Page({
     );
   };
   const General = () => {
+    const [CIBranchName, setCIBranchName] = useState<string>(
+      data?.CIBranchName || '',
+    );
+
     return (
       <>
         <div
@@ -400,7 +403,6 @@ function Page({
               <hr className={'mb-2 mt-2'} />
               <h5 className={'text-xl'}>CI Branch Name</h5>
               <Input
-                key={'CIBranchName'}
                 defaultValue={CIBranchName}
                 onChange={(e, data) => {
                   console.log(data.value);
@@ -548,12 +550,6 @@ function Page({
       </>
     );
   };
-
-  useEffect(() => {
-    if (data?.CIBranchName) {
-      setCIBranchName(data.CIBranchName);
-    }
-  }, [data]);
 
   return (
     <div className={'w-100 flex w-full max-w-7xl flex-col'}>
