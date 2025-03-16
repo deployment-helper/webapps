@@ -8,6 +8,7 @@ import { getRandomValueFromArray, getVideosFromAssets } from '@/src/helpers';
 // TODO: layout should have add default asset behaviour to add default asset to the layout
 type TLayout = {
   id: string;
+  desc?: string;
   componentName: string;
   image: string;
   content: Record<string, IInput>;
@@ -92,6 +93,7 @@ export const layouts: Array<TLayout> = [
   },
   {
     id: 'layout5',
+    desc: 'Image + title',
     componentName: 'Layout5',
     image: '/layout5.png',
     content: {

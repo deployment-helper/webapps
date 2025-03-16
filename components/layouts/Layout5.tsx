@@ -1,14 +1,17 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
 import { ILayoutProps } from '@/components/layouts/types';
 import LayoutBody from '@/components/layouts/LayoutBody';
 import Image from '@/components/Image/Image';
-import { Title1 } from '@fluentui/react-components';
+import useResizeFont from '@/hooks/useResizeFont';
 
 export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
   (
     { content, sceneId, isDisplayNone, isViewOnly, onError }: ILayoutProps,
     ref,
   ) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const fontSize = useResizeFont(containerRef.current);
+
     return (
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
         <Image
@@ -18,9 +21,12 @@ export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
           onError={onError}
         />
         <div
-          className={' absolute flex h-full w-full items-center justify-center'}
+          ref={containerRef}
+          className={'absolute flex h-full w-full items-center justify-center'}
         >
-          <Title1 className={'text-white'}>{content?.title?.value}</Title1>
+          <div className={'text-center text-white'} style={{ fontSize }}>
+            {content?.title?.value}
+          </div>
         </div>
       </LayoutBody>
     );
