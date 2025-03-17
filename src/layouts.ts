@@ -49,7 +49,7 @@ export const layouts: Array<TLayout> = [
       image: {
         type: 'image',
         name: 'image',
-        value: 'https://via.placeholder.com/150',
+        value: '/no-image.png',
         placeholder: 'Image',
       },
     },
