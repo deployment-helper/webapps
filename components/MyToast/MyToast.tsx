@@ -1,7 +1,7 @@
-import { Toast, ToastBody, ToastTitle } from "@fluentui/react-components";
-import { ToastIntent } from "@fluentui/react-toast";
+import { Toast, ToastBody, ToastTitle } from '@fluentui/react-components';
+import { ToastIntent } from '@fluentui/react-toast';
 
-export function MyToast({ title, body, intent = "success" }: IMyToastProps) {
+export function MyToast({ title, body, intent = 'success' }: IMyToastProps) {
   return (
     <Toast>
       <ToastTitle>{title}</ToastTitle>
