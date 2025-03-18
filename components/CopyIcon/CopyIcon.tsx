@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import useMyToastController from '../MyToast/MyToast.hook';
 import { Copy24Filled } from '@fluentui/react-icons';
 
@@ -26,7 +27,8 @@ export function CopyIcon({ position = 'top-right', copyText }: ICopyIconProps) {
       className={`${positionClass} z-10 cursor-pointer rounded bg-violet-100`}
     >
       <Copy24Filled
-        onClick={() => {
+        onClick={(event: any) => {
+          event.stopPropagation();
           navigator.clipboard.writeText(copyText).then(() => {
             dispatchToast({
               title: 'Copied',
