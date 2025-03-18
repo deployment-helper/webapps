@@ -44,7 +44,7 @@ export function Video({
         {!isViewOnly && (
           <div
             className={
-              'absolute bottom-1 right-1 cursor-pointer rounded bg-amber-200'
+              'absolute bottom-1 right-1 cursor-pointer rounded bg-violet-100'
             }
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
