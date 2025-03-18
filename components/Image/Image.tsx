@@ -48,11 +48,21 @@ export function Image({
             <CopyIcon position={copyPosition || 'top-right'} copyText={src} />
           )}
           {onDelete && <DeleteIcon onClick={onDelete} />}
-          <img src={src} onError={onImageError} onLoad={onImageLoadSuccess} />
+          <img
+            src={src}
+            onError={onImageError}
+            onLoad={onImageLoadSuccess}
+            alt={alt}
+          />
         </div>
       ) : (
         <div className={`relative`}>
-          <img src={src} onError={onImageError} onLoad={onImageLoadSuccess} />
+          <img
+            src={src}
+            onError={onImageError}
+            onLoad={onImageLoadSuccess}
+            alt={alt}
+          />
           {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
           {!isViewOnly && (
             // Replace button at right top
