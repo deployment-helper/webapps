@@ -325,7 +325,9 @@ export const useMutationGetSceneImages = () => {
 // write a mutation to upload the video with following parameters
 // branch - string, title - string, desc - string, thumbnail_url - string, video_url - string, video_id - string
 
-export const useMutationUploadVideo = () => {
+export const useMutationUploadVideo = (
+  onComplete: (state: 'success' | 'error', data: any) => void,
+) => {
   return useMutation({
     mutationFn: (data: {
       id: string;
@@ -333,5 +335,8 @@ export const useMutationUploadVideo = () => {
       title: string;
       desc: string;
     }) => VideoClient.uploadVideo(data.id, data.branch, data.title, data.desc),
+    onSettled(data, error, variables, context) {
+      onComplete(error ? 'error' : 'success', error || data);
+    },
   });
 };

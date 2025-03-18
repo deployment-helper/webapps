@@ -15,6 +15,7 @@ import {
   Textarea,
 } from '@fluentui/react-components';
 import Image from '@/components/Image/Image';
+import { useMyToastController } from '@/components/MyToast';
 
 export default function Page({
   params,
@@ -26,7 +27,35 @@ export default function Page({
 }) {
   const { data: videoData } = useQueryGetVideo(params.video_id);
   const { data: projectData } = useQueryGetProject(params.project_id);
-  const { mutate: upload, isPending } = useMutationUploadVideo();
+
+  //  display toasts
+
+  const { dispatchToast } = useMyToastController();
+  const { mutate: upload, isPending } = useMutationUploadVideo(
+    (state: 'error' | 'success', data: any) => {
+      if (state === 'success') {
+        if (data.errors) {
+          dispatchToast({
+            title: 'Error',
+            body: data.errors,
+            intent: 'error',
+          });
+        } else {
+          dispatchToast({
+            title: 'Success',
+            body: 'Video upload scheduled successfully',
+            intent: 'success',
+          });
+        }
+      } else {
+        dispatchToast({
+          title: 'Error',
+          body: 'Error uploading video',
+          intent: 'error',
+        });
+      }
+    },
+  );
 
   const {
     register,
