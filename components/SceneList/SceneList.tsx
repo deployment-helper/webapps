@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { IInput } from '@/src/types/types';
 import { DEFAULT_LAYOUT } from '@/src/layouts';
 import { CreateSceneWithTextModal } from '@/components/CreateSceneWithTextModal';
+import { IError } from '@/src/types/common.types';
 
 export function SceneList(props: ISceneListProps) {
   const params = useParams();
@@ -33,6 +34,7 @@ export function SceneList(props: ISceneListProps) {
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const setSelectedSceneId = useVideoStore((state) => state.setSelectedSceneId);
   const setVideoErrors = useVideoStore((state) => state.setVideoErrors);
+  const clearSceneErrors = useVideoStore((state) => state.clearSceneError);
   const videoErrors = useVideoStore((state) => state.videoErrors);
 
   const onSceneChange = (
@@ -80,13 +82,19 @@ export function SceneList(props: ISceneListProps) {
     setScenes(newScenes);
   };
 
-  const onError = (error: string[]) => {
-    setVideoErrors && setVideoErrors(error);
+  const onError: IError = (sceneId: string, errors: string) => {
+    setVideoErrors &&
+      setVideoErrors([...(videoErrors || []), { sceneId, error: errors }]);
+  };
+
+  const onClearError = (sceneId: string) => {
+    clearSceneErrors?.(sceneId);
   };
 
   useEffect(() => {
     setScenes(props.scenes);
   }, [props.scenes]);
+
   useEffect(() => {
     if (props.scenes.length > 0 && !selectedSceneId) {
       const scene = props.scenes[0];
@@ -132,7 +140,9 @@ export function SceneList(props: ISceneListProps) {
             layoutId={scene.layoutId || DEFAULT_LAYOUT.id}
             isSelected={scene.id === selectedSceneId}
             onCreateScene={props.createScene}
-            onErrors={onError}
+            onError={onError}
+            onClearError={onClearError}
+            isDirty={videoErrors?.some((error) => error.sceneId === scene.id)}
           />
         ))}
       </div>

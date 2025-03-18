@@ -13,6 +13,7 @@ export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
       isViewOnly,
       parentEl,
       onError,
+      onClearError,
     }: ILayoutProps,
     ref,
   ) => {
@@ -24,6 +25,7 @@ export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
           isCopyable={true}
           isViewOnly={isViewOnly}
           onError={onError}
+          onLoad={onClearError}
         />
         <div
           className={' absolute flex h-full w-full items-center justify-center'}

@@ -4,6 +4,7 @@ import { ArrowSync24Filled } from '@fluentui/react-icons';
 import { SyntheticEvent, useState } from 'react';
 import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
 import DeleteIcon from '@/components/DeleteIcon/DeleteIcon';
+import { IClearError } from '@/src/types/common.types';
 
 export function Video({
   src,
@@ -13,6 +14,7 @@ export function Video({
   onUploadSuccess,
   onDelete,
   onError,
+  onLoad,
 }: IVideoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onSuccessfulUpload = (url: string) => {
@@ -23,10 +25,18 @@ export function Video({
   const onVideoError = (e: SyntheticEvent<HTMLVideoElement, Event>) => {
     onError && onError('Video not found');
   };
+  const onLoadSuccess = () => {
+    onLoad && onLoad();
+  };
   return (
     <>
       <div className={'relative'}>
-        <video controls src={src} onError={onVideoError} />
+        <video
+          controls
+          src={src}
+          onError={onVideoError}
+          onLoadedData={onLoadSuccess}
+        />
         {isCopyable && (
           <CopyIcon position={copyPosition || 'top-right'} copyText={src} />
         )}
@@ -55,10 +65,11 @@ export function Video({
 }
 
 export interface IVideoProps extends Partial<IInsertImageProps> {
-  isViewOnly?: boolean;
-  src: string;
-  isCopyable?: boolean;
   copyPosition?: ICopyIconProps['position'];
+  isCopyable?: boolean;
+  isViewOnly?: boolean;
   onDelete?: () => void;
   onError?: (error: string) => void;
+  onLoad?: () => void;
+  src: string;
 }

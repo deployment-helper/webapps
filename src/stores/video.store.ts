@@ -10,6 +10,7 @@ export const useVideoStore = create<IVideoStore>()(
     sceneContent: {},
     messageBar: [],
     currentProjectId: undefined,
+    videoErrors: [],
     setMessage: (message) => {
       set((state) => ({
         ...state,
@@ -55,6 +56,13 @@ export const useVideoStore = create<IVideoStore>()(
       set((state) => ({
         ...state,
         videoErrors: errors,
+      }));
+    },
+    clearSceneError: (sceneId) => {
+      set((state) => ({
+        ...state,
+        videoErrors:
+          state.videoErrors?.filter((error) => error.sceneId !== sceneId) || [],
       }));
     },
   })),

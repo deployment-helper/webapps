@@ -18,6 +18,7 @@ import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
 import { getSpeakerRefFile } from '@/src/helpers';
 import { useVideoStore } from '@/src/stores/video.store';
+import { IClearError, IError } from '@/src/types/common.types';
 
 let mutateDebounce: any = undefined;
 export const Scene = (props: ISceneProps) => {
@@ -27,7 +28,6 @@ export const Scene = (props: ISceneProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [isHover, setIsHover] = useState(false);
-  const [errors, setErrors] = useState<string[]>([]);
   const [sceneCSSClasses, setSceneCSSClasses] = useState('');
 
   const { mutate: updateScene } = useMutationUpdateScene();
@@ -94,7 +94,7 @@ export const Scene = (props: ISceneProps) => {
   };
 
   useEffect(() => {
-    if (errors.length) {
+    if (props.isDirty) {
       setSceneCSSClasses(
         `border-2 ${
           props.isSelected
@@ -109,8 +109,8 @@ export const Scene = (props: ISceneProps) => {
         } `,
       );
     }
-    props.onErrors && props.onErrors(errors);
-  }, [props.isSelected, errors]);
+  }, [props.isSelected, props.isDirty]);
+
   return (
     <div
       onMouseEnter={onHover}
@@ -161,10 +161,15 @@ export const Scene = (props: ISceneProps) => {
           >
             <RenderLayoutComponent
               layoutId={props.layoutId}
-              sceneId={props.sceneDocId}
+              sceneId={props.id}
               content={props.content}
               parentEl={ref?.current}
-              onError={(error) => setErrors([...errors, error])}
+              onError={(error) => {
+                props.onError && props.onError(props.id, error);
+              }}
+              onClearError={() => {
+                props.onClearError && props.onClearError(props.id);
+              }}
             />
           </div>
 
@@ -237,17 +242,18 @@ export const Scene = (props: ISceneProps) => {
 };
 
 export interface ISceneProps extends IScene {
-  videoId: string;
-  sceneArrayIndex: number;
-  markerIndex?: number;
-  sceneDocId: string;
   audioLanguage?: ELanguage;
-  voiceCode?: string;
+  markerIndex?: number;
+  onClearError: IClearError;
+  onCreateScene: (addAfter: boolean, sceneArrayIndex?: number) => void;
+  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
   onDragStart: (e: React.DragEvent<HTMLDivElement>, id: string) => void;
   onDrop: (e: React.DragEvent<HTMLDivElement>) => void;
-  onDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
-  onCreateScene: (addAfter: boolean, sceneArrayIndex?: number) => void;
-  onErrors: (errors: string[]) => void;
+  onError: IError;
+  sceneArrayIndex: number;
+  sceneDocId: string;
+  videoId: string;
+  voiceCode?: string;
 }
 
 export default Scene;

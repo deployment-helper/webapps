@@ -1,6 +1,6 @@
-import LayoutBody from "@/components/layouts/LayoutBody";
-import { forwardRef, MutableRefObject } from "react";
-import { IInput } from "@/src/types/types";
+import LayoutBody from '@/components/layouts/LayoutBody';
+import { forwardRef, MutableRefObject } from 'react';
+import { IInput } from '@/src/types/types';
 
 export const TitleSubtitle = forwardRef<HTMLDivElement, ITitleSubtitleProps>(
   ({ content, isNone, sceneId }: ITitleSubtitleProps, ref) => {
@@ -21,5 +21,5 @@ export interface ITitleSubtitleProps {
   content: Record<string, IInput>;
 }
 
-TitleSubtitle.displayName = "TitleSubtitle";
+TitleSubtitle.displayName = 'TitleSubtitle';
 export default TitleSubtitle;

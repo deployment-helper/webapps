@@ -1,22 +1,26 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { InsertImageModal } from '@/components/InsertImageModal/InsertImageModal';
 import { IInsertImageProps } from '@/components/InsertImage/InsertImage';
 import { ArrowSync24Filled } from '@fluentui/react-icons';
 import CopyIcon, { ICopyIconProps } from '@/components/CopyIcon/CopyIcon';
 import DeleteIcon from '@/components/DeleteIcon/DeleteIcon';
 import ImageSparkle from '@/components/ImageSparkle/ImageSparkle';
+import { IClearError } from '@/src/types/common.types';
 
 export function Image({
+  alt,
+  copyPosition,
   isAIImage,
+  isCopyable,
   isViewOnly,
-  onUploadSuccess,
   onDelete,
   onError,
+  onLoad,
+  onUploadSuccess,
   src,
-  isCopyable,
-  copyPosition,
 }: IImageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const onOpenChange = (e: any, data: any) => {
     setIsModalOpen(data.open);
   };
@@ -30,6 +34,10 @@ export function Image({
     onError && onError('Image not found');
   };
 
+  const onImageLoadSuccess = () => {
+    onLoad && onLoad();
+  };
+
   return (
     // TODO: This component can be improved by adding a loading state when uploading an image.
     // TODO: className relative can be moved to the parent div
@@ -40,11 +48,11 @@ export function Image({
             <CopyIcon position={copyPosition || 'top-right'} copyText={src} />
           )}
           {onDelete && <DeleteIcon onClick={onDelete} />}
-          <img src={src} onError={onImageError} />
+          <img src={src} onError={onImageError} onLoad={onImageLoadSuccess} />
         </div>
       ) : (
         <div className={`relative`}>
-          <img src={src} onError={onImageError} />
+          <img src={src} onError={onImageError} onLoad={onImageLoadSuccess} />
           {isCopyable && <CopyIcon position={'top-right'} copyText={src} />}
           {!isViewOnly && (
             // Replace button at right top
@@ -75,14 +83,16 @@ export function Image({
 }
 
 export interface IImageProps extends Partial<IInsertImageProps> {
-  isViewOnly?: boolean;
-  src: string;
-  isCopyable?: boolean;
-  copyPosition?: ICopyIconProps['position'];
-  onDelete?: () => void;
-  isAIImage?: boolean;
   alt?: string;
+  copyPosition?: ICopyIconProps['position'];
+  isAIImage?: boolean;
+  isCopyable?: boolean;
+  isViewOnly?: boolean;
+  onDelete?: () => void;
   onError?: (error: string) => void;
+  onLoad?: () => void;
+  onUploadSuccess?: (url: string) => void;
+  src: string;
 }
 
 export default Image;

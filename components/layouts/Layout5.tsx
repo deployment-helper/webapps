@@ -6,7 +6,14 @@ import useResizeFont from '@/hooks/useResizeFont';
 
 export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
   (
-    { content, sceneId, isDisplayNone, isViewOnly, onError }: ILayoutProps,
+    {
+      content,
+      sceneId,
+      isDisplayNone,
+      isViewOnly,
+      onError,
+      onClearError,
+    }: ILayoutProps,
     ref,
   ) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -15,10 +22,12 @@ export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
     return (
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
         <Image
+          alt="scene image"
           src={content?.image?.value as string}
           isCopyable={true}
           isViewOnly={isViewOnly}
           onError={onError}
+          onLoad={onClearError}
         />
         <div
           ref={containerRef}

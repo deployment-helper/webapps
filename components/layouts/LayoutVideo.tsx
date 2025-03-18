@@ -5,7 +5,14 @@ import { Video } from '@/components/Video/Video';
 
 export const LayoutVideo = forwardRef<HTMLImageElement, ILayoutProps>(
   (
-    { content, sceneId, isDisplayNone, isViewOnly, onError }: ILayoutProps,
+    {
+      content,
+      sceneId,
+      isDisplayNone,
+      isViewOnly,
+      onError,
+      onClearError,
+    }: ILayoutProps,
     ref,
   ) => {
     return (
@@ -15,6 +22,7 @@ export const LayoutVideo = forwardRef<HTMLImageElement, ILayoutProps>(
           isCopyable={true}
           isViewOnly={isViewOnly}
           onError={onError}
+          onLoad={onClearError}
         />
       </LayoutBody>
     );

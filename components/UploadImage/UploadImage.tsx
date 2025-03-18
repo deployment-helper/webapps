@@ -103,7 +103,7 @@ export function UploadImage({
 }
 
 export interface IUploadImageProps {
-  onUploadSuccess: (url?: string) => void;
+  onUploadSuccess: (url: string) => void;
   onStateChange?: (status: UploadStatus) => void;
   isDisplayURLUpload?: boolean;
 }

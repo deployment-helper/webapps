@@ -43,6 +43,7 @@ export const layouts: Array<TLayout> = [
   },
   {
     id: 'layout2',
+    desc: 'Image layout',
     componentName: 'LayoutImage',
     image: '/layout2.png',
     content: {

@@ -10,8 +10,9 @@ export interface IVideoStore {
   setMessage: (message: IMessage) => void;
   removeMessage: (id: string) => void;
   currentProjectId?: string;
-  videoErrors?: string[];
-  setVideoErrors?: (errors: string[]) => void;
+  videoErrors?: ISceneError[];
+  setVideoErrors?: (errors: ISceneError[]) => void;
+  clearSceneError?: (sceneId: string) => void;
   setSceneContent: (
     layoutId: string,
     sceneId: string,
@@ -188,6 +189,7 @@ export interface IGenerateVideoDto {
 
 export interface IScene {
   isSelected?: boolean;
+  isDirty?: boolean;
   layoutId: string;
   id: string;
   name: string;
@@ -226,4 +228,9 @@ export interface IAsset {
 
 export interface IOverlay extends IAsset {
   exampleSrc: string;
+}
+
+export interface ISceneError {
+  sceneId: string;
+  error: string;
 }
