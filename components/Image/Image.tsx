@@ -49,6 +49,7 @@ export function Image({
           )}
           {onDelete && <DeleteIcon onClick={onDelete} />}
           <img
+            loading="lazy"
             src={src}
             onError={onImageError}
             onLoad={onImageLoadSuccess}
@@ -58,6 +59,7 @@ export function Image({
       ) : (
         <div className={`relative`}>
           <img
+            loading="lazy"
             src={src}
             onError={onImageError}
             onLoad={onImageLoadSuccess}
