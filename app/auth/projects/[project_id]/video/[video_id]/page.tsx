@@ -419,7 +419,12 @@ export default function Page({
         {/*TODO: Use inline drawer from fluent UI*/}
         <div className="w-9/12 border bg-gray-100">
           {trayOption === TRAY_OPTIONS_SCENES && (
-            <LayoutSelector sceneDocId={videoData?.scenesId || ''} />
+            <LayoutSelector
+              sceneDocId={videoData?.scenesId || ''}
+              name={videoData?.name}
+              description={videoData?.description}
+              visualPrompt={videoData?.visualPrompt}
+            />
           )}
           {trayOption === TRAY_OPTIONS_VOICES && (
             <SupportedVoices

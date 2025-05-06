@@ -8,10 +8,14 @@ import { useState } from 'react';
 import { debounce } from 'lodash';
 
 import Image from '@/components/Image/Image';
+import CopyIcon from '@/components/CopyIcon/CopyIcon';
 
 import { layouts } from '@/src/layouts';
 import { useVideoStore } from '@/src/stores/video.store';
-import { useMutationUpdateScene } from '@/src/query/video.query';
+import {
+  useMutationUpdateScene,
+  useQueryGetVideo,
+} from '@/src/query/video.query';
 import { useParams } from 'next/navigation';
 
 import { IInput } from '@/src/types/types';
@@ -19,13 +23,20 @@ import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayo
 import { Video } from '@/components/Video/Video';
 
 let debounceContent: any = undefined;
-const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
+const LayoutSelector = ({
+  name,
+  description,
+  sceneDocId,
+  visualPrompt,
+}: ISceneEditorProps) => {
   const [activeTab, setActiveTab] = useState('1');
   const selectedLayoutId = useVideoStore((state) => state.selectedLayoutId);
   const selectedSceneId = useVideoStore((state) => state.selectedSceneId);
   const sceneContent = useVideoStore((state) => state.sceneContent);
   const sceneArrayIndex = useVideoStore((state) => state.sceneArrayIndex);
   const setSceneContent = useVideoStore((state) => state.setSceneContent);
+
+  const {} = useQueryGetVideo;
   const params = useParams();
 
   const { mutate: updateScene } = useMutationUpdateScene();
@@ -123,11 +134,11 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
       >
         <Tab value={'1'}>Layout</Tab>
         <Tab value={'2'}>Content</Tab>
+        <Tab value={'3'}>Video</Tab>
       </TabList>
       <div>
         {/*Layouts*/}
         {activeTab === '1' && (
-          // render current layouts
           <>
             <div>
               <h2>Current Layout</h2>
@@ -221,6 +232,60 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
             </div>
           </>
         )}
+
+        {/*Video Tab*/}
+        {activeTab === '3' && (
+          <div className="mt-4">
+            <h2 className="mb-4 text-lg font-semibold">Video Settings</h2>
+            <div className="space-y-4">
+              <div className="relative flex flex-col">
+                <label htmlFor="videoTitle" className="mb-1 font-bold">
+                  Video Title
+                </label>
+                <input
+                  id="videoTitle"
+                  name="videoTitle"
+                  className="rounded border bg-gray-50 p-2"
+                  type="text"
+                  placeholder="No title available"
+                  value={name || ''}
+                  readOnly
+                />
+                <CopyIcon copyText={name || ''} position="top-right" />
+              </div>
+
+              <div className="relative flex flex-col">
+                <label htmlFor="videoDescription" className="mb-1 font-bold">
+                  Video Description
+                </label>
+                <textarea
+                  id="videoDescription"
+                  name="videoDescription"
+                  className="h-24 rounded border bg-gray-50 p-2"
+                  placeholder="No description available"
+                  value={description || ''}
+                  readOnly
+                />
+                <CopyIcon copyText={description || ''} position="top-right" />
+              </div>
+
+              <div className="relative flex flex-col">
+                <label htmlFor="videoVisualPrompt" className="mb-1 font-bold">
+                  Video Visual Prompt
+                </label>
+                <textarea
+                  id="videoVisualPrompt"
+                  name="videoVisualPrompt"
+                  className="h-24 rounded border bg-gray-50 p-2"
+                  placeholder="No visual prompt available"
+                  value={visualPrompt || ''}
+                  readOnly
+                />
+                <CopyIcon copyText={visualPrompt || ''} position="top-right" />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -228,6 +293,9 @@ const LayoutSelector = ({ sceneDocId }: ISceneEditorProps) => {
 
 export interface ISceneEditorProps {
   sceneDocId: string;
+  name?: string;
+  description?: string;
+  visualPrompt?: string;
 }
 
 export { LayoutSelector };

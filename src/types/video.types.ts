@@ -173,6 +173,7 @@ export interface IVideo {
   voiceCode?: string;
   artifacts?: IArtifacts[];
   thumbnailUrl?: string;
+  visualPrompt?: string;
 }
 
 export enum EWorkerVersion {
