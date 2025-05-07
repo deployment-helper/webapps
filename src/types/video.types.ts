@@ -168,6 +168,7 @@ export interface IVideo {
   overlay?: string;
   projectId?: string;
   scenesId: string;
+  status?: 'in_progress' | 'published' | 'error';
   updatedAt: string;
   userId: string;
   voiceCode?: string;

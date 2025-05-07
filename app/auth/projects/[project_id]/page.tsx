@@ -20,6 +20,7 @@ import {
   Subtitle2,
   TableColumnDefinition,
   Title1,
+  Tooltip,
 } from '@fluentui/react-components';
 
 import {
@@ -38,8 +39,11 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useMyToastController } from '@/components/MyToast/MyToast.hook';
 import {
   CheckmarkCircle24Filled,
+  ErrorCircle24Filled,
   MoreVertical20Regular,
   Settings32Filled,
+  Warning24Filled,
+  ArrowClockwise24Regular,
 } from '@fluentui/react-icons';
 import { LanguageDialog } from '@/components/LanguageDialog/LanguageDialog';
 import { VideoClient } from '@/src/apis/video.client';
@@ -142,6 +146,7 @@ function Videos({
           ...video,
           isPublished: true,
           youtubeUrl: youtubeUrl,
+          status: 'published',
         },
       });
     }
@@ -243,6 +248,45 @@ function Videos({
       },
       renderCell: (item) => {
         return <Body1Strong>{item.id}</Body1Strong>;
+      },
+    }),
+    createTableColumn<IVideo>({
+      columnId: 'status',
+      renderHeaderCell: () => {
+        return <Subtitle2>Status</Subtitle2>;
+      },
+      renderCell: (item) => {
+        let icon = null;
+        let statusText = '';
+        let iconColor = '';
+
+        switch (item.status) {
+          case 'in_progress':
+            icon = <ArrowClockwise24Regular className="animate-spin" />;
+            statusText = 'In Progress';
+            iconColor = 'text-blue-500';
+            break;
+          case 'published':
+            icon = <CheckmarkCircle24Filled />;
+            statusText = 'Published';
+            iconColor = 'text-green-500';
+            break;
+          case 'error':
+            icon = <ErrorCircle24Filled />;
+            statusText = 'Error';
+            iconColor = 'text-red-500';
+            break;
+          default:
+            icon = <Warning24Filled />;
+            statusText = 'Unknown';
+            iconColor = 'text-yellow-500';
+        }
+
+        return (
+          <Tooltip content={statusText} relationship="label">
+            <div className={`flex items-center ${iconColor}`}>{icon}</div>
+          </Tooltip>
+        );
       },
     }),
     createTableColumn<IVideo>({
