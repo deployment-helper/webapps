@@ -262,7 +262,11 @@ function Videos({
 
         switch (item.status) {
           case 'in_progress':
-            icon = <ArrowClockwise24Regular className="animate-spin" />;
+            icon = (
+              <div className="flex items-center justify-center rounded-full bg-blue-500 p-0">
+                <ArrowClockwise24Regular className="animate-spin text-white" />
+              </div>
+            );
             statusText = 'In Progress';
             iconColor = 'text-blue-500';
             break;
