@@ -182,10 +182,21 @@ function Videos({
 
   // Generate video on batch server
   function generateVideo(video: IVideo) {
+    // Update video status to in_progress
+    updateVideo({
+      id: video.id as string,
+      name: video.name,
+      data: {
+        ...video,
+        status: 'in_progress',
+      },
+    });
+
     VideoClient.generateVideoV2(video.id as string, {
       videoId: video.id as string,
       url: generatePreviewUrl(video.id as string, true),
     });
+
     dispatchToast({
       title: 'Video is being created',
       body: 'You will be notified once the video is ready for download.',

@@ -209,6 +209,16 @@ export default function Page({
       return;
     }
 
+    // Update video status to in_progress
+    updateVideo({
+      id: params.video_id,
+      name: videoData?.name || '',
+      data: {
+        ...videoData,
+        status: 'in_progress',
+      },
+    });
+
     const speakerRefFile = getSpeakerRefFile(
       videoData?.audioLanguage as ELanguage,
       videoData?.voiceCode || '',
