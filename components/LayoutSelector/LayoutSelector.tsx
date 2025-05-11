@@ -10,7 +10,7 @@ import { debounce } from 'lodash';
 import Image from '@/components/Image/Image';
 import CopyIcon from '@/components/CopyIcon/CopyIcon';
 
-import { layouts } from '@/src/layouts';
+import { ALLOWED_LAYOUTS, layouts } from '@/src/layouts';
 import { useVideoStore } from '@/src/stores/video.store';
 import {
   useMutationUpdateScene,
@@ -155,21 +155,23 @@ const LayoutSelector = ({
             {/*Render layouts*/}
             <h2>Layouts</h2>
             <div className={'flex flex-wrap'}>
-              {layouts.map((layout) => (
-                <div key={layout.id}>
-                  <img
-                    style={{ width: '200px', cursor: 'pointer' }}
-                    className={`p-0.5 ${
-                      layout.id === selectedLayoutId
-                        ? 'border-2 border-blue-500'
-                        : ''
-                    }`}
-                    src={layout.image}
-                    alt={layout.id}
-                    onClick={() => onLayoutChange(layout.id)}
-                  />
-                </div>
-              ))}
+              {layouts
+                .filter((layout) => ALLOWED_LAYOUTS.includes(layout.id))
+                .map((layout) => (
+                  <div key={layout.id}>
+                    <img
+                      style={{ width: '200px', cursor: 'pointer' }}
+                      className={`p-0.5 ${
+                        layout.id === selectedLayoutId
+                          ? 'border-2 border-blue-500'
+                          : ''
+                      }`}
+                      src={layout.image}
+                      alt={layout.id}
+                      onClick={() => onLayoutChange(layout.id)}
+                    />
+                  </div>
+                ))}
             </div>
           </>
         )}
