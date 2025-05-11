@@ -167,6 +167,7 @@ export const layouts: Array<TLayout> = [
 export const ALLOWED_LAYOUTS = [
   'layout1',
   'layout2',
+  'layout3',
   'layout4',
   'layout5',
   'layout6',

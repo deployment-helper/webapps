@@ -1,34 +1,77 @@
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import usePrintPdf from '@/hooks/usePrintPdf';
 
 export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
   (props, ref) => {
-    // this component should have height and width as per 16:9 aspect ratio
-    /**
-     * High Definition (HD):
-     * 1024 x 576 (WSVGA)
-     * 1280 x 720 (HD/WXGA)
-     * 1366 x 768 (WXGA)
-     * 1600 x 900 (HD+)
-     * 1920 x 1080 (Full HD)
-     * 2560 x 1440 (Quad HD)
-     */
+    const [scale, setScale] = useState(1);
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const BASE_WIDTH = 1280;
+    const BASE_HEIGHT = 720;
 
     const isPrintPdf = usePrintPdf();
 
-    return (
-      <div
-        style={
-          props.isNone ? { width: '0px', height: '0px', overflow: 'auto' } : {}
+    useEffect(() => {
+      const updateScale = () => {
+        if (containerRef.current) {
+          const container = containerRef.current.parentElement;
+          if (container) {
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+
+            const widthScale = containerWidth / BASE_WIDTH;
+            const heightScale = containerHeight / BASE_HEIGHT;
+
+            // Calculate scale while maintaining aspect ratio
+            const newScale = Math.min(widthScale, heightScale, 1);
+            setScale(newScale);
+          }
         }
-      >
+      };
+
+      updateScale();
+      window.addEventListener('resize', updateScale);
+      return () => window.removeEventListener('resize', updateScale);
+    }, []);
+
+    const contentStyle = {
+      width: `${BASE_WIDTH}px`,
+      height: `${BASE_HEIGHT}px`,
+      transform: `scale(${scale})`,
+      transformOrigin: 'top left',
+    };
+
+    const containerStyle = {
+      width: `${BASE_WIDTH * scale}px`,
+      height: `${BASE_HEIGHT * scale}px`,
+      overflow: 'hidden',
+    };
+
+    const setRefs = (node: HTMLDivElement | null) => {
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+      containerRef.current = node;
+    };
+
+    return props.isNone ? (
+      <div style={{ width: '0px', height: '0px', overflow: 'hidden' }}>
         <div
-          ref={ref}
+          ref={setRefs}
           id={props.sceneId}
-          style={{ width: '100%' }}
-          className={`relative flex justify-center ${
-            isPrintPdf ? '' : 'border-2'
-          } bg-white`}
+          style={contentStyle}
+          className={`relative flex ${isPrintPdf ? '' : 'border-2'} bg-white`}
+        >
+          {props.children}
+        </div>
+      </div>
+    ) : (
+      <div style={containerStyle} ref={setRefs}>
+        <div
+          id={props.sceneId}
+          style={contentStyle}
+          className={`relative flex ${isPrintPdf ? '' : 'border-2'} bg-white`}
         >
           {props.children}
         </div>

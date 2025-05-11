@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-
 import layouts, { ALLOWED_LAYOUTS } from '@/src/layouts';
 import { ILayoutProps } from '@/components/layouts/types';
 
@@ -13,24 +12,48 @@ export default function RenderLayoutComponent({
   parentEl,
   isDisplayNone = false,
 }: IRenderLayoutComponentProps) {
-  const [LayoutReactComponent, setLayoutReactComponent] = useState<
-    React.FunctionComponent<any> | undefined
-  >(undefined);
+  const [error, setError] = useState<Error | null>(null);
+  const [LayoutReactComponent, setLayoutReactComponent] =
+    useState<React.ComponentType<ILayoutProps> | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
 
   // Dynamically import layout component for selected layout
   useEffect(() => {
     const layout = layouts.find((layout) => layout.id === layoutId);
 
-    if (!layout || !ALLOWED_LAYOUTS.includes(layoutId)) return;
+    if (!layout || !ALLOWED_LAYOUTS.includes(layoutId)) {
+      setError(new Error(`Invalid layout ID: ${layoutId}`));
+      onError?.(`Invalid layout ID: ${layoutId}`);
+      return;
+    }
 
-    const LayoutReactComponent =
-      require(`@/components/layouts/${layout?.componentName}`).default;
-    setLayoutReactComponent(LayoutReactComponent);
+    // Clear any previous errors
+    setError(null);
+    onClearError?.();
+
+    // Use dynamic import for better code splitting
+    const loadComponent = async () => {
+      try {
+        const component = await import(
+          `@/components/layouts/${layout.componentName}`
+        );
+        setLayoutReactComponent(() => component.default);
+      } catch (err) {
+        console.error('Failed to load layout component:', err);
+        setError(err as Error);
+        onError?.(`Failed to load layout: ${layout.componentName}`);
+      }
+    };
+
+    loadComponent();
   }, [layoutId]);
 
+  if (error) {
+    return <div className="error-state">Failed to load layout component</div>;
+  }
+
   return (
-    <div>
+    <>
       {content && LayoutReactComponent && (
         <LayoutReactComponent
           isNone={isDisplayNone}
@@ -43,7 +66,7 @@ export default function RenderLayoutComponent({
           onClearError={onClearError}
         />
       )}
-    </div>
+    </>
   );
 }
 

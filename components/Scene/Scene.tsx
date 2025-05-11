@@ -156,6 +156,7 @@ export const Scene = (props: ISceneProps) => {
           <div
             style={{
               width: '220px',
+              height: '120px',
             }}
             ref={ref}
           >

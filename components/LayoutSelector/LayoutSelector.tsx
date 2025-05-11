@@ -177,9 +177,10 @@ const LayoutSelector = ({
         {/*Content*/}
         {activeTab === '2' && (
           <>
-            <div>
+            <div className="flex h-[200px] flex-row">
               {/*This image element to render imageToCanvas generate image in this section*/}
-              <img id={'canvas'} src={''} />
+              {/* @Depricated and no more in use */}
+              {/* <img id={'canvas'} src={''} /> */}
               {/*Render currently selected component with latest content*/}
               <RenderLayoutComponent
                 isDisplayNone={true}
