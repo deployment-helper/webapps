@@ -44,6 +44,7 @@ const LayoutSelector = ({
   const { mutate: updateScene } = useMutationUpdateScene();
 
   const isMCQLayout = selectedLayoutId === 'layout8';
+  const isAnswerExplanationLayout = selectedLayoutId === 'layout9';
 
   // Select tab
   const onTabSelect = (e: SelectTabEvent, data: SelectTabData) => {
@@ -233,6 +234,17 @@ const LayoutSelector = ({
                           })
                         }
                         label="Show Answers"
+                      />
+                    ) : value.type === 'input' &&
+                      key === 'explanation' &&
+                      isAnswerExplanationLayout ? (
+                      <textarea
+                        onChange={onInputChange}
+                        name={value.name}
+                        value={value.value}
+                        placeholder={value.placeholder}
+                        className="h-32 rounded border p-2"
+                        rows={4}
                       />
                     ) : value.type === 'input' ? (
                       <input

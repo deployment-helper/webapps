@@ -191,6 +191,35 @@ export const layouts: Array<TLayout> = [
       },
     },
   },
+  {
+    id: 'layout9',
+    desc: 'Question answer explanation layout',
+    componentName: 'HeaderAnswerExplanation',
+    image: '/layout8.png', // Using layout8 image temporarily, should be updated with proper image
+    content: {
+      question: {
+        type: 'input',
+        name: 'question',
+        bodyCopyType: 'title',
+        value: 'What is your question?',
+        placeholder: 'Enter your question',
+      },
+      correctAnswer: {
+        type: 'input',
+        name: 'correctAnswer',
+        bodyCopyType: 'subtitle',
+        value: 'The correct answer',
+        placeholder: 'Enter the correct answer',
+      },
+      explanation: {
+        type: 'input',
+        name: 'explanation',
+        bodyCopyType: 'body',
+        value: 'Explanation for the correct answer',
+        placeholder: 'Enter explanation for why this is correct',
+      },
+    },
+  },
 ];
 
 export const ALLOWED_LAYOUTS = [
@@ -200,6 +229,7 @@ export const ALLOWED_LAYOUTS = [
   'layout5',
   'layout6',
   'layout8',
+  'layout9', // Adding layout9 to allowed layouts
 ];
 
 export const LAYOUT_IDS = layouts.map((layout: TLayout) => layout.id);
