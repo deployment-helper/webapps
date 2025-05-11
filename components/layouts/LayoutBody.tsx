@@ -23,7 +23,12 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
 
             // Calculate scale while maintaining aspect ratio
             const newScale = Math.min(widthScale, heightScale, 1);
-            setScale(newScale);
+            // Set the scale to 1 if the container is smaller than the base size
+            if (newScale === 0) {
+              setScale(1);
+            } else {
+              setScale(newScale);
+            }
           }
         }
       };
@@ -56,7 +61,13 @@ export const LayoutBody = forwardRef<HTMLDivElement, ILayoutBodyProps>(
     };
 
     return props.isNone ? (
-      <div style={{ width: '0px', height: '0px', overflow: 'hidden' }}>
+      <div
+        style={{
+          width: '0px',
+          height: '0px',
+          overflow: 'hidden',
+        }}
+      >
         <div
           ref={setRefs}
           id={props.sceneId}

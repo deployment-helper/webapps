@@ -9,12 +9,7 @@ interface ITitleProps extends ILayoutProps {
 
 export const Title = forwardRef<HTMLDivElement, ITitleProps>(
   (
-    {
-      content,
-      sceneId,
-      isDisplayNone,
-      backgroundColor = 'yellow',
-    }: ITitleProps,
+    { content, sceneId, isDisplayNone, backgroundColor = 'white' }: ITitleProps,
     ref,
   ) => {
     const containerRef = useRef<HTMLDivElement>(null);
