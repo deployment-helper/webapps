@@ -119,12 +119,15 @@ export default function VideoPreview({
                   data-name="start-1"
                   data-description={'hello world'}
                   className={'bg-green-300'}
-                  style={{ position: "relative" }}
+                  style={{ position: 'relative' }}
                 >
                   Navigate between slides using arrow keys
-                  <span style ={{
-                    position: "absolute", right: "10px"
-                  }}>
+                  <span
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                    }}
+                  >
                     ➡️
                   </span>
                 </section>
@@ -152,10 +155,12 @@ export default function VideoPreview({
                   className={'bg-red-300'}
                   style={{ position: 'relative' }}
                 >
-                  <span style={{
-                    position: 'absolute',
-                    left: '10px'
-                  }}>
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: '10px',
+                    }}
+                  >
                     ⬅️
                   </span>
                   The End

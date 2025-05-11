@@ -4,6 +4,9 @@ import LayoutBody from '@/components/layouts/LayoutBody';
 import { Video } from '@/components/Video/Video';
 import useResizeFont from '@/hooks/useResizeFont';
 
+/**
+ * Video and title layout
+ */
 export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
   (
     {

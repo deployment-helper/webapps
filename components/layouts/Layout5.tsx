@@ -4,6 +4,9 @@ import LayoutBody from '@/components/layouts/LayoutBody';
 import Image from '@/components/Image/Image';
 import useResizeFont from '@/hooks/useResizeFont';
 
+/**
+ * Image and title layout
+ */
 export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
   (
     {

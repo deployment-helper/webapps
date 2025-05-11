@@ -3,7 +3,10 @@ import { ILayoutProps } from '@/components/layouts/types';
 import LayoutBody from '@/components/layouts/LayoutBody';
 import Image from '@/components/Image/Image';
 import { usePrintPdf } from '@/hooks/usePrintPdf';
-
+/**
+ * @deprecated
+ * This layout is deprecated and will be removed in the future.
+ */
 export const Layout5 = forwardRef<HTMLImageElement, ILayoutProps>(
   ({ content, sceneId, isDisplayNone, isViewOnly }: ILayoutProps, ref) => {
     const isPrintPdf = usePrintPdf();
