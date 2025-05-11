@@ -4,6 +4,7 @@ import {
   Tab,
   TabList,
 } from '@fluentui/react-tabs';
+import { Switch, SwitchOnChangeData } from '@fluentui/react-components';
 import { useState } from 'react';
 import { debounce } from 'lodash';
 
@@ -21,6 +22,7 @@ import { useParams } from 'next/navigation';
 import { IInput } from '@/src/types/types';
 import RenderLayoutComponent from '@/components/RenderLayoutComponent/RenderLayoutComponent';
 import { Video } from '@/components/Video/Video';
+import QuestionOptionsEditor from '@/components/QuestionOptionsEditor/QuestionOptionsEditor';
 
 let debounceContent: any = undefined;
 const LayoutSelector = ({
@@ -40,6 +42,8 @@ const LayoutSelector = ({
   const params = useParams();
 
   const { mutate: updateScene } = useMutationUpdateScene();
+
+  const isMCQLayout = selectedLayoutId === 'layout8';
 
   // Select tab
   const onTabSelect = (e: SelectTabEvent, data: SelectTabData) => {
@@ -105,7 +109,11 @@ const LayoutSelector = ({
   };
 
   // Listener for content data change and update the content in state
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | { target: { name: string; value: string } },
+  ) => {
     const content = {
       ...sceneContent,
       [e.target.name]: {
@@ -193,23 +201,49 @@ const LayoutSelector = ({
             </div>
 
             <hr className={'my-4'} />
-            <div className={'flex flex-col'}>
+            <div className={'flex flex-col gap-4'}>
               {sceneContent &&
                 Object.entries(sceneContent).map(([key, value]) => (
                   <div key={key} className={'flex flex-col'}>
-                    <label className={'capitalize'} htmlFor={key}>
+                    <label className={'mb-2 capitalize'} htmlFor={key}>
                       {key}
                     </label>
-                    {value.type === 'input' && (
+                    {value.type === 'input' &&
+                    key === 'options' &&
+                    isMCQLayout ? (
+                      <QuestionOptionsEditor
+                        value={value.value as string}
+                        onChange={(newValue) =>
+                          onInputChange({
+                            target: { name: key, value: newValue },
+                          })
+                        }
+                      />
+                    ) : value.type === 'input' &&
+                      key === 'isShowAnswer' &&
+                      isMCQLayout ? (
+                      <Switch
+                        checked={value.value === 'true'}
+                        onChange={(_, data: SwitchOnChangeData) =>
+                          onInputChange({
+                            target: {
+                              name: key,
+                              value: data.checked.toString(),
+                            },
+                          })
+                        }
+                        label="Show Answers"
+                      />
+                    ) : value.type === 'input' ? (
                       <input
                         onChange={onInputChange}
                         type={value.type}
                         name={value.name}
                         value={value.value}
                         placeholder={value.placeholder}
+                        className="rounded border p-2"
                       />
-                    )}
-                    {value.type === 'image' && (
+                    ) : value.type === 'image' ? (
                       <Image
                         isViewOnly={false}
                         isCopyable={true}
@@ -219,8 +253,7 @@ const LayoutSelector = ({
                           onUploadSuccess(url || '', value.name);
                         }}
                       />
-                    )}
-                    {value.type === 'video' && (
+                    ) : value.type === 'video' ? (
                       <Video
                         isViewOnly={false}
                         isCopyable={true}
@@ -229,7 +262,7 @@ const LayoutSelector = ({
                           onUploadSuccess(url || '', value.name);
                         }}
                       />
-                    )}
+                    ) : null}
                   </div>
                 ))}
             </div>

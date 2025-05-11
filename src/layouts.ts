@@ -162,6 +162,35 @@ export const layouts: Array<TLayout> = [
       },
     },
   },
+  {
+    id: 'layout8',
+    desc: 'Question with options layout',
+    componentName: 'HeaderOptions',
+    image: '/layout8.png',
+    content: {
+      question: {
+        type: 'input',
+        name: 'question',
+        bodyCopyType: 'title',
+        value: 'What is your question?',
+        placeholder: 'Enter your question',
+      },
+      options: {
+        type: 'input',
+        name: 'options',
+        bodyCopyType: 'subtitle',
+        value:
+          '[{"text": "Option 1", "isCorrect": true}, {"text": "Option 2", "isCorrect": false}]',
+        placeholder: 'Add JSON array of options with isCorrect flag',
+      },
+      isShowAnswer: {
+        type: 'input',
+        name: 'isShowAnswer',
+        value: 'false',
+        placeholder: 'true/false',
+      },
+    },
+  },
 ];
 
 export const ALLOWED_LAYOUTS = [
@@ -170,6 +199,7 @@ export const ALLOWED_LAYOUTS = [
   'layout4',
   'layout5',
   'layout6',
+  'layout8',
 ];
 
 export const LAYOUT_IDS = layouts.map((layout: TLayout) => layout.id);
