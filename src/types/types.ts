@@ -112,7 +112,7 @@ export interface IStore {
 export interface IInput {
   // type is HTML element type
   type: 'input' | 'image' | 'video';
-  bodyCopyType?: 'title' | 'subtitle';
+  bodyCopyType?: 'title' | 'subtitle' | 'body' | 'option';
   name: string;
   value?: string;
   placeholder?: string;

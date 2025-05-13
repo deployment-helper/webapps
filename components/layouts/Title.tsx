@@ -9,7 +9,7 @@ interface ITitleProps extends ILayoutProps {
 
 export const Title = forwardRef<HTMLDivElement, ITitleProps>(
   (
-    { content, sceneId, isDisplayNone, backgroundColor = 'white' }: ITitleProps,
+    { content, sceneId, isDisplayNone, backgroundColor = 'rgb(124 58 237 / var(--tw-bg-opacity))' }: ITitleProps,
     ref,
   ) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ export const Title = forwardRef<HTMLDivElement, ITitleProps>(
           style={{ backgroundColor }}
           ref={containerRef}
         >
-          <div className="text-center" style={{ fontSize }}>
+          <div className="text-center" style={{ fontSize, color: 'white' }}>
             {content?.title?.value}
           </div>
         </div>
