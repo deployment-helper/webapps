@@ -347,7 +347,7 @@ function Page({
       { label: 'docs.google.com', value: 'https://docs.google.com' },
       { label: 'localhost:3000', value: 'http://localhost:3000' },
       { label: 'webapps-psi.vercel.app', value: 'https://webapps-psi.vercel.app' },
-      { label: 'apis.app-management.com', value: 'https://apis.app-management' },
+      { label: 'apis.app-management.com', value: 'https://apis.app-management.com' },
     ];
     return (
       <>

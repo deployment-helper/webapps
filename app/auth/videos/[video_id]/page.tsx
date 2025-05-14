@@ -137,6 +137,7 @@ export default function VideoPreview({
                     data-slideid={`${scene.id}`}
                     data-name={`${scene.id}`}
                     data-description={scene.description}
+                    data-layoutId={scene.layoutId}
                     data-sceneindex={index}
                     data-language={video?.audioLanguage || 'en-US'}
                   >
