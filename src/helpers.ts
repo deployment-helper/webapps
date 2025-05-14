@@ -138,12 +138,9 @@ export function checkAndSetApiKey(url: string) {
   return url;
 }
 
-export function generatePreviewUrl(videoId: string, apiServer?: boolean) {
-  //http://localhost:3000/auth/videos/ZbUNPeasPcPtOIG7o64z
-  const server = apiServer
-    ? 'http://apis.app-management.com' // This is just a dummy value for server use in the backend
-    : getFrontendServerUrl();
-  return `${server}/auth/videos/${videoId}`;
+export function generatePreviewUrl(videoId: string, serverUrl:string) {
+  //http://localhost:3000/auth/videos/ZbUNPeasPcPtOIG7o64z  
+  return `${serverUrl}/auth/videos/${videoId}`;
 }
 
 export const formatDate = (timestamp: number) => {

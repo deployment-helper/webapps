@@ -121,6 +121,7 @@ export interface IProject {
   };
   CIBranchName?: string;
   mergeEffect?: string;
+  runnerServerName?: string;
 }
 
 export interface IMessage {

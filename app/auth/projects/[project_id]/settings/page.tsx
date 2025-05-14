@@ -343,6 +343,12 @@ function Page({
       data?.CIBranchName || '',
     );
     const SCENES_MERGE_EFFECTS = ['concat', 'fade'];
+    const RUNNER_SERVER_OPTIONS = [
+      { label: 'docs.google.com', value: 'https://docs.google.com' },
+      { label: 'localhost:3000', value: 'http://localhost:3000' },
+      { label: 'webapps-psi.vercel.app', value: 'https://webapps-psi.vercel.app' },
+      { label: 'apis.app-management.com', value: 'https://apis.app-management' },
+    ];
     return (
       <>
         <div
@@ -420,6 +426,32 @@ function Page({
                   }
                 }}
               />
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Runner server name</h3>
+              <h5>
+                This server name is required to select runner on batch server.
+              </h5>
+              <Select
+                onChange={(
+                  ev: ChangeEvent<HTMLSelectElement>,
+                  data: SelectOnChangeData,
+                ) => {
+                  updateProject({
+                    runnerServerName: data?.value as string,
+                  });
+                }}
+              >
+                <option value={''}>Select Server</option>
+                {RUNNER_SERVER_OPTIONS.map((option) => (
+                  <option
+                    selected={data?.runnerServerName === option.value}
+                    value={option.value}
+                    key={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
               <hr className={'mb-2 mt-2'} />
               <h3 className={'text-xl'}>Scenes Merge Effect</h3>
               <h5>

@@ -208,7 +208,10 @@ export default function Page({
       setIsErrorDialogOpen(true);
       return;
     }
-
+    if (!projectData?.runnerServerName) {
+      console.warn('Runner server setting not available, check your project settings');
+      return;
+    }
     // Update video status to in_progress
     updateVideo({
       id: params.video_id,
@@ -223,11 +226,13 @@ export default function Page({
       videoData?.audioLanguage as ELanguage,
       videoData?.voiceCode || '',
     );
+    
     VideoClient.generateVideoV2(params.video_id as string, {
       videoId: params.video_id as string,
       speakerRefFile,
-      url: generatePreviewUrl(params.video_id as string, true),
+      url: generatePreviewUrl(params.video_id as string, projectData?.runnerServerName),
     });
+
     dispatchToast({
       title: 'Video is being created',
       body: 'You will be notified once the video is ready for download.',

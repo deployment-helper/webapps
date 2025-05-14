@@ -181,7 +181,13 @@ function Videos({
   }
 
   // Generate video on batch server
+  // TODO: This code block is duplicate and used on multiple places
+  // Need to refactor
   function generateVideo(video: IVideo) {
+    if (!project?.runnerServerName) { 
+      console.log('Runner server not found');
+      return;
+    }
     // Update video status to in_progress
     updateVideo({
       id: video.id as string,
@@ -194,7 +200,7 @@ function Videos({
 
     VideoClient.generateVideoV2(video.id as string, {
       videoId: video.id as string,
-      url: generatePreviewUrl(video.id as string, true),
+      url: generatePreviewUrl(video.id as string, project?.runnerServerName),
     });
 
     dispatchToast({
