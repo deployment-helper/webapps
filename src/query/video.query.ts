@@ -236,8 +236,14 @@ export const useMutationUpdateProject = () => {
   return useMutation({
     mutationFn: (data: any) => VideoClient.updateProject(data.id, data),
     onSuccess: (data, variables) => {
+      // Invalidate projects list
       queryClient.invalidateQueries({
         queryKey: getProjectsQueryKey(),
+      });
+
+      // Invalidate specific project data
+      queryClient.invalidateQueries({
+        queryKey: ['project', variables.id],
       });
     },
   });
