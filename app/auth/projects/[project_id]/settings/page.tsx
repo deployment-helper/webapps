@@ -346,8 +346,14 @@ function Page({
     const RUNNER_SERVER_OPTIONS = [
       { label: 'docs.google.com', value: 'https://docs.google.com' },
       { label: 'localhost:3000', value: 'http://localhost:3000' },
-      { label: 'webapps-psi.vercel.app', value: 'https://webapps-psi.vercel.app' },
-      { label: 'apis.app-management.com', value: 'https://apis.app-management.com' },
+      {
+        label: 'webapps-psi.vercel.app',
+        value: 'https://webapps-psi.vercel.app',
+      },
+      {
+        label: 'apis.app-management.com',
+        value: 'https://apis.app-management.com',
+      },
     ];
     return (
       <>
@@ -402,6 +408,21 @@ function Page({
                 onChange={(e, data) => {
                   updateProject({
                     videoSubtitles: !!data.checked,
+                  });
+                }}
+                label={'Enable'}
+              />
+              <hr className={'mb-2 mt-2'} />
+              <h3 className={'text-xl'}>Apply default animation</h3>
+              <h5>
+                When enabled, each scene video will be created with default
+                animation.
+              </h5>
+              <Checkbox
+                checked={data?.applyDefaultAnimation}
+                onChange={(e, data) => {
+                  updateProject({
+                    applyDefaultAnimation: !!data.checked,
                   });
                 }}
                 label={'Enable'}

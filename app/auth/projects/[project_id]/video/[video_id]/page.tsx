@@ -209,7 +209,9 @@ export default function Page({
       return;
     }
     if (!projectData?.runnerServerName) {
-      console.warn('Runner server setting not available, check your project settings');
+      console.warn(
+        'Runner server setting not available, check your project settings',
+      );
       return;
     }
     // Update video status to in_progress
@@ -226,11 +228,14 @@ export default function Page({
       videoData?.audioLanguage as ELanguage,
       videoData?.voiceCode || '',
     );
-    
+
     VideoClient.generateVideoV2(params.video_id as string, {
       videoId: params.video_id as string,
       speakerRefFile,
-      url: generatePreviewUrl(params.video_id as string, projectData?.runnerServerName),
+      url: generatePreviewUrl(
+        params.video_id as string,
+        projectData?.runnerServerName,
+      ),
     });
 
     dispatchToast({

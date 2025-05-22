@@ -138,8 +138,8 @@ export function checkAndSetApiKey(url: string) {
   return url;
 }
 
-export function generatePreviewUrl(videoId: string, serverUrl:string) {
-  //http://localhost:3000/auth/videos/ZbUNPeasPcPtOIG7o64z  
+export function generatePreviewUrl(videoId: string, serverUrl: string) {
+  //http://localhost:3000/auth/videos/ZbUNPeasPcPtOIG7o64z
   return `${serverUrl}/auth/videos/${videoId}`;
 }
 

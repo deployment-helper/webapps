@@ -112,6 +112,7 @@ export interface IProject {
   sceneRandomAsset?: boolean;
   videoWithDefaultSettings?: boolean;
   videoSubtitles?: boolean;
+  applyDefaultAnimation?: boolean;
   defaultMp3SpeakingRate?: number;
   postFixSilence?: string;
   preFixSilence?: string;
