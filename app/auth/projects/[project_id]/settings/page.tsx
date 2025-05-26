@@ -26,6 +26,7 @@ import {
   HeadphonesSoundWave24Filled,
   Prompt24Filled,
   Settings24Filled,
+  Bot24Filled,
 } from '@fluentui/react-icons';
 import { ChangeEvent, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -58,6 +59,7 @@ function Page({
   const [activeTab, setActiveTab] = useState<number>(4);
 
   const promptVideoCloneRef = useRef<HTMLTextAreaElement>(null);
+  const systemPromptRef = useRef<HTMLTextAreaElement>(null);
 
   const updateProject = (_data: Partial<IProject>) => {
     mutate({
@@ -662,6 +664,50 @@ function Page({
     );
   };
 
+  const AISettings = () => {
+    return (
+      <>
+        <div
+          className={
+            'mb-2 flex items-center justify-between gap-2 bg-violet-50 p-2'
+          }
+        >
+          <div className={'flex'}>
+            <Subtitle1>AI</Subtitle1>
+            {isPending && <Spinner size={'tiny'} className={'ml-1'} />}
+          </div>
+          <div className={'flex items-center gap-2'}></div>
+        </div>
+        <hr />
+        <div className={'p-2'}>
+          <div>
+            <div className={'flex flex-col gap-1 pt-2'}>
+              <h3 className={'text-xl'}>System Prompt</h3>
+              <h5>Configure the AI system prompt for content generation</h5>
+              <Textarea
+                defaultValue={data?.systemPrompt}
+                ref={systemPromptRef}
+                className={'w-full'}
+                rows={15}
+              />
+              <Button
+                appearance={'primary'}
+                onClick={() => {
+                  updateProject({
+                    systemPrompt: systemPromptRef.current?.value,
+                  });
+                }}
+              >
+                Save
+                {isPending && <Spinner size={'small'} />}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className={'w-100 flex w-full max-w-7xl flex-col'}>
       <div className={'flex  justify-start pb-1 pt-1'}>
@@ -715,6 +761,13 @@ function Page({
               <Prompt24Filled />
               <Body1 className={'ml-1'}>Prompts</Body1>
             </ListItem>
+            <ListItem
+              selected={activeTab === 6}
+              onClick={() => setActiveTab(6)}
+            >
+              <Bot24Filled />
+              <Body1 className={'ml-1'}>AI</Body1>
+            </ListItem>
           </List>
         </div>
         <div className="flex w-3/4 flex-col">
@@ -724,6 +777,7 @@ function Page({
           {activeTab === 3 && <Overlays />}
           {activeTab === 4 && <General />}
           {activeTab === 5 && <Prompts />}
+          {activeTab === 6 && <AISettings />}
         </div>
       </div>
     </div>

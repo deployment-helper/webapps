@@ -117,6 +117,7 @@ export interface IProject {
   postFixSilence?: string;
   preFixSilence?: string;
   prompts?: Record<string, any>;
+  systemPrompt?: string;
   createdAt: {
     _seconds: number;
   };
