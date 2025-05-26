@@ -166,56 +166,63 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const DocumentUploadModal = () => (
-    <Dialog
-      open={isDocumentModalOpen}
-      onOpenChange={(_, data) => setIsDocumentModalOpen(data.open)}
-    >
-      <DialogSurface>
-        <DialogBody>
-          <DialogTitle>
-            <div className="flex justify-between">
-              <Body1Strong>Upload PDF Document</Body1Strong>
+  // The DocumentUploadModal is now rendered conditionally in JSX rather than as a function component
+  const renderDocumentUploadModal = () => {
+    if (!isDocumentModalOpen) return null;
+
+    return (
+      <Dialog
+        open={isDocumentModalOpen}
+        onOpenChange={(event, data) => {
+          setIsDocumentModalOpen(data.open);
+        }}
+      >
+        <DialogSurface>
+          <DialogBody>
+            <DialogTitle>
+              <div className="flex justify-between">
+                <Body1Strong>Upload PDF Document</Body1Strong>
+                <div
+                  className="relative -right-4 -top-4 cursor-pointer text-gray-600"
+                  onClick={() => setIsDocumentModalOpen(false)}
+                >
+                  <DismissCircle24Filled />
+                </div>
+              </div>
+            </DialogTitle>
+            <DialogContent>
               <div
-                className="relative -right-4 -top-4 cursor-pointer text-gray-600"
+                {...getRootProps()}
+                className={`flex h-64 w-full items-center justify-center rounded-lg border-2 border-dashed p-4 ${
+                  isDragActive ? 'bg-gray-100' : 'bg-white'
+                }`}
+              >
+                <input {...getInputProps()} accept="application/pdf" />
+                {isUploading ? (
+                  <Spinner size="medium" />
+                ) : (
+                  <div className="text-center">
+                    <Document24Regular className="mx-auto mb-2 h-16 w-16 text-gray-400" />
+                    <p>
+                      Drag and drop a PDF file here, or click to select a file
+                    </p>
+                  </div>
+                )}
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                appearance="secondary"
                 onClick={() => setIsDocumentModalOpen(false)}
               >
-                <DismissCircle24Filled />
-              </div>
-            </div>
-          </DialogTitle>
-          <DialogContent>
-            <div
-              {...getRootProps()}
-              className={`flex h-64 w-full items-center justify-center rounded-lg border-2 border-dashed p-4 ${
-                isDragActive ? 'bg-gray-100' : 'bg-white'
-              }`}
-            >
-              <input {...getInputProps()} accept="application/pdf" />
-              {isUploading ? (
-                <Spinner size="medium" />
-              ) : (
-                <div className="text-center">
-                  <Document24Regular className="mx-auto mb-2 h-16 w-16 text-gray-400" />
-                  <p>
-                    Drag and drop a PDF file here, or click to select a file
-                  </p>
-                </div>
-              )}
-            </div>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              appearance="secondary"
-              onClick={() => setIsDocumentModalOpen(false)}
-            >
-              Cancel
-            </Button>
-          </DialogActions>
-        </DialogBody>
-      </DialogSurface>
-    </Dialog>
-  );
+                Cancel
+              </Button>
+            </DialogActions>
+          </DialogBody>
+        </DialogSurface>
+      </Dialog>
+    );
+  };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -223,7 +230,14 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
 
   return (
     <>
-      <Dialog open={isOpen} onOpenChange={(_, data) => !data.open && onClose()}>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(event, data) => {
+          if (!data.open) {
+            onClose();
+          }
+        }}
+      >
         <DialogSurface className="h-[80vh] max-h-[700px] w-[80vw] max-w-[800px]">
           <DialogBody>
             <DialogTitle>
@@ -304,7 +318,10 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
                 <Button
                   icon={<Add24Regular />}
                   appearance="subtle"
-                  onClick={() => setIsDocumentModalOpen(true)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsDocumentModalOpen(true);
+                  }}
                   title="Upload PDF document"
                 />
                 <div className="relative flex-1">
@@ -337,7 +354,7 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
       </Dialog>
 
       {/* Document upload modal */}
-      {isDocumentModalOpen && <DocumentUploadModal />}
+      {renderDocumentUploadModal()}
     </>
   );
 };
