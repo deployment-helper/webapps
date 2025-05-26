@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Body1Strong,
@@ -13,10 +13,12 @@ import {
   DataGridRow,
   Menu,
   MenuItem,
+  MenuButtonProps,
   MenuList,
   MenuPopover,
   MenuTrigger,
   Spinner,
+  SplitButton,
   Subtitle2,
   TableColumnDefinition,
   Title1,
@@ -54,6 +56,7 @@ import WorkflowList from '@/components/WorkflowList/WorkflowList';
 import ArtifactList from '@/components/ArtifactList/ArtifactList';
 import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
 import { useRouter } from 'next/navigation';
+import SystemPromptModal from '@/components/SystemPromptModal/SystemPromptModal';
 
 const DOWNLOADS_DESC =
   'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
@@ -76,6 +79,7 @@ function Videos({
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
   const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
+  const [isAIAgentModalOpen, setIsAIAgentModalOpen] = useState(false);
   const [artifactsSt, setArtifactsSt] = useState<{
     id: string;
     isOpen: boolean;
@@ -184,7 +188,7 @@ function Videos({
   // TODO: This code block is duplicate and used on multiple places
   // Need to refactor
   function generateVideo(video: IVideo) {
-    if (!project?.runnerServerName) { 
+    if (!project?.runnerServerName) {
       console.log('Runner server not found');
       return;
     }
@@ -251,11 +255,11 @@ function Videos({
     setIsCreateVideoOpen(false);
   }
 
-  function refreshVideos() {
+  const refreshVideos = useCallback(() => {
     client.invalidateQueries({
       queryKey: ['project', params.project_id, 'videos'],
     });
-  }
+  }, [client, params.project_id]);
 
   const columns: TableColumnDefinition<IVideo>[] = [
     createTableColumn<IVideo>({
@@ -484,23 +488,23 @@ function Videos({
     if (createVideoMutation.isSuccess) {
       refreshVideos();
     }
-  }, [createVideoMutation.isSuccess]);
+  }, [createVideoMutation.isSuccess, refreshVideos]);
 
   useEffect(() => {
     if (deleteMutation.isSuccess) {
       refreshVideos();
     }
-  }, [deleteMutation.isSuccess]);
+  }, [deleteMutation.isSuccess, refreshVideos]);
 
   useEffect(() => {
     if (copyMutation.isSuccess) {
       refreshVideos();
     }
-  }, [copyMutation.isSuccess]);
+  }, [copyMutation.isSuccess, refreshVideos]);
 
   useEffect(() => {
     setCurrentProject(params.project_id);
-  }, [params.project_id]);
+  }, [params.project_id, setCurrentProject]);
 
   return (
     <>
@@ -510,6 +514,14 @@ function Videos({
             open={isLanguageDropdownOpen}
             onClose={onClose}
             onSubmit={copyWithNewLanguage}
+          />
+        )}
+        {isAIAgentModalOpen && (
+          <SystemPromptModal
+            isOpen={isAIAgentModalOpen}
+            onClose={() => setIsAIAgentModalOpen(false)}
+            title="Create Video with AI Agent"
+            description="Use AI to help create your video. Upload documents or describe what you'd like to include in your video."
           />
         )}
         <div className="flex justify-between pb-6 pt-6">
@@ -529,22 +541,31 @@ function Videos({
             >
               Refresh
             </Button>
-            <Button
-              appearance="primary"
-              onClick={() => {
-                setIsCreateVideoOpen(true);
-              }}
-            >
-              Create
-            </Button>
-            <Button
-              appearance="primary"
-              onClick={() => {
-                setIsWorkFlowOpen(true);
-              }}
-            >
-              Create With Workflow
-            </Button>
+            <Menu positioning="below-end">
+              <MenuTrigger disableButtonEnhancement>
+                {(triggerProps: MenuButtonProps) => (
+                  <SplitButton
+                    appearance="primary"
+                    menuButton={triggerProps}
+                    primaryActionButton={{
+                      onClick: () => setIsCreateVideoOpen(true),
+                    }}
+                  >
+                    Create
+                  </SplitButton>
+                )}
+              </MenuTrigger>
+              <MenuPopover>
+                <MenuList>
+                  <MenuItem onClick={() => setIsWorkFlowOpen(true)}>
+                    Create With Workflow
+                  </MenuItem>
+                  <MenuItem onClick={() => setIsAIAgentModalOpen(true)}>
+                    Create With AI Agent
+                  </MenuItem>
+                </MenuList>
+              </MenuPopover>
+            </Menu>
             <Link
               className={'rounded-md p-2 hover:bg-gray-100'}
               href={`/auth/projects/${params.project_id}/settings`}
