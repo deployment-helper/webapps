@@ -1,6 +1,7 @@
 'use client';
 import {
   useMutationPostTextToSpeech,
+  useQueryGetProject,
   useQueryGetScenes,
   useQueryGetVideo,
 } from '@/src/query/video.query';
@@ -19,6 +20,7 @@ export default function VideoPreview({
   };
 }) {
   const { data: video } = useQueryGetVideo(params.video_id);
+  const { data: projectData } = useQueryGetProject(video?.projectId || '');
   const { data: scenesResp, isLoading } = useQueryGetScenes(params.video_id);
   const videos = scenesResp?.[0].scenes;
 
@@ -140,6 +142,9 @@ export default function VideoPreview({
                     data-layoutId={scene.layoutId}
                     data-sceneindex={index}
                     data-language={video?.audioLanguage || 'en-US'}
+                    data-applyDefaultAnimation={
+                      projectData?.applyDefaultAnimation ? 'true' : 'false'
+                    }
                   >
                     <RenderLayoutComponent
                       isDisplayNone={false}

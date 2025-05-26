@@ -56,6 +56,8 @@ export default function RenderLayoutComponent({
     <>
       {content && LayoutReactComponent && (
         <LayoutReactComponent
+          // TODO: check this tsignore
+          // @ts-ignore
           isNone={isDisplayNone}
           isViewOnly={true}
           content={content}

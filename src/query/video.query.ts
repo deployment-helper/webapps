@@ -5,7 +5,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 import { VideoClient } from '@/src/apis/video.client';
-import { ELanguage, IVideo } from '@/src/types/video.types';
+import { ELanguage, IProject, IVideo } from '@/src/types/video.types';
 import { useVideoStore } from '@/src/stores/video.store';
 import { v4 } from 'uuid';
 
@@ -211,7 +211,7 @@ export const useQueryGetProjects = () => {
 };
 
 export const useQueryGetProject = (id: string) => {
-  return useQuery({
+  return useQuery<IProject>({
     queryKey: ['project', id],
     refetchOnWindowFocus: false,
     queryFn: () => VideoClient.getProject(id),

@@ -85,6 +85,10 @@ export class VideoClient extends ServerClient {
   }
 
   public static async getProject(id: string): Promise<IProject> {
+    if (!id) {
+      console.warn('Project ID is not provided');
+      return {} as IProject;
+    }
     const resp = await VideoClient.sendToAPiServer(`projects/${id}`);
     return resp.json();
   }
