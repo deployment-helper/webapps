@@ -7,7 +7,6 @@ export function useMyToastController() {
   const { dispatchToast } = useToastController(TOAST_ID);
   return {
     dispatchToast: ({ title, body, intent = 'success' }: IMyToastProps) => {
-      console.log('Dispatching toast:', { title, body, intent });
       dispatchToast(<MyToast title={title} body={body} intent={intent} />, {
         intent,
         position: 'bottom-start',
