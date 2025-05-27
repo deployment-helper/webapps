@@ -346,3 +346,29 @@ export const useMutationUploadVideo = (
     },
   });
 };
+
+export const useMutationGenerateMCQ = (
+  onSuccess?: (data: any) => void,
+  onError?: (error: any) => void,
+) => {
+  return useMutation({
+    mutationFn: (data: {
+      projectId: string;
+      systemPrompt: string;
+      assetFiles: string[];
+      userPrompt: string;
+    }) =>
+      VideoClient.generateMCQ(
+        data.projectId,
+        data.systemPrompt,
+        data.assetFiles,
+        data.userPrompt,
+      ),
+    onSuccess: (data) => {
+      if (onSuccess) onSuccess(data);
+    },
+    onError: (error) => {
+      if (onError) onError(error);
+    },
+  });
+};

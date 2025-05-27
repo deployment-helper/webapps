@@ -12,6 +12,7 @@ import {
   Body1Strong,
   Textarea,
   Spinner,
+  Title1,
 } from '@fluentui/react-components';
 import {
   Add24Regular,
@@ -23,6 +24,7 @@ import { useDropzone } from 'react-dropzone';
 import { getApiServer, s3RandomPublicKey } from '@/src/helpers';
 import { ServerClient } from '@/src/apis/server.client';
 import { useMyToastController } from '@/components/MyToast';
+import { useMutationGenerateMCQ } from '@/src/query/video.query';
 
 export interface IMessage {
   id: string;
@@ -41,14 +43,16 @@ export interface ISystemPromptModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
-  description?: string;
+  systemPrompt?: string;
+  projectId?: string;
 }
 
 export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
   isOpen,
   onClose,
   title = 'System Prompt',
-  description = 'System prompt content',
+  systemPrompt = 'No system prompt provided.',
+  projectId = '',
 }) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [documents, setDocuments] = useState<IDocument[]>([]);
@@ -59,13 +63,44 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { dispatchToast } = useMyToastController();
 
-  // Scroll to bottom whenever messages change
-  React.useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // Initialize the MCQ mutation
+  const { mutate: generateMCQ, isPending: isMcqLoading } =
+    useMutationGenerateMCQ(
+      (data) => {
+        // On success
+        setIsSending(false);
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Math.random().toString(36).substring(2, 11),
+            text: data.response || 'MCQ generated successfully',
+            isUser: false,
+            timestamp: new Date(),
+          },
+        ]);
+      },
+      (error) => {
+        // On error
+        setIsSending(false);
+        dispatchToast({
+          title: 'Error',
+          body: 'Failed to generate MCQ',
+          intent: 'error',
+        });
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Math.random().toString(36).substring(2, 11),
+            text: 'Error: Failed to generate MCQ',
+            isUser: false,
+            timestamp: new Date(),
+          },
+        ]);
+      },
+    );
 
   const handleSendMessage = () => {
-    const message = promptInputRef.current?.value;
+    const message = promptInputRef.current?.value.trim();
     if (!message || message.trim() === '') return;
 
     // Add user message
@@ -79,25 +114,42 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
       },
     ]);
 
-    // Mock server response
+    // Set sending state
     setIsSending(true);
-    setTimeout(() => {
+
+    // Use the hardcoded user prompt for MCQ generation
+    const userPrompt =
+      'Generate multiple choice questions with explanations for correct and incorrect answers';
+
+    // Get asset files from documents
+    const assetFiles = documents.map((doc) => doc.url);
+
+    if (!projectId) {
+      setIsSending(false);
+      dispatchToast({
+        title: 'Error',
+        body: 'Project ID is required to generate MCQs',
+        intent: 'error',
+      });
       setMessages((prev) => [
         ...prev,
         {
           id: Math.random().toString(36).substring(2, 11),
-          text: `Response to: ${message}`,
+          text: 'Error: Project ID is required to generate MCQs',
           isUser: false,
           timestamp: new Date(),
         },
       ]);
-      setIsSending(false);
+      return;
+    }
 
-      // Clear input after sending
-      if (promptInputRef.current) {
-        promptInputRef.current.value = '';
-      }
-    }, 1000);
+    // Call the MCQ API with our data
+    generateMCQ({
+      projectId,
+      systemPrompt,
+      assetFiles,
+      userPrompt,
+    });
   };
 
   const onDrop = async (acceptedFiles: File[]) => {
@@ -181,7 +233,7 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
           <DialogBody>
             <DialogTitle>
               <div className="flex justify-between">
-                <Body1Strong>Upload PDF Document</Body1Strong>
+                <Title1>Upload PDF Document</Title1>
                 <div
                   className="relative -right-4 -top-4 cursor-pointer text-gray-600"
                   onClick={() => setIsDocumentModalOpen(false)}
@@ -242,7 +294,7 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
           <DialogBody>
             <DialogTitle>
               <div className="flex justify-between">
-                <Body1Strong>{title}</Body1Strong>
+                <Title1>{title}</Title1>
                 <div
                   className="relative -right-4 -top-4 cursor-pointer text-gray-600"
                   onClick={onClose}
@@ -253,8 +305,11 @@ export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
             </DialogTitle>
             <DialogContent className="flex h-full flex-col">
               {/* System prompt description */}
+              <div className="mb-4">
+                <Body1Strong>System Prompt</Body1Strong>
+              </div>
               <div className="mb-2">
-                <Body1>{description}</Body1>
+                <Body1>{systemPrompt}</Body1>
               </div>
 
               {/* Document list */}

@@ -323,4 +323,26 @@ export class VideoClient extends ServerClient {
 
     return resp.json();
   }
+
+  public static async generateMCQ(
+    projectId: string,
+    systemPrompt: string,
+    assetFiles: string[] = [],
+    userPrompt: string,
+  ): Promise<any> {
+    const body = {
+      project_id: projectId,
+      system_prompt: systemPrompt,
+      asset_files: assetFiles,
+      user_prompt: userPrompt,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      '/agent/mcq',
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
 }

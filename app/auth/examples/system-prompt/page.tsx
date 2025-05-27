@@ -34,7 +34,7 @@ export default function SystemPromptExample() {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           title="System Prompt"
-          description="Use this interface to interact with documents and generate responses based on their content."
+          systemPrompt="Use this interface to interact with documents and generate responses based on their content."
         />
       )}
     </div>

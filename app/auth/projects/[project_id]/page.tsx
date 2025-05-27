@@ -56,7 +56,7 @@ import WorkflowList from '@/components/WorkflowList/WorkflowList';
 import ArtifactList from '@/components/ArtifactList/ArtifactList';
 import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
 import { useRouter } from 'next/navigation';
-import SystemPromptModal from '@/components/SystemPromptModal/SystemPromptModal';
+import SystemPromptPanel from '@/components/SystemPromptPanel/SystemPromptPanel';
 
 const DOWNLOADS_DESC =
   'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
@@ -75,11 +75,12 @@ function Videos({
     isFetching,
     isLoading,
   } = useQueryGetVideosForProject(params.project_id);
+  const { data: project } = useQueryGetProject(params.project_id);
 
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
   const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
-  const [isAIAgentModalOpen, setIsAIAgentModalOpen] = useState(false);
+  const [isAIAgentPanelOpen, setIsAIAgentPanelOpen] = useState(false);
   const [artifactsSt, setArtifactsSt] = useState<{
     id: string;
     isOpen: boolean;
@@ -133,8 +134,6 @@ function Videos({
       body: 'Preparing for download. You will be notified once it is ready.',
     });
   };
-
-  const { data: project } = useQueryGetProject(params.project_id);
 
   function publishVideo(video: IVideo) {
     if (video) {
@@ -507,21 +506,18 @@ function Videos({
   }, [params.project_id, setCurrentProject]);
 
   return (
-    <>
-      <div className="w-100 max-w-7xl" style={{ minWidth: '80rem' }}>
+    <div className="flex w-full flex-row justify-center">
+      <div
+        className={`${
+          isAIAgentPanelOpen ? 'w-2/3' : 'w-100 max-w-7xl'
+        } transition-all duration-300`}
+        style={{ minWidth: isAIAgentPanelOpen ? '40rem' : '80rem' }}
+      >
         {isLanguageDropdownOpen && (
           <LanguageDialog
             open={isLanguageDropdownOpen}
             onClose={onClose}
             onSubmit={copyWithNewLanguage}
-          />
-        )}
-        {isAIAgentModalOpen && (
-          <SystemPromptModal
-            isOpen={isAIAgentModalOpen}
-            onClose={() => setIsAIAgentModalOpen(false)}
-            title="Create Video with AI Agent"
-            description="Use AI to help create your video. Upload documents or describe what you'd like to include in your video."
           />
         )}
         <div className="flex justify-between pb-6 pt-6">
@@ -560,7 +556,7 @@ function Videos({
                   <MenuItem onClick={() => setIsWorkFlowOpen(true)}>
                     Create With Workflow
                   </MenuItem>
-                  <MenuItem onClick={() => setIsAIAgentModalOpen(true)}>
+                  <MenuItem onClick={() => setIsAIAgentPanelOpen(true)}>
                     Create With AI Agent
                   </MenuItem>
                 </MenuList>
@@ -659,7 +655,19 @@ function Videos({
           />
         )}
       </div>
-    </>
+
+      {/* AI Agent Side Panel */}
+      {isAIAgentPanelOpen && (
+        <div className="min-h-screen w-1/4 border-l border-gray-200 bg-white">
+          <SystemPromptPanel
+            onClose={() => setIsAIAgentPanelOpen(false)}
+            title="Create Video with AI Agent"
+            systemPrompt={project?.systemPrompt}
+            projectId={params.project_id}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 
