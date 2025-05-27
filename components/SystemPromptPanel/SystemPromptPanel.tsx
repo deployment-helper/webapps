@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   Button,
   Input,
@@ -54,6 +54,11 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { dispatchToast } = useMyToastController();
+
+  // Auto-scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   // Initialize the MCQ mutation
   const { mutate: generateMCQ, isPending: isMcqLoading } =
@@ -220,9 +225,9 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
   };
 
   return (
-    <div className="flex h-full flex-col p-6">
+    <div className="flex flex-col p-6" style={{ height: 'calc(100% - 48px)' }}>
       {/* Header */}
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex  items-center justify-between">
         <Title1>{title}</Title1>
         <div
           className="cursor-pointer text-gray-600 hover:text-gray-800"
@@ -233,10 +238,10 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
       </div>
 
       {/* System prompt description */}
-      <div className="mb-4">
+      <div className="mb-4 ">
         <Body1Strong>System Prompt</Body1Strong>
       </div>
-      <div className="mb-4">
+      <div className="mb-4 ">
         <Body1>{systemPrompt}</Body1>
       </div>
 
@@ -257,45 +262,47 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
       )}
 
       {/* Messages area */}
-      <div className="mb-4 flex-1 overflow-y-auto rounded border border-gray-200 bg-gray-50 p-4">
-        {messages.length === 0 ? (
-          <div className="flex h-full items-center justify-center text-gray-400">
-            <p>No messages yet. Start a conversation!</p>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${
-                  message.isUser ? 'justify-end' : 'justify-start'
-                }`}
-              >
+      <div className="mb-4 min-h-0 flex-1 overflow-hidden rounded border border-gray-200 bg-gray-50">
+        <div className="h-full overflow-y-auto p-4">
+          {messages.length === 0 ? (
+            <div className="flex h-full items-center justify-center text-gray-400">
+              <p>No messages yet. Start a conversation!</p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4 overflow-auto">
+              {messages.map((message) => (
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
-                    message.isUser
-                      ? 'bg-blue-500 text-white'
-                      : 'border border-gray-200 bg-white'
+                  key={message.id}
+                  className={`flex ${
+                    message.isUser ? 'justify-end' : 'justify-start'
                   }`}
                 >
-                  <p>{message.text}</p>
                   <div
-                    className={`mt-1 text-xs ${
-                      message.isUser ? 'text-blue-100' : 'text-gray-500'
+                    className={`max-w-[80%] rounded-lg p-3 ${
+                      message.isUser
+                        ? 'bg-blue-500 text-white'
+                        : 'border border-gray-200 bg-white'
                     }`}
                   >
-                    {formatTime(message.timestamp)}
+                    <p>{message.text}</p>
+                    <div
+                      className={`mt-1 text-xs ${
+                        message.isUser ? 'text-blue-100' : 'text-gray-500'
+                      }`}
+                    >
+                      {formatTime(message.timestamp)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-        )}
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Input area */}
-      <div className="flex gap-2">
+      <div className="flex flex-shrink-0 gap-2">
         <Button
           icon={<Add24Regular />}
           appearance="subtle"
@@ -309,7 +316,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
           <Textarea
             ref={promptInputRef}
             placeholder="Type your message here..."
-            className="max-h-[120px] min-h-[40px] pr-10"
+            className="h-full w-full pr-10"
             resize="vertical"
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
@@ -320,14 +327,18 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
           />
         </div>
         <Button
-          icon={<Send24Regular />}
+          icon={
+            isSending ? (
+              <Spinner size="tiny" className="ml-2" />
+            ) : (
+              <Send24Regular />
+            )
+          }
           appearance="primary"
           onClick={handleSendMessage}
           disabled={isSending}
           title="Send message"
-        >
-          {isSending && <Spinner size="tiny" className="ml-2" />}
-        </Button>
+        ></Button>
       </div>
 
       {/* Document upload modal overlay */}
