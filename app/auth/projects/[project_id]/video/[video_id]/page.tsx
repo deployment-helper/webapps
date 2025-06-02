@@ -271,6 +271,8 @@ export default function Page({
     setCurrentProject(params.project_id);
   }, [params.project_id]);
 
+  const disableActionButtons = scenes.length == 0 ? true : false;
+
   return (
     <div className="flex  h-screen w-full">
       <div className="w-9/12 bg-white">
@@ -281,7 +283,7 @@ export default function Page({
           }
         >
           <div className={'flex items-end justify-start gap-1'}>
-            <Button onClick={playAll}>
+            <Button onClick={playAll} disabled={disableActionButtons}>
               Play All
               <div className={'pl-2'}>
                 {isAudioPending && (
@@ -289,12 +291,22 @@ export default function Page({
                 )}
               </div>
             </Button>
-            <Button>
-              <Link target={'_blank'} href={`/auth/videos/${params.video_id}`}>
+            <Button disabled={disableActionButtons}>
+              <Link
+                target={'_blank'}
+                href={`/auth/videos/${params.video_id}`}
+                style={{
+                  pointerEvents: disableActionButtons ? 'none' : 'auto',
+                }}
+              >
                 <Body1Strong>Preview</Body1Strong>
               </Link>
             </Button>
-            <Button appearance={'primary'} onClick={createVideo}>
+            <Button
+              appearance={'primary'}
+              onClick={createVideo}
+              disabled={disableActionButtons}
+            >
               Create Video
               <Play20Filled className="cursor-pointer" />
             </Button>
