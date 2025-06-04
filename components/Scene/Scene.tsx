@@ -81,6 +81,7 @@ export const Scene = (props: ISceneProps) => {
 
   const deleteScene = () => {
     if (confirm('Are you sure to delete this scene?')) {
+      props.onSceneDelete();
       deleteMutation.mutate({
         id: props.videoId,
         sceneId: props.sceneDocId,
@@ -255,6 +256,7 @@ export interface ISceneProps extends IScene {
   sceneDocId: string;
   videoId: string;
   voiceCode?: string;
+  onSceneDelete: () => void;
 }
 
 export default Scene;
