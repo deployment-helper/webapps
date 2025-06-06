@@ -83,13 +83,11 @@ export function SceneList(props: ISceneListProps) {
   };
 
   const onError: IError = (sceneId: string, errors: string) => {
-    props.onSceneError(sceneId, errors);
     setVideoErrors &&
       setVideoErrors([...(videoErrors || []), { sceneId, error: errors }]);
   };
 
   const onClearError = (sceneId: string) => {
-    props.onSceneErrorClear(sceneId);
     clearSceneErrors?.(sceneId);
   };
 
@@ -145,7 +143,6 @@ export function SceneList(props: ISceneListProps) {
             onError={onError}
             onClearError={onClearError}
             isDirty={videoErrors?.some((error) => error.sceneId === scene.id)}
-            onSceneDelete={() => props.onSceneDelete(scene.id)}
           />
         ))}
       </div>
@@ -193,9 +190,6 @@ export interface ISceneListProps {
   sceneDocId: string;
   audioLanguage?: ELanguage;
   voiceCode?: string;
-  onSceneError: (id: string, errors: string) => void;
-  onSceneErrorClear: (id: string) => void;
-  onSceneDelete: (id: string) => void;
   onSceneReorder?: (
     sceneArrayIndex: number,
     newSceneArrayIndex: number,

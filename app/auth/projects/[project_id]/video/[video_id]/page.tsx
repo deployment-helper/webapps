@@ -127,38 +127,8 @@ export default function Page({
     ? [videoData?.defaultAsset]
     : projectData?.assets;
 
-  const [disableActionButtons, setDisableActionButtons] = useState(
-    scenes.length === 0,
-  );
-
-  const [errorScenes, setErrorScenes] = useState(new Map());
-
-  const onSceneError = (id: string, _: string) => {
-    if (errorScenes.get(id) == null) {
-      const newerrorScenes = new Map(errorScenes);
-      newerrorScenes.set(id, true);
-      setErrorScenes(newerrorScenes);
-    }
-  }
-
-  // This method is reused for onSceneDelete since both share the same logic
-  // i.e, removing the given scene from errorScenes if it is present
-  const onSceneErrorClear = (id: string) => {
-    if (errorScenes.has(id)) {
-      const newerrorScenes = new Map(errorScenes);
-      newerrorScenes.delete(id);
-      setErrorScenes(newerrorScenes);
-    }
-  }
-
-  useEffect(() => {
-    const shouldDisable = scenes.length === 0 || errorScenes.size > 0;
-
-    // Update only when necessary
-    if (disableActionButtons !== shouldDisable) {
-      setDisableActionButtons(shouldDisable);
-    }
-  }, [scenes.length, errorScenes, disableActionButtons]);
+  const disableActionButtons =
+    scenes.length === 0 || (videoErrors?.length ?? 0) > 0;
 
   const onCreateSceneFromText = (text: string) => {
     const scenesDesc = splitIntoLines(text);
@@ -478,9 +448,6 @@ export default function Page({
           sceneDocId={videoData?.scenesId || ''}
           isLoading={isScenesFetching || isScenesLoading}
           onSceneReorder={onSceneReorder}
-          onSceneError={onSceneError}
-          onSceneErrorClear={onSceneErrorClear}
-          onSceneDelete={onSceneErrorClear}
         />
       </div>
       {/*Right section*/}
