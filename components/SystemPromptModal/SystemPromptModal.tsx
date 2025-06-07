@@ -47,6 +47,12 @@ export interface ISystemPromptModalProps {
   projectId?: string;
 }
 
+/**
+ * A modal component for system prompt interaction with chat-like interface and document upload capabilities.
+ *
+ * @deprecated This component is deprecated and will be removed in a future version.
+ * Please use the new ChatInterface component SystemPromptPanel instead.
+ */
 export const SystemPromptModal: React.FC<ISystemPromptModalProps> = ({
   isOpen,
   onClose,
