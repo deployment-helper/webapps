@@ -227,17 +227,14 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
   return (
     <div className="flex h-[calc(100vh-64px)] flex-col bg-white">
       {/* Fixed Header Section */}
-      <header className="flex-shrink-0 bg-teal-600 px-6 py-4 text-white shadow-md">
+      <header
+        className="flex-shrink-0 px-6 py-4 text-white shadow-md"
+        style={{ backgroundColor: 'var(--colorBrandBackground)' }}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white bg-opacity-20">
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
             <div>
               <h1 className="text-xl font-bold">{title}</h1>
-              <p className="text-sm text-teal-100">System Prompt</p>
             </div>
           </div>
           <button
@@ -247,7 +244,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
             <DismissCircle24Filled className="h-5 w-5" />
           </button>
         </div>
-        <div className="mt-3 text-sm text-teal-100">
+        <div className="mt-2 text-sm text-violet-100">
           {systemPrompt.length > 120
             ? `${systemPrompt.substring(0, 120)}...`
             : systemPrompt}
@@ -255,7 +252,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
 
         {/* Document list in header */}
         {documents.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="mt-2 flex flex-wrap gap-2">
             {documents.map((doc) => (
               <div
                 key={doc.id}
@@ -326,7 +323,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
                     <div
                       className={`rounded-lg px-4 py-3 shadow-sm ${
                         message.isUser
-                          ? 'bg-teal-600 text-white'
+                          ? 'bg-violet-600 text-white'
                           : 'border border-gray-200 bg-white'
                       }`}
                     >
@@ -339,7 +336,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
                       </p>
                       <p
                         className={`mt-2 text-xs ${
-                          message.isUser ? 'text-teal-100' : 'text-gray-500'
+                          message.isUser ? 'text-violet-100' : 'text-gray-500'
                         }`}
                       >
                         {formatTime(message.timestamp)}
@@ -371,7 +368,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
             <Textarea
               ref={promptInputRef}
               placeholder="Type your message here..."
-              className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-violet-500"
               rows={1}
               style={{ minHeight: '44px', maxHeight: '120px' }}
               resize="vertical"
@@ -389,7 +386,7 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
             onClick={handleSendMessage}
             disabled={isSending}
             title="Send message"
-            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-teal-600 text-white transition-colors hover:bg-teal-700"
+            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-violet-600 text-white transition-colors hover:bg-violet-700"
           />
         </div>
       </footer>
