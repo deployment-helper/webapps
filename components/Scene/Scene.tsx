@@ -81,6 +81,11 @@ export const Scene = (props: ISceneProps) => {
 
   const deleteScene = () => {
     if (confirm('Are you sure to delete this scene?')) {
+      if (props.isDirty) {
+        // Clear any errors that are tied to current scene before deleting
+        props.onClearError(props.id);
+      }
+
       deleteMutation.mutate({
         id: props.videoId,
         sceneId: props.sceneDocId,

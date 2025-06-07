@@ -127,6 +127,9 @@ export default function Page({
     ? [videoData?.defaultAsset]
     : projectData?.assets;
 
+  const disableActionButtons =
+    scenes.length === 0 || (videoErrors?.length ?? 0) > 0;
+
   const onCreateSceneFromText = (text: string) => {
     const scenesDesc = splitIntoLines(text);
     const _layoutId = selectedLayoutId || defaultProjectLayout || '';
@@ -356,7 +359,10 @@ export default function Page({
           }
         >
           <div className={'flex items-end justify-start gap-1'}>
-            <Button disabled={isAudioPending} onClick={playAll}>
+            <Button
+              disabled={isAudioPending || disableActionButtons}
+              onClick={playAll}
+            >
               Play All
               <div className={'pl-2'}>
                 {isAudioPending && (
@@ -364,12 +370,22 @@ export default function Page({
                 )}
               </div>
             </Button>
-            <Button>
-              <Link target={'_blank'} href={`/auth/videos/${params.video_id}`}>
+            <Button disabled={disableActionButtons}>
+              <Link
+                target={'_blank'}
+                href={`/auth/videos/${params.video_id}`}
+                style={{
+                  pointerEvents: disableActionButtons ? 'none' : 'auto',
+                }}
+              >
                 <Body1Strong>Preview</Body1Strong>
               </Link>
             </Button>
-            <Button appearance={'primary'} onClick={createVideo}>
+            <Button
+              appearance={'primary'}
+              disabled={disableActionButtons}
+              onClick={createVideo}
+            >
               Create Video
               <Play20Filled className="cursor-pointer" />
             </Button>
