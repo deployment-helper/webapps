@@ -225,55 +225,96 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
   };
 
   return (
-    <div className="flex flex-col p-6" style={{ height: 'calc(100% - 48px)' }}>
-      {/* Header */}
-      <div className="mb-6 flex  items-center justify-between">
-        <Title1>{title}</Title1>
-        <div
-          className="cursor-pointer text-gray-600 hover:text-gray-800"
-          onClick={onClose}
-        >
-          <DismissCircle24Filled />
+    <div className="flex h-[calc(100vh-64px)] flex-col bg-white">
+      {/* Fixed Header Section */}
+      <header className="flex-shrink-0 bg-teal-600 px-6 py-4 text-white shadow-md">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white bg-opacity-20">
+              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-xl font-bold">{title}</h1>
+              <p className="text-sm text-teal-100">System Prompt</p>
+            </div>
+          </div>
+          <button
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white bg-opacity-20 transition-colors hover:bg-opacity-30"
+            onClick={onClose}
+          >
+            <DismissCircle24Filled className="h-5 w-5" />
+          </button>
         </div>
-      </div>
-
-      {/* System prompt description */}
-      <div className="mb-4 ">
-        <Body1Strong>System Prompt</Body1Strong>
-      </div>
-      <div className="mb-4 ">
-        <Body1 title={systemPrompt}>
+        <div className="mt-3 text-sm text-teal-100">
           {systemPrompt.length > 120
             ? `${systemPrompt.substring(0, 120)}...`
             : systemPrompt}
-        </Body1>
-      </div>
-
-      {/* Document list */}
-      {documents.length > 0 && (
-        <div className="mb-4 flex flex-wrap gap-2">
-          {documents.map((doc) => (
-            <div
-              key={doc.id}
-              className="flex items-center gap-1 rounded bg-gray-100 px-2 py-1"
-              title={doc.name}
-            >
-              <Document24Regular />
-              <span className="max-w-[150px] truncate text-sm">{doc.name}</span>
-            </div>
-          ))}
         </div>
-      )}
 
-      {/* Messages area */}
-      <div className="mb-4 min-h-0 flex-1 overflow-hidden rounded border border-gray-200 bg-gray-50">
-        <div className="h-full overflow-y-auto p-4">
+        {/* Document list in header */}
+        {documents.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {documents.map((doc) => (
+              <div
+                key={doc.id}
+                className="flex items-center gap-1 rounded bg-white bg-opacity-20 px-2 py-1"
+                title={doc.name}
+              >
+                <Document24Regular className="h-4 w-4" />
+                <span className="max-w-[150px] truncate text-sm">
+                  {doc.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {/* Scrollable Messages Container */}
+      <main className="scrollbar-thin flex-1 overflow-y-auto bg-gray-50 px-6 py-4">
+        <style jsx>{`
+          .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+          }
+          .scrollbar-thin::-webkit-scrollbar-track {
+            background: #f1f5f9;
+          }
+          .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+          }
+          .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+          }
+        `}</style>
+        <div className="space-y-4">
           {messages.length === 0 ? (
-            <div className="flex h-full items-center justify-center text-gray-400">
-              <p>No messages yet. Start a conversation!</p>
+            <div className="flex h-full items-center justify-center">
+              <div className="text-center">
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-200">
+                  <svg
+                    className="h-8 w-8 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    />
+                  </svg>
+                </div>
+                <p className="text-lg text-gray-500">
+                  No messages yet. Start a conversation!
+                </p>
+              </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4 overflow-auto">
+            <>
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -281,69 +322,77 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
                     message.isUser ? 'justify-end' : 'justify-start'
                   }`}
                 >
-                  <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
-                      message.isUser
-                        ? 'bg-blue-500 text-white'
-                        : 'border border-gray-200 bg-white'
-                    }`}
-                  >
-                    <p>{message.text}</p>
+                  <div className="max-w-xs lg:max-w-md">
                     <div
-                      className={`mt-1 text-xs ${
-                        message.isUser ? 'text-blue-100' : 'text-gray-500'
+                      className={`rounded-lg px-4 py-3 shadow-sm ${
+                        message.isUser
+                          ? 'bg-teal-600 text-white'
+                          : 'border border-gray-200 bg-white'
                       }`}
                     >
-                      {formatTime(message.timestamp)}
+                      <p
+                        className={
+                          message.isUser ? 'text-white' : 'text-gray-800'
+                        }
+                      >
+                        {message.text}
+                      </p>
+                      <p
+                        className={`mt-2 text-xs ${
+                          message.isUser ? 'text-teal-100' : 'text-gray-500'
+                        }`}
+                      >
+                        {formatTime(message.timestamp)}
+                      </p>
                     </div>
                   </div>
                 </div>
               ))}
               <div ref={messagesEndRef} />
-            </div>
+            </>
           )}
         </div>
-      </div>
+      </main>
 
-      {/* Input area */}
-      <div className="flex flex-shrink-0 gap-2">
-        <Button
-          icon={<Add24Regular />}
-          appearance="subtle"
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsDocumentModalOpen(true);
-          }}
-          title="Upload PDF document"
-        />
-        <div className="relative flex-1">
-          <Textarea
-            ref={promptInputRef}
-            placeholder="Type your message here..."
-            className="h-full w-full pr-10"
-            resize="vertical"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                handleSendMessage();
-              }
+      {/* Fixed Bottom Input Section */}
+      <footer className="flex-shrink-0 border-t border-gray-200 bg-white px-6 py-4">
+        <div className="flex items-end space-x-3">
+          <Button
+            icon={<Add24Regular />}
+            appearance="subtle"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsDocumentModalOpen(true);
             }}
+            title="Upload PDF document"
+            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 transition-colors hover:bg-gray-200"
+          />
+          <div className="relative flex-1">
+            <Textarea
+              ref={promptInputRef}
+              placeholder="Type your message here..."
+              className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+              rows={1}
+              style={{ minHeight: '44px', maxHeight: '120px' }}
+              resize="vertical"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              }}
+            />
+          </div>
+          <Button
+            icon={isSending ? <Spinner size="tiny" /> : <Send24Regular />}
+            appearance="primary"
+            onClick={handleSendMessage}
+            disabled={isSending}
+            title="Send message"
+            className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-teal-600 text-white transition-colors hover:bg-teal-700"
           />
         </div>
-        <Button
-          icon={
-            isSending ? (
-              <Spinner size="tiny" className="ml-2" />
-            ) : (
-              <Send24Regular />
-            )
-          }
-          appearance="primary"
-          onClick={handleSendMessage}
-          disabled={isSending}
-          title="Send message"
-        ></Button>
-      </div>
+      </footer>
 
       {/* Document upload modal overlay */}
       {isDocumentModalOpen && (
