@@ -242,7 +242,11 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
         <Body1Strong>System Prompt</Body1Strong>
       </div>
       <div className="mb-4 ">
-        <Body1>{systemPrompt}</Body1>
+        <Body1 title={systemPrompt}>
+          {systemPrompt.length > 120
+            ? `${systemPrompt.substring(0, 120)}...`
+            : systemPrompt}
+        </Body1>
       </div>
 
       {/* Document list */}
