@@ -150,6 +150,7 @@ const Projects: FC = () => {
             <Button
               appearance={'primary'}
               onClick={() => {
+                setCurrentProject(null);
                 setIsOpen(true);
               }}
             >
