@@ -7,6 +7,7 @@ import {
   Textarea,
   Spinner,
   Title1,
+  Caption1,
 } from '@fluentui/react-components';
 import {
   Add24Regular,
@@ -244,10 +245,13 @@ export const SystemPromptPanel: React.FC<ISystemPromptPanelProps> = ({
             <DismissCircle24Filled className="h-5 w-5" />
           </button>
         </div>
-        <div className="mt-2 text-sm text-violet-100">
-          {systemPrompt.length > 120
-            ? `${systemPrompt.substring(0, 120)}...`
-            : systemPrompt}
+        <div className="mt-2 text-sm text-violet-100" title={systemPrompt}>
+          <Body1Strong>System Prompt:</Body1Strong>
+          <Caption1>
+            {systemPrompt.length > 120
+              ? `${systemPrompt.substring(0, 120)}...`
+              : systemPrompt}
+          </Caption1>
         </div>
 
         {/* Document list in header */}
