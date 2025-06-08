@@ -215,6 +215,11 @@ export default function Page({
       console.warn(
         'Runner server setting not available, check your project settings',
       );
+      dispatchToast({
+        title: 'Runner Server Not Selected',
+        body: 'Please select runner server from `Project Settings > General Tab > Select Runner Server`',
+        intent: 'error',
+      });
       return;
     }
     // Update video status to in_progress
