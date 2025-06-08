@@ -28,7 +28,7 @@ import {
   Settings24Filled,
   Bot24Filled,
 } from '@fluentui/react-icons';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { getFileType } from '@/src/helpers';
 import Image from '@/components/Image/Image';
@@ -45,6 +45,7 @@ import {
   WORKFLOW_YOUTUBE_VIDEO_CLONE,
 } from '@/src/constants';
 import { LAYOUT_IDS } from '@/src/layouts';
+import { useVideoStore } from '@/src/stores/video.store';
 
 function Page({
   params,
@@ -57,9 +58,16 @@ function Page({
   const { mutate, isPending } = useMutationUpdateProject();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(4);
+  const setCurrentProjectId = useVideoStore(
+    (state) => state.setCurrentProjectId,
+  );
 
   const promptVideoCloneRef = useRef<HTMLTextAreaElement>(null);
   const systemPromptRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    setCurrentProjectId(params.project_id);
+  }, [params.project_id, setCurrentProjectId]);
 
   const updateProject = (_data: Partial<IProject>) => {
     mutate({
