@@ -454,6 +454,9 @@ function Page({
               <h5>
                 This server name is required to select runner on batch server.
               </h5>
+              {!data?.runnerServerName && (
+                <h5 style={{ color: 'red' }}>*This field is required</h5>
+              )}
               <Select
                 onChange={(
                   ev: ChangeEvent<HTMLSelectElement>,
