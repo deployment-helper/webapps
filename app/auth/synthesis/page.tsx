@@ -119,12 +119,20 @@ export default function SynthesisPage() {
               <Button
                 appearance="primary"
                 size="large"
-                icon={isLoading || isSynthesisLoading ? <Spinner size="tiny" /> : <Play24Regular />}
+                icon={
+                  isLoading || isSynthesisLoading ? (
+                    <Spinner size="tiny" />
+                  ) : (
+                    <Play24Regular />
+                  )
+                }
                 onClick={handleGenerate}
                 disabled={isLoading || isSynthesisLoading || !inputText.trim()}
                 className="min-w-[140px]"
               >
-                {isLoading || isSynthesisLoading ? 'Generating...' : 'Generate MP3'}
+                {isLoading || isSynthesisLoading
+                  ? 'Generating...'
+                  : 'Generate MP3'}
               </Button>
 
               <Button

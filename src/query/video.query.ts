@@ -211,9 +211,7 @@ export const useMutationPostTextToSpeechMultiVoice = (
       conversationText: string;
     }
   >({
-    mutationFn: async (data: {
-      conversationText: string;
-    }) => {
+    mutationFn: async (data: { conversationText: string }) => {
       const resp = await VideoClient.textToSpeechMultiVoice(
         data.conversationText,
       );
