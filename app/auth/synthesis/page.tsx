@@ -10,12 +10,7 @@ import {
 } from '@fluentui/react-components';
 import { Play24Regular, Delete24Regular } from '@fluentui/react-icons';
 import Mp3Player from '@/components/Mp3Player/Mp3Player';
-
-interface SynthesisResponse {
-  audioData: string; // Base64 encoded MP3 data
-  success: boolean;
-  message?: string;
-}
+import { useMutationPostTextToSpeechMultiVoice } from '@/src/query/video.query';
 
 export default function SynthesisPage() {
   const [inputText, setInputText] = useState('');
@@ -23,6 +18,26 @@ export default function SynthesisPage() {
   const [audioData, setAudioData] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Initialize the multi-voice synthesis mutation
+  const { mutate: generateMultiVoiceSynthesis, isPending: isSynthesisLoading } =
+    useMutationPostTextToSpeechMultiVoice(
+      (data) => {
+        // On success
+        setIsLoading(false);
+        if (data && data.length > 0 && data[0].data) {
+          setAudioData(data[0].data);
+        } else {
+          setError('No audio data received from synthesis');
+        }
+      },
+      (error) => {
+        // On error
+        setIsLoading(false);
+        console.error('Synthesis error:', error);
+        setError('Failed to generate synthesis. Please try again.');
+      },
+    );
 
   const handleGenerate = async () => {
     if (!inputText.trim()) {
@@ -34,37 +49,10 @@ export default function SynthesisPage() {
     setError(null);
     setAudioData(null);
 
-    try {
-      // Simulated API call - replace with actual endpoint
-      const response = await fetch('/api/synthesis', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: inputText,
-          language: 'en',
-          voice: 'multi-voice',
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: SynthesisResponse = await response.json();
-
-      if (data.success && data.audioData) {
-        setAudioData(data.audioData);
-      } else {
-        setError(data.message || 'Failed to generate synthesis');
-      }
-    } catch (err) {
-      console.error('Synthesis error:', err);
-      setError('Failed to generate synthesis. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
+    // Call the multi-voice synthesis API
+    generateMultiVoiceSynthesis({
+      conversationText: inputText,
+    });
   };
 
   const handleClear = () => {
@@ -131,12 +119,12 @@ export default function SynthesisPage() {
               <Button
                 appearance="primary"
                 size="large"
-                icon={isLoading ? <Spinner size="tiny" /> : <Play24Regular />}
+                icon={isLoading || isSynthesisLoading ? <Spinner size="tiny" /> : <Play24Regular />}
                 onClick={handleGenerate}
-                disabled={isLoading || !inputText.trim()}
+                disabled={isLoading || isSynthesisLoading || !inputText.trim()}
                 className="min-w-[140px]"
               >
-                {isLoading ? 'Generating...' : 'Generate MP3'}
+                {isLoading || isSynthesisLoading ? 'Generating...' : 'Generate MP3'}
               </Button>
 
               <Button
@@ -144,7 +132,7 @@ export default function SynthesisPage() {
                 size="large"
                 icon={<Delete24Regular />}
                 onClick={handleClear}
-                disabled={isLoading}
+                disabled={isLoading || isSynthesisLoading}
               >
                 Clear Text
               </Button>

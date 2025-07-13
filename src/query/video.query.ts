@@ -199,6 +199,35 @@ export const useMutationPostTextToSpeech = () => {
   });
 };
 
+// Multi-voice text to speech mutation
+export const useMutationPostTextToSpeechMultiVoice = (
+  onSuccess?: (data: any) => void,
+  onError?: (error: any) => void,
+) => {
+  return useMutation<
+    Array<{ type: string; data: string }>,
+    DefaultError,
+    {
+      conversationText: string;
+    }
+  >({
+    mutationFn: async (data: {
+      conversationText: string;
+    }) => {
+      const resp = await VideoClient.textToSpeechMultiVoice(
+        data.conversationText,
+      );
+      return resp;
+    },
+    onSuccess: (data) => {
+      if (onSuccess) onSuccess(data);
+    },
+    onError: (error) => {
+      if (onError) onError(error);
+    },
+  });
+};
+
 // Project queries
 
 // get List of video query

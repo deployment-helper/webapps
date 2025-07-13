@@ -186,6 +186,22 @@ export class VideoClient extends ServerClient {
     return resp.json();
   }
 
+  public static async textToSpeechMultiVoice(
+    conversationText: string,
+  ): Promise<{ type: string; data: string }[]> {
+    const body = {
+      conversationText,
+    };
+
+    const resp = await VideoClient.sendToAPiServer(
+      `ai/synthesis/multi-voice`,
+      body,
+      HttpMethod.POST,
+    );
+
+    return resp.json();
+  }
+
   public static async generateVideoV2(
     id: string,
     data: Exclude<IGenerateVideoDto, 'version'>,
