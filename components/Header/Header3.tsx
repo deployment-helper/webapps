@@ -1,4 +1,4 @@
-import { Avatar, mergeClasses } from '@fluentui/react-components';
+import { mergeClasses } from '@fluentui/react-components';
 import { Navigation24Filled } from '@fluentui/react-icons';
 
 import BaseHeader from '@/components/BaseHeader/BaseHeader';
@@ -7,6 +7,7 @@ import { HeaderProps } from '@/components/Header/Header.types';
 import ProjectDropdown from '@/components/ProjectDropdown/ProjectDropdown';
 import { useVideoStore } from '@/src/stores/video.store';
 import { useRouter } from 'next/navigation';
+import UserDropdown from '@/components/UserDropdown';
 
 export const Header3 = ({ projectList }: HeaderProps) => {
   const router = useRouter();
@@ -34,13 +35,7 @@ export const Header3 = ({ projectList }: HeaderProps) => {
       }
       slot3={
         <div>
-          <Avatar
-            className="cursor-pointer"
-            image={{
-              src: 'https://placekitten.com/32/32',
-              as: 'img',
-            }}
-          />
+          <UserDropdown />
         </div>
       }
     />
