@@ -39,8 +39,9 @@ export function s3RandomPublicKey() {
 }
 
 export function getApiServer() {
-  const apiServer = document.querySelector("[data-store='apiServer']")
-    ?.textContent;
+  const apiServer =
+    document.querySelector("[data-store='apiServer']")?.textContent ||
+    process.env.NEXT_PUBLIC_API_SERVER;
 
   if (!apiServer) {
     throw new Error('apiServer not found');
@@ -50,8 +51,9 @@ export function getApiServer() {
 }
 
 export function getBatchServer() {
-  const batchServer = document.querySelector("[data-store='batchApiServer']")
-    ?.textContent;
+  const batchServer =
+    document.querySelector("[data-store='batchApiServer']")?.textContent ||
+    process.env.NEXT_PUBLIC_BATCH_API_SERVER;
 
   if (!batchServer) {
     throw new Error('batchServer not found');
@@ -62,9 +64,9 @@ export function getBatchServer() {
 
 // generate a function getImageGenerationServer
 export function getImageGenerationServer() {
-  const imageGenerationServer = document.querySelector(
-    "[data-store='imageGenerationServer']",
-  )?.textContent;
+  const imageGenerationServer =
+    document.querySelector("[data-store='imageGenerationServer']")
+      ?.textContent || process.env.NEXT_PUBLIC_IMAGE_GENERATION_SERVER_URL;
 
   if (!imageGenerationServer) {
     throw new Error('imageGenerationServer not found');

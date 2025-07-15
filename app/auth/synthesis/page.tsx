@@ -20,24 +20,28 @@ export default function SynthesisPage() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Initialize the multi-voice synthesis mutation
-  const { mutate: generateMultiVoiceSynthesis, isPending: isSynthesisLoading } =
-    useMutationPostTextToSpeechMultiVoice(
-      (data) => {
-        // On success
-        setIsLoading(false);
-        if (data && data.length > 0 && data[0].data) {
-          setAudioData(data[0].data);
-        } else {
-          setError('No audio data received from synthesis');
-        }
-      },
-      (error) => {
-        // On error
-        setIsLoading(false);
-        console.error('Synthesis error:', error);
-        setError('Failed to generate synthesis. Please try again.');
-      },
-    );
+  const {
+    mutate: generateMultiVoiceSynthesis,
+    isPending: isSynthesisLoading,
+    data,
+  } = useMutationPostTextToSpeechMultiVoice(
+    (data) => {
+      // On success
+      setIsLoading(false);
+      if (data && data.data && data.data.length) {
+        setAudioData(data.data);
+        setError(null);
+      } else {
+        setError('No audio data received from synthesis');
+      }
+    },
+    (error) => {
+      // On error
+      setIsLoading(false);
+      console.error('Synthesis error:', error);
+      setError('Failed to generate synthesis. Please try again.');
+    },
+  );
 
   const handleGenerate = async () => {
     if (!inputText.trim()) {
