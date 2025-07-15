@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# lock files (use yarn.lock only)
+package-lock.json
+bun.lockb
+
 # testing
 /coverage
 
@@ -14,6 +18,9 @@
 
 # production
 /build
+
+# storybook
+storybook-static
 
 # misc
 .DS_Store
