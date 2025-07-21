@@ -15,8 +15,17 @@ export const LoginAndSignUp: FC<LoginAndSignupProps> = ({
           Log in quickly and securely using your SSO credentials. Click the
           button below to proceed.
         </Subtitle1>
-        <Button href={ssoUrl} as="a" appearance="primary" size="large">
-          Login
+        <Button 
+          href={ssoUrl} 
+          as="a" 
+          appearance="primary" 
+          size="large"
+          style={{
+            backgroundColor: '#22c55e',
+            borderColor: '#22c55e'
+          }}
+        >
+          Login Karo
         </Button>
         <div>
           Privacy Note: Your privacy is of utmost importance to us. By
