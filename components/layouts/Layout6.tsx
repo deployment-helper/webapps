@@ -39,7 +39,7 @@ export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
           className={' absolute flex h-full w-full items-center justify-center'}
         >
           <div
-            style={{ fontSize: fontSize }}
+            style={{ fontSize: fontSize, lineHeight: 1.4}}
             className={'align-center p-2 text-white'}
           >
             {content?.title?.value}
