@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import Server from '../apis/server';
 import { Header } from '@/components/Header';
 
-export const SlidesLayout: FC<{ children: ReactNode }> = async ({
+const SlidesLayout: FC<{ children: ReactNode }> = async ({
   children,
 }) => {
   const user = await Server.getUserInfo();

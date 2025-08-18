@@ -1,8 +1,9 @@
 import BaseHeader from '@/components/BaseHeader/BaseHeader';
-import { Avatar, mergeClasses } from '@fluentui/react-components';
+import { mergeClasses } from '@fluentui/react-components';
 import { useStyles } from './Header.styles';
 import { Navigation24Filled } from '@fluentui/react-icons';
 import { HeaderProps } from '@/components/Header/Header.types';
+import UserDropdown from '@/components/UserDropdown';
 
 export const Header2 = ({ title }: HeaderProps) => {
   const classes = useStyles();
@@ -16,13 +17,7 @@ export const Header2 = ({ title }: HeaderProps) => {
       }
       slot3={
         <div>
-          <Avatar
-            className="cursor-pointer"
-            image={{
-              src: 'https://placekitten.com/32/32',
-              as: 'img',
-            }}
-          />
+          <UserDropdown />
         </div>
       }
     />

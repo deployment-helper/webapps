@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Input,
   mergeClasses,
   Spinner,
@@ -21,6 +20,7 @@ import {
   useQueryGetVideo,
 } from '@/src/query/video.query';
 import Link from 'next/link';
+import UserDropdown from '@/components/UserDropdown';
 
 let debouncedMutation: any = undefined;
 
@@ -106,13 +106,7 @@ export const Header4 = ({ projectList }: HeaderProps) => {
       slot2={<Slot2 projectList={projectList} />}
       slot3={
         <div>
-          <Avatar
-            className="cursor-pointer"
-            image={{
-              src: 'https://placekitten.com/32/32',
-              as: 'img',
-            }}
-          />
+          <UserDropdown />
         </div>
       }
     />
