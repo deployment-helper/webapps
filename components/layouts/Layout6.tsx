@@ -20,7 +20,12 @@ export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
     }: ILayoutProps,
     ref,
   ) => {
-    const fontSize = useResizeFont(parentEl);
+    const fontSize = useResizeFont(parentEl, {
+      small: '5rem',
+      medium: '10rem',
+      large: '15rem',
+    });
+
     return (
       <LayoutBody isNone={isDisplayNone} ref={ref} sceneId={sceneId}>
         <Video
@@ -34,7 +39,7 @@ export const Layout6 = forwardRef<HTMLImageElement, ILayoutProps>(
           className={' absolute flex h-full w-full items-center justify-center'}
         >
           <div
-            style={{ fontSize: fontSize }}
+            style={{ fontSize: fontSize, lineHeight: 1.4}}
             className={'align-center p-2 text-white'}
           >
             {content?.title?.value}
