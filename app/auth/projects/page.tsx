@@ -1,5 +1,5 @@
 'use client';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   Body1Strong,
@@ -32,15 +32,31 @@ import { useQueryClient } from '@tanstack/react-query';
 import FormAddProject from '../../../components/FormAddProject/FormAddProject';
 import { formatDate } from '@/src/helpers';
 import { MoreVertical20Regular } from '@fluentui/react-icons';
+import { Pagination } from '../../../components/Pagination';
+
+const ITEMS_PER_PAGE = 10;
 
 const Projects: FC = () => {
   const { data: projects, isFetching, isLoading } = useQueryGetProjects();
   const client = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [currentProject, setCurrentProject] =
     useState<Partial<IProject> | null>(null);
   const addProjectMutation = useMutationCreateProject();
   const updateProjectMutation = useMutationUpdateProject();
+
+  const { paginatedProjects, totalPages } = useMemo(() => {
+    if (!projects || !projects.length) {
+      return { paginatedProjects: [], totalPages: 0 };
+    }
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return {
+      paginatedProjects: projects.slice(startIndex, endIndex),
+      totalPages: Math.ceil(projects.length / ITEMS_PER_PAGE),
+    };
+  }, [projects, currentPage]);
 
   const columns: TableColumnDefinition<IProject>[] = [
     createTableColumn<IProject>({
@@ -158,25 +174,38 @@ const Projects: FC = () => {
             </Button>
           </div>
         </div>
-        {projects && projects.length && (
-          <DataGrid className="w-100 flex" items={projects} columns={columns}>
-            <DataGridHeader>
-              <DataGridRow>
-                {({ renderHeaderCell }) => (
-                  <DataGridHeaderCell>{renderHeaderCell()}</DataGridHeaderCell>
-                )}
-              </DataGridRow>
-            </DataGridHeader>
-            <DataGridBody<IVideo>>
-              {({ item, rowId }) => (
-                <DataGridRow<IVideo> key={rowId}>
-                  {({ renderCell }) => (
-                    <DataGridCell>{renderCell(item)}</DataGridCell>
+        {paginatedProjects && paginatedProjects.length && (
+          <>
+            <DataGrid
+              className="w-100 flex"
+              items={paginatedProjects}
+              columns={columns}
+            >
+              <DataGridHeader>
+                <DataGridRow>
+                  {({ renderHeaderCell }) => (
+                    <DataGridHeaderCell>
+                      {renderHeaderCell()}
+                    </DataGridHeaderCell>
                   )}
                 </DataGridRow>
-              )}
-            </DataGridBody>
-          </DataGrid>
+              </DataGridHeader>
+              <DataGridBody<IVideo>>
+                {({ item, rowId }) => (
+                  <DataGridRow<IVideo> key={rowId}>
+                    {({ renderCell }) => (
+                      <DataGridCell>{renderCell(item)}</DataGridCell>
+                    )}
+                  </DataGridRow>
+                )}
+              </DataGridBody>
+            </DataGrid>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </>
         )}
       </div>
       {isOpen && (
