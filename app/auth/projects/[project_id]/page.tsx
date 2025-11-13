@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   Body1Strong,
@@ -57,10 +57,12 @@ import ArtifactList from '@/components/ArtifactList/ArtifactList';
 import InsertImageModal from '@/components/InsertImageModal/InsertImageModal';
 import { useRouter } from 'next/navigation';
 import SystemPromptPanel from '@/components/SystemPromptPanel/SystemPromptPanel';
+import { Pagination } from '@/components/Pagination';
 
 const DOWNLOADS_DESC =
   'This is list of the generated videos. Time format is MM/DD/YY HH:MM';
 const ARTIFACTS_DESC = 'This is list of the artifacts.';
+const ITEMS_PER_PAGE = 10;
 
 function Videos({
   params,
@@ -81,6 +83,7 @@ function Videos({
   const [isCrateVideoOpen, setIsCreateVideoOpen] = useState(false);
   const [isWorkFlowOpen, setIsWorkFlowOpen] = useState(false);
   const [isAIAgentPanelOpen, setIsAIAgentPanelOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [artifactsSt, setArtifactsSt] = useState<{
     id: string;
     isOpen: boolean;
@@ -98,6 +101,18 @@ function Videos({
   const [isThumbNailModelOpen, setIsThumbNailModelOpen] =
     useState<boolean>(false);
   const client = useQueryClient();
+
+  const { paginatedVideos, totalPages } = useMemo(() => {
+    if (!videos || !videos.length) {
+      return { paginatedVideos: [], totalPages: 0 };
+    }
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return {
+      paginatedVideos: videos.slice(startIndex, endIndex),
+      totalPages: Math.ceil(videos.length / ITEMS_PER_PAGE),
+    };
+  }, [videos, currentPage]);
 
   const invalidateProject = () => {
     client.invalidateQueries({
@@ -570,25 +585,38 @@ function Videos({
             </Link>
           </div>
         </div>
-        {videos && videos.length && (
-          <DataGrid className="w-100 flex" items={videos} columns={columns}>
-            <DataGridHeader>
-              <DataGridRow>
-                {({ renderHeaderCell }) => (
-                  <DataGridHeaderCell>{renderHeaderCell()}</DataGridHeaderCell>
-                )}
-              </DataGridRow>
-            </DataGridHeader>
-            <DataGridBody<IVideo>>
-              {({ item, rowId }) => (
-                <DataGridRow<IVideo> key={rowId}>
-                  {({ renderCell }) => (
-                    <DataGridCell>{renderCell(item)}</DataGridCell>
+        {paginatedVideos && paginatedVideos.length && (
+          <>
+            <DataGrid
+              className="w-100 flex"
+              items={paginatedVideos}
+              columns={columns}
+            >
+              <DataGridHeader>
+                <DataGridRow>
+                  {({ renderHeaderCell }) => (
+                    <DataGridHeaderCell>
+                      {renderHeaderCell()}
+                    </DataGridHeaderCell>
                   )}
                 </DataGridRow>
-              )}
-            </DataGridBody>
-          </DataGrid>
+              </DataGridHeader>
+              <DataGridBody<IVideo>>
+                {({ item, rowId }) => (
+                  <DataGridRow<IVideo> key={rowId}>
+                    {({ renderCell }) => (
+                      <DataGridCell>{renderCell(item)}</DataGridCell>
+                    )}
+                  </DataGridRow>
+                )}
+              </DataGridBody>
+            </DataGrid>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </>
         )}
         {isCrateVideoOpen && (
           <FormAddVideo
